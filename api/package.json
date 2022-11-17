@@ -1,0 +1,15 @@
+{
+  "name": "taalportfolio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "16.x"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.ts"
+  },
+  "author": "Bjorn Van Hoorde and Stef Verniers",
+  "license": "ISC"
+}
