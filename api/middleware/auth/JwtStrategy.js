@@ -1,0 +1,26 @@
+import UserService from "../../modules/User/User.service";
+
+const { ExtractJwt, Strategy } = require("passport-jwt");
+
+const jwtOptions = {
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: process.env.JWT_SECRET,
+};
+
+export default new Strategy(jwtOptions, async (payload, done) => {
+  try {
+    const { email, id } = payload;
+
+    // Check if user with id and email exists
+    const userService = new UserService();
+    const user = await userService.findOneBy({ email, id });
+
+    if (!user) {
+      return done(null, false);
+    }
+
+    return done(null, user);
+  } catch (e) {
+    return done(e, false);
+  }
+});
