@@ -3,8 +3,9 @@ import * as bodyParser from "body-parser";
 import * as helmet from "helmet";
 import { QueryFailedError, TypeORMError } from "typeorm";
 import BaseError from "../errors/BaseError";
+import { Application, NextFunction, Request, Response, Router } from "express";
 
-const registerMiddleware = (app) => {
+const registerMiddleware = (app: Router) => {
   // use CORS middleware
   // add "allow all" cors
   if (process.env.ENV === "production") {
@@ -29,16 +30,21 @@ const registerMiddleware = (app) => {
   app.use(helmet.xssFilter());
 };
 
-const registerErrorHandler = (app) => {
+const registerErrorHandler = (app: Application) => {
   // Default error handler
-  app.use(function (err, req, res, next) {
-    let message;
-    let statusCode;
+  app.use(function (
+    err: Error,
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    let message: string;
+    let statusCode: number;
     let errors = {};
 
     if (err instanceof QueryFailedError) {
       message = err.driverError.detail;
-      statusCode =  400;
+      statusCode = 400;
     } else if (err instanceof TypeORMError) {
       message = err.message;
       statusCode = 500;
@@ -53,9 +59,9 @@ const registerErrorHandler = (app) => {
     res.status(statusCode).json({
       message,
       statusCode,
-      errors
+      errors,
     });
   });
 };
 
-export {registerMiddleware, registerErrorHandler}
+export { registerMiddleware, registerErrorHandler };

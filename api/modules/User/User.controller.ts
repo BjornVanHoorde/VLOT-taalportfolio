@@ -1,18 +1,30 @@
+import { NextFunction, Response } from "express";
 import NotFoundError from "../../errors/NotFoundError";
-import { UserRole } from "./User.constants";
+import { AuthRequest } from "../../middleware/auth/auth.types";
 import UserService from "./User.service";
+import { UserBody } from "./User.types";
 
 export default class UserController {
+  private userService: UserService;
+
   constructor() {
     this.userService = new UserService();
   }
 
-  all = async (req, res, next) => {
+  all = async (
+    req: AuthRequest<{}, {}, {}>,
+    res: Response,
+    next: NextFunction
+  ) => {
     const users = await this.userService.all({ ...req.body });
     return res.json(users);
   };
 
-  find = async (req, res, next) => {
+  find = async (
+    req: AuthRequest<{ id: number }>,
+    res: Response,
+    next: NextFunction
+  ) => {
     if (!req.user.isTeacher()) {
       req.params.id = req.user.id;
     }
@@ -24,15 +36,23 @@ export default class UserController {
     return res.json(user);
   };
 
-  create = async (req, res, next) => {
+  create = async (
+    req: AuthRequest<{}, {}, UserBody>,
+    res: Response,
+    next: NextFunction
+  ) => {
     const { body } = req;
-    body.role = UserRole.Student;
+    body.rol = body.rol;
 
     const user = await this.userService.create(body);
     return res.json(user);
   };
 
-  update = async (req, res, next) => {
+  update = async (
+    req: AuthRequest<{ id: string }, {}, UserBody>,
+    res: Response,
+    next: NextFunction
+  ) => {
     const { body } = req;
     body.id = parseInt(req.params.id);
 
@@ -46,11 +66,15 @@ export default class UserController {
       }
       return res.json(user);
     } catch (e) {
-      next(err);
+      next(e);
     }
   };
 
-  delete = async (req, res, next) => {
+  delete = async (
+    req: AuthRequest<{ id: string }>,
+    res: Response,
+    next: NextFunction
+  ) => {
     try {
       const user = await this.userService.delete(parseInt(req.params.id));
       if (!user) {
@@ -58,7 +82,7 @@ export default class UserController {
       }
       return res.json({});
     } catch (e) {
-      next(err);
+      next(e);
     }
   };
 }

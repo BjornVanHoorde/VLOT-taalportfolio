@@ -1,9 +1,10 @@
 import UserService from "../../modules/User/User.service";
 import * as LocalStrategy from "passport-local";
+import User from "../../modules/User/User.entity";
 
 export default new LocalStrategy(
   { usernameField: "email" },
-  async (email, password, done) => {
+  async (email: string, password: string, done) => {
     try {
       // find user with email
       const userService = new UserService();

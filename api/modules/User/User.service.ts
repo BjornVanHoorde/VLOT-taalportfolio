@@ -1,32 +1,36 @@
+import { Repository } from "typeorm";
 import { AppDataSource } from "../../database/DatabaseSource";
 import User from "./User.entity";
+import { UserBody } from "./User.types";
 
 export default class UserService {
+  private repository: Repository<User>;
+
   constructor() {
     const repository = AppDataSource.getRepository(User);
     this.repository = repository;
   }
 
-  all = async (options) => {
+  all = async (options: object) => {
     const users = await this.repository.find({
       where: options,
     });
     return users;
   };
 
-  findOne = async (id) => {
+  findOne = async (id: number) => {
     const user = await this.repository.findOne({
       where: { id },
     });
     return user;
   };
 
-  findOneBy = async (options) => {
+  findOneBy = async (options: object) => {
     const user = await this.repository.findOneBy(options);
     return user;
   };
 
-  findByEmailWithPassword = async (email) => {
+  findByEmailWithPassword = async (email: string) => {
     const user = await this.repository
       .createQueryBuilder("user")
       .where("user.email = :email", { email })
@@ -35,12 +39,12 @@ export default class UserService {
     return user;
   };
 
-  create = async (body) => {
+  create = async (body: UserBody) => {
     const user = await this.repository.save(this.repository.create(body));
     return user;
   };
 
-  update = async (id, body) => {
+  update = async (id: number, body: UserBody) => {
     let user = await this.findOne(id);
     if (user) {
       user = await this.repository.save({ ...user, ...body });
@@ -48,7 +52,7 @@ export default class UserService {
     return user;
   };
 
-  delete = async (id) => {
+  delete = async (id: number) => {
     let user = await this.findOne(id);
     if (user) {
       await this.repository.softDelete({ id });

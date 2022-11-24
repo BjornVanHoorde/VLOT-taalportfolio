@@ -8,39 +8,37 @@ import {
   ManyToOne,
 } from "typeorm";
 import { compare, hash } from "bcrypt";
-import { IsDefined, isEmail } from "class-validator";
+import { IsDefined, IsEmail } from "class-validator";
 import { BaseEntity } from "../BaseEntity";
 import { UserRole } from "./User.constants";
-
-const { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate } = require("typeorm");
 
 @Entity()
 export default class User extends BaseEntity {
   @PrimaryGeneratedColumn()
-  idn
+  id: number;
 
   @IsDefined({ always: true })
   @Column()
-  firstName;
+  voornaam: string;
 
   @IsDefined({ always:true })
   @Column()
-  lastName;
+  achternaam: string;
 
   @IsDefined({ always: true })
-  @isEmail(undefined, { unique: true })
-  @Column()
-  email;
+  @IsEmail(undefined, { always: true })
+  @Column({ unique: true })
+  email: string;
 
   @IsDefined({ groups: ["create"] })
   @Column({ select: false })
-  password;
+  password: string;
 
   @Column({
     type: "enum",
     enum: UserRole,
   })
-  role;
+  rol: UserRole;
 
   @BeforeInsert()
   @BeforeUpdate()
@@ -50,19 +48,19 @@ export default class User extends BaseEntity {
     }
   }
 
-  async checkPassword(password) {
+  async checkPassword(password: string) {
     return await compare(password, this.password);
   }
 
   isAdmin() {
-    return this.role === UserRole.Admin;
+    return this.rol === UserRole.Admin;
   }
 
   isStudent() {
-    return this.role === UserRole.Student;
+    return this.rol === UserRole.Student;
   }
 
   isTeacher() {
-    return this.role === UserRole.Teacher;
+    return this.rol === UserRole.Teacher;
   }
 }

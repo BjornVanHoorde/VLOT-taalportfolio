@@ -8,15 +8,15 @@ import {
 } from "typeorm";
 import ValidationError from "../errors/ValidationError";
 
-export class BaseEntity {
+export abstract class BaseEntity {
   @CreateDateColumn({ select: false })
-  createdAt;
+  createdAt: Date;
 
   @UpdateDateColumn({ select: false })
-  updatedAt;
+  updatedAt: Date;
 
   @DeleteDateColumn({ select: false })
-  deletedAt;
+  deletedAt: Date;
 
   @BeforeInsert()
   async validateCreate() {
