@@ -1,4 +1,5 @@
 import UserService from "../../modules/User/User.service";
+import * as LocalStrategy from "passport-local";
 
 export default new LocalStrategy(
   { usernameField: "email" },

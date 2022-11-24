@@ -1,8 +1,9 @@
-const passport = require("passport");
-const { default: AuthError } = require("../../errors/AuthError");
-const { default: ForbiddenError } = require("../../errors/ForbiddenError");
-const { default: JwtStrategy } = require("./JwtStrategy");
-const { default: LocalStrategy } = require("./LocalStrategy");
+import * as passport from "passport";
+import AuthError from "../../errors/AuthError";
+import LocalStrategy from "./LocalStrategy";
+import ForbiddenError from "../../errors/ForbiddenError";
+import * as jwt from "jsonwebtoken";
+import JwtStrategy from "./JwtStrategy";
 
 passport.use("local", LocalStrategy);
 passport.use("jwt", JwtStrategy);

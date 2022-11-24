@@ -2,6 +2,7 @@ import * as cors from "cors";
 import * as bodyParser from "body-parser";
 import * as helmet from "helmet";
 import { QueryFailedError, TypeORMError } from "typeorm";
+import BaseError from "../errors/BaseError";
 
 const registerMiddleware = (app) => {
   // use CORS middleware

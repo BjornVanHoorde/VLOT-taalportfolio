@@ -1,5 +1,14 @@
-import { compare } from "bcrypt";
-import { IsDefined } from "class-validator";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BeforeInsert,
+  BeforeUpdate,
+  OneToMany,
+  ManyToOne,
+} from "typeorm";
+import { compare, hash } from "bcrypt";
+import { IsDefined, isEmail } from "class-validator";
 import { BaseEntity } from "../BaseEntity";
 import { UserRole } from "./User.constants";
 
@@ -8,7 +17,7 @@ const { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate } = r
 @Entity()
 export default class User extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id;
+  idn
 
   @IsDefined({ always: true })
   @Column()
@@ -19,6 +28,7 @@ export default class User extends BaseEntity {
   lastName;
 
   @IsDefined({ always: true })
+  @isEmail(undefined, { unique: true })
   @Column()
   email;
 

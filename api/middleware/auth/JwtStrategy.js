@@ -1,6 +1,5 @@
 import UserService from "../../modules/User/User.service";
-
-const { ExtractJwt, Strategy } = require("passport-jwt");
+import { ExtractJwt, Strategy } from "passport-jwt";
 
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

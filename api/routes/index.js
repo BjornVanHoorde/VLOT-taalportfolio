@@ -1,3 +1,5 @@
+import * as express from "express";
+
 const useMethod = (func) => async (req, res, next) => {
   try {
     await func(req, res, next);
