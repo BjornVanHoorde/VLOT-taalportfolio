@@ -1,7 +1,7 @@
 import { NextFunction, Response } from "express";
+import { GradeOptions } from "../../constants";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
-import { KlasGrade } from "./Klas.constants";
 import KlasService from "./Klas.service";
 import { KlasBody } from "./Klas.types";
 
@@ -22,7 +22,7 @@ export default class KlasController {
   };
 
   allByGrade = async (
-    req: AuthRequest<{ grade: KlasGrade }>,
+    req: AuthRequest<{ grade: GradeOptions }>,
     res: Response,
     next: NextFunction
   ) => {

@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
 import Klas from "../modules/Klas/Klas.entity";
+import Taaltip from "../modules/Taaltip/Taaltip.entity";
 import User from "../modules/User/User.entity";
 
 export const AppDataSource = new DataSource({
@@ -12,7 +13,7 @@ export const AppDataSource = new DataSource({
   database: process.env.DB_NAME,
   synchronize: true,
   logging: false,
-  entities: [User, Klas],
+  entities: [User, Klas, Taaltip],
   migrations: [],
   subscribers: [],
   ssl:

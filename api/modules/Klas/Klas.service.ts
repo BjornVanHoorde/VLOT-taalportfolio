@@ -1,6 +1,6 @@
 import { Repository } from "typeorm";
+import { GradeOptions } from "../../constants";
 import { AppDataSource } from "../../database/DatabaseSource";
-import { KlasGrade } from "./Klas.constants";
 import Klas from "./Klas.entity";
 import { KlasBody } from "./Klas.types";
 
@@ -19,7 +19,7 @@ export default class KlasService {
     return klassen;
   };
 
-  byGrade = async (grade: KlasGrade) => {
+  byGrade = async (grade: GradeOptions) => {
     const klassen = await this.repository.find({
       where: { graad: grade },
     });

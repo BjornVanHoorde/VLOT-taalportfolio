@@ -1,8 +1,9 @@
 import { IsDefined } from "class-validator";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { GradeOptions } from "../../constants";
 import { BaseEntity } from "../BaseEntity";
+import Taaltip from "../Taaltip/Taaltip.entity";
 import User from "../User/User.entity";
-import { KlasGrade } from "./Klas.constants";
 
 @Entity()
 export default class Klas extends BaseEntity {
@@ -15,8 +16,11 @@ export default class Klas extends BaseEntity {
 
   @IsDefined({ always: true })
   @Column()
-  graad: KlasGrade;
+  graad: GradeOptions;
 
   @OneToMany(() => User, (user) => user.klas)
   leerlingen: User[];
+
+  @OneToMany(() => Taaltip, (taaltip) => taaltip.klas)
+  taaltips: Taaltip[];
 }

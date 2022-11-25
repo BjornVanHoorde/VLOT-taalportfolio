@@ -2,6 +2,7 @@ import { NextFunction, Request, Response, Router } from "express";
 import NotFoundError from "../errors/NotFoundError";
 import { authJwt, authLocal, withRole } from "../middleware/auth";
 import KlasController from "../modules/Klas/Klas.controller";
+import TaaltipController from "../modules/Taaltip/Taaltip.controller";
 import AuthController from "../modules/User/Auth.controller";
 import { UserRole } from "../modules/User/User.constants";
 import UserController from "../modules/User/User.controller";
@@ -58,6 +59,17 @@ const registerAdminRoutes = (router: Router) => {
   adminRouter.post("/klas", useMethod(klasController.create));
   adminRouter.patch("/klas/:id", useMethod(klasController.update));
   adminRouter.delete("/klas/:id", useMethod(klasController.delete));
+
+  const taaltipController = new TaaltipController();
+  adminRouter.get("/taaltips", useMethod(taaltipController.all));
+  adminRouter.get("/klas/:id/taaltips", useMethod(taaltipController.allByClass));
+  adminRouter.get("/taaltips/vaardigheid/:skill", useMethod(taaltipController.allBySkill));
+  adminRouter.get("/taaltips/taal/:language", useMethod(taaltipController.allByLanguage));
+  adminRouter.get("/klas/:id/taaltips/:language/:skill", useMethod(taaltipController.allByClassLanguageSkill));
+  adminRouter.get("/taaltip/:id", useMethod(taaltipController.find));
+  adminRouter.post("/taaltip", useMethod(taaltipController.create));
+  adminRouter.patch("/taaltip/:id", useMethod(taaltipController.update));
+  adminRouter.delete("/taaltip/:id", useMethod(taaltipController.delete));
 
   router.use(withRole([UserRole.Admin]), adminRouter);
 };
