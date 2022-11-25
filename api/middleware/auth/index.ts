@@ -41,7 +41,6 @@ const createToken = (user: User) => {
 };
 
 const withRole = (role: UserRole) => (req, res, next) => {
-  console.log(req.user);
   const { user } = req;
 
   if (user.rol === role) {

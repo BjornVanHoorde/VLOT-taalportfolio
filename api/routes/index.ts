@@ -15,30 +15,41 @@ const useMethod =
     }
   };
 
-const registerAdminRoutes = (router: Router) => {
-  const adminRouter = Router();
-
-  // Register admin routes
-  const userController = new UserController();
-  adminRouter.get("/users", useMethod(userController.all));
-  router.post("/register", useMethod(userController.create));
-  router.patch("/users/:id", useMethod(userController.update));
-
-  router.use(withRole(UserRole.Admin), adminRouter);
-};
-
 const registerOnboardingRoutes = (router: Router) => {
   // Register onboarding routes
   const authController = new AuthController();
   router.post("/login", authLocal, useMethod(authController.login));
 };
 
-const registerStudentRoutes = (router: Router) => {
+const registerAuthenticatedRoutes = (router: Router) => {
   const authRouter = Router();
 
-  // Register student routes
+  // Admin routes
+  registerAdminRoutes(authRouter);
 
+  // Student routes
+  registerStudentRoutes(authRouter);
+
+  // Teacher routes
+  registerTeacherRoutes(authRouter);
+
+  // Authenticated routes use authJWT
   router.use(authJwt, authRouter);
+};
+
+const registerAdminRoutes = (router: Router) => {
+  const adminRouter = Router();
+
+  // Register admin routes
+  const userController = new UserController();
+  adminRouter.get("/users", useMethod(userController.all));
+  adminRouter.get("/teachers", useMethod(userController.allTeachers));
+  adminRouter.get("/students", useMethod(userController.allStudents));
+  adminRouter.post("/register", useMethod(userController.create));
+  adminRouter.patch("/users/:id", useMethod(userController.update));
+  adminRouter.delete("/users/:id", useMethod(userController.delete));
+
+  router.use(withRole(UserRole.Admin), adminRouter);
 };
 
 const registerTeacherRoutes = (router: Router) => {
@@ -49,18 +60,20 @@ const registerTeacherRoutes = (router: Router) => {
   router.use(withRole(UserRole.Teacher), teacherRouter);
 };
 
+const registerStudentRoutes = (router: Router) => {
+  const authRouter = Router();
+
+  // Register student routes
+
+  router.use(authJwt, authRouter);
+};
+
 const registerRoutes = (app: Router) => {
   // Onboarding routes
   registerOnboardingRoutes(app);
 
-  // Admin routes
-  registerAdminRoutes(app);
-
-  // Student routes
-  registerStudentRoutes(app);
-
-  // Teacher routes
-  registerTeacherRoutes(app);
+  // Authenticated routes
+  registerAuthenticatedRoutes(app);
 
   // Fallback route
   app.use((req: Request, res: Response, next: NextFunction) => {

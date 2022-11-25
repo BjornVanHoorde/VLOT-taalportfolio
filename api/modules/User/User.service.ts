@@ -1,5 +1,6 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../database/DatabaseSource";
+import { UserRole } from "./User.constants";
 import User from "./User.entity";
 import { UserBody } from "./User.types";
 
@@ -16,6 +17,20 @@ export default class UserService {
       where: options,
     });
     return users;
+  };
+
+  teachers = async () => {
+    const teachers = await this.repository.find({
+      where: { rol: UserRole.Teacher },
+    });
+    return teachers;
+  };
+
+  students = async () => {
+    const students = await this.repository.find({
+      where: { rol: UserRole.Student },
+    });
+    return students;
   };
 
   findOne = async (id: number) => {

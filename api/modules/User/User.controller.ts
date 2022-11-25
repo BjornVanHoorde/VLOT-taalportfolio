@@ -20,6 +20,24 @@ export default class UserController {
     return res.json(users);
   };
 
+  allTeachers = async (
+    req: AuthRequest<{}, {}, {}>,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const teachers = await this.userService.teachers();
+    return res.json(teachers);
+  };
+
+  allStudents = async (
+    req: AuthRequest<{}, {}, {}>,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const students = await this.userService.students();
+    return res.json(students);
+  };
+
   find = async (
     req: AuthRequest<{ id: number }>,
     res: Response,
