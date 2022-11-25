@@ -11,6 +11,7 @@ import { compare, hash } from "bcrypt";
 import { IsDefined, IsEmail } from "class-validator";
 import { BaseEntity } from "../BaseEntity";
 import { UserRole } from "./User.constants";
+import Klas from "../Klas/Klas.entity";
 
 @Entity()
 export default class User extends BaseEntity {
@@ -21,7 +22,7 @@ export default class User extends BaseEntity {
   @Column()
   voornaam: string;
 
-  @IsDefined({ always:true })
+  @IsDefined({ always: true })
   @Column()
   achternaam: string;
 
@@ -39,6 +40,9 @@ export default class User extends BaseEntity {
     enum: UserRole,
   })
   rol: UserRole;
+
+  @ManyToOne(() => Klas, (klas) => klas.leerlingen)
+  klas: Klas;
 
   @BeforeInsert()
   @BeforeUpdate()

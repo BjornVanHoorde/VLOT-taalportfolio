@@ -7,5 +7,5 @@ export interface UserBody {
   email: string;
   rol: UserRole;
   password?: string;
-  klas_id: number;
+  klas_id?: number;
 }

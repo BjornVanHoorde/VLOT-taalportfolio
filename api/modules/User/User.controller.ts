@@ -1,6 +1,7 @@
 import { NextFunction, Response } from "express";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
+import { UserRole } from "./User.constants";
 import UserService from "./User.service";
 import { UserBody } from "./User.types";
 
@@ -43,11 +44,22 @@ export default class UserController {
     res: Response,
     next: NextFunction
   ) => {
-    if (!req.user.isTeacher()) {
+    // Students cannot see info of other users
+    if (req.user.isStudent()) {
       req.params.id = req.user.id;
     }
 
-    const user = await this.userService.findOne(req.params.id);
+    let user: UserBody;
+    user = await this.userService.findOne(req.params.id);
+
+    // If the user is a teacher and the found user is also a teacher or an admin
+    // than forbid them from viewing the info
+    if (req.user.isTeacher) {
+      if (user.rol === UserRole.Teacher || user.rol === UserRole.Admin) {
+        req.params.id = req.user.id;
+        user = await this.userService.findOne(req.params.id);
+      }
+    }
     if (!user) {
       next(new NotFoundError());
     }
