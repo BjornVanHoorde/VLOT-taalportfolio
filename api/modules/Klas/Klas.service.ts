@@ -29,7 +29,7 @@ export default class KlasService {
   findOne = async (id: number) => {
     const klas = await this.repository.findOne({
       where: { id },
-      relations: ["leerlingen"],
+      relations: ["leerlingen", "leerlingen.taaltipsAntwoorden"],
     });
     return klas;
   };

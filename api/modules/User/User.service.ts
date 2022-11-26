@@ -15,6 +15,7 @@ export default class UserService {
   all = async (options: object) => {
     const users = await this.repository.find({
       where: options,
+      relations: ["taaltipsAntwoorden"]
     });
     return users;
   };

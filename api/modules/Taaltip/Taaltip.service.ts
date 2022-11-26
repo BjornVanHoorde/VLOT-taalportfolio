@@ -1,5 +1,5 @@
 import { Repository } from "typeorm";
-import { GradeOptions, TaalOptions, VaardigheidOptions } from "../../constants";
+import { TaalOptions, VaardigheidOptions } from "../../constants";
 import { AppDataSource } from "../../database/DatabaseSource";
 import Taaltip from "./Taaltip.entity";
 import { TaaltipBody } from "./Taaltip.types";
@@ -15,6 +15,7 @@ export default class TaaltipService {
   all = async (options: object) => {
     const taaltips = await this.repository.find({
       where: options,
+      relations: ["taaltipsAntwoorden"]
     });
     return taaltips;
   };

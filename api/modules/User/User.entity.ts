@@ -12,6 +12,7 @@ import { IsDefined, IsEmail } from "class-validator";
 import { BaseEntity } from "../BaseEntity";
 import { UserRole } from "./User.constants";
 import Klas from "../Klas/Klas.entity";
+import TaaltipLeerling from "../TaaltipLeerling/TaaltipLeerling.entity";
 
 @Entity()
 export default class User extends BaseEntity {
@@ -43,6 +44,9 @@ export default class User extends BaseEntity {
 
   @ManyToOne(() => Klas, (klas) => klas.leerlingen)
   klas: Klas;
+
+  @OneToMany(() => TaaltipLeerling, (antwoord) => antwoord.leerling)
+  taaltipsAntwoorden: TaaltipLeerling[];
 
   @BeforeInsert()
   @BeforeUpdate()

@@ -2,14 +2,20 @@ import { NextFunction, Response } from "express";
 import { TaalOptions, VaardigheidOptions } from "../../constants";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
+import KlasService from "../Klas/Klas.service";
+import TaaltipLeerlingService from "../TaaltipLeerling/TaaltipLeerling.service";
 import TaaltipService from "./Taaltip.service";
 import { TaaltipBody } from "./Taaltip.types";
 
 export default class TaaltipController {
   private taaltipService: TaaltipService;
+  private klasService: KlasService;
+  private TaaltipsLeerlingService: TaaltipLeerlingService;
 
   constructor() {
     this.taaltipService = new TaaltipService();
+    this.klasService = new KlasService();
+    this.TaaltipsLeerlingService = new TaaltipLeerlingService();
   }
 
   all = async (
@@ -83,7 +89,21 @@ export default class TaaltipController {
   ) => {
     const { body } = req;
 
+    const leerlingen =  (await this.klasService.findOne(body.klas.id)).leerlingen;
     const taaltip = await this.taaltipService.create(body);
+
+    // If there is new taaltip,
+    // insert an empty answer to all the students who are in the class with the new taaltip
+    leerlingen.forEach( async (leerling) => {
+      await this.TaaltipsLeerlingService.create({
+        taaltip,
+        leerling,
+        taaltipId: taaltip.id,
+        leerlingId: leerling.id,
+        antwoord: "-",
+      })
+    });
+
     return res.json(taaltip);
   };
 

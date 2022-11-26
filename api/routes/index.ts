@@ -3,6 +3,7 @@ import NotFoundError from "../errors/NotFoundError";
 import { authJwt, authLocal, withRole } from "../middleware/auth";
 import KlasController from "../modules/Klas/Klas.controller";
 import TaaltipController from "../modules/Taaltip/Taaltip.controller";
+import TaaltipLeerlingController from "../modules/TaaltipLeerling/TaaltipLeerling.controller";
 import AuthController from "../modules/User/Auth.controller";
 import { UserRole } from "../modules/User/User.constants";
 import UserController from "../modules/User/User.controller";
@@ -87,16 +88,29 @@ const registerTeacherRoutes = (router: Router) => {
   teacherRouter.get("/graad/:grade", useMethod(klasController.allByGrade));
   teacherRouter.get("/klas/:id", useMethod(klasController.find));
 
+  const taaltipController = new TaaltipController();
+  teacherRouter.get("/klas/:id/taaltips/:language/:skill", useMethod(taaltipController.allByClassLanguageSkill));
+  teacherRouter.post("/taaltip", useMethod(taaltipController.create));
+  teacherRouter.patch("/taaltip/:id", useMethod(taaltipController.update));
+  teacherRouter.delete("/taaltip/:id", useMethod(taaltipController.delete));
 
   router.use(withRole([UserRole.Teacher, UserRole.Admin]), teacherRouter);
 };
 
 const registerStudentRoutes = (router: Router) => {
-  const authRouter = Router();
+  const studentRouter = Router();
 
   // Register student routes
+  const userController = new UserController();
+  studentRouter.get("/user/:id", useMethod(userController.find));
 
-  router.use(authJwt, authRouter);
+  const taaltipController = new TaaltipController();
+  studentRouter.get("/klas/:id/taaltips/:language/:skill", useMethod(taaltipController.allByClassLanguageSkill));
+
+  const taaltipLeerlingController = new TaaltipLeerlingController();
+  studentRouter.patch("/taaltips/antwoord/:id", useMethod(taaltipLeerlingController.update));
+
+  router.use(withRole([UserRole.Teacher, UserRole.Admin, UserRole.Student]), studentRouter);
 };
 
 const registerRoutes = (app: Router) => {

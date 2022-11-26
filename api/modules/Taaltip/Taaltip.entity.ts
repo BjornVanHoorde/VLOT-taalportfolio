@@ -3,6 +3,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { TaalOptions, VaardigheidOptions } from "../../constants";
 import { BaseEntity } from "../BaseEntity";
 import Klas from "../Klas/Klas.entity";
+import TaaltipLeerling from "../TaaltipLeerling/TaaltipLeerling.entity";
 
 @Entity()
 export default class Taaltip extends BaseEntity {
@@ -23,4 +24,7 @@ export default class Taaltip extends BaseEntity {
 
   @ManyToOne(() => Klas, (klas) => klas.taaltips)
   klas: Klas;
+
+  @ManyToOne(() => TaaltipLeerling, (antwoord) => antwoord.taaltip)
+  taaltipsAntwoorden: TaaltipLeerling;
 }

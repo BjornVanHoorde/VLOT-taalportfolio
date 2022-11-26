@@ -1,3 +1,4 @@
+import Klas from "../Klas/Klas.entity";
 import { UserRole } from "./User.constants";
 
 export interface UserBody {
@@ -7,5 +8,6 @@ export interface UserBody {
   email: string;
   rol: UserRole;
   password?: string;
+  klas: Klas;
   klas_id?: number;
 }
