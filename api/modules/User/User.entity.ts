@@ -13,6 +13,7 @@ import { BaseEntity } from "../BaseEntity";
 import { UserRole } from "./User.constants";
 import Klas from "../Klas/Klas.entity";
 import TaaltipLeerling from "../TaaltipLeerling/TaaltipLeerling.entity";
+import KlasLeerkracht from "../KlasLeerkracht/KlasLeerkracht.entity";
 
 @Entity()
 export default class User extends BaseEntity {
@@ -47,6 +48,9 @@ export default class User extends BaseEntity {
 
   @OneToMany(() => TaaltipLeerling, (antwoord) => antwoord.leerling)
   taaltipsAntwoorden: TaaltipLeerling[];
+
+  @OneToMany(() => KlasLeerkracht, (klas) => klas.leerkracht)
+  leerkrachtKlassen: KlasLeerkracht[];
 
   @BeforeInsert()
   @BeforeUpdate()

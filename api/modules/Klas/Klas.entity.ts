@@ -2,6 +2,7 @@ import { IsDefined } from "class-validator";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { GradeOptions } from "../../constants";
 import { BaseEntity } from "../BaseEntity";
+import KlasLeerkracht from "../KlasLeerkracht/KlasLeerkracht.entity";
 import Taaltip from "../Taaltip/Taaltip.entity";
 import User from "../User/User.entity";
 
@@ -23,4 +24,7 @@ export default class Klas extends BaseEntity {
 
   @OneToMany(() => Taaltip, (taaltip) => taaltip.klas)
   taaltips: Taaltip[];
+
+  @OneToMany(() => KlasLeerkracht, (klas) => klas.klas)
+  leerkrachtKlassen: KlasLeerkracht[];
 }

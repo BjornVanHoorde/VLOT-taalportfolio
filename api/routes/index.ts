@@ -2,6 +2,7 @@ import { NextFunction, Request, Response, Router } from "express";
 import NotFoundError from "../errors/NotFoundError";
 import { authJwt, authLocal, withRole } from "../middleware/auth";
 import KlasController from "../modules/Klas/Klas.controller";
+import KlasLeerkrachtController from "../modules/KlasLeerkracht/KlasLeerkracht.controller";
 import TaaltipController from "../modules/Taaltip/Taaltip.controller";
 import TaaltipLeerlingController from "../modules/TaaltipLeerling/TaaltipLeerling.controller";
 import AuthController from "../modules/User/Auth.controller";
@@ -71,6 +72,15 @@ const registerAdminRoutes = (router: Router) => {
   adminRouter.post("/taaltip", useMethod(taaltipController.create));
   adminRouter.patch("/taaltip/:id", useMethod(taaltipController.update));
   adminRouter.delete("/taaltip/:id", useMethod(taaltipController.delete));
+
+  const klasLeerkrachtController = new KlasLeerkrachtController();
+  adminRouter.get("/leerkracht/klassen", useMethod(klasLeerkrachtController.all));
+  adminRouter.get("/leerkracht/klassen/:id", useMethod(klasLeerkrachtController.allByClass));
+  adminRouter.get("/leerkracht/:id/klassen", useMethod(klasLeerkrachtController.allByTeacher));
+  adminRouter.get("/leerkracht/klas/:id", useMethod(klasLeerkrachtController.find));
+  adminRouter.post("/leerkracht/klas", useMethod(klasLeerkrachtController.create));
+  adminRouter.patch("/leerkracht/klas/:id", useMethod(klasLeerkrachtController.update));
+  adminRouter.delete("/leerkracht/klas/:id", useMethod(klasLeerkrachtController.delete));
 
   router.use(withRole([UserRole.Admin]), adminRouter);
 };
