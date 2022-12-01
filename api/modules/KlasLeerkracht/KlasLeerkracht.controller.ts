@@ -58,6 +58,7 @@ export default class KlasLeerkrachtController {
   ) => {
     const { body } = req;
 
+    
     body.geldigVan =  new Date(body.geldigVan)
     body.geldigTot =  new Date(body.geldigTot)
 
