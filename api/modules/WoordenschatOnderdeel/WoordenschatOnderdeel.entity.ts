@@ -3,6 +3,7 @@ import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "ty
 import { TaalOptions } from "../../constants";
 import { BaseEntity } from "../BaseEntity";
 import User from "../User/User.entity";
+import WoordenschatWoord from "../WoordenschatWoord/WoordenschatWoord.entity";
 
 @Entity()
 export default class WoordenschatOnderdeel extends BaseEntity {
@@ -24,6 +25,6 @@ export default class WoordenschatOnderdeel extends BaseEntity {
   @ManyToOne(() => User, (leerling) => leerling.woordenschatOnderdelen)
   leerling: User;
 
-  // @OneToMany(() => WoordenschatOnderdeel, (woorden) => woorden.onderdeel)
-  // woorden: WoordenschatOnderdeel[];
+  @OneToMany(() => WoordenschatWoord, (woorden) => woorden.onderdeel)
+  woorden: WoordenschatWoord[];
 }

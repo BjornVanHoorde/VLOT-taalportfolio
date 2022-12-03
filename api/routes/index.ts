@@ -13,6 +13,7 @@ import AuthController from "../modules/User/Auth.controller";
 import { UserRole } from "../modules/User/User.constants";
 import UserController from "../modules/User/User.controller";
 import WoordenschatOnderdeelController from "../modules/WoordenschatOnderdeel/WoordenschatOnderdeel.controller";
+import WoordenschatWoordController from "../modules/WoordenschatWoord/WoordenschatWoord.controller";
 
 const useMethod =
   (func: (req: any, res: Response, next: NextFunction) => Promise<any>) =>
@@ -123,6 +124,13 @@ const registerAdminRoutes = (router: Router) => {
   adminRouter.post("/woordenschat/onderdelen", useMethod(woordenschatOnderdeelController.create));
   adminRouter.patch("/woordenschat/onderdelen/:id", useMethod(woordenschatOnderdeelController.update));
   adminRouter.delete("/woordenschat/onderdelen/:id", useMethod(woordenschatOnderdeelController.delete));
+
+  const woordenschatWoordController = new WoordenschatWoordController();
+  adminRouter.get("/woordenschat/woorden", useMethod(woordenschatWoordController.all));
+  adminRouter.get("/woordenschat/woorden/:id", useMethod(woordenschatWoordController.find));
+  adminRouter.post("/woordenschat/woorden", useMethod(woordenschatWoordController.create));
+  adminRouter.patch("/woordenschat/woorden/:id", useMethod(woordenschatWoordController.update));
+  adminRouter.delete("/woordenschat/woorden/:id", useMethod(woordenschatWoordController.delete));
 
   router.use(withRole([UserRole.Admin]), adminRouter);
 };

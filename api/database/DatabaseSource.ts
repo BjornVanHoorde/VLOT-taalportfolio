@@ -10,6 +10,7 @@ import Taaltip from "../modules/Taaltip/Taaltip.entity";
 import TaaltipLeerling from "../modules/TaaltipLeerling/TaaltipLeerling.entity";
 import User from "../modules/User/User.entity";
 import WoordenschatOnderdeel from "../modules/WoordenschatOnderdeel/WoordenschatOnderdeel.entity";
+import WoordenschatWoord from "../modules/WoordenschatWoord/WoordenschatWoord.entity";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -31,6 +32,7 @@ export const AppDataSource = new DataSource({
     FoutenanalyseOnderdeel,
     FoutenanalyseFout,
     WoordenschatOnderdeel,
+    WoordenschatWoord,
   ],
   migrations: [],
   subscribers: [],
