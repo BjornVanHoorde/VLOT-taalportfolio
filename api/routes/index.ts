@@ -12,6 +12,7 @@ import TaaltipLeerlingController from "../modules/TaaltipLeerling/TaaltipLeerlin
 import AuthController from "../modules/User/Auth.controller";
 import { UserRole } from "../modules/User/User.constants";
 import UserController from "../modules/User/User.controller";
+import WoordenschatOnderdeelController from "../modules/WoordenschatOnderdeel/WoordenschatOnderdeel.controller";
 
 const useMethod =
   (func: (req: any, res: Response, next: NextFunction) => Promise<any>) =>
@@ -115,6 +116,13 @@ const registerAdminRoutes = (router: Router) => {
   adminRouter.post("/foutenanalyse/fouten", useMethod(foutenanalyseFoutenController.create));
   adminRouter.patch("/foutenanalyse/fouten/:id", useMethod(foutenanalyseFoutenController.update));
   adminRouter.delete("/foutenanalyse/fouten/:id", useMethod(foutenanalyseFoutenController.delete));
+
+  const woordenschatOnderdeelController = new WoordenschatOnderdeelController();
+  adminRouter.get("/woordenschat/onderdelen", useMethod(woordenschatOnderdeelController.all));
+  adminRouter.get("/woordenschat/onderdelen/:id", useMethod(woordenschatOnderdeelController.find));
+  adminRouter.post("/woordenschat/onderdelen", useMethod(woordenschatOnderdeelController.create));
+  adminRouter.patch("/woordenschat/onderdelen/:id", useMethod(woordenschatOnderdeelController.update));
+  adminRouter.delete("/woordenschat/onderdelen/:id", useMethod(woordenschatOnderdeelController.delete));
 
   router.use(withRole([UserRole.Admin]), adminRouter);
 };
