@@ -14,7 +14,7 @@ export default class FoutenanalyseOnderdeelService {
   all = async (options: object) => {
     const foutenanalyseOnderdelen = await this.repository.find({
       where: options,
-      relations: ["leerling"],
+      relations: ["leerling", "fouten"],
     });
     return foutenanalyseOnderdelen;
   };
@@ -22,7 +22,7 @@ export default class FoutenanalyseOnderdeelService {
   findOne = async (id: number) => {
     const foutenanalyseOnderdeel = await this.repository.findOne({
       where: { id },
-      relations: ["leerling"],
+      relations: ["leerling", "fouten"],
     });
     return foutenanalyseOnderdeel;
   };

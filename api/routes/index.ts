@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response, Router } from "express";
 import NotFoundError from "../errors/NotFoundError";
 import { authJwt, authLocal, withRole } from "../middleware/auth";
-import FoutenanalyseOnderdeelController from "../modules/FoutanalyseOnderdeel/FoutenanalyseOnderdeel.controller";
+import FoutenanalyseFoutenController from "../modules/FoutenanalyseFout/FoutenanalyseFout.controller";
+import FoutenanalyseOnderdeelController from "../modules/FoutenanalyseOnderdeel/FoutenanalyseOnderdeel.controller";
 import KlasController from "../modules/Klas/Klas.controller";
 import KlasLeerkrachtController from "../modules/KlasLeerkracht/KlasLeerkracht.controller";
 import TaalprofielAntwoordController from "../modules/TaalprofielAntwoord/TaalprofielAntwoord.controller";
@@ -107,6 +108,13 @@ const registerAdminRoutes = (router: Router) => {
   adminRouter.post("/foutenanalyse/onderdeel", useMethod(foutenanalyseOnderdeelController.create));
   adminRouter.patch("/foutenanalyse/onderdelen/:id", useMethod(foutenanalyseOnderdeelController.update));
   adminRouter.delete("/foutenanalyse/onderdelen/:id", useMethod(foutenanalyseOnderdeelController.delete));
+
+  const foutenanalyseFoutenController = new FoutenanalyseFoutenController();
+  adminRouter.get("/foutenanalyse/fouten", useMethod(foutenanalyseFoutenController.all));
+  adminRouter.get("/foutenanalyse/fouten/:id", useMethod(foutenanalyseFoutenController.find));
+  adminRouter.post("/foutenanalyse/fouten", useMethod(foutenanalyseFoutenController.create));
+  adminRouter.patch("/foutenanalyse/fouten/:id", useMethod(foutenanalyseFoutenController.update));
+  adminRouter.delete("/foutenanalyse/fouten/:id", useMethod(foutenanalyseFoutenController.delete));
 
   router.use(withRole([UserRole.Admin]), adminRouter);
 };
