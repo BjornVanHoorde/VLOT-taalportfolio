@@ -1,5 +1,6 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
+import FoutenanalyseOnderdeel from "../modules/FoutanalyseOnderdeel/FoutenanalyseOnderdeel.entity";
 import Klas from "../modules/Klas/Klas.entity";
 import KlasLeerkracht from "../modules/KlasLeerkracht/KlasLeerkracht.entity";
 import TaalprofielAntwoord from "../modules/TaalprofielAntwoord/TaalprofielAntwoord.entity";
@@ -25,6 +26,7 @@ export const AppDataSource = new DataSource({
     KlasLeerkracht,
     TaalprofielVraag,
     TaalprofielAntwoord,
+    FoutenanalyseOnderdeel,
   ],
   migrations: [],
   subscribers: [],

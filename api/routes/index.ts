@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response, Router } from "express";
 import NotFoundError from "../errors/NotFoundError";
 import { authJwt, authLocal, withRole } from "../middleware/auth";
+import FoutenanalyseOnderdeelController from "../modules/FoutanalyseOnderdeel/FoutenanalyseOnderdeel.controller";
 import KlasController from "../modules/Klas/Klas.controller";
 import KlasLeerkrachtController from "../modules/KlasLeerkracht/KlasLeerkracht.controller";
 import TaalprofielAntwoordController from "../modules/TaalprofielAntwoord/TaalprofielAntwoord.controller";
@@ -100,6 +101,12 @@ const registerAdminRoutes = (router: Router) => {
   adminRouter.patch("/taalprofiel/antwoorden/:id", useMethod(taalprofielAntwoordenController.update));
   adminRouter.delete("/taalprofiel/antwoorden/:id", useMethod(taalprofielAntwoordenController.delete));
 
+  const foutenanalyseOnderdeelController = new FoutenanalyseOnderdeelController();
+  adminRouter.get("/foutenanalyse/onderdelen", useMethod(foutenanalyseOnderdeelController.all));
+  adminRouter.get("/foutenanalyse/onderdelen/:id", useMethod(foutenanalyseOnderdeelController.find));
+  adminRouter.post("/foutenanalyse/onderdeel", useMethod(foutenanalyseOnderdeelController.create));
+  adminRouter.patch("/foutenanalyse/onderdelen/:id", useMethod(foutenanalyseOnderdeelController.update));
+  adminRouter.delete("/foutenanalyse/onderdelen/:id", useMethod(foutenanalyseOnderdeelController.delete));
 
   router.use(withRole([UserRole.Admin]), adminRouter);
 };

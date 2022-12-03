@@ -15,6 +15,7 @@ import Klas from "../Klas/Klas.entity";
 import TaaltipLeerling from "../TaaltipLeerling/TaaltipLeerling.entity";
 import KlasLeerkracht from "../KlasLeerkracht/KlasLeerkracht.entity";
 import TaalprofielAntwoord from "../TaalprofielAntwoord/TaalprofielAntwoord.entity";
+import FoutenanalyseOnderdeel from "../FoutanalyseOnderdeel/FoutenanalyseOnderdeel.entity";
 
 @Entity()
 export default class User extends BaseEntity {
@@ -55,6 +56,9 @@ export default class User extends BaseEntity {
 
   @OneToMany(() => TaalprofielAntwoord, (antwoord) => antwoord.leerling)
   taalprofielAntwoorden: TaalprofielAntwoord[];
+
+  @OneToMany(() => FoutenanalyseOnderdeel, (onderdeel) => onderdeel.leerling)
+  foutenanalyseOnderdelen: FoutenanalyseOnderdeel[];
 
   @BeforeInsert()
   @BeforeUpdate()
