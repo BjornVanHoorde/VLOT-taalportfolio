@@ -1,7 +1,8 @@
 import { IsDefined } from "class-validator";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { GradeOptions, TaalOptions } from "../../constants";
 import { BaseEntity } from "../BaseEntity";
+import TaalprofielAntwoord from "../TaalprofielAntwoord/TaalprofielAntwoord.entity";
 import { QuestionTypes } from "./TaalprofielVraag.constants";
 
 @Entity()
@@ -24,4 +25,7 @@ export default class TaalprofielVraag extends BaseEntity {
   @IsDefined({ always: true })
   @Column()
   graad: GradeOptions;
+
+  @OneToMany(() => TaalprofielAntwoord, (antwoord) => antwoord.vraag)
+  taalprofielAntwoorden: TaalprofielAntwoord[];
 }
