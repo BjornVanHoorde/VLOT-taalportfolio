@@ -3,6 +3,8 @@ import NotFoundError from "../errors/NotFoundError";
 import { authJwt, authLocal, withRole } from "../middleware/auth";
 import KlasController from "../modules/Klas/Klas.controller";
 import KlasLeerkrachtController from "../modules/KlasLeerkracht/KlasLeerkracht.controller";
+import TaalprofielAntwoordController from "../modules/TaalprofielAntwoord/TaalprofielAntwoord.controller";
+import TaalprofielVraagController from "../modules/TaalprofielVraag/TaalprofielVraag.controller";
 import TaaltipController from "../modules/Taaltip/Taaltip.controller";
 import TaaltipLeerlingController from "../modules/TaaltipLeerling/TaaltipLeerling.controller";
 import AuthController from "../modules/User/Auth.controller";
@@ -81,6 +83,23 @@ const registerAdminRoutes = (router: Router) => {
   adminRouter.post("/leerkracht/klas", useMethod(klasLeerkrachtController.create));
   adminRouter.patch("/leerkracht/klas/:id", useMethod(klasLeerkrachtController.update));
   adminRouter.delete("/leerkracht/klas/:id", useMethod(klasLeerkrachtController.delete));
+
+  const taalprofielVragenController = new TaalprofielVraagController();
+  adminRouter.get("/taalprofiel/vragen", useMethod(taalprofielVragenController.all));
+  adminRouter.get("/taalprofiel/vragen/graad/:grade", useMethod(taalprofielVragenController.allByGrade));
+  adminRouter.get("/taalprofiel/vragen/taal/:language", useMethod(taalprofielVragenController.allByLanguage));
+  adminRouter.get("/taalprofiel/vragen/:id", useMethod(taalprofielVragenController.find));
+  adminRouter.post("/taalprofiel/vragen", useMethod(taalprofielVragenController.create));
+  adminRouter.patch("/taalprofiel/vragen/:id", useMethod(taalprofielVragenController.update));
+  adminRouter.delete("/taalprofiel/vragen/:id", useMethod(taalprofielVragenController.delete));
+
+  const taalprofielAntwoordenController = new TaalprofielAntwoordController();
+  adminRouter.get("/taalprofiel/antwoorden", useMethod(taalprofielAntwoordenController.all));
+  adminRouter.get("/taalprofiel/antwoorden/:id", useMethod(taalprofielAntwoordenController.find));
+  adminRouter.post("/taalprofiel/antwoord", useMethod(taalprofielAntwoordenController.create));
+  adminRouter.patch("/taalprofiel/antwoorden/:id", useMethod(taalprofielAntwoordenController.update));
+  adminRouter.delete("/taalprofiel/antwoorden/:id", useMethod(taalprofielAntwoordenController.delete));
+
 
   router.use(withRole([UserRole.Admin]), adminRouter);
 };
