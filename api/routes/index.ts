@@ -12,6 +12,7 @@ import TaaltipLeerlingController from "../modules/TaaltipLeerling/TaaltipLeerlin
 import AuthController from "../modules/User/Auth.controller";
 import { UserRole } from "../modules/User/User.constants";
 import UserController from "../modules/User/User.controller";
+import VaardighedenCriteriaController from "../modules/VaardighedenCriteria/VaardighedenCriteria.controller";
 import WoordenschatOnderdeelController from "../modules/WoordenschatOnderdeel/WoordenschatOnderdeel.controller";
 import WoordenschatWoordController from "../modules/WoordenschatWoord/WoordenschatWoord.controller";
 
@@ -131,6 +132,13 @@ const registerAdminRoutes = (router: Router) => {
   adminRouter.post("/woordenschat/woorden", useMethod(woordenschatWoordController.create));
   adminRouter.patch("/woordenschat/woorden/:id", useMethod(woordenschatWoordController.update));
   adminRouter.delete("/woordenschat/woorden/:id", useMethod(woordenschatWoordController.delete));
+
+  const vaardighedenCriteriaController = new VaardighedenCriteriaController();
+  adminRouter.get("/vaardigheden/criteria", useMethod(vaardighedenCriteriaController.all));
+  adminRouter.get("/vaardigheden/criteria/:id", useMethod(vaardighedenCriteriaController.find));
+  adminRouter.post("/vaardigheden/criteria", useMethod(vaardighedenCriteriaController.create));
+  adminRouter.patch("/vaardigheden/criteria/:id", useMethod(vaardighedenCriteriaController.update));
+  adminRouter.delete("/vaardigheden/criteria/:id", useMethod(vaardighedenCriteriaController.delete));
 
   router.use(withRole([UserRole.Admin]), adminRouter);
 };

@@ -9,6 +9,7 @@ import TaalprofielVraag from "../modules/TaalprofielVraag/TaalprofielVraag.entit
 import Taaltip from "../modules/Taaltip/Taaltip.entity";
 import TaaltipLeerling from "../modules/TaaltipLeerling/TaaltipLeerling.entity";
 import User from "../modules/User/User.entity";
+import VaardighedenCriteria from "../modules/VaardighedenCriteria/VaardighedenCriteria.entity";
 import WoordenschatOnderdeel from "../modules/WoordenschatOnderdeel/WoordenschatOnderdeel.entity";
 import WoordenschatWoord from "../modules/WoordenschatWoord/WoordenschatWoord.entity";
 
@@ -33,6 +34,7 @@ export const AppDataSource = new DataSource({
     FoutenanalyseFout,
     WoordenschatOnderdeel,
     WoordenschatWoord,
+    VaardighedenCriteria,
   ],
   migrations: [],
   subscribers: [],
