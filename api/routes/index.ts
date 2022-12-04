@@ -13,6 +13,7 @@ import AuthController from "../modules/User/Auth.controller";
 import { UserRole } from "../modules/User/User.constants";
 import UserController from "../modules/User/User.controller";
 import VaardighedenCriteriaController from "../modules/VaardighedenCriteria/VaardighedenCriteria.controller";
+import VaardighedenOnderdeelController from "../modules/VaardighedenOnderdeel/VaardighedenOnderdeel.controller";
 import WoordenschatOnderdeelController from "../modules/WoordenschatOnderdeel/WoordenschatOnderdeel.controller";
 import WoordenschatWoordController from "../modules/WoordenschatWoord/WoordenschatWoord.controller";
 
@@ -139,6 +140,13 @@ const registerAdminRoutes = (router: Router) => {
   adminRouter.post("/vaardigheden/criteria", useMethod(vaardighedenCriteriaController.create));
   adminRouter.patch("/vaardigheden/criteria/:id", useMethod(vaardighedenCriteriaController.update));
   adminRouter.delete("/vaardigheden/criteria/:id", useMethod(vaardighedenCriteriaController.delete));
+
+  const vaardighedenOnderdeelController = new VaardighedenOnderdeelController();
+  adminRouter.get("/vaardigheden/onderdelen", useMethod(vaardighedenOnderdeelController.all));
+  adminRouter.get("/vaardigheden/onderdelen/:id", useMethod(vaardighedenOnderdeelController.find));
+  adminRouter.post("/vaardigheden/onderdelen", useMethod(vaardighedenOnderdeelController.create));
+  adminRouter.patch("/vaardigheden/onderdelen/:id", useMethod(vaardighedenOnderdeelController.update));
+  adminRouter.delete("/vaardigheden/onderdelen/:id", useMethod(vaardighedenOnderdeelController.delete));
 
   router.use(withRole([UserRole.Admin]), adminRouter);
 };

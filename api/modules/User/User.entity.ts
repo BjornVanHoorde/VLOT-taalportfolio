@@ -17,6 +17,7 @@ import KlasLeerkracht from "../KlasLeerkracht/KlasLeerkracht.entity";
 import TaalprofielAntwoord from "../TaalprofielAntwoord/TaalprofielAntwoord.entity";
 import FoutenanalyseOnderdeel from "../FoutenanalyseOnderdeel/FoutenanalyseOnderdeel.entity";
 import WoordenschatOnderdeel from "../WoordenschatOnderdeel/WoordenschatOnderdeel.entity";
+import VaardighedenOnderdeel from "../VaardighedenOnderdeel/VaardighedenOnderdeel.entity";
 
 @Entity()
 export default class User extends BaseEntity {
@@ -63,6 +64,9 @@ export default class User extends BaseEntity {
 
   @OneToMany(() => WoordenschatOnderdeel, (onderdeel) => onderdeel.leerling)
   woordenschatOnderdelen: WoordenschatOnderdeel[];
+
+  @OneToMany(() => VaardighedenOnderdeel, (onderdeel) => onderdeel.leerling)
+  vaardighedenOnderdelen: VaardighedenOnderdeel[];
 
   @BeforeInsert()
   @BeforeUpdate()
