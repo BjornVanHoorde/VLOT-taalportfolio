@@ -2,7 +2,7 @@ import { IsDefined } from "class-validator";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { GradeOptions, TaalOptions, VaardigheidOptions } from "../../constants";
 import { BaseEntity } from "../BaseEntity";
-import TaalprofielAntwoord from "../TaalprofielAntwoord/TaalprofielAntwoord.entity";
+import VaardighedenEvaluatie from "../VaardighedenEvaluatie/VaardighedenEvaluatie.entity";
 
 @Entity()
 export default class VaardighedenCriteria extends BaseEntity {
@@ -25,6 +25,6 @@ export default class VaardighedenCriteria extends BaseEntity {
   @Column()
   graad: GradeOptions;
 
-  // @OneToMany(() => TaalprofielAntwoord, (antwoord) => antwoord.vraag)
-  // taalprofielAntwoorden: TaalprofielAntwoord[];
+  @OneToMany(() => VaardighedenEvaluatie, (evalutie) => evalutie.criteria)
+  evaluaties: VaardighedenEvaluatie[];
 }

@@ -3,6 +3,7 @@ import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "ty
 import { TaalOptions, VaardigheidOptions } from "../../constants";
 import { BaseEntity } from "../BaseEntity";
 import User from "../User/User.entity";
+import VaardighedenEvaluatie from "../VaardighedenEvaluatie/VaardighedenEvaluatie.entity";
 
 @Entity()
 export default class VaardighedenOnderdeel extends BaseEntity {
@@ -28,6 +29,6 @@ export default class VaardighedenOnderdeel extends BaseEntity {
   @ManyToOne(() => User, (leerling) => leerling.vaardighedenOnderdelen)
   leerling: User;
 
-  // @OneToMany(() => VaardighedenEvaluatie, (evalutie) => evalutie.onderdeel)
-  // evaluties: VaardighedenEvaluatie[];
+  @OneToMany(() => VaardighedenEvaluatie, (evalutie) => evalutie.onderdeel)
+  evaluaties: VaardighedenEvaluatie[];
 }

@@ -14,7 +14,7 @@ export default class VaardighedenOnderdeelService {
   all = async (options: object) => {
     const vaardighedenOnderdelen = await this.repository.find({
       where: options,
-      // relations: ["leerling", "woorden"],
+      relations: ["leerling", "evaluaties", "evaluaties.criteria"],
     });
     return vaardighedenOnderdelen;
   };
@@ -22,7 +22,7 @@ export default class VaardighedenOnderdeelService {
   findOne = async (id: number) => {
     const vaardighedenOnderdeel = await this.repository.findOne({
       where: { id },
-      // relations: ["leerling", "woorden"],
+      relations: ["leerling", "evaluaties", "evaluaties.criteria"],
     });
     return vaardighedenOnderdeel;
   };
