@@ -34,6 +34,13 @@ export default class UserService {
     return students;
   };
 
+  studentsByClass = async (id: number) => {
+    const students = await this.repository.find({
+      where: { rol: UserRole.Student, klas: { id } },
+    })
+    return students;
+  }
+
   findOne = async (id: number) => {
     const user = await this.repository.findOne({
       where: { id },

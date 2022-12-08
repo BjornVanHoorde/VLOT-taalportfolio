@@ -58,6 +58,7 @@ const registerAdminRoutes = (router: Router) => {
   adminRouter.get("/users", useMethod(userController.all));
   adminRouter.get("/teachers", useMethod(userController.allTeachers));
   adminRouter.get("/students", useMethod(userController.allStudents));
+  adminRouter.get("/students/klas/:id", useMethod(userController.allStudentsByClass));
   adminRouter.get("/user/:id", useMethod(userController.find));
   adminRouter.post("/register", useMethod(userController.create));
   adminRouter.patch("/users/:id", useMethod(userController.update));
@@ -164,8 +165,8 @@ const registerTeacherRoutes = (router: Router) => {
 
   // Register teacher routes
   const userController = new UserController();
-  teacherRouter.get("/students", useMethod(userController.allStudents));
   teacherRouter.get("/user/:id", useMethod(userController.find));
+  teacherRouter.get("/students/klas/:id", useMethod(userController.allStudentsByClass));
 
   const klasController = new KlasController();
   teacherRouter.get("/klassen", useMethod(klasController.all));

@@ -1,4 +1,5 @@
 import { NextFunction, Response } from "express";
+import ForbiddenError from "../../errors/ForbiddenError";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
 import { UserRole } from "./User.constants";
@@ -17,6 +18,9 @@ export default class UserController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
     const users = await this.userService.all({ ...req.body });
     return res.json(users);
   };
@@ -26,6 +30,9 @@ export default class UserController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
     const teachers = await this.userService.teachers();
     return res.json(teachers);
   };
@@ -35,7 +42,25 @@ export default class UserController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
     const students = await this.userService.students();
+    return res.json(students);
+  };
+
+  allStudentsByClass = async (
+    req: AuthRequest<{ id: number }, {}, {}>,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { params } = req;
+
+    if (req.user.isStudent()) {
+      return new ForbiddenError();
+    }
+
+    const students = await this.userService.studentsByClass(params.id);
     return res.json(students);
   };
 
@@ -71,6 +96,10 @@ export default class UserController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
     const { body } = req;
     body.rol = body.rol;
 
@@ -83,6 +112,10 @@ export default class UserController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
     const { body } = req;
     body.id = parseInt(req.params.id);
 
@@ -105,6 +138,10 @@ export default class UserController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+    
     try {
       const user = await this.userService.delete(parseInt(req.params.id));
       if (!user) {
