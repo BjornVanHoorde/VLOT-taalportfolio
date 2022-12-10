@@ -1,4 +1,5 @@
 import { NextFunction, Response } from "express";
+import ForbiddenError from "../../errors/ForbiddenError";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
 import KlasLeerkrachtService from "./KlasLeerkracht.service";
@@ -16,6 +17,10 @@ export default class KlasLeerkrachtController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
     const klassen = await this.klasLeerkrachtService.all({ ...req.body });
     return res.json(klassen);
   };
@@ -25,6 +30,10 @@ export default class KlasLeerkrachtController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
     const klassen = await this.klasLeerkrachtService.byClass(req.params.id);
     return res.json(klassen);
   };
@@ -34,6 +43,10 @@ export default class KlasLeerkrachtController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
     const klassen = await this.klasLeerkrachtService.byTeacher(req.params.id);
     return res.json(klassen);
   };
@@ -43,6 +56,10 @@ export default class KlasLeerkrachtController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
     const klas = await this.klasLeerkrachtService.findOne(req.params.id);
 
     if (!klas) {
@@ -56,11 +73,14 @@ export default class KlasLeerkrachtController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
     const { body } = req;
 
-    
-    body.geldigVan =  new Date(body.geldigVan)
-    body.geldigTot =  new Date(body.geldigTot)
+    body.geldigVan = new Date(body.geldigVan);
+    body.geldigTot = new Date(body.geldigTot);
 
     const klas = await this.klasLeerkrachtService.create(body);
     return res.json(klas);
@@ -71,10 +91,14 @@ export default class KlasLeerkrachtController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
     const { body } = req;
     body.id = parseInt(req.params.id);
-    body.geldigVan =  new Date(body.geldigVan)
-    body.geldigTot =  new Date(body.geldigTot)
+    body.geldigVan = new Date(body.geldigVan);
+    body.geldigTot = new Date(body.geldigTot);
 
     try {
       const klas = await this.klasLeerkrachtService.update(
@@ -95,8 +119,14 @@ export default class KlasLeerkrachtController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
     try {
-      const klas = await this.klasLeerkrachtService.delete(parseInt(req.params.id));
+      const klas = await this.klasLeerkrachtService.delete(
+        parseInt(req.params.id)
+      );
       if (!klas) {
         next(new NotFoundError());
       }
