@@ -1,14 +1,19 @@
 import { NextFunction, Response } from "express";
+import ForbiddenError from "../../errors/ForbiddenError";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
+import { CheckTeacherClasses } from "../../utils";
+import UserService from "../User/User.service";
 import TaalprofielAntwoordService from "./TaalprofielAntwoord.service";
 import { TaalprofielAntwoordBody } from "./TaalprofielAntwoord.types";
 
 export default class TaalprofielAntwoordController {
   private taalprofielAntwoordService: TaalprofielAntwoordService;
+  private userService: UserService;
 
   constructor() {
     this.taalprofielAntwoordService = new TaalprofielAntwoordService();
+    this.userService = new UserService();
   }
 
   all = async (
@@ -16,7 +21,55 @@ export default class TaalprofielAntwoordController {
     res: Response,
     next: NextFunction
   ) => {
-    const taalprofielAntwoorden = await this.taalprofielAntwoordService.all({ ...req.body });
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
+    const taalprofielAntwoorden = await this.taalprofielAntwoordService.all({
+      ...req.body,
+    });
+    return res.json(taalprofielAntwoorden);
+  };
+
+  byStudent = async (
+    req: AuthRequest<{ id: number }>,
+    res: Response,
+    next: NextFunction
+  ) => {
+    if (req.user.isStudent()) {
+      req.params.id = req.user.id;
+    }
+
+    if (req.user.isTeacher()) {
+      const klasId = (await this.userService.findOne(req.params.id)).klas.id;
+      if (!(await CheckTeacherClasses(req.user.id, klasId))) {
+        next(new ForbiddenError());
+      }
+    }
+
+    const taalprofielAntwoorden =
+      await this.taalprofielAntwoordService.byStudent(req.params.id);
+    return res.json(taalprofielAntwoorden);
+  };
+
+  byClass = async (
+    req: AuthRequest<{ id: number }>,
+    res: Response,
+    next: NextFunction
+  ) => {
+    if (req.user.isStudent()) {
+      return new ForbiddenError();
+    }
+
+    if (req.user.isTeacher()) {
+      if (!(await CheckTeacherClasses(req.user.id, req.params.id))) {
+        next(new ForbiddenError());
+      }
+    }
+
+    const taalprofielAntwoorden = await this.taalprofielAntwoordService.byClass(
+      req.params.id
+    );
     return res.json(taalprofielAntwoorden);
   };
 
@@ -25,7 +78,13 @@ export default class TaalprofielAntwoordController {
     res: Response,
     next: NextFunction
   ) => {
-    const taalprofielAntwoord = await this.taalprofielAntwoordService.findOne(req.params.id);
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
+    const taalprofielAntwoord = await this.taalprofielAntwoordService.findOne(
+      req.params.id
+    );
 
     if (!taalprofielAntwoord) {
       next(new NotFoundError());
@@ -38,9 +97,15 @@ export default class TaalprofielAntwoordController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
     const { body } = req;
 
-    const taalprofielAntwoord = await this.taalprofielAntwoordService.create(body);
+    const taalprofielAntwoord = await this.taalprofielAntwoordService.create(
+      body
+    );
 
     return res.json(taalprofielAntwoord);
   };
@@ -50,6 +115,10 @@ export default class TaalprofielAntwoordController {
     res: Response,
     next: NextFunction
   ) => {
+    if (req.user.isTeacher()) {
+      return new ForbiddenError();
+    }
+
     const { body } = req;
     body.id = parseInt(req.params.id);
 
@@ -72,8 +141,14 @@ export default class TaalprofielAntwoordController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
     try {
-      const taalprofielAntwoord = await this.taalprofielAntwoordService.delete(parseInt(req.params.id));
+      const taalprofielAntwoord = await this.taalprofielAntwoordService.delete(
+        parseInt(req.params.id)
+      );
       if (!taalprofielAntwoord) {
         next(new NotFoundError());
       }

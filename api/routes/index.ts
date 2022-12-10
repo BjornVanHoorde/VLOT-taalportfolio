@@ -172,6 +172,10 @@ const registerTeacherRoutes = (router: Router) => {
   teacherRouter.get("/klassen/leerkracht/:id", useMethod(klasController.allByTeacher));
   teacherRouter.get("/klas/:id", useMethod(klasController.find));
 
+  const taalprofielAntwoordController = new TaalprofielAntwoordController();
+  teacherRouter.get("/taalprofiel/antwoorden/leerling/:id", useMethod(taalprofielAntwoordController.byStudent));
+  teacherRouter.get("/taalprofiel/antwoorden/klas/:id", useMethod(taalprofielAntwoordController.byClass));
+
   const taaltipController = new TaaltipController();
   teacherRouter.get("/klas/:id/taaltips/:language/:skill", useMethod(taaltipController.allByClassLanguageSkill));
   teacherRouter.post("/taaltip", useMethod(taaltipController.create));
@@ -193,6 +197,10 @@ const registerStudentRoutes = (router: Router) => {
 
   const taaltipLeerlingController = new TaaltipLeerlingController();
   studentRouter.patch("/taaltips/antwoord/:id", useMethod(taaltipLeerlingController.update));
+
+  const taalprofielAntwoordController = new TaalprofielAntwoordController();
+  studentRouter.get("/taalprofiel/antwoorden/leerling/:id", useMethod(taalprofielAntwoordController.byStudent));
+  studentRouter.patch("/taalprofiel/antwoorden/:id", useMethod(taalprofielAntwoordController.update));
 
   router.use(studentRouter);
 };

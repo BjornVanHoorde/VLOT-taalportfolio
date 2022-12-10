@@ -3,6 +3,7 @@ import { GradeOptions } from "../../constants";
 import ForbiddenError from "../../errors/ForbiddenError";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
+import { CheckTeacherClasses } from "../../utils";
 import KlasService from "./Klas.service";
 import { KlasBody } from "./Klas.types";
 
@@ -67,16 +68,7 @@ export default class KlasController {
     }
 
     if (req.user.isTeacher()) {
-      let access = false;
-
-      const klassen = await this.klasService.byTeacher(req.user.id);
-      klassen.forEach((klas) => {
-        if (klas.id == req.params.id) {
-          access = true;
-        }
-      });
-
-      if (!access) {
+      if(!await CheckTeacherClasses(req.user.id, req.params.id)) {
         next(new ForbiddenError());
       }
     }
