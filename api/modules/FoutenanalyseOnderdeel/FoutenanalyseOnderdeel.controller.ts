@@ -1,14 +1,19 @@
 import { NextFunction, Response } from "express";
+import ForbiddenError from "../../errors/ForbiddenError";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
+import { CheckTeacherClasses } from "../../utils";
+import UserService from "../User/User.service";
 import FoutenanalyseOnderdeelService from "./FoutenanalyseOnderdeel.service";
 import { FoutenanalyseOnderdeelBody } from "./FoutenanalyseOnderdeel.types";
 
 export default class FoutenanalyseOnderdeelController {
   private foutenanalyseOnderdeelService: FoutenanalyseOnderdeelService;
+  private userService: UserService;
 
   constructor() {
     this.foutenanalyseOnderdeelService = new FoutenanalyseOnderdeelService();
+    this.userService = new UserService();
   }
 
   all = async (
@@ -16,7 +21,53 @@ export default class FoutenanalyseOnderdeelController {
     res: Response,
     next: NextFunction
   ) => {
-    const foutenanalyseOnderdelen = await this.foutenanalyseOnderdeelService.all({ ...req.body });
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
+    const foutenanalyseOnderdelen =
+      await this.foutenanalyseOnderdeelService.all({ ...req.body });
+    return res.json(foutenanalyseOnderdelen);
+  };
+  byStudent = async (
+    req: AuthRequest<{ id: number }>,
+    res: Response,
+    next: NextFunction
+  ) => {
+    if (req.user.isStudent()) {
+      req.params.id = req.user.id;
+    }
+
+    if (req.user.isTeacher()) {
+      const klasId = (await this.userService.findOne(req.params.id)).klas.id;
+      if (!(await CheckTeacherClasses(req.user.id, klasId))) {
+        next(new ForbiddenError());
+      }
+    }
+
+    const foutenanalyseOnderdelen =
+      await this.foutenanalyseOnderdeelService.byStudent(req.params.id);
+    return res.json(foutenanalyseOnderdelen);
+  };
+
+  byClass = async (
+    req: AuthRequest<{ id: number }>,
+    res: Response,
+    next: NextFunction
+  ) => {
+    if (req.user.isStudent()) {
+      return new ForbiddenError();
+    }
+
+    if (req.user.isTeacher()) {
+      if (!(await CheckTeacherClasses(req.user.id, req.params.id))) {
+        next(new ForbiddenError());
+      }
+    }
+
+    const foutenanalyseOnderdelen = await this.foutenanalyseOnderdeelService.byClass(
+      req.params.id
+    );
     return res.json(foutenanalyseOnderdelen);
   };
 
@@ -25,7 +76,8 @@ export default class FoutenanalyseOnderdeelController {
     res: Response,
     next: NextFunction
   ) => {
-    const foutenanalyseOnderdeel = await this.foutenanalyseOnderdeelService.findOne(req.params.id);
+    const foutenanalyseOnderdeel =
+      await this.foutenanalyseOnderdeelService.findOne(req.params.id);
 
     if (!foutenanalyseOnderdeel) {
       next(new NotFoundError());
@@ -38,9 +90,18 @@ export default class FoutenanalyseOnderdeelController {
     res: Response,
     next: NextFunction
   ) => {
+    if (req.user.isTeacher()) {
+      return new ForbiddenError();
+    }
+
     const { body } = req;
 
-    const foutenanalyseOnderdeel = await this.foutenanalyseOnderdeelService.create(body);
+    if (req.user.isStudent()) {
+      body.leerling = req.user;
+    }
+
+    const foutenanalyseOnderdeel =
+      await this.foutenanalyseOnderdeelService.create(body);
 
     return res.json(foutenanalyseOnderdeel);
   };
@@ -50,14 +111,19 @@ export default class FoutenanalyseOnderdeelController {
     res: Response,
     next: NextFunction
   ) => {
+    if (req.user.isTeacher()) {
+      return new ForbiddenError();
+    }
+
     const { body } = req;
     body.id = parseInt(req.params.id);
 
     try {
-      const foutenanalyseOnderdeel = await this.foutenanalyseOnderdeelService.update(
-        parseInt(req.params.id),
-        req.body
-      );
+      const foutenanalyseOnderdeel =
+        await this.foutenanalyseOnderdeelService.update(
+          parseInt(req.params.id),
+          req.body
+        );
       if (!foutenanalyseOnderdeel) {
         next(new NotFoundError());
       }
@@ -72,8 +138,15 @@ export default class FoutenanalyseOnderdeelController {
     res: Response,
     next: NextFunction
   ) => {
+    if (req.user.isTeacher()) {
+      return new ForbiddenError();
+    }
+
     try {
-      const foutenanalyseOnderdeel = await this.foutenanalyseOnderdeelService.delete(parseInt(req.params.id));
+      const foutenanalyseOnderdeel =
+        await this.foutenanalyseOnderdeelService.delete(
+          parseInt(req.params.id)
+        );
       if (!foutenanalyseOnderdeel) {
         next(new NotFoundError());
       }

@@ -176,11 +176,9 @@ const registerTeacherRoutes = (router: Router) => {
   teacherRouter.get("/taalprofiel/antwoorden/leerling/:id", useMethod(taalprofielAntwoordController.byStudent));
   teacherRouter.get("/taalprofiel/antwoorden/klas/:id", useMethod(taalprofielAntwoordController.byClass));
 
-  const taaltipController = new TaaltipController();
-  teacherRouter.get("/klas/:id/taaltips/:language/:skill", useMethod(taaltipController.allByClassLanguageSkill));
-  teacherRouter.post("/taaltip", useMethod(taaltipController.create));
-  teacherRouter.patch("/taaltip/:id", useMethod(taaltipController.update));
-  teacherRouter.delete("/taaltip/:id", useMethod(taaltipController.delete));
+  const foutenanalyseOnderdeelController = new FoutenanalyseOnderdeelController();
+  teacherRouter.get("/foutenanalyse/onderdelen/leerling/:id", useMethod(foutenanalyseOnderdeelController.byStudent));
+  teacherRouter.get("/foutenanalyse/onderdelen/klas/:id", useMethod(foutenanalyseOnderdeelController.byClass));
 
   router.use(teacherRouter);
 };
@@ -192,15 +190,16 @@ const registerStudentRoutes = (router: Router) => {
   const userController = new UserController();
   studentRouter.get("/user/:id", useMethod(userController.find));
 
-  const taaltipController = new TaaltipController();
-  studentRouter.get("/klas/:id/taaltips/:language/:skill", useMethod(taaltipController.allByClassLanguageSkill));
-
-  const taaltipLeerlingController = new TaaltipLeerlingController();
-  studentRouter.patch("/taaltips/antwoord/:id", useMethod(taaltipLeerlingController.update));
-
   const taalprofielAntwoordController = new TaalprofielAntwoordController();
   studentRouter.get("/taalprofiel/antwoorden/leerling/:id", useMethod(taalprofielAntwoordController.byStudent));
   studentRouter.patch("/taalprofiel/antwoorden/:id", useMethod(taalprofielAntwoordController.update));
+
+  const foutenanalyseOnderdeelController = new FoutenanalyseOnderdeelController();
+  studentRouter.get("/foutenanalyse/onderdelen/leerling/:id", useMethod(foutenanalyseOnderdeelController.byStudent));
+  studentRouter.post("/foutenanalyse/onderdeel", useMethod(foutenanalyseOnderdeelController.create));
+  studentRouter.patch("/foutenanalyse/onderdelen/:id", useMethod(foutenanalyseOnderdeelController.update));
+  studentRouter.delete("/foutenanalyse/onderdelen/:id", useMethod(foutenanalyseOnderdeelController.delete));
+
 
   router.use(studentRouter);
 };
