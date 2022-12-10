@@ -35,17 +35,17 @@ const registerOnboardingRoutes = (router: Router) => {
 };
 
 const registerAuthenticatedRoutes = (router: Router) => {
-  const authRouter = Router();  
-
-  // Student routes
-  registerStudentRoutes(authRouter);
+  const authRouter = Router();
   
   // Teacher routes
   registerTeacherRoutes(authRouter);
   
+  // Student routes
+  registerStudentRoutes(authRouter);
+  
   // Admin routes
   registerAdminRoutes(authRouter);
-
+  
   // Authenticated routes use authJWT
   router.use(authJwt, authRouter);
 };
@@ -157,7 +157,7 @@ const registerAdminRoutes = (router: Router) => {
   adminRouter.patch("/vaardigheden/evaluaties/:id", useMethod(vaardighedenEvaluatieController.update));
   adminRouter.delete("/vaardigheden/evaluaties/:id", useMethod(vaardighedenEvaluatieController.delete));
 
-  router.use(withRole([UserRole.Admin]), adminRouter);
+  router.use(withRole(UserRole.Admin), adminRouter);
 };
 
 const registerTeacherRoutes = (router: Router) => {
@@ -169,8 +169,7 @@ const registerTeacherRoutes = (router: Router) => {
   teacherRouter.get("/students/klas/:id", useMethod(userController.allStudentsByClass));
 
   const klasController = new KlasController();
-  teacherRouter.get("/klassen", useMethod(klasController.all));
-  teacherRouter.get("/graad/:grade", useMethod(klasController.allByGrade));
+  teacherRouter.get("/klassen/leerkracht/:id", useMethod(klasController.allByTeacher));
   teacherRouter.get("/klas/:id", useMethod(klasController.find));
 
   const taaltipController = new TaaltipController();
@@ -179,7 +178,7 @@ const registerTeacherRoutes = (router: Router) => {
   teacherRouter.patch("/taaltip/:id", useMethod(taaltipController.update));
   teacherRouter.delete("/taaltip/:id", useMethod(taaltipController.delete));
 
-  router.use(withRole([UserRole.Teacher, UserRole.Admin]), teacherRouter);
+  router.use(teacherRouter);
 };
 
 const registerStudentRoutes = (router: Router) => {
@@ -195,7 +194,7 @@ const registerStudentRoutes = (router: Router) => {
   const taaltipLeerlingController = new TaaltipLeerlingController();
   studentRouter.patch("/taaltips/antwoord/:id", useMethod(taaltipLeerlingController.update));
 
-  router.use(withRole([UserRole.Teacher, UserRole.Admin, UserRole.Student]), studentRouter);
+  router.use(studentRouter);
 };
 
 const registerRoutes = (app: Router) => {

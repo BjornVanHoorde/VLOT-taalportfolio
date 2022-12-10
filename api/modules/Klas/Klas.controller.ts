@@ -1,5 +1,6 @@
 import { NextFunction, Response } from "express";
 import { GradeOptions } from "../../constants";
+import ForbiddenError from "../../errors/ForbiddenError";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
 import KlasService from "./Klas.service";
@@ -17,6 +18,10 @@ export default class KlasController {
     res: Response,
     next: NextFunction
   ) => {
+    if (req.user.isStudent()) {
+      return new ForbiddenError();
+    }
+
     const klassen = await this.klasService.all({ ...req.body });
     return res.json(klassen);
   };
@@ -26,7 +31,28 @@ export default class KlasController {
     res: Response,
     next: NextFunction
   ) => {
+    if (req.user.isStudent()) {
+      return new ForbiddenError();
+    }
+
     const klassen = await this.klasService.byGrade(req.params.grade);
+    return res.json(klassen);
+  };
+
+  allByTeacher = async (
+    req: AuthRequest<{ id: number }>,
+    res: Response,
+    next: NextFunction
+  ) => {
+    if (req.user.isStudent()) {
+      return new ForbiddenError();
+    }
+
+    if (req.user.isTeacher()) {
+      req.params.id = req.user.id;
+    }
+
+    const klassen = await this.klasService.byTeacher(req.params.id);
     return res.json(klassen);
   };
 
@@ -37,7 +63,22 @@ export default class KlasController {
   ) => {
     // Students cannot see info of other classes
     if (req.user.isStudent()) {
-      req.params.id = req.user.klas.id;
+      return new ForbiddenError();
+    }
+
+    if (req.user.isTeacher()) {
+      let access = false;
+
+      const klassen = await this.klasService.byTeacher(req.user.id);
+      klassen.forEach((klas) => {
+        if (klas.id == req.params.id) {
+          access = true;
+        }
+      });
+
+      if (!access) {
+        next(new ForbiddenError());
+      }
     }
 
     const klas = await this.klasService.findOne(req.params.id);
@@ -53,6 +94,10 @@ export default class KlasController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
     const { body } = req;
 
     const klas = await this.klasService.create(body);
@@ -64,6 +109,10 @@ export default class KlasController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
     const { body } = req;
     body.id = parseInt(req.params.id);
 
@@ -86,6 +135,10 @@ export default class KlasController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
     try {
       const klas = await this.klasService.delete(parseInt(req.params.id));
       if (!klas) {

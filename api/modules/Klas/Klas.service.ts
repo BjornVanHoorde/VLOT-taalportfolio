@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { LessThan, MoreThan, Repository } from "typeorm";
 import { GradeOptions } from "../../constants";
 import { AppDataSource } from "../../database/DatabaseSource";
 import Klas from "./Klas.entity";
@@ -26,10 +26,23 @@ export default class KlasService {
     return klassen;
   };
 
+  byTeacher = async (id: number) => {
+    const klassen = await this.repository.find({
+      where: {
+        leerkrachtKlassen: {
+          leerkracht: { id },
+          geldigVan: LessThan(new Date()),
+          geldigTot: MoreThan(new Date()),
+        },
+      },
+    });
+    return klassen;
+  };
+
   findOne = async (id: number) => {
     const klas = await this.repository.findOne({
       where: { id },
-      relations: ["leerlingen", "leerlingen.taaltipsAntwoorden"],
+      relations: ["leerlingen"],
     });
     return klas;
   };
