@@ -1,5 +1,6 @@
 import { NextFunction, Response } from "express";
 import { GradeOptions, TaalOptions, VaardigheidOptions } from "../../constants";
+import ForbiddenError from "../../errors/ForbiddenError";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
 import TaalprofielVraagService from "./TaalprofielVraag.service";
@@ -17,7 +18,13 @@ export default class TaalprofielVraagController {
     res: Response,
     next: NextFunction
   ) => {
-    const taalprofielVragen = await this.taalprofielVraagService.all({ ...req.body });
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
+    const taalprofielVragen = await this.taalprofielVraagService.all({
+      ...req.body,
+    });
     return res.json(taalprofielVragen);
   };
 
@@ -26,8 +33,13 @@ export default class TaalprofielVraagController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
 
-    const taalprofielVragen = await this.taalprofielVraagService.byGrade(req.params.grade);
+    const taalprofielVragen = await this.taalprofielVraagService.byGrade(
+      req.params.grade
+    );
     return res.json(taalprofielVragen);
   };
 
@@ -36,7 +48,13 @@ export default class TaalprofielVraagController {
     res: Response,
     next: NextFunction
   ) => {
-    const taalprofielVragen = await this.taalprofielVraagService.byLanguage(req.params.language);
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
+    const taalprofielVragen = await this.taalprofielVraagService.byLanguage(
+      req.params.language
+    );
     return res.json(taalprofielVragen);
   };
 
@@ -45,7 +63,13 @@ export default class TaalprofielVraagController {
     res: Response,
     next: NextFunction
   ) => {
-    const taalprofielVraag = await this.taalprofielVraagService.findOne(req.params.id);
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
+    const taalprofielVraag = await this.taalprofielVraagService.findOne(
+      req.params.id
+    );
 
     if (!taalprofielVraag) {
       next(new NotFoundError());
@@ -58,6 +82,10 @@ export default class TaalprofielVraagController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
     const { body } = req;
 
     const taalprofielVraag = await this.taalprofielVraagService.create(body);
@@ -70,6 +98,10 @@ export default class TaalprofielVraagController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
     const { body } = req;
     body.id = parseInt(req.params.id);
 
@@ -92,8 +124,14 @@ export default class TaalprofielVraagController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
     try {
-      const taalprofielVraag = await this.taalprofielVraagService.delete(parseInt(req.params.id));
+      const taalprofielVraag = await this.taalprofielVraagService.delete(
+        parseInt(req.params.id)
+      );
       if (!taalprofielVraag) {
         next(new NotFoundError());
       }
