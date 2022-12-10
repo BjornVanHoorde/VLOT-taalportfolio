@@ -111,12 +111,18 @@ export default class FoutenanalyseOnderdeelController {
     res: Response,
     next: NextFunction
   ) => {
+    let { body } = req;
+    body.id = parseInt(req.params.id);
+
     if (req.user.isTeacher()) {
-      return new ForbiddenError();
+      const foutenanalyseOnderdeel = await this.foutenanalyseOnderdeelService.findOne(parseInt(req.params.id));
+      body = { ...foutenanalyseOnderdeel, feedback: body.feedback };
     }
 
-    const { body } = req;
-    body.id = parseInt(req.params.id);
+    if (req.user.isStudent()) {
+      const foutenanalyseOnderdeel = await this.foutenanalyseOnderdeelService.findOne(parseInt(req.params.id));
+      body.feedback = foutenanalyseOnderdeel.feedback;
+    }
 
     try {
       const foutenanalyseOnderdeel =

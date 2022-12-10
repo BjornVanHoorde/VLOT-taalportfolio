@@ -179,6 +179,7 @@ const registerTeacherRoutes = (router: Router) => {
   const foutenanalyseOnderdeelController = new FoutenanalyseOnderdeelController();
   teacherRouter.get("/foutenanalyse/onderdelen/leerling/:id", useMethod(foutenanalyseOnderdeelController.byStudent));
   teacherRouter.get("/foutenanalyse/onderdelen/klas/:id", useMethod(foutenanalyseOnderdeelController.byClass));
+  teacherRouter.patch("/foutenanalyse/onderdelen/:id", useMethod(foutenanalyseOnderdeelController.update));
 
   router.use(teacherRouter);
 };
