@@ -201,6 +201,11 @@ const registerStudentRoutes = (router: Router) => {
   studentRouter.patch("/foutenanalyse/onderdelen/:id", useMethod(foutenanalyseOnderdeelController.update));
   studentRouter.delete("/foutenanalyse/onderdelen/:id", useMethod(foutenanalyseOnderdeelController.delete));
 
+  const foutenanalyseFoutController = new FoutenanalyseFoutenController();
+  studentRouter.post("/foutenanalyse/fouten", useMethod(foutenanalyseFoutController.create));
+  studentRouter.patch("/foutenanalyse/fouten/:id", useMethod(foutenanalyseFoutController.update));
+  studentRouter.delete("/foutenanalyse/fouten/:id", useMethod(foutenanalyseFoutController.delete));
+
 
   router.use(studentRouter);
 };

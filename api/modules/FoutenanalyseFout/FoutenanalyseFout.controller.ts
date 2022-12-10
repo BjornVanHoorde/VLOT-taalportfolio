@@ -1,14 +1,19 @@
 import { NextFunction, Response } from "express";
+import ForbiddenError from "../../errors/ForbiddenError";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
+import { CheckTeacherClasses } from "../../utils";
+import UserService from "../User/User.service";
 import FoutenanalyseFoutService from "./FoutenanalyseFout.service";
 import { FoutenanalyseFoutBody } from "./FoutenanalyseFout.types";
 
 export default class FoutenanalyseFoutenController {
   private foutenanalyseFoutService: FoutenanalyseFoutService;
+  private userService: UserService;
 
   constructor() {
     this.foutenanalyseFoutService = new FoutenanalyseFoutService();
+    this.userService = new UserService();
   }
 
   all = async (
@@ -16,7 +21,13 @@ export default class FoutenanalyseFoutenController {
     res: Response,
     next: NextFunction
   ) => {
-    const foutenanalyseFouten = await this.foutenanalyseFoutService.all({ ...req.body });
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
+    const foutenanalyseFouten = await this.foutenanalyseFoutService.all({
+      ...req.body,
+    });
     return res.json(foutenanalyseFouten);
   };
 
@@ -25,7 +36,9 @@ export default class FoutenanalyseFoutenController {
     res: Response,
     next: NextFunction
   ) => {
-    const foutenanalyseFout = await this.foutenanalyseFoutService.findOne(req.params.id);
+    const foutenanalyseFout = await this.foutenanalyseFoutService.findOne(
+      req.params.id
+    );
 
     if (!foutenanalyseFout) {
       next(new NotFoundError());
@@ -38,6 +51,10 @@ export default class FoutenanalyseFoutenController {
     res: Response,
     next: NextFunction
   ) => {
+    if (req.user.isTeacher()) {
+      return new ForbiddenError();
+    }
+
     const { body } = req;
 
     const foutenanalyseFout = await this.foutenanalyseFoutService.create(body);
@@ -50,6 +67,10 @@ export default class FoutenanalyseFoutenController {
     res: Response,
     next: NextFunction
   ) => {
+    if (req.user.isTeacher()) {
+      return new ForbiddenError();
+    }
+
     const { body } = req;
     body.id = parseInt(req.params.id);
 
@@ -72,8 +93,14 @@ export default class FoutenanalyseFoutenController {
     res: Response,
     next: NextFunction
   ) => {
+    if (req.user.isTeacher()) {
+      return new ForbiddenError();
+    }
+
     try {
-      const foutenanalyseFout = await this.foutenanalyseFoutService.delete(parseInt(req.params.id));
+      const foutenanalyseFout = await this.foutenanalyseFoutService.delete(
+        parseInt(req.params.id)
+      );
       if (!foutenanalyseFout) {
         next(new NotFoundError());
       }

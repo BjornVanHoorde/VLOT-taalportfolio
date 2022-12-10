@@ -29,6 +29,7 @@ export default class FoutenanalyseOnderdeelController {
       await this.foutenanalyseOnderdeelService.all({ ...req.body });
     return res.json(foutenanalyseOnderdelen);
   };
+
   byStudent = async (
     req: AuthRequest<{ id: number }>,
     res: Response,
@@ -65,9 +66,8 @@ export default class FoutenanalyseOnderdeelController {
       }
     }
 
-    const foutenanalyseOnderdelen = await this.foutenanalyseOnderdeelService.byClass(
-      req.params.id
-    );
+    const foutenanalyseOnderdelen =
+      await this.foutenanalyseOnderdeelService.byClass(req.params.id);
     return res.json(foutenanalyseOnderdelen);
   };
 
@@ -115,12 +115,18 @@ export default class FoutenanalyseOnderdeelController {
     body.id = parseInt(req.params.id);
 
     if (req.user.isTeacher()) {
-      const foutenanalyseOnderdeel = await this.foutenanalyseOnderdeelService.findOne(parseInt(req.params.id));
+      const foutenanalyseOnderdeel =
+        await this.foutenanalyseOnderdeelService.findOne(
+          parseInt(req.params.id)
+        );
       body = { ...foutenanalyseOnderdeel, feedback: body.feedback };
     }
 
     if (req.user.isStudent()) {
-      const foutenanalyseOnderdeel = await this.foutenanalyseOnderdeelService.findOne(parseInt(req.params.id));
+      const foutenanalyseOnderdeel =
+        await this.foutenanalyseOnderdeelService.findOne(
+          parseInt(req.params.id)
+        );
       body.feedback = foutenanalyseOnderdeel.feedback;
     }
 
