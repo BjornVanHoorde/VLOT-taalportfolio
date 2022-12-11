@@ -2,18 +2,14 @@ import { NextFunction, Response } from "express";
 import ForbiddenError from "../../errors/ForbiddenError";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
-import { CheckTeacherClasses } from "../../utils";
-import UserService from "../User/User.service";
 import FoutenanalyseFoutService from "./FoutenanalyseFout.service";
 import { FoutenanalyseFoutBody } from "./FoutenanalyseFout.types";
 
 export default class FoutenanalyseFoutenController {
   private foutenanalyseFoutService: FoutenanalyseFoutService;
-  private userService: UserService;
 
   constructor() {
     this.foutenanalyseFoutService = new FoutenanalyseFoutService();
-    this.userService = new UserService();
   }
 
   all = async (

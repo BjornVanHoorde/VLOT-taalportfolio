@@ -1,4 +1,5 @@
 import { NextFunction, Response } from "express";
+import ForbiddenError from "../../errors/ForbiddenError";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
 import WoordenschatWoordService from "./WoordenschatWoord.service";
@@ -16,7 +17,13 @@ export default class WoordenschatWoordController {
     res: Response,
     next: NextFunction
   ) => {
-    const woordenschatWoorden = await this.woordenschatWoordService.all({ ...req.body });
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
+    const woordenschatWoorden = await this.woordenschatWoordService.all({
+      ...req.body,
+    });
     return res.json(woordenschatWoorden);
   };
 
@@ -25,7 +32,9 @@ export default class WoordenschatWoordController {
     res: Response,
     next: NextFunction
   ) => {
-    const woordenschatWoord = await this.woordenschatWoordService.findOne(req.params.id);
+    const woordenschatWoord = await this.woordenschatWoordService.findOne(
+      req.params.id
+    );
 
     if (!woordenschatWoord) {
       next(new NotFoundError());
@@ -38,6 +47,10 @@ export default class WoordenschatWoordController {
     res: Response,
     next: NextFunction
   ) => {
+    if (req.user.isTeacher()) {
+      return new ForbiddenError();
+    }
+
     const { body } = req;
 
     const woordenschatWoord = await this.woordenschatWoordService.create(body);
@@ -50,6 +63,10 @@ export default class WoordenschatWoordController {
     res: Response,
     next: NextFunction
   ) => {
+    if (req.user.isTeacher()) {
+      return new ForbiddenError();
+    }
+
     const { body } = req;
     body.id = parseInt(req.params.id);
 
@@ -72,8 +89,14 @@ export default class WoordenschatWoordController {
     res: Response,
     next: NextFunction
   ) => {
+    if (req.user.isTeacher()) {
+      return new ForbiddenError();
+    }
+
     try {
-      const woordenschatWoord = await this.woordenschatWoordService.delete(parseInt(req.params.id));
+      const woordenschatWoord = await this.woordenschatWoordService.delete(
+        parseInt(req.params.id)
+      );
       if (!woordenschatWoord) {
         next(new NotFoundError());
       }

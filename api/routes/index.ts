@@ -217,6 +217,11 @@ const registerStudentRoutes = (router: Router) => {
   studentRouter.patch("/woordenschat/onderdelen/:id", useMethod(woordenschatOnderdeelController.update));
   studentRouter.delete("/woordenschat/onderdelen/:id", useMethod(woordenschatOnderdeelController.delete));
 
+  const woordenschatWoordController = new WoordenschatWoordController();
+  studentRouter.post("/woordenschat/woorden", useMethod(woordenschatWoordController.create));
+  studentRouter.patch("/woordenschat/woorden/:id", useMethod(woordenschatWoordController.update));
+  studentRouter.delete("/woordenschat/woorden/:id", useMethod(woordenschatWoordController.delete));
+
   router.use(studentRouter);
 };
 
