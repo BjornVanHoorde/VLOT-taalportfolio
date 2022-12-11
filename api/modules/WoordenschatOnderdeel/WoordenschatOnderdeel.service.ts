@@ -19,6 +19,22 @@ export default class WoordenschatOnderdeelService {
     return woordenschatOnderdelen;
   };
 
+  byStudent = async (id: number) => {
+    const woordenschatOnderdelen = await this.repository.find({
+      where: { leerling: { id } },
+      relations: ["woorden"],
+    });
+    return woordenschatOnderdelen;
+  };
+
+  byClass = async (id: number) => {
+    const woordenschatOnderdelen = await this.repository.find({
+      where: { leerling: { klas: { id } } },
+      relations: ["woorden", "leerling"],
+    });
+    return woordenschatOnderdelen;
+  };
+
   findOne = async (id: number) => {
     const woordenschatOnderdeel = await this.repository.findOne({
       where: { id },

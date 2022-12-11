@@ -181,6 +181,11 @@ const registerTeacherRoutes = (router: Router) => {
   teacherRouter.get("/foutenanalyse/onderdelen/klas/:id", useMethod(foutenanalyseOnderdeelController.byClass));
   teacherRouter.patch("/foutenanalyse/onderdelen/:id", useMethod(foutenanalyseOnderdeelController.update));
 
+  const woordenschatOnderdeelController = new WoordenschatOnderdeelController();
+  teacherRouter.get("/woordenschat/onderdelen/leerling/:id", useMethod(woordenschatOnderdeelController.byStudent));
+  teacherRouter.get("/woordenschat/onderdelen/klas/:id", useMethod(woordenschatOnderdeelController.byClass));
+  teacherRouter.patch("/woordenschat/onderdelen/:id", useMethod(woordenschatOnderdeelController.update));
+
   router.use(teacherRouter);
 };
 
@@ -206,6 +211,11 @@ const registerStudentRoutes = (router: Router) => {
   studentRouter.patch("/foutenanalyse/fouten/:id", useMethod(foutenanalyseFoutController.update));
   studentRouter.delete("/foutenanalyse/fouten/:id", useMethod(foutenanalyseFoutController.delete));
 
+  const woordenschatOnderdeelController = new WoordenschatOnderdeelController();
+  studentRouter.get("/woordenschat/onderdelen/leerling/:id", useMethod(woordenschatOnderdeelController.byStudent));
+  studentRouter.post("/woordenschat/onderdeel", useMethod(woordenschatOnderdeelController.create));
+  studentRouter.patch("/woordenschat/onderdelen/:id", useMethod(woordenschatOnderdeelController.update));
+  studentRouter.delete("/woordenschat/onderdelen/:id", useMethod(woordenschatOnderdeelController.delete));
 
   router.use(studentRouter);
 };
