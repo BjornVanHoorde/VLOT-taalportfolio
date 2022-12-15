@@ -5,7 +5,6 @@ import { AuthRequest } from "../../middleware/auth/auth.types";
 import { CheckTeacherClasses } from "../../utils";
 import UserService from "../User/User.service";
 import WoordenschatOnderdeelService from "./WoordenschatOnderdeel.service";
-import woordenschatOnderdeelService from "./WoordenschatOnderdeel.service";
 import { WoordenschatOnderdeelBody } from "./WoordenschatOnderdeel.types";
 
 export default class WoordenschatOnderdeelController {
