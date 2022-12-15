@@ -1,5 +1,6 @@
 import { NextFunction, Response } from "express";
 import { TaalOptions, VaardigheidOptions } from "../../constants";
+import ForbiddenError from "../../errors/ForbiddenError";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
 import KlasService from "../Klas/Klas.service";
@@ -23,6 +24,10 @@ export default class TaaltipController {
     res: Response,
     next: NextFunction
   ) => {
+    if (req.user.isStudent()) {
+      return new ForbiddenError();
+    }
+
     const taaltips = await this.taaltipService.all({ ...req.body });
     return res.json(taaltips);
   };
@@ -32,9 +37,8 @@ export default class TaaltipController {
     res: Response,
     next: NextFunction
   ) => {
-    // Students cannot see taaltips of other classes
     if (req.user.isStudent()) {
-      req.params.id = req.user.klas.id;
+      return new ForbiddenError();
     }
 
     const taaltips = await this.taaltipService.byClass(req.params.id);
@@ -46,6 +50,10 @@ export default class TaaltipController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
     const taaltips = await this.taaltipService.byLanguage(req.params.language);
     return res.json(taaltips);
   };
@@ -55,17 +63,33 @@ export default class TaaltipController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
     const taaltips = await this.taaltipService.bySkill(req.params.skill);
     return res.json(taaltips);
   };
 
   allByClassLanguageSkill = async (
-    req: AuthRequest<{ id: number, language: TaalOptions, skill: VaardigheidOptions }>,
+    req: AuthRequest<{
+      id: number;
+      language: TaalOptions;
+      skill: VaardigheidOptions;
+    }>,
     res: Response,
     next: NextFunction
   ) => {
-    const { id, language, skill } =  req.params
-    const taaltips = await this.taaltipService.byClassLanguageSkill(id, language, skill);
+    if (req.user.isStudent()) {
+      return new ForbiddenError();
+    }
+
+    const { id, language, skill } = req.params;
+    const taaltips = await this.taaltipService.byClassLanguageSkill(
+      id,
+      language,
+      skill
+    );
     return res.json(taaltips);
   };
 
@@ -74,6 +98,10 @@ export default class TaaltipController {
     res: Response,
     next: NextFunction
   ) => {
+    if (req.user.isStudent()) {
+      return new ForbiddenError();
+    }
+
     const taaltip = await this.taaltipService.findOne(req.params.id);
 
     if (!taaltip) {
@@ -87,22 +115,29 @@ export default class TaaltipController {
     res: Response,
     next: NextFunction
   ) => {
+    if (req.user.isStudent()) {
+      return new ForbiddenError();
+    }
+
     const { body } = req;
+    let taaltip: TaaltipBody;
 
-    const leerlingen =  (await this.klasService.findOne(body.klas.id)).leerlingen;
-    const taaltip = await this.taaltipService.create(body);
-
-    // If there is new taaltip,
-    // insert an empty answer to all the students who are in the class with the new taaltip
-    leerlingen.forEach( async (leerling) => {
-      await this.TaaltipsLeerlingService.create({
-        taaltip,
-        leerling,
-        taaltipId: taaltip.id,
-        leerlingId: leerling.id,
-        antwoord: "-",
-      })
-    });
+    // This is only if 1 class is given.
+    if (body.klas) {
+      const leerlingen = (await this.klasService.findOne(body.klas.id))
+        .leerlingen;
+      taaltip = await this.taaltipService.create(body);
+      await this.fillInTaaltips(leerlingen, taaltip);
+      // This is only if more than 1 class is given.
+    } else {
+      const klassen = await this.klasService.byTeacher(req.user.id);
+      klassen.forEach(async (klas) => {
+        body.klas = klas;
+        taaltip = await this.taaltipService.create(body);
+        const leerlingen = (await this.klasService.findOne(klas.id)).leerlingen;
+        await this.fillInTaaltips(leerlingen, taaltip);
+      });
+    }
 
     return res.json(taaltip);
   };
@@ -112,6 +147,10 @@ export default class TaaltipController {
     res: Response,
     next: NextFunction
   ) => {
+    if (req.user.isStudent()) {
+      return new ForbiddenError();
+    }
+
     const { body } = req;
     body.id = parseInt(req.params.id);
 
@@ -134,6 +173,10 @@ export default class TaaltipController {
     res: Response,
     next: NextFunction
   ) => {
+    if (req.user.isStudent()) {
+      return new ForbiddenError();
+    }
+
     try {
       const taaltip = await this.taaltipService.delete(parseInt(req.params.id));
       if (!taaltip) {
@@ -143,5 +186,19 @@ export default class TaaltipController {
     } catch (e) {
       next(e);
     }
+  };
+
+  fillInTaaltips = async (leerlingen, taaltip) => {
+    // If there is new taaltip,
+    // insert an empty answer to all the students who are in the class with the new taaltip
+    leerlingen.forEach(async (leerling) => {
+      await this.TaaltipsLeerlingService.create({
+        taaltip,
+        leerling,
+        taaltipId: taaltip.id,
+        leerlingId: leerling.id,
+        antwoord: "-",
+      });
+    });
   };
 }

@@ -74,10 +74,10 @@ const registerAdminRoutes = (router: Router) => {
 
   const taaltipController = new TaaltipController();
   adminRouter.get("/taaltips", useMethod(taaltipController.all));
-  adminRouter.get("/klas/:id/taaltips", useMethod(taaltipController.allByClass));
+  adminRouter.get("/taaltips/klas/:id", useMethod(taaltipController.allByClass));
   adminRouter.get("/taaltips/vaardigheid/:skill", useMethod(taaltipController.allBySkill));
   adminRouter.get("/taaltips/taal/:language", useMethod(taaltipController.allByLanguage));
-  adminRouter.get("/klas/:id/taaltips/:language/:skill", useMethod(taaltipController.allByClassLanguageSkill));
+  adminRouter.get("/taaltips/klas/:id/:language/:skill", useMethod(taaltipController.allByClassLanguageSkill));
   adminRouter.get("/taaltip/:id", useMethod(taaltipController.find));
   adminRouter.post("/taaltip", useMethod(taaltipController.create));
   adminRouter.patch("/taaltip/:id", useMethod(taaltipController.update));
@@ -186,6 +186,12 @@ const registerTeacherRoutes = (router: Router) => {
   teacherRouter.get("/woordenschat/onderdelen/klas/:id", useMethod(woordenschatOnderdeelController.byClass));
   teacherRouter.patch("/woordenschat/onderdelen/:id", useMethod(woordenschatOnderdeelController.update));
 
+  const taaltipController = new TaaltipController();
+  teacherRouter.get("/taaltips/klas/:id", useMethod(taaltipController.allByClass));
+  teacherRouter.post("/taaltips", useMethod(taaltipController.create));
+  teacherRouter.patch("/taaltips/:id", useMethod(taaltipController.update));
+  teacherRouter.delete("/taaltips/:id", useMethod(taaltipController.delete));
+
   router.use(teacherRouter);
 };
 
@@ -221,7 +227,7 @@ const registerStudentRoutes = (router: Router) => {
   studentRouter.post("/woordenschat/woorden", useMethod(woordenschatWoordController.create));
   studentRouter.patch("/woordenschat/woorden/:id", useMethod(woordenschatWoordController.update));
   studentRouter.delete("/woordenschat/woorden/:id", useMethod(woordenschatWoordController.delete));
-
+  
   router.use(studentRouter);
 };
 

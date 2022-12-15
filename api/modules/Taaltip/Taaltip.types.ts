@@ -7,5 +7,4 @@ export interface TaaltipBody {
   taal: TaalOptions;
   vaardigheid: VaardigheidOptions;
   klas: Klas;
-  klasId: number;
 }
