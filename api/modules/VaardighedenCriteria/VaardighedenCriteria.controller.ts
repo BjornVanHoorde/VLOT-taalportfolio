@@ -1,4 +1,5 @@
 import { NextFunction, Response } from "express";
+import ForbiddenError from "../../errors/ForbiddenError";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
 import VaardighedenCriteriaService from "./VaardighedenCriteria.service";
@@ -16,7 +17,13 @@ export default class VaardighedenCriteriaController {
     res: Response,
     next: NextFunction
   ) => {
-    const vaardighedenCriteria = await this.vaardighedenCriteriaService.all({ ...req.body });
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
+    const vaardighedenCriteria = await this.vaardighedenCriteriaService.all({
+      ...req.body,
+    });
     return res.json(vaardighedenCriteria);
   };
 
@@ -25,7 +32,13 @@ export default class VaardighedenCriteriaController {
     res: Response,
     next: NextFunction
   ) => {
-    const vaardighedenCriteria = await this.vaardighedenCriteriaService.findOne(req.params.id);
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
+    const vaardighedenCriteria = await this.vaardighedenCriteriaService.findOne(
+      req.params.id
+    );
 
     if (!vaardighedenCriteria) {
       next(new NotFoundError());
@@ -38,9 +51,15 @@ export default class VaardighedenCriteriaController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
     const { body } = req;
 
-    const vaardighedenCriteria = await this.vaardighedenCriteriaService.create(body);
+    const vaardighedenCriteria = await this.vaardighedenCriteriaService.create(
+      body
+    );
 
     return res.json(vaardighedenCriteria);
   };
@@ -50,14 +69,19 @@ export default class VaardighedenCriteriaController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
     const { body } = req;
     body.id = parseInt(req.params.id);
 
     try {
-      const vaardighedenCriteria = await this.vaardighedenCriteriaService.update(
-        parseInt(req.params.id),
-        req.body
-      );
+      const vaardighedenCriteria =
+        await this.vaardighedenCriteriaService.update(
+          parseInt(req.params.id),
+          req.body
+        );
       if (!vaardighedenCriteria) {
         next(new NotFoundError());
       }
@@ -72,8 +96,13 @@ export default class VaardighedenCriteriaController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
     try {
-      const vaardighedenCriteria = await this.vaardighedenCriteriaService.delete(parseInt(req.params.id));
+      const vaardighedenCriteria =
+        await this.vaardighedenCriteriaService.delete(parseInt(req.params.id));
       if (!vaardighedenCriteria) {
         next(new NotFoundError());
       }
