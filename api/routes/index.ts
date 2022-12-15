@@ -192,6 +192,10 @@ const registerTeacherRoutes = (router: Router) => {
   teacherRouter.patch("/taaltips/:id", useMethod(taaltipController.update));
   teacherRouter.delete("/taaltips/:id", useMethod(taaltipController.delete));
 
+  const taaltipLeerlingController = new TaaltipLeerlingController();
+  teacherRouter.get("/taaltips/antwoorden/leerling/:id", useMethod(taaltipLeerlingController.allByStudent));
+  teacherRouter.get("/taaltips/antwoorden/klas/:id", useMethod(taaltipLeerlingController.allByClass));
+
   router.use(teacherRouter);
 };
 
@@ -227,7 +231,11 @@ const registerStudentRoutes = (router: Router) => {
   studentRouter.post("/woordenschat/woorden", useMethod(woordenschatWoordController.create));
   studentRouter.patch("/woordenschat/woorden/:id", useMethod(woordenschatWoordController.update));
   studentRouter.delete("/woordenschat/woorden/:id", useMethod(woordenschatWoordController.delete));
-  
+
+  const taaltipLeerlingController = new TaaltipLeerlingController();
+  studentRouter.get("/taaltips/antwoorden/leerling/:id", useMethod(taaltipLeerlingController.allByStudent));
+  studentRouter.patch("/taaltips/antwoorden/:id", useMethod(taaltipLeerlingController.update));
+
   router.use(studentRouter);
 };
 

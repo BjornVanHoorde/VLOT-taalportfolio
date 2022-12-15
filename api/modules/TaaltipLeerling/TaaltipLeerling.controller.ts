@@ -1,4 +1,5 @@
 import { NextFunction, Response } from "express";
+import ForbiddenError from "../../errors/ForbiddenError";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
 import TaaltipLeerlingService from "./TaaltipLeerling.service";
@@ -16,6 +17,10 @@ export default class TaaltipLeerlingController {
     res: Response,
     next: NextFunction
   ) => {
+    if(!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
     const antwoorden = await this.taaltipLeerlingService.all({ ...req.body });
     return res.json(antwoorden);
   };
@@ -25,7 +30,24 @@ export default class TaaltipLeerlingController {
     res: Response,
     next: NextFunction
   ) => {
+    if (req.user.isStudent()) {
+      req.params.id = req.user.id;
+    }
+
     const antwoorden = await this.taaltipLeerlingService.byStudent(req.params.id);
+    return res.json(antwoorden);
+  };
+
+  allByClass = async (
+    req: AuthRequest<{ id: number }>,
+    res: Response,
+    next: NextFunction
+  ) => {
+    if (req.user.isStudent()) {
+      return new ForbiddenError();
+    }
+
+    const antwoorden = await this.taaltipLeerlingService.byClass(req.params.id);
     return res.json(antwoorden);
   };
 
@@ -34,6 +56,10 @@ export default class TaaltipLeerlingController {
     res: Response,
     next: NextFunction
   ) => {
+    if (req.user.isStudent()) {
+      return new ForbiddenError();
+    }
+
     const antwoorden = await this.taaltipLeerlingService.byTaaltip(req.params.id);
     return res.json(antwoorden);
   };
@@ -43,6 +69,10 @@ export default class TaaltipLeerlingController {
     res: Response,
     next: NextFunction
   ) => {
+    if (req.user.isStudent()) {
+      return new ForbiddenError();
+    }
+
     const antwoord = await this.taaltipLeerlingService.findOne(req.params.id);
 
     if (!antwoord) {
@@ -56,6 +86,10 @@ export default class TaaltipLeerlingController {
     res: Response,
     next: NextFunction
   ) => {
+    if (req.user.isStudent()) {
+      return new ForbiddenError();
+    }
+
     const { body } = req;
 
     const antwoord = await this.taaltipLeerlingService.create(body);
@@ -67,6 +101,10 @@ export default class TaaltipLeerlingController {
     res: Response,
     next: NextFunction
   ) => {
+    if(req.user.isTeacher()) {
+      return new ForbiddenError();
+    }
+
     const { body } = req;
     body.id = parseInt(req.params.id);
 
@@ -89,6 +127,10 @@ export default class TaaltipLeerlingController {
     res: Response,
     next: NextFunction
   ) => {
+    if (!req.user.isAdmin()) {
+      return new ForbiddenError();
+    }
+
     try {
       const antwoord = await this.taaltipLeerlingService.delete(parseInt(req.params.id));
       if (!antwoord) {

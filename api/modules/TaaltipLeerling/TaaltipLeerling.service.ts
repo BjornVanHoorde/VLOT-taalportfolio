@@ -23,6 +23,15 @@ export default class TaaltipLeerlingService {
   byStudent = async (id: number) => {
     const taaltips = await this.repository.find({
       where: { leerling: { id } },
+      relations: ["taaltip"],
+    });
+    return taaltips;
+  };
+
+  byClass = async (id: number) => {
+    const taaltips = await this.repository.find({
+      where: { leerling: { klas: { id } } },
+      relations: ["taaltip", "leerling"],
     });
     return taaltips;
   };
