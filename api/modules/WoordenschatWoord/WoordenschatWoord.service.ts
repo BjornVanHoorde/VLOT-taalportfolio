@@ -25,6 +25,13 @@ export default class WoordenschatWoordService {
     return woordenschatWoord;
   };
 
+  byOnderdeel = async (id: number) => {
+    const woordenschatWoorden = await this.repository.find({
+      where: { onderdeel: { id } },
+    });
+    return woordenschatWoorden;
+  };
+
   findOneBy = async (options: object) => {
     const woordenschatWoord = await this.repository.findOneBy(options);
     return woordenschatWoord;

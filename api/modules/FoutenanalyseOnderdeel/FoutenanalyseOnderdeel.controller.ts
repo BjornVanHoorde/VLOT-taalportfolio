@@ -3,16 +3,19 @@ import ForbiddenError from "../../errors/ForbiddenError";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
 import { CheckTeacherClasses } from "../../utils";
+import FoutenanalyseFoutService from "../FoutenanalyseFout/FoutenanalyseFout.service";
 import UserService from "../User/User.service";
 import FoutenanalyseOnderdeelService from "./FoutenanalyseOnderdeel.service";
 import { FoutenanalyseOnderdeelBody } from "./FoutenanalyseOnderdeel.types";
 
 export default class FoutenanalyseOnderdeelController {
   private foutenanalyseOnderdeelService: FoutenanalyseOnderdeelService;
+  private foutenanalyseFoutService: FoutenanalyseFoutService;
   private userService: UserService;
 
   constructor() {
     this.foutenanalyseOnderdeelService = new FoutenanalyseOnderdeelService();
+    this.foutenanalyseFoutService = new FoutenanalyseFoutService();
     this.userService = new UserService();
   }
 
@@ -155,6 +158,11 @@ export default class FoutenanalyseOnderdeelController {
     }
 
     try {
+      const foutenanalyseFouten = await this.foutenanalyseFoutService.byOnderdeel(parseInt(req.params.id));
+      foutenanalyseFouten.forEach((element) => {
+        this.foutenanalyseFoutService.delete(element.id);
+      });
+
       const foutenanalyseOnderdeel =
         await this.foutenanalyseOnderdeelService.delete(
           parseInt(req.params.id)

@@ -4,8 +4,6 @@ import VaardighedenOnderdeel from "../VaardighedenOnderdeel/VaardighedenOnderdee
 export interface VaardighedenEvaluatieBody {
   id?: number;
   antwoord: string;
-  criteriaId: number;
   criteria: VaardighedenCriteria;
-  onderdeelId: number;
   onderdeel: VaardighedenOnderdeel;
 }

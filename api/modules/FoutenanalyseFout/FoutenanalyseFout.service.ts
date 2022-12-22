@@ -30,6 +30,13 @@ export default class FoutenanalyseFoutService {
     return foutenanalyseFout;
   };
 
+  byOnderdeel = async (id: number) => {
+    const foutenanalyseFouten = await this.repository.find({
+      where: { onderdeel: { id } },
+    });
+    return foutenanalyseFouten;
+  };
+
   create = async (body: FoutenanalyseFoutBody) => {
     const foutenanalyseFout = await this.repository.save(
       this.repository.create(body)

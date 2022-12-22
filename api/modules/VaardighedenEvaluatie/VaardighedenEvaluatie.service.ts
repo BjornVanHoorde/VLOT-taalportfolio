@@ -32,6 +32,22 @@ export default class VaardighedenEvaluatieService {
     return vaardighedenEvaluatie;
   };
 
+  byCriteria = async (id: number) => {
+    const vaardighedenEvaluaties = await this.repository.find({
+      where: { criteria: { id } },
+      relations: ["criteria"],
+    });
+    return vaardighedenEvaluaties;
+  };
+
+  byOnderdeel = async (id: number) => {
+    const vaardighedenEvaluaties = await this.repository.find({
+      where: { onderdeel: { id } },
+      relations: ["criteria"],
+    });
+    return vaardighedenEvaluaties;
+  };
+
   create = async (body: VaardighedenEvaluatieBody) => {
     const vaardighedenEvaluatie = await this.repository.save(
       this.repository.create(body)

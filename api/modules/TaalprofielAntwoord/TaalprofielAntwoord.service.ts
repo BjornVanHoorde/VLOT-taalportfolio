@@ -35,6 +35,14 @@ export default class TaalprofielAntwoordService {
     return taalprofielAntwoorden;
   };
 
+  byQuestion = async (id: number) => {
+    const taalprofielAntwoorden = await this.repository.find({
+      where: { vraag: { id } },
+      relations: ["vraag", 'leerling'],
+    });
+    return taalprofielAntwoorden;
+  };
+
   findOne = async (id: number) => {
     const taalprofielAntwoord = await this.repository.findOne({
       where: { id },

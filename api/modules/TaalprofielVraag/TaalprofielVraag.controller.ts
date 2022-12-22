@@ -1,16 +1,19 @@
 import { NextFunction, Response } from "express";
-import { GradeOptions, TaalOptions, VaardigheidOptions } from "../../constants";
+import { GradeOptions, TaalOptions } from "../../constants";
 import ForbiddenError from "../../errors/ForbiddenError";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
+import TaalprofielAntwoordService from "../TaalprofielAntwoord/TaalprofielAntwoord.service";
 import TaalprofielVraagService from "./TaalprofielVraag.service";
 import { TaalprofielVraagBody } from "./TaalprofielVraag.types";
 
 export default class TaalprofielVraagController {
   private taalprofielVraagService: TaalprofielVraagService;
+  private taalprofielAntwoordService: TaalprofielAntwoordService;
 
   constructor() {
     this.taalprofielVraagService = new TaalprofielVraagService();
+    this.taalprofielAntwoordService = new TaalprofielAntwoordService();
   }
 
   all = async (
@@ -129,6 +132,11 @@ export default class TaalprofielVraagController {
     }
 
     try {
+      const antwoorden = await this.taalprofielAntwoordService.byQuestion(parseInt(req.params.id));
+      antwoorden.forEach(async (antwoord) => {
+        await this.taalprofielAntwoordService.delete(antwoord.id);
+      });
+
       const taalprofielVraag = await this.taalprofielVraagService.delete(
         parseInt(req.params.id)
       );

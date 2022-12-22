@@ -4,15 +4,18 @@ import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
 import { CheckTeacherClasses } from "../../utils";
 import UserService from "../User/User.service";
+import WoordenschatWoordService from "../WoordenschatWoord/WoordenschatWoord.service";
 import WoordenschatOnderdeelService from "./WoordenschatOnderdeel.service";
 import { WoordenschatOnderdeelBody } from "./WoordenschatOnderdeel.types";
 
 export default class WoordenschatOnderdeelController {
   private woordenschatOnderdeelService: WoordenschatOnderdeelService;
+  private woordenschatWoordService: WoordenschatWoordService;
   private userService: UserService;
 
   constructor() {
     this.woordenschatOnderdeelService = new WoordenschatOnderdeelService();
+    this.woordenschatWoordService = new WoordenschatWoordService();
     this.userService = new UserService();
   }
 
@@ -152,6 +155,11 @@ export default class WoordenschatOnderdeelController {
     }
 
     try {
+      const woorden = await this.woordenschatWoordService.byOnderdeel(parseInt(req.params.id));
+      woorden.forEach(async woord => {
+        await this.woordenschatWoordService.delete(woord.id);
+      });
+
       const woordenschatOnderdeel =
         await this.woordenschatOnderdeelService.delete(parseInt(req.params.id));
       if (!woordenschatOnderdeel) {

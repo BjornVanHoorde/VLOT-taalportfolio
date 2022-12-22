@@ -4,15 +4,18 @@ import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
 import { CheckTeacherClasses } from "../../utils";
 import UserService from "../User/User.service";
+import VaardighedenEvaluatieService from "../VaardighedenEvaluatie/VaardighedenEvaluatie.service";
 import VaardighedenOnderdeelService from "./VaardighedenOnderdeel.service";
 import { VaardighedenOnderdeelBody } from "./VaardighedenOnderdeel.types";
 
 export default class VaardighedenOnderdeelController {
   private vaardighedenOnderdeelService: VaardighedenOnderdeelService;
   private userService: UserService;
+  private vaardighedenEvaluatieService: VaardighedenEvaluatieService;
 
   constructor() {
     this.vaardighedenOnderdeelService = new VaardighedenOnderdeelService();
+    this.vaardighedenEvaluatieService = new VaardighedenEvaluatieService();
     this.userService = new UserService();
   }
 
@@ -150,6 +153,11 @@ export default class VaardighedenOnderdeelController {
     }
     
     try {
+      const evaluaties = await this.vaardighedenEvaluatieService.byOnderdeel(parseInt(req.params.id));
+      evaluaties.forEach(async (evaluatie) => {
+        await this.vaardighedenEvaluatieService.delete(evaluatie.id);
+      });
+
       const vaardighedenOnderdeel = await this.vaardighedenOnderdeelService.delete(parseInt(req.params.id));
       if (!vaardighedenOnderdeel) {
         next(new NotFoundError());
