@@ -2,14 +2,17 @@ import { NextFunction, Response } from "express";
 import ForbiddenError from "../../errors/ForbiddenError";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
+import VaardighedenEvaluatieService from "../VaardighedenEvaluatie/VaardighedenEvaluatie.service";
 import VaardighedenCriteriaService from "./VaardighedenCriteria.service";
 import { VaardighedenCriteriaBody } from "./VaardighedenCriteria.types";
 
 export default class VaardighedenCriteriaController {
   private vaardighedenCriteriaService: VaardighedenCriteriaService;
+  private vaardighedenEvaluatieService: VaardighedenEvaluatieService;
 
   constructor() {
     this.vaardighedenCriteriaService = new VaardighedenCriteriaService();
+    this.vaardighedenEvaluatieService = new VaardighedenEvaluatieService();
   }
 
   all = async (
@@ -101,6 +104,11 @@ export default class VaardighedenCriteriaController {
     }
 
     try {
+      const evaluaties = await this.vaardighedenEvaluatieService.byCriteria(parseInt(req.params.id));
+      evaluaties.forEach(async (evaluatie) => {
+        await this.vaardighedenEvaluatieService.delete(evaluatie.id);
+      });
+
       const vaardighedenCriteria =
         await this.vaardighedenCriteriaService.delete(parseInt(req.params.id));
       if (!vaardighedenCriteria) {

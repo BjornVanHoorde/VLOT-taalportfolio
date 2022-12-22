@@ -4,14 +4,23 @@ import ForbiddenError from "../../errors/ForbiddenError";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
 import { CheckTeacherClasses } from "../../utils";
+import KlasLeerkrachtService from "../KlasLeerkracht/KlasLeerkracht.service";
+import TaaltipService from "../Taaltip/Taaltip.service";
+import UserService from "../User/User.service";
 import KlasService from "./Klas.service";
 import { KlasBody } from "./Klas.types";
 
 export default class KlasController {
   private klasService: KlasService;
+  private klasLeerkrachtService: KlasLeerkrachtService;
+  private taaltipsService: TaaltipService;
+  private userService: UserService;
 
   constructor() {
     this.klasService = new KlasService();
+    this.klasLeerkrachtService = new KlasLeerkrachtService();
+    this.taaltipsService = new TaaltipService();
+    this.userService = new UserService();
   }
 
   all = async (
@@ -132,6 +141,21 @@ export default class KlasController {
     }
 
     try {
+      const klasLeerkracht = await this.klasLeerkrachtService.byClass(parseInt(req.params.id));
+      klasLeerkracht.forEach(async (klasLeerkracht) => {
+        await this.klasLeerkrachtService.delete(klasLeerkracht.id);
+      });
+
+      const taaltips = await this.taaltipsService.byClass(parseInt(req.params.id));
+      taaltips.forEach(async (taaltip) => {
+        await this.taaltipsService.delete(taaltip.id);
+      });
+
+      const leerlingen = await this.userService.studentsByClass(parseInt(req.params.id));
+      leerlingen.forEach(async (leerling) => {
+        await this.userService.update(leerling.id ,{ ...leerling, klas: null });
+      });
+
       const klas = await this.klasService.delete(parseInt(req.params.id));
       if (!klas) {
         next(new NotFoundError());
