@@ -196,6 +196,12 @@ const registerTeacherRoutes = (router: Router) => {
   teacherRouter.get("/taaltips/antwoorden/leerling/:id", useMethod(taaltipLeerlingController.allByStudent));
   teacherRouter.get("/taaltips/antwoorden/klas/:id", useMethod(taaltipLeerlingController.allByClass));
 
+  const vaardighedenOnderdeelController = new VaardighedenOnderdeelController();
+  teacherRouter.get("/vaardigheden/onderdelen/leerling/:id", useMethod(vaardighedenOnderdeelController.byStudent));
+  teacherRouter.post("/vaardigheden/onderdeel/klas/:id", useMethod(vaardighedenOnderdeelController.byClass));
+  teacherRouter.patch("/vaardigheden/onderdelen/:id", useMethod(vaardighedenOnderdeelController.update));
+
+
   router.use(teacherRouter);
 };
 
@@ -235,6 +241,17 @@ const registerStudentRoutes = (router: Router) => {
   const taaltipLeerlingController = new TaaltipLeerlingController();
   studentRouter.get("/taaltips/antwoorden/leerling/:id", useMethod(taaltipLeerlingController.allByStudent));
   studentRouter.patch("/taaltips/antwoorden/:id", useMethod(taaltipLeerlingController.update));
+
+  const vaardighedenOnderdeelController = new VaardighedenOnderdeelController();
+  studentRouter.get("/vaardigheden/onderdelen/leerling/:id", useMethod(vaardighedenOnderdeelController.byStudent));
+  studentRouter.post("/vaardigheden/onderdeel", useMethod(vaardighedenOnderdeelController.create));
+  studentRouter.patch("/vaardigheden/onderdelen/:id", useMethod(vaardighedenOnderdeelController.update));
+  studentRouter.delete("/vaardigheden/onderdelen/:id", useMethod(vaardighedenOnderdeelController.delete));
+
+  const vaardighedenEvaluatieController = new VaardighedenEvaluatieController();
+  studentRouter.post("/vaardigheden/evaluaties", useMethod(vaardighedenEvaluatieController.create));
+  studentRouter.patch("/vaardigheden/evaluaties/:id", useMethod(vaardighedenEvaluatieController.update));
+  studentRouter.delete("/vaardigheden/evaluaties/:id", useMethod(vaardighedenEvaluatieController.delete));
 
   router.use(studentRouter);
 };

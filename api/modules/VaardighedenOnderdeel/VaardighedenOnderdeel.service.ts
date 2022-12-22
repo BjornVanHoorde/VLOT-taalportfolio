@@ -26,6 +26,14 @@ export default class VaardighedenOnderdeelService {
     });
     return vaardighedenOnderdelen;
   };
+  
+  byClass = async (id: number) => {
+    const vaardighedenOnderdelen = await this.repository.find({
+      where: { leerling: { klas: { id } } },
+      relations: ["leerling", "evaluaties", "evaluaties.criteria"],
+    });
+    return vaardighedenOnderdelen;
+  };
 
   findOne = async (id: number) => {
     const vaardighedenOnderdeel = await this.repository.findOne({

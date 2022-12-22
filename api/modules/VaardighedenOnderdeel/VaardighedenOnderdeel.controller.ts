@@ -51,6 +51,27 @@ export default class VaardighedenOnderdeelController {
     return res.json(vaardighedenOnderdelen);
   };
 
+  
+  byClass = async (
+    req: AuthRequest<{ id: number }>,
+    res: Response,
+    next: NextFunction
+  ) => {
+    if (req.user.isStudent()) {
+      return new ForbiddenError();
+    }
+
+    if (req.user.isTeacher()) {
+      if (!(await CheckTeacherClasses(req.user.id, req.params.id))) {
+        next(new ForbiddenError());
+      }
+    }
+
+    const vaardighedenOnderdelen =
+      await this.vaardighedenOnderdeelService.byClass(req.params.id);
+    return res.json(vaardighedenOnderdelen);
+  };
+
   find = async (
     req: AuthRequest<{ id: number }>,
     res: Response,
