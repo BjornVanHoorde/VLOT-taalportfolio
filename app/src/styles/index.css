@@ -1,0 +1,6 @@
+@import './home.css';
+
+:root {
+    min-height: 100vh;
+    font-family: Geneva,Tahoma,Verdana,sans-serif;
+}
