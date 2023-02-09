@@ -16,7 +16,7 @@ const App = () => {
           </Route>
           <Route path="/home" element={<Home />} />
           {/* REST ROUTES */}
-          <Route path="*" element={<Navigate to="/home" />} />
+          <Route path="*" element={<Navigate to={AuthRoutes.Login} />} />
         </Routes>
       </AuthProvider>
     </>

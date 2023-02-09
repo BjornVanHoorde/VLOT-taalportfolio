@@ -1,6 +1,9 @@
 @import './home.css';
+@import './auth.css';
 
 :root {
     min-height: 100vh;
     font-family: Geneva,Tahoma,Verdana,sans-serif;
+    background: url('../img/achtergrond\ -\ design.png');
+    background-size: cover;
 }

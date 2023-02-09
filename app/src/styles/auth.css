@@ -1,0 +1,49 @@
+#auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#auth-login {
+    height: 50vh;
+    width: 50vh;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.146) 0px 0px 55px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#auth-login > * {
+    width: 50%;
+}
+
+.form-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+}
+
+.form-item > label {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.form-item > input {
+    padding: 0.75rem 0rem 0.5rem 0.75rem;
+
+}
+
+button {
+    border: none;
+    padding: 1rem;
+    width: 100%;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: darkgrey;
+    transition: 0.3s ease;
+}
