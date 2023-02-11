@@ -1,11 +1,9 @@
+import StdSidebar from "../Sidebar/Sidebar";
+
 const Home = () => {
-  const homeDiv = document.createElement('div');
-  homeDiv.setAttribute('id', 'home');
-  homeDiv.innerHTML = `
-  <img src='/img/logo.png'>
-  <h1>Content loading...</h1>
-  `
-  document.getElementById('root').appendChild(homeDiv);
+  return (
+    <StdSidebar />
+  )
 };
 
 export default Home;

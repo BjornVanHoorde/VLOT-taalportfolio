@@ -1,5 +1,6 @@
 @import './home.css';
 @import './auth.css';
+@import './sidebar.css';
 
 :root {
     min-height: 100vh;
