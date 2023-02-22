@@ -1,9 +1,7 @@
-import StdSidebar from "../Sidebar/Sidebar";
+import StdSidebar from "../Shared/Generic/Sidebar/Sidebar";
 
 const Home = () => {
-  return (
-    <StdSidebar />
-  )
+  return <StdSidebar />;
 };
 
 export default Home;
