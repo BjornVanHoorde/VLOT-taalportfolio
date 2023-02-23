@@ -2,6 +2,7 @@ import logo from "../../../../../img/logo.svg";
 import AccountInfo from "./AccountInfo";
 import JaarSelector from "./JaarSelector";
 import Navigation from "./Navigation";
+import "./styles/sidebar.css";
 
 const StdSidebar = () => {
   return (
