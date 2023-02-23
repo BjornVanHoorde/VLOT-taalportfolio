@@ -1,17 +1,12 @@
+import { MainNav, SubNav } from "../../../../../core/constants/SidebarNav";
+import SidebarNav from "../../../../Design/Nav/SidebarNav";
+
 const Navigation = () => {
     return (
     <div id='sidebar-components'>
-        <nav id='main-nav'>
-            <li>Taalprofiel</li>
-            <li>Taaldossier</li>
-            <li>Taalgroei</li>
-                <nav id='sub-nav'>
-                    <li>Vaardigheden</li>
-                    <li>Foutanalyse</li>
-                    <li>Woordenschat</li>
-                    <li>Taaltips</li>
-                </nav>
-        </nav>
+        <SidebarNav items={MainNav} >
+            <SidebarNav items={SubNav} />
+        </SidebarNav>
     </div>
     )
 }
