@@ -21,9 +21,11 @@ const App = () => {
           {/* From here on out you have te be logged in */}
           <Route
             element={
-              <AuthContainer>
                 <AppLayout />
+                /*
+              <AuthContainer>
               </AuthContainer>
+              */
             }
           >
             <Route path="/home" element={<Home />} />

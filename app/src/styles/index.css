@@ -2,6 +2,7 @@
 @import './auth.css';
 @import url("https://use.typekit.net/law2zmh.css");
 
+
 :root {
     min-height: 100vh;
     font-family: "filson-soft", sans-serif;
@@ -15,4 +16,14 @@ input {
 
 textarea {
     font-family: "filson-soft", sans-serif;
+    font-family: Geneva, Tahoma, Verdana, sans-serif;
+}
+
+#main {
+    min-height: 100vh;
+    background: url('../img/background.png');
+    background-size: cover;
+    width: 85vw;
+    position: absolute;
+    right: 0;
 }
