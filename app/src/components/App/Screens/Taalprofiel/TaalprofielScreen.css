@@ -1,0 +1,58 @@
+.taalprofiel {
+  width: 75%;
+  margin: 0 auto;
+}
+
+.taalprofiel .multiple-choice {
+  width: 100%;
+  margin-bottom: 5rem;
+}
+
+.taalprofiel .multiple-choice .field {
+  width: 100%;
+  background-color: #FFF;
+  border: 2.5px solid #A6DBF1;
+  border-radius: 10px 0 10px 0;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.taalprofiel .multiple-choice .field.options {
+  width: 100%;
+  border: none;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.taalprofiel .multiple-choice .field.options p {
+  width: 25%;
+  text-align: center;
+}
+
+.taalprofiel .multiple-choice .field label {
+  width: 50%;
+}
+
+.taalprofiel .multiple-choice .field .choices {
+  width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.taalprofiel .multiple-choice .field .choices input[type="radio"] {
+  width: 25%;
+}
+
+.taalprofiel .open .field textarea {
+  width: 100%;
+  height: 100px;
+  border: 2.5px solid #A6DBF1;
+  border-radius: 10px 0 10px 0;
+  padding: 20px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  resize: none;
+}

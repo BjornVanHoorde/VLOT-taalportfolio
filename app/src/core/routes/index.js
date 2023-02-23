@@ -3,6 +3,10 @@ const AuthRoutes = {
   Login: "/auth/login",
 };
 
+const TaalprofielRoutes = {
+  Index: "/taalprofiel",
+};
+
 export const route = (path, options = {}) => {
   Object.keys(options).forEach((key) => {
     path = path.replace(`:${key}`, options[key]);
@@ -10,4 +14,4 @@ export const route = (path, options = {}) => {
   return path;
 };
 
-export { AuthRoutes };
+export { AuthRoutes, TaalprofielRoutes };

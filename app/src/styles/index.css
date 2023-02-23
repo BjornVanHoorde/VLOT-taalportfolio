@@ -1,9 +1,18 @@
 @import './home.css';
 @import './auth.css';
+@import url("https://use.typekit.net/law2zmh.css");
 
 :root {
     min-height: 100vh;
-    font-family: Geneva, Tahoma, Verdana, sans-serif;
+    font-family: "filson-soft", sans-serif;
     background: url('../img/achtergrond\ -\ design.png');
     background-size: cover;
+}
+
+input {
+    font-family: "filson-soft", sans-serif;
+}
+
+textarea {
+    font-family: "filson-soft", sans-serif;
 }

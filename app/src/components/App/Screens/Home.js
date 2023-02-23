@@ -6,7 +6,6 @@ const Home = () => {
 
   return (
     <>
-      <StdSidebar />;
       <button color="danger" onClick={logout}>
         logout
       </button>
