@@ -1,24 +1,74 @@
-import logo from '../../../../img/logo.svg'
+import useMutation from "../../../../core/hooks/useMutation";
+import logo from "../../../../img/logo.svg";
+import { useAuthContext } from "../AuthProvider";
+import useForm from "../../../../core/hooks/useForm";
+import * as yup from "yup";
+
+const schema = yup.object().shape({
+  email: yup.string().email().required(),
+  password: yup.string().required(),
+});
+
+const defaultData = {
+  email: "",
+  password: "",
+};
 
 const LoginScreen = () => {
-  return(
+  const { login } = useAuthContext();
+  const { isLoading, error, mutate } = useMutation();
+
+  const { values, errors, handleChange, handleSubmit } = useForm(schema, {
+    ...defaultData,
+  });
+
+  const handleData = (values) => {
+    mutate(`${process.env.REACT_APP_API_URL}/login`, {
+      method: "POST",
+      data: values,
+      onSuccess: (data) => {
+        login(data);
+      },
+    });
+  };
+
+  return (
     <div id="auth">
-        <div id="auth-login">
-                <img src={logo} alt='logo'/>
-            <form className="auth-form">
-                <div className='form-item'>
-                    <label>VLOT-Gebruikersnaam</label>
-                    <input type={Text}></input>
-                </div>
-                <div className='form-item'>
-                    <label>Wachtwoord</label>
-                    <input type='password'></input>
-                </div>
-                <button type={SubmitEvent}>Inloggen</button>
-            </form>
-        </div>
+      <div id="auth-login">
+        <img src={logo} alt="logo" />
+        <form
+          className="auth-form"
+          onSubmit={handleSubmit(handleData)}
+          noValidate
+        >
+          {error && <div className="error">{error}</div>}
+          <div className="form-item">
+            <label>VLOT-Email</label>
+            <input
+              type="email"
+              name="email"
+              onChange={handleChange}
+              value={values.email}
+              error={errors.email}
+              disabled={isLoading}
+            ></input>
+          </div>
+          <div className="form-item">
+            <label>Wachtwoord</label>
+            <input
+              type="password"
+              name="password"
+              onChange={handleChange}
+              value={values.password}
+              error={errors.password}
+              disabled={isLoading}
+            ></input>
+          </div>
+          <button type={SubmitEvent}>Inloggen</button>
+        </form>
+      </div>
     </div>
-)
+  );
 };
 
 export default LoginScreen;
