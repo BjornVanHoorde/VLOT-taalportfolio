@@ -1,0 +1,23 @@
+.top-nav {
+    height: 6vh;
+    display: flex;
+    align-items: center;
+}
+
+.top-nav > button {
+    height: 70%; 
+    overflow: hidden;
+    width: 8vw;
+    margin-left: 2vw;
+    margin-top: 2vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px #A6DBF1 solid;
+    background: none;
+    border-radius: 10px 0px 10px 0px;
+}
+
+.top-nav > button:hover {
+    background-color: #A6DBF1;
+}

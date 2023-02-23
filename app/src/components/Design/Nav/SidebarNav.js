@@ -5,7 +5,7 @@ const SidebarNav = ({ items = [], classname, children }) => {
     <nav className={classname}>
       {items &&
         items.map((item) => (
-          <li>
+          <li key={item.label}>
             <Link to={item.href}>{item.label}</Link>
           </li>
         ))}
