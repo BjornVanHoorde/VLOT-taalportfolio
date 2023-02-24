@@ -1,4 +1,5 @@
 import { NextFunction, Response } from "express";
+import { TaalOptions } from "../../constants";
 import ForbiddenError from "../../errors/ForbiddenError";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
@@ -49,6 +50,30 @@ export default class TaalprofielAntwoordController {
 
     const taalprofielAntwoorden =
       await this.taalprofielAntwoordService.byStudent(req.params.id);
+    return res.json(taalprofielAntwoorden);
+  };
+
+  byStudentLanguage = async (
+    req: AuthRequest<{ id: number; language: TaalOptions }>,
+    res: Response,
+    next: NextFunction
+  ) => {
+    if (req.user.isStudent()) {
+      req.params.id = req.user.id;
+    }
+
+    if (req.user.isTeacher()) {
+      const klasId = (await this.userService.findOne(req.params.id)).klas.id;
+      if (!(await CheckTeacherClasses(req.user.id, klasId))) {
+        next(new ForbiddenError());
+      }
+    }
+
+    const taalprofielAntwoorden =
+      await this.taalprofielAntwoordService.byStudentLanguage(
+        req.params.id,
+        req.params.language
+      );
     return res.json(taalprofielAntwoorden);
   };
 

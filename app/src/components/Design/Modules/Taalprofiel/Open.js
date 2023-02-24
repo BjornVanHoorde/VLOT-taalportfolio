@@ -1,11 +1,13 @@
-const Open = ({ vraag, onChange }) => {
+import "./styles/Open.css";
+
+const Open = ({ answer, onChange, value }) => {
   return (
     <div className="field">
-      <p>{vraag.vraag}</p>
+      <p className="question">{answer.vraag.vraag}</p>
       <textarea
         type="text"
-        name={vraag.id}
-        value={vraag.answer}
+        name={answer.id}
+        value={value}
         onChange={onChange}
       />
     </div>

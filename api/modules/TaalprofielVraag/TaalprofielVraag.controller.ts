@@ -4,16 +4,19 @@ import ForbiddenError from "../../errors/ForbiddenError";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
 import TaalprofielAntwoordService from "../TaalprofielAntwoord/TaalprofielAntwoord.service";
+import UserService from "../User/User.service";
 import TaalprofielVraagService from "./TaalprofielVraag.service";
 import { TaalprofielVraagBody } from "./TaalprofielVraag.types";
 
 export default class TaalprofielVraagController {
   private taalprofielVraagService: TaalprofielVraagService;
   private taalprofielAntwoordService: TaalprofielAntwoordService;
+  private userService: UserService;
 
   constructor() {
     this.taalprofielVraagService = new TaalprofielVraagService();
     this.taalprofielAntwoordService = new TaalprofielAntwoordService();
+    this.userService = new UserService();
   }
 
   all = async (
@@ -21,10 +24,6 @@ export default class TaalprofielVraagController {
     res: Response,
     next: NextFunction
   ) => {
-    if (!req.user.isAdmin()) {
-      return new ForbiddenError();
-    }
-
     const taalprofielVragen = await this.taalprofielVraagService.all({
       ...req.body,
     });
@@ -51,10 +50,6 @@ export default class TaalprofielVraagController {
     res: Response,
     next: NextFunction
   ) => {
-    if (!req.user.isAdmin()) {
-      return new ForbiddenError();
-    }
-
     const taalprofielVragen = await this.taalprofielVraagService.byLanguage(
       req.params.language
     );
@@ -92,6 +87,9 @@ export default class TaalprofielVraagController {
     const { body } = req;
 
     const taalprofielVraag = await this.taalprofielVraagService.create(body);
+    const leerlingen = await this.userService.students();
+
+    await this.fillInTaalprofielVragen(leerlingen, taalprofielVraag);
 
     return res.json(taalprofielVraag);
   };
@@ -132,7 +130,9 @@ export default class TaalprofielVraagController {
     }
 
     try {
-      const antwoorden = await this.taalprofielAntwoordService.byQuestion(parseInt(req.params.id));
+      const antwoorden = await this.taalprofielAntwoordService.byQuestion(
+        parseInt(req.params.id)
+      );
       antwoorden.forEach(async (antwoord) => {
         await this.taalprofielAntwoordService.delete(antwoord.id);
       });
@@ -147,5 +147,17 @@ export default class TaalprofielVraagController {
     } catch (e) {
       next(e);
     }
+  };
+
+  fillInTaalprofielVragen = async (leerlingen, taalprofielVraag) => {
+    leerlingen.forEach(async (leerling) => {
+      await this.taalprofielAntwoordService.create({
+        antwoord: "",
+        vraagId: taalprofielVraag.id,
+        vraag: taalprofielVraag,
+        leerlingId: leerling.id,
+        leerling,
+      });
+    });
   };
 }

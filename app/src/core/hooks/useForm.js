@@ -3,7 +3,7 @@ import { getValidationErrors } from "../helpers/validation";
 
 const useForm = (initialSchema, initialData) => {
   const [isTouched, setIsTouched] = useState(false);
-  const [values, setValues] = useState({ ...initialData });
+  const [values, setValues] = useState(initialData);
   const [errors, setErrors] = useState({});
   // we don't listen to schema changes
   const schemaRef = useRef(initialSchema);
@@ -14,6 +14,19 @@ const useForm = (initialSchema, initialData) => {
       [e.target.name]: e.target.value,
     });
   };
+
+  const handleInvalidate = (data) => {
+    setValues(data);
+  };
+
+  // const handleArrayChange = (e, targetName, index) => {
+  //   const updatedArray = [...values[targetName]];
+  //   updatedArray[index] = { vraagId: e.target.name, antwoord: e.target.value };
+  //   setValues({
+  //     ...values,
+  //     [targetName]: updatedArray,
+  //   });
+  // };
 
   const setPasswordValue = (passwordValue) => {
     setValues({
@@ -62,7 +75,9 @@ const useForm = (initialSchema, initialData) => {
     values,
     errors,
     handleChange,
+    // handleArrayChange,
     handleSubmit,
+    handleInvalidate,
     setPasswordValue,
   };
 };

@@ -1,5 +1,5 @@
-import TaalprofielOverview from "../../Shared/Taalportfolio/overview";
-import "./TaalprofielScreen.css";
+import TaalprofielOverview from "./overview";
+import "./styles/TaalprofielScreen.css";
 
 const TaalprofielScreen = () => {
   return <TaalprofielOverview />;

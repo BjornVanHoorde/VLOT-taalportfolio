@@ -1,4 +1,5 @@
 import { Repository } from "typeorm";
+import { TaalOptions } from "../../constants";
 import { AppDataSource } from "../../database/DatabaseSource";
 import TaalprofielAntwoord from "./TaalprofielAntwoord.entity";
 import { TaalprofielAntwoordBody } from "./TaalprofielAntwoord.types";
@@ -27,10 +28,18 @@ export default class TaalprofielAntwoordService {
     return taalprofielAntwoorden;
   };
 
+  byStudentLanguage = async (id: number, language: TaalOptions) => {
+    const taalprofielAntwoorden = await this.repository.find({
+      where: { leerling: { id }, vraag: { taal: language } },
+      relations: ["vraag"],
+    });
+    return taalprofielAntwoorden;
+  };
+
   byClass = async (id: number) => {
     const taalprofielAntwoorden = await this.repository.find({
       where: { leerling: { klas: { id } } },
-      relations: ["vraag", 'leerling'],
+      relations: ["vraag", "leerling"],
     });
     return taalprofielAntwoorden;
   };
@@ -38,7 +47,7 @@ export default class TaalprofielAntwoordService {
   byQuestion = async (id: number) => {
     const taalprofielAntwoorden = await this.repository.find({
       where: { vraag: { id } },
-      relations: ["vraag", 'leerling'],
+      relations: ["vraag", "leerling"],
     });
     return taalprofielAntwoorden;
   };

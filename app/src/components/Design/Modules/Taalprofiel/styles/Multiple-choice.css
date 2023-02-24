@@ -1,0 +1,17 @@
+.field label {
+  width: 50%;
+}
+
+.field label p {
+  padding-left: 20px;
+}
+
+.field .choices {
+  width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.field .choices input[type="radio"] {
+  width: 25%;
+}

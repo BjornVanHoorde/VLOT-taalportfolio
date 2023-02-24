@@ -1,5 +1,5 @@
 import TopNavLanguages from "../../../../../core/constants/TopNavLanguages";
-import LanguageButton from "../../../../Design/Button/styles/LanguageButton";
+import LanguageButton from "../../../../Design/Button/LanguageButton";
 import { useLanguageContext } from "../../../Language/LanguageProvider";
 import "./styles/topbar.css";
 
