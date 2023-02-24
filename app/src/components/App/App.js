@@ -21,11 +21,9 @@ const App = () => {
           {/* From here on out you have te be logged in */}
           <Route
             element={
-                <AppLayout />
-                /*
               <AuthContainer>
+                <AppLayout />
               </AuthContainer>
-              */
             }
           >
             <Route path="/home" element={<Home />} />
@@ -33,12 +31,7 @@ const App = () => {
               path={TaalprofielRoutes.Index}
               element={<TaalprofielScreen />}
             />
-            {/* NEDERLANDS */}
-            {/* FRANS */}
-            {/* ENGELS */}
-            {/* DUITS */}
-            {/* REST ROUTES */}
-            <Route path="*" element={<Navigate to={AuthRoutes.Login} />} />
+            <Route path="*" element={<Navigate to="/home" />} />
           </Route>
         </Routes>
       </AuthProvider>

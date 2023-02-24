@@ -8,18 +8,17 @@ const AppLayout = () => {
   const { auth } = useAuthContext();
   const location = useLocation();
 
-  // if (auth)
-  // {
-  return (
-    <>
-      <StdSidebar />
-      <div id="main">
-        <TopNavStudent />
-        <Outlet />
-      </div>
-    </>
-  );
-  // }
+  if (auth) {
+    return (
+      <>
+        <StdSidebar />
+        <div id="main">
+          <TopNavStudent />
+          <Outlet />
+        </div>
+      </>
+    );
+  }
 
   return <Navigate to={AuthRoutes.Login} state={{ from: location }} replace />;
 };

@@ -6,7 +6,7 @@ import Navigation from "./Navigation";
 import "./styles/sidebar.css";
 
 const StdSidebar = () => {
-  const logout = useAuthContext();
+  const { logout } = useAuthContext();
   return (
     <div className="sidebar">
       <div id="sidebarLogo">
