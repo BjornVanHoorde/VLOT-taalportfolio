@@ -4,8 +4,8 @@
     align-items: center;
 }
 
-.top-nav > button {
-    height: 70%; 
+.top-nav>button {
+    height: 70%;
     overflow: hidden;
     width: 8vw;
     margin-left: 2vw;
@@ -18,6 +18,10 @@
     border-radius: 10px 0px 10px 0px;
 }
 
-.top-nav > button:hover {
+.top-nav>button:hover {
+    background-color: #A6DBF1;
+}
+
+.top-nav button.active {
     background-color: #A6DBF1;
 }

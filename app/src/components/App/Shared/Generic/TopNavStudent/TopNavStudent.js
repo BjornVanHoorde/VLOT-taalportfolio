@@ -1,19 +1,23 @@
 import TopNavLanguages from "../../../../../core/constants/TopNavLanguages";
 import LanguageButton from "../../../../Design/Button/styles/LanguageButton";
+import { useLanguageContext } from "../../../Language/LanguageProvider";
 import "./styles/topbar.css";
 
-
 const TopNavStudent = () => {
-    
-    return (
-        <div className="top-nav">
-            {
-                TopNavLanguages.map((language) => (
-                    <LanguageButton label={language.label} key={language.label} />
-                ))
-            }
-        </div>
-    )
-}
+  const { currentLanguage, changeLanguage } = useLanguageContext();
+
+  return (
+    <div className="top-nav">
+      {TopNavLanguages.map((language) => (
+        <LanguageButton
+          label={language.label}
+          key={language.label}
+          activeLanguage={currentLanguage === language.label}
+          onClick={() => changeLanguage(language.label)}
+        />
+      ))}
+    </div>
+  );
+};
 
 export default TopNavStudent;

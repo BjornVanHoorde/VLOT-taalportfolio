@@ -2,8 +2,11 @@ import { QuestionTypes } from "../../../../core/constants/Taalprofiel";
 import useFetch from "../../../../core/hooks/useFetch";
 import MultipleChoice from "../../../Design/Modules/Taalprofiel/Multiple-choice";
 import Open from "../../../Design/Modules/Taalprofiel/Open";
+import { useLanguageContext } from "../../Language/LanguageProvider";
 
 const TaalprofielOverview = () => {
+  const { currentLanguage } = useLanguageContext();
+
   const {
     isLoading,
     error,
@@ -25,7 +28,10 @@ const TaalprofielOverview = () => {
         </div>
         {vragen &&
           vragen.map((vraag) => {
-            if (vraag.soortVraag === QuestionTypes.MultipleChoice) {
+            if (
+              vraag.soortVraag === QuestionTypes.MultipleChoice &&
+              vraag.taal === currentLanguage
+            ) {
               return <MultipleChoice vraag={vraag} key={vraag.id} />;
             }
           })}
@@ -33,7 +39,10 @@ const TaalprofielOverview = () => {
       <div className="open">
         {vragen &&
           vragen.map((vraag) => {
-            if (vraag.soortVraag === QuestionTypes.Open) {
+            if (
+              vraag.soortVraag === QuestionTypes.Open &&
+              vraag.taal === currentLanguage
+            ) {
               return <Open vraag={vraag} key={vraag.id} />;
             }
           })}

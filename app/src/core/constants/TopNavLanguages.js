@@ -1,20 +1,16 @@
 const TopNavLanguages = [
-    {
-        href: '',
-        label: 'Nederlands'
-    },
-    {
-        href: '',
-        label: 'Frans'
-    },
-    {
-        href: '',
-        label: 'Engels'
-    },
-    {
-        href: '',
-        label: 'Duits'
-    },
-]
+  {
+    label: "Nederlands",
+  },
+  {
+    label: "Engels",
+  },
+  {
+    label: "Frans",
+  },
+  {
+    label: "Duits",
+  },
+];
 
 export default TopNavLanguages;
