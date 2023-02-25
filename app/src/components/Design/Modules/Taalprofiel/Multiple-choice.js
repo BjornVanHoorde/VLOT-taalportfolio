@@ -10,8 +10,6 @@ const MultipleChoice = ({ answer, onChange, value }) => {
       </label>
       <div className="choices">
         {Choices.map((choice) => (
-          // console.log(choice.value === answer.answer);
-          // console.log(choice.value);
           <Radio
             name={answer.id}
             value={choice.value}

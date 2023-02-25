@@ -58,10 +58,14 @@ const useForm = (initialSchema, initialData) => {
   // this way, we don't have to pass a success callback in useForm constructor
   const handleSubmit = (callback) => async (e) => {
     e.preventDefault();
-    setIsTouched(true);
-    await validate(values, () => {
+    if (schemaRef.current) {
+      setIsTouched(true);
+      await validate(values, () => {
+        callback(values);
+      });
+    } else {
       callback(values);
-    });
+    }
   };
 
   useEffect(() => {

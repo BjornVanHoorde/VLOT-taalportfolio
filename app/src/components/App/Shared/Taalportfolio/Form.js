@@ -17,7 +17,7 @@ const transformData = (initialData) => {
   return transformedData;
 };
 
-const TaalProfielForm = ({ answers }) => {
+const TaalProfielForm = ({ answers, onSubmit }) => {
   const { auth } = useAuthContext();
   const { values, handleChange, handleSubmit, handleInvalidate } = useForm(
     null,
@@ -29,7 +29,7 @@ const TaalProfielForm = ({ answers }) => {
   }, [answers]);
 
   const handleData = (values) => {
-    console.log(values);
+    onSubmit(values);
   };
 
   return (
