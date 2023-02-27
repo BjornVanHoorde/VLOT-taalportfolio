@@ -7,6 +7,10 @@
     background-size: cover;
 }
 
+#auth::before {
+    background-size: 110%;
+}
+
 #auth-login {
     height: 50vh;
     width: 50vh;
@@ -47,4 +51,16 @@ button {
 button:hover {
     cursor: pointer;
     transition: 0.3s ease;
+    background-color: rgb(178, 218, 178);
+}
+
+.error {
+    margin-bottom: 3vh;
+    height: 4vh;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    color: crimson;
+    background-color: rgb(255, 193, 193);
+    font-weight: 400;
 }
