@@ -84,6 +84,12 @@
     margin-bottom: 1vh;
 }
 
+.account-info:hover {
+    background-color: rgb(192, 225, 255);
+    cursor: pointer;
+    transition: ease-out 0.2s;
+}
+
 .account-info>img {
     margin: auto;
     margin-bottom: 0.5rem;
@@ -94,11 +100,21 @@
     padding: 0.3rem;
 }
 
+a {
+    text-decoration: none;
+    color:black
+}
+
 li {
     list-style-type: none;
 }
 
 .logout-btn {
     background-color: rgb(235, 68, 68);
+    color: white;
+}
+
+.logout-btn:hover {
+    background-color: rgb(165, 48, 48);
     color: white;
 }
