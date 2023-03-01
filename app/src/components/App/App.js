@@ -1,6 +1,6 @@
 import AuthProvider from "./Auth/AuthProvider";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { AuthRoutes, ProfielRoute, TaalprofielRoutes } from "../../core/routes";
+import { AuthRoutes, ProfielRoute, TaalgroeiRoutes, TaalprofielRoutes } from "../../core/routes";
 import OnBoardingLayout from "./Auth/OnBoardingLayout";
 import LoginScreen from "./Auth/login/LoginScreen";
 import Home from "./Screens/Home";
@@ -9,6 +9,7 @@ import AppLayout from "./AppLayout";
 import TaalprofielScreen from "./Screens/Taalprofiel/TaalprofielScreen";
 import LanguageProvider from "./Language/LanguageProvider";
 import UserdetailsScreen from "./Screens/Userdetails/UserdetailsScreen";
+import VaardighedenScreen from "./Screens/Taalgroei/Vaardigheden/VaardighedenScreen";
 
 const App = () => {
   return (
@@ -34,6 +35,10 @@ const App = () => {
               <Route
                 path={TaalprofielRoutes.Index}
                 element={<TaalprofielScreen />}
+              />
+              <Route 
+                path={TaalgroeiRoutes.Vaardigheden}
+                element={<VaardighedenScreen />}
               />
               <Route path="*" element={<Navigate to="/home" />} />
             </Route>
