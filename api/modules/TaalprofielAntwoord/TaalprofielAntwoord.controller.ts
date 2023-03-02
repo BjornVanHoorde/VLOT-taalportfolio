@@ -3,7 +3,8 @@ import { TaalOptions } from "../../constants";
 import ForbiddenError from "../../errors/ForbiddenError";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
-import { CheckTeacherClasses } from "../../utils";
+import { CheckTeacherClasses, convertYear, getGrade } from "../../utils";
+import KlasService from "../Klas/Klas.service";
 import UserService from "../User/User.service";
 import TaalprofielAntwoordService from "./TaalprofielAntwoord.service";
 import { TaalprofielAntwoordBody } from "./TaalprofielAntwoord.types";
@@ -54,10 +55,18 @@ export default class TaalprofielAntwoordController {
   };
 
   byStudentLanguage = async (
-    req: AuthRequest<{ id: number; language: TaalOptions }>,
+    req: AuthRequest<{
+      id: number;
+      language: TaalOptions;
+      selectedYear: string;
+    }>,
     res: Response,
     next: NextFunction
   ) => {
+    const klas = (await this.userService.findOne(req.params.id)).klas.klas;
+    const year = convertYear(req.params.selectedYear, klas);
+    const grade = getGrade(req.params.selectedYear);
+
     if (req.user.isStudent()) {
       req.params.id = req.user.id;
     }
@@ -72,7 +81,9 @@ export default class TaalprofielAntwoordController {
     const taalprofielAntwoorden =
       await this.taalprofielAntwoordService.byStudentLanguage(
         req.params.id,
-        req.params.language
+        req.params.language,
+        year,
+        grade
       );
     return res.json(taalprofielAntwoorden);
   };

@@ -458,7 +458,7 @@ const registerStudentRoutes = (router: Router) => {
     useMethod(taalprofielAntwoordController.byStudent)
   );
   studentRouter.get(
-    "/taalprofiel/antwoorden/leerling/:id/taal/:language",
+    "/taalprofiel/antwoorden/leerling/:id/taal/:language/:selectedYear",
     useMethod(taalprofielAntwoordController.byStudentLanguage)
   );
   studentRouter.patch(
