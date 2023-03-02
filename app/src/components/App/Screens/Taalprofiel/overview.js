@@ -7,7 +7,7 @@ import useMutation from "../../../../core/hooks/useMutation";
 import Alert from "../../../Design/Alert/Alert";
 import { useAuthContext } from "../../Auth/AuthProvider";
 import { useLanguageContext } from "../../Language/LanguageProvider";
-import TaalProfielForm from "../../Shared/Taalportfolio/Form";
+import TaalProfielForm from "../../Shared/Taalprofiel/Form";
 import "./styles/overview.css";
 
 const TaalprofielOverview = () => {
