@@ -1,15 +1,20 @@
-import Years from "../../../../../core/constants/Years";
 import Select from "../../../../Design/Form/Select";
+import { useYearContext } from "../../../Year/YearProvider";
 
 const JaarSelector = () => {
+  const { selectedYear, availableYears, changeYear } = useYearContext();
+  const handleChange = (e) => {
+    changeYear(e.target.value);
+  };
+
   return (
     <div id="jaar-selector">
       <Select
-        options={Years}
+        options={availableYears}
         name="jaar"
         disabled={false}
-        value="jaar"
-        onChange={() => {}}
+        value={selectedYear}
+        onChange={handleChange}
         error=""
       />
     </div>

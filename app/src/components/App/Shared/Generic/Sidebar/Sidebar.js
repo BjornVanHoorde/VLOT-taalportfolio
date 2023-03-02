@@ -1,7 +1,7 @@
 import logo from "../../../../../img/logo.svg";
 import { useAuthContext } from "../../../Auth/AuthProvider";
 import AccountInfo from "./AccountInfo";
-// import JaarSelector from "./JaarSelector";
+import JaarSelector from "./JaarSelector";
 import Navigation from "./Navigation";
 import "./styles/sidebar.css";
 
@@ -12,7 +12,7 @@ const StdSidebar = () => {
       <div id="sidebarLogo">
         <img src={logo} alt="logo van de school" />
       </div>
-      {/* <JaarSelector /> */}
+      <JaarSelector />
       <Navigation />
       <AccountInfo />
       <button className="logout-btn" onClick={logout}>

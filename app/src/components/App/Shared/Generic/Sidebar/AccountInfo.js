@@ -4,17 +4,17 @@ import { Link } from "react-router-dom";
 import { ProfielRoute } from "../../../../../core/routes";
 
 const AccountInfo = () => {
-
-  const {auth} = useAuthContext();
-
+  const { auth } = useAuthContext();
 
   return (
     <Link to={ProfielRoute.Index}>
       <div className="account-info">
         <img src={no_picture} alt="geen afbeelding" />
-        <p>{auth.user.voornaam} {auth.user.achternaam}</p>
+        <p>
+          {auth.user.voornaam} {auth.user.achternaam}
+        </p>
         <p>{auth.user.id}</p>
-      </div> 
+      </div>
     </Link>
   );
 };

@@ -9,36 +9,42 @@ import AppLayout from "./AppLayout";
 import TaalprofielScreen from "./Screens/Taalprofiel/TaalprofielScreen";
 import LanguageProvider from "./Language/LanguageProvider";
 import UserdetailsScreen from "./Screens/Userdetails/UserdetailsScreen";
+import YearProvider from "./Year/YearProvider";
 
 const App = () => {
   return (
     <>
       <AuthProvider>
-        <LanguageProvider>
-          <Routes>
-            {/* AUTHROUTES */}
-            <Route path={AuthRoutes.Index} element={<OnBoardingLayout />}>
-              <Route path={AuthRoutes.Login} element={<LoginScreen />} />
-            </Route>
-            {/* MAIN ROUTES */}
-            {/* From here on out you have te be logged in */}
-            <Route
-              element={
-                <AuthContainer>
-                  <AppLayout />
-                </AuthContainer>
-              }
-            >
-              <Route path="/home" element={<Home />} />
-              <Route path={ProfielRoute.Index} element={<UserdetailsScreen />} />
+        <YearProvider>
+          <LanguageProvider>
+            <Routes>
+              {/* AUTHROUTES */}
+              <Route path={AuthRoutes.Index} element={<OnBoardingLayout />}>
+                <Route path={AuthRoutes.Login} element={<LoginScreen />} />
+              </Route>
+              {/* MAIN ROUTES */}
+              {/* From here on out you have te be logged in */}
               <Route
-                path={TaalprofielRoutes.Index}
-                element={<TaalprofielScreen />}
-              />
-              <Route path="*" element={<Navigate to="/home" />} />
-            </Route>
-          </Routes>
-        </LanguageProvider>
+                element={
+                  <AuthContainer>
+                    <AppLayout />
+                  </AuthContainer>
+                }
+              >
+                <Route path="/home" element={<Home />} />
+                <Route
+                  path={ProfielRoute.Index}
+                  element={<UserdetailsScreen />}
+                />
+                <Route
+                  path={TaalprofielRoutes.Index}
+                  element={<TaalprofielScreen />}
+                />
+                <Route path="*" element={<Navigate to="/home" />} />
+              </Route>
+            </Routes>
+          </LanguageProvider>
+        </YearProvider>
       </AuthProvider>
     </>
   );
