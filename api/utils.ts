@@ -16,7 +16,6 @@ const CheckTeacherClasses = async (userId: number, classId: number) => {
 };
 
 const convertYear = (selectedYear: string, klas: string) => {
-  console.log("selectedYear", selectedYear);
   const splitKlas = klas.split("");
   let convertedYear: number;
   splitKlas.map((item) => {
@@ -24,7 +23,6 @@ const convertYear = (selectedYear: string, klas: string) => {
       convertedYear = parseFloat(item);
     }
   });
-  console.log("convertedYear", convertedYear);
 
   // get the date of today
   const newDate = new Date();

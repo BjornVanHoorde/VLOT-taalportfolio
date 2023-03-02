@@ -57,6 +57,7 @@ export default class TaalprofielAntwoordService {
           updatedAt: Between(new Date(year, 9, 1), new Date(year + 1, 12, 31)),
         }),
       },
+      order: { vraag: { id: "ASC" } },
       relations: ["vraag"],
     });
     return taalprofielAntwoorden;

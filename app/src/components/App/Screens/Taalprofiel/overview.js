@@ -22,8 +22,6 @@ const TaalprofielOverview = () => {
     `/taalprofiel/antwoorden/leerling/${auth.user.id}/taal/${currentLanguage}/${selectedYear}`
   );
 
-  console.log(answers[0].createdAt);
-
   useEffect(() => {
     invalidate();
   }, [currentLanguage]);
@@ -42,6 +40,7 @@ const TaalprofielOverview = () => {
             if (count === length) {
               invalidate();
               showAlert("De antwoorden zijn opgeslagen.");
+              window.scrollTo(0, 0);
             }
           },
         }
