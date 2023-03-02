@@ -5,7 +5,6 @@
 
 .taalgroei-nav {
     margin-left: 5vw;
-    border-bottom: solid 1px #A6DBF1;
 }
 
 .taalgroei-nav-button {
@@ -15,6 +14,20 @@
     border: solid 3px #A6DBF1;
     margin-right: 1vw;
     border-radius: 10px 0 0 0;
+    border-bottom: none;
+}
+
+.lijn {
+    border-bottom: solid 2px #A6DBF1;
+}
+
+.taalgroei-nav-button > p {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+
 }
 
 .taalgroei-nav-button:hover {
@@ -29,12 +42,14 @@
 
 .vaardigheden-content {
     display: flex;
-    margin-top: 1vh;
+    height: 86vh;
 }
 
 .evaluatie-sidebar {
     width: 13vw;
     color: #64b2d3;
+    height: 100%;
+    background-color: #DFF2FA;
 }
 
 .evaluatie-add {
@@ -43,8 +58,9 @@
     display: flex;
     justify-content: space-evenly;
     padding: 1.3rem;
-    font-size: 1.3rem;
+    font-size: 1rem;
     border-radius: 0 0 10px 0;
+    border-top: none;
 }
 
 .evaluatie-add:hover {
@@ -55,4 +71,25 @@
 
 .evaluatie-add:active {
     background-color: #DFF2FA;
+}
+
+.evaluatie-item {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.evaluatie-delete {
+    width: 7%;
+}
+
+.content {
+    width: 72vw;
+    align-items: top;
+    padding: 2rem;
+}
+
+.no-content {
+    display: flex;
+    justify-content: center;
 }
