@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     width: fit-content;
-    margin-left: 2vw;
+    margin-left: 3vw;
 }
 
 .top-nav>button {
@@ -15,15 +15,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px #A6DBF1 solid;
+    border: 3px #A6DBF1 solid;
     background: none;
     border-radius: 10px 0px 10px 0px;
 }
 
 .top-nav>button:hover {
-    background-color: #A6DBF1;
+    background-color: #DFF2FA;
 }
 
 .top-nav button.active {
-    background-color: #A6DBF1;
+    background-color: #DFF2FA;
 }

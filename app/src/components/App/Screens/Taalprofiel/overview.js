@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-loop-func */
 import { useEffect } from "react";
 import useAlert from "../../../../core/hooks/useAlert";
 import useFetch from "../../../../core/hooks/useFetch";
@@ -51,7 +53,7 @@ const TaalprofielOverview = () => {
       )}
       {answers?.length === 0 && (
         <p className="no-answers">
-          Er zijn nog geen vragen voor deze taal beschikbaar.
+          Er zijn nog geen vragen voor deze taal beschikbaar...
         </p>
       )}
     </>

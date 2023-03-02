@@ -1,4 +1,4 @@
-import { TaalprofielRoutes } from "../routes";
+import { TaalgroeiRoutes, TaalprofielRoutes } from "../routes";
 
 const MainNav = [
   {
@@ -17,7 +17,7 @@ const MainNav = [
 
 const SubNav = [
   {
-    href: "",
+    href: TaalgroeiRoutes.Vaardigheden,
     label: "Vaardigheden",
   },
   {

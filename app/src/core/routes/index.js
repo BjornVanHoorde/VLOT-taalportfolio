@@ -11,6 +11,14 @@ const ProfielRoute = {
   Index: "/profiel"
 }
 
+const TaalgroeiRoutes = {
+  Index: "/taalgroei",
+  Vaardigheden: "/taalgroei/vaardigheden",
+  Foutanalyse: "/taalgroei/foutanalyse",
+  Woordenschat: "/taalgroei/woordenschat",
+  Taaltips: "/taalgroei/taaltips"
+}
+
 export const route = (path, options = {}) => {
   Object.keys(options).forEach((key) => {
     path = path.replace(`:${key}`, options[key]);
@@ -18,4 +26,4 @@ export const route = (path, options = {}) => {
   return path;
 };
 
-export { AuthRoutes, TaalprofielRoutes, ProfielRoute };
+export { AuthRoutes, TaalprofielRoutes, ProfielRoute, TaalgroeiRoutes };
