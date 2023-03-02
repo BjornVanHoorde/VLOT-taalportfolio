@@ -8,16 +8,18 @@ import Alert from "../../../Design/Alert/Alert";
 import { useAuthContext } from "../../Auth/AuthProvider";
 import { useLanguageContext } from "../../Language/LanguageProvider";
 import TaalProfielForm from "../../Shared/Taalprofiel/Form";
+import { useYearContext } from "../../Year/YearProvider";
 import "./styles/overview.css";
 
 const TaalprofielOverview = () => {
   const { currentLanguage } = useLanguageContext();
+  const { selectedYear } = useYearContext();
   const { auth } = useAuthContext();
   const { isLoading, error, mutate } = useMutation();
   const { alert, showAlert, hideAlert } = useAlert();
 
   const { data: answers, invalidate } = useFetch(
-    `/taalprofiel/antwoorden/leerling/${auth.user.id}/taal/${currentLanguage}`
+    `/taalprofiel/antwoorden/leerling/${auth.user.id}/taal/${currentLanguage}/${selectedYear}`
   );
 
   useEffect(() => {
@@ -38,6 +40,7 @@ const TaalprofielOverview = () => {
             if (count === length) {
               invalidate();
               showAlert("De antwoorden zijn opgeslagen.");
+              window.scrollTo(0, 0);
             }
           },
         }

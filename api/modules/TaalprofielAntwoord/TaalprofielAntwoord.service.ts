@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { Between, Repository } from "typeorm";
 import { TaalOptions } from "../../constants";
 import { AppDataSource } from "../../database/DatabaseSource";
 import TaalprofielAntwoord from "./TaalprofielAntwoord.entity";
@@ -28,9 +28,36 @@ export default class TaalprofielAntwoordService {
     return taalprofielAntwoorden;
   };
 
-  byStudentLanguage = async (id: number, language: TaalOptions) => {
+  byStudentLanguage = async (
+    id: number,
+    language: TaalOptions,
+    year: number,
+    grade: number
+  ) => {
+    let isFullyAnswered = true;
+    const taalprofielAntwoordenCheck = await this.repository.find({
+      where: {
+        leerling: { id },
+        vraag: { taal: language, graad: grade },
+      },
+      relations: ["vraag"],
+    });
+
+    taalprofielAntwoordenCheck.forEach((taalprofielAntwoord) => {
+      if (taalprofielAntwoord.antwoord === "") {
+        isFullyAnswered = false;
+      }
+    });
+
     const taalprofielAntwoorden = await this.repository.find({
-      where: { leerling: { id }, vraag: { taal: language } },
+      where: {
+        leerling: { id },
+        vraag: { taal: language, graad: grade },
+        ...(isFullyAnswered && {
+          updatedAt: Between(new Date(year, 9, 1), new Date(year + 1, 12, 31)),
+        }),
+      },
+      order: { vraag: { id: "ASC" } },
       relations: ["vraag"],
     });
     return taalprofielAntwoorden;
