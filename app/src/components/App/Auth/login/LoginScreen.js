@@ -36,6 +36,7 @@ const LoginScreen = () => {
     <div id="auth">
       <div id="auth-login">
         <img src={logo} alt="logo" />
+        <h2>Aanmelden:</h2>
         <form
           className="auth-form"
           onSubmit={handleSubmit(handleData)}
@@ -43,7 +44,7 @@ const LoginScreen = () => {
         >
           {error && <div className="error">{error}</div>}
           <div className="form-item">
-            <label>VLOT-Email</label>
+            <label>Gebruikersnaam of e-mail:</label>
             <input
               type="email"
               name="email"
@@ -54,7 +55,7 @@ const LoginScreen = () => {
             ></input>
           </div>
           <div className="form-item">
-            <label>Wachtwoord</label>
+            <label>Wachtwoord:</label>
             <input
               type="password"
               name="password"
