@@ -27,16 +27,31 @@ const Vaardigheden = () => {
                         </div>
                     </div>
                     <div className="evaluatie-item">
-                    <div className="evaluatie-add-tekst">
+                        <div className="evaluatie-item-content">
                             <span>Evaluatie 1</span>
-                        </div>
-                        <div className="evaluatie-delete">
-                            <img src={verwijder} alt='delete'></img>
+                            <div className="evaluatie-delete">
+                                <img src={verwijder} alt='delete'></img>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div className="content">
-                    <h3 className="no-content">Er werden nog geen evaluaties aangemaakt</h3>
+                    {/* <h3 className="no-content">Er werden nog geen evaluaties aangemaakt</h3> */}
+                    <div className="taalgroei-form">
+                        <div className="taalgroei-form-item">
+                            <p>Je schrijft en vlot leesbare tekst</p>
+                            <select value="2">
+                                <option selected className="value-blank" value="blank"></option>
+                                <option className="value-0" value="0"></option>
+                                <option className="value-1" value="1"></option>
+                                <option className="value-2" value="2"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div className="taalgroei-feedback">
+                        <h3>feedback of opmerkingen</h3>
+                        <input type="text"></input>
+                    </div>
                 </div>
             </div>
         </div>
