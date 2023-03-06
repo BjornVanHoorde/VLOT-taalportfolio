@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import Roles from "../../../../core/constants/Roles";
-import { Choices, QuestionTypes } from "../../../../core/constants/Taalprofiel";
-import getYear from "../../../../core/helpers/getYear";
+import { QuestionTypes } from "../../../../core/constants/Taalprofiel";
 import useForm from "../../../../core/hooks/useForm";
 import Button from "../../../Design/Button/Button";
+import ChoicesLabels from "../../../Design/Form/ChoicesLabels";
 import MultipleChoice from "../../../Design/Modules/Taalprofiel/Multiple-choice";
 import Open from "../../../Design/Modules/Taalprofiel/Open";
 import { useAuthContext } from "../../Auth/AuthProvider";
@@ -18,7 +18,12 @@ const transformData = (initialData) => {
   return transformedData;
 };
 
-const TaalProfielForm = ({ answers, onSubmit, editStatusStudent }) => {
+const TaalProfielForm = ({
+  answers,
+  onSubmit,
+  editStatusStudent,
+  currentLanguage,
+}) => {
   const { auth } = useAuthContext();
   const { values, handleChange, handleSubmit, handleInvalidate } = useForm(
     null,
@@ -38,11 +43,7 @@ const TaalProfielForm = ({ answers, onSubmit, editStatusStudent }) => {
       <div className="multiple-choice">
         <div className="field options">
           <label></label>
-          <div className="choices">
-            {Choices.map((choice) => (
-              <p key={choice.value}>{choice.value}</p>
-            ))}
-          </div>
+          <ChoicesLabels currentLangauge={currentLanguage} />
         </div>
         {answers &&
           answers.map((answer) => {
@@ -53,6 +54,7 @@ const TaalProfielForm = ({ answers, onSubmit, editStatusStudent }) => {
                   key={answer.id}
                   onChange={handleChange}
                   value={values[answer.id]}
+                  currentLanguage={currentLanguage}
                   disabled={editStatusStudent}
                 />
               );

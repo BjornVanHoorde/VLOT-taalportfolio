@@ -57,6 +57,7 @@ const TaalprofielOverview = () => {
           answers={answers}
           onSubmit={handleSubmit}
           editStatusStudent={getEditStatusStudent(auth, selectedYear)}
+          currentLanguage={currentLanguage}
         />
       )}
       {answers?.length === 0 && (
