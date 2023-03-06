@@ -151,13 +151,16 @@ export default class TaalprofielVraagController {
 
   fillInTaalprofielVragen = async (leerlingen, taalprofielVraag) => {
     leerlingen.forEach(async (leerling) => {
-      await this.taalprofielAntwoordService.create({
-        antwoord: "",
-        vraagId: taalprofielVraag.id,
-        vraag: taalprofielVraag,
-        leerlingId: leerling.id,
-        leerling,
-      });
+      for (let jaar = 1; jaar < 3; jaar++) {
+        await this.taalprofielAntwoordService.create({
+          antwoord: "",
+          vraagId: taalprofielVraag.id,
+          vraag: taalprofielVraag,
+          leerlingId: leerling.id,
+          leerling,
+          jaar,
+        });
+      }
     });
   };
 }

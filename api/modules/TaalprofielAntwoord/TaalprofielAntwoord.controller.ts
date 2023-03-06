@@ -63,8 +63,6 @@ export default class TaalprofielAntwoordController {
     res: Response,
     next: NextFunction
   ) => {
-    const klas = (await this.userService.findOne(req.params.id)).klas.klas;
-    const year = convertYear(req.params.selectedYear, klas);
     const grade = getGrade(req.params.selectedYear);
 
     if (req.user.isStudent()) {
@@ -82,7 +80,7 @@ export default class TaalprofielAntwoordController {
       await this.taalprofielAntwoordService.byStudentLanguage(
         req.params.id,
         req.params.language,
-        year,
+        Number(req.params.selectedYear),
         grade
       );
     return res.json(taalprofielAntwoorden);

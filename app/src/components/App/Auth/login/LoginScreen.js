@@ -65,7 +65,7 @@ const LoginScreen = () => {
               disabled={isLoading}
             ></input>
           </div>
-          <button type={SubmitEvent}>Inloggen</button>
+          <button>Inloggen</button>
         </form>
       </div>
     </div>

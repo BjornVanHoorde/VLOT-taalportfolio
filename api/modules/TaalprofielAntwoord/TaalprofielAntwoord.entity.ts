@@ -13,6 +13,10 @@ export default class TaalprofielAntwoord extends BaseEntity {
   @Column()
   antwoord: string;
 
+  @IsDefined({ always: true })
+  @Column()
+  jaar: number;
+
   @ManyToOne(() => TaalprofielVraag, (vraag) => vraag.taalprofielAntwoorden)
   vraag: TaalprofielVraag;
 

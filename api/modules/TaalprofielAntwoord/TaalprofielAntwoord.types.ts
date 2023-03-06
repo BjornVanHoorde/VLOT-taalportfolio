@@ -8,4 +8,5 @@ export interface TaalprofielAntwoordBody {
   vraag: TaalprofielVraag;
   leerlingId: number;
   leerling: User;
+  jaar: number;
 }

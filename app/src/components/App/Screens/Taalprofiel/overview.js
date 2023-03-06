@@ -24,7 +24,7 @@ const TaalprofielOverview = () => {
 
   useEffect(() => {
     invalidate();
-  }, [currentLanguage]);
+  }, [currentLanguage, selectedYear]);
 
   const handleSubmit = (values) => {
     const length = Object.keys(values).length;

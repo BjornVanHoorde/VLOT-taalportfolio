@@ -1,5 +1,4 @@
 import KlasService from "./modules/Klas/Klas.service";
-import { UserBody } from "./modules/User/User.types";
 
 const CheckTeacherClasses = async (userId: number, classId: number) => {
   const klasService = new KlasService();
@@ -13,6 +12,10 @@ const CheckTeacherClasses = async (userId: number, classId: number) => {
   });
 
   return access;
+};
+
+const getGradeYear = (selectedYear: string) => {
+  return Number(selectedYear) % 2 === 0 ? 2 : 1;
 };
 
 const convertYear = (selectedYear: string, klas: string) => {
@@ -61,4 +64,4 @@ const getGrade = (selectedYear: string) => {
   }
 };
 
-export { CheckTeacherClasses, convertYear, getGrade };
+export { CheckTeacherClasses, convertYear, getGrade, getGradeYear };
