@@ -1,5 +1,6 @@
 import { IsDefined } from "class-validator";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import AndereTaal from "../AndereTaal/AndereTaal.entity";
 import { BaseEntity } from "../BaseEntity";
 import TaalprofielVraag from "../TaalprofielVraag/TaalprofielVraag.entity";
 import User from "../User/User.entity";
@@ -22,4 +23,7 @@ export default class TaalprofielAntwoord extends BaseEntity {
 
   @ManyToOne(() => User, (leerling) => leerling.taalprofielAntwoorden)
   leerling: User;
+
+  @ManyToOne(() => AndereTaal, (andereTaal) => andereTaal.taalprofielAntwoorden)
+  andereTaal: AndereTaal;
 }

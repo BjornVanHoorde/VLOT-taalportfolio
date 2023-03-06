@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response, Router } from "express";
 import NotFoundError from "../errors/NotFoundError";
 import { authJwt, authLocal, withRole } from "../middleware/auth";
+import AndereTaalController from "../modules/AndereTaal/AndereTaal.controller";
 import FoutenanalyseFoutenController from "../modules/FoutenanalyseFout/FoutenanalyseFout.controller";
 import FoutenanalyseOnderdeelController from "../modules/FoutenanalyseOnderdeel/FoutenanalyseOnderdeel.controller";
 import KlasController from "../modules/Klas/Klas.controller";
@@ -433,6 +434,21 @@ const registerTeacherRoutes = (router: Router) => {
 
 const registerStudentRoutes = (router: Router) => {
   const studentRouter = Router();
+
+  const andereTaalController = new AndereTaalController();
+  studentRouter.get(
+    "/andere-talen/leerling/:id",
+    useMethod(andereTaalController.byStudent)
+  );
+  studentRouter.post("/andere-talen", useMethod(andereTaalController.create));
+  studentRouter.patch(
+    "/andere-talen/:id",
+    useMethod(andereTaalController.update)
+  );
+  studentRouter.delete(
+    "/andere-talen/:id",
+    useMethod(andereTaalController.delete)
+  );
 
   // Register student routes
   const userController = new UserController();

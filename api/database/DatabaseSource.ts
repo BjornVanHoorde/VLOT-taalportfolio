@@ -1,5 +1,6 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
+import AndereTaal from "../modules/AndereTaal/AndereTaal.entity";
 import FoutenanalyseFout from "../modules/FoutenanalyseFout/FoutenanalyseFout.entity";
 import FoutenanalyseOnderdeel from "../modules/FoutenanalyseOnderdeel/FoutenanalyseOnderdeel.entity";
 import Klas from "../modules/Klas/Klas.entity";
@@ -39,6 +40,7 @@ export const AppDataSource = new DataSource({
     VaardighedenCriteria,
     VaardighedenOnderdeel,
     VaardighedenEvaluatie,
+    AndereTaal,
   ],
   migrations: [],
   subscribers: [],

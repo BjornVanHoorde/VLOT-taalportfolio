@@ -10,6 +10,7 @@ enum TaalOptions {
   English = "Engels",
   French = "Frans",
   German = "Duits",
+  Other = "Andere",
 }
 
 enum GradeOptions {
