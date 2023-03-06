@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-loop-func */
 import { useEffect } from "react";
+import getEditStatusStudent from "../../../../core/helpers/getEditStatus";
 import useAlert from "../../../../core/hooks/useAlert";
 import useFetch from "../../../../core/hooks/useFetch";
 import useMutation from "../../../../core/hooks/useMutation";
@@ -52,7 +53,11 @@ const TaalprofielOverview = () => {
     <>
       {alert && <Alert message={alert.message} onClick={hideAlert} />}
       {answers?.length > 0 && (
-        <TaalProfielForm answers={answers} onSubmit={handleSubmit} />
+        <TaalProfielForm
+          answers={answers}
+          onSubmit={handleSubmit}
+          editStatusStudent={getEditStatusStudent(auth, selectedYear)}
+        />
       )}
       {answers?.length === 0 && (
         <p className="no-answers">

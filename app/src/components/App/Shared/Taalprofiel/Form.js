@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Roles from "../../../../core/constants/Roles";
 import { Choices, QuestionTypes } from "../../../../core/constants/Taalprofiel";
+import getYear from "../../../../core/helpers/getYear";
 import useForm from "../../../../core/hooks/useForm";
 import Button from "../../../Design/Button/Button";
 import MultipleChoice from "../../../Design/Modules/Taalprofiel/Multiple-choice";
@@ -17,7 +18,7 @@ const transformData = (initialData) => {
   return transformedData;
 };
 
-const TaalProfielForm = ({ answers, onSubmit }) => {
+const TaalProfielForm = ({ answers, onSubmit, editStatusStudent }) => {
   const { auth } = useAuthContext();
   const { values, handleChange, handleSubmit, handleInvalidate } = useForm(
     null,
@@ -52,6 +53,7 @@ const TaalProfielForm = ({ answers, onSubmit }) => {
                   key={answer.id}
                   onChange={handleChange}
                   value={values[answer.id]}
+                  disabled={editStatusStudent}
                 />
               );
             }
@@ -67,14 +69,17 @@ const TaalProfielForm = ({ answers, onSubmit }) => {
                   key={answer.id}
                   onChange={handleChange}
                   value={values[answer.id]}
+                  readOnly={editStatusStudent}
                 />
               );
             }
           })}
       </div>
-      <div className="btn-div">
-        {auth.user.rol === Roles.Student && <Button label="Opslaan" />}
-      </div>
+      {!editStatusStudent && (
+        <div className="btn-div">
+          {auth.user.rol === Roles.Student && <Button label="Opslaan" />}
+        </div>
+      )}
     </form>
   );
 };
