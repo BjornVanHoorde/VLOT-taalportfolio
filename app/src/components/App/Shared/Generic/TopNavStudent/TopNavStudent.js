@@ -35,8 +35,12 @@ const TopNavStudent = ({ isTaalprofiel }) => {
             <LanguageButton
               key={language.id}
               label={language.taal}
-              activeLanguage={currentLanguage === Languages.Other}
-              onClick={() => changeLanguage(Languages.Other)}
+              activeLanguage={
+                currentLanguage === `${Languages.Other} ${language.taal}`
+              }
+              onClick={() =>
+                changeLanguage(`${Languages.Other} ${language.taal}`)
+              }
             />
           ))}
         {isTaalprofiel && (

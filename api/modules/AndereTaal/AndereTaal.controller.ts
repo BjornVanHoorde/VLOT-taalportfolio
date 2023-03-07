@@ -76,6 +76,8 @@ export default class AndereTaalController {
       body.leerling = req.user;
     }
 
+    const andereTaal = await this.andereTaalService.create(body);
+
     const taalprofielVragen = await this.taalprofielVraagService.byLanguage(
       TaalOptions.Other
     );
@@ -89,11 +91,11 @@ export default class AndereTaalController {
           leerlingId: req.user.id,
           leerling: req.user,
           jaar,
+          andereTaalId: andereTaal.id,
+          andereTaal,
         });
       }
     });
-
-    const andereTaal = await this.andereTaalService.create(body);
 
     return res.json(andereTaal);
   };

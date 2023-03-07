@@ -42,7 +42,7 @@ export default class TaalprofielAntwoordService {
         jaar: getGradeYear(String(year)),
       },
       order: { vraag: { id: "ASC" } },
-      relations: ["vraag"],
+      relations: ["vraag", "andereTaal"],
     });
     return taalprofielAntwoorden;
   };
