@@ -27,3 +27,7 @@ textarea {
     position: absolute;
     right: 0;
 }
+
+::-webkit-scrollbar { 
+    display: none; 
+}
