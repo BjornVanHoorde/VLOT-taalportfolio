@@ -23,8 +23,11 @@ const TaalprofielOverview = () => {
     `/taalprofiel/antwoorden/leerling/${auth.user.id}/taal/${currentLanguage}/${selectedYear}`
   );
 
+  console.log(answers);
+
   useEffect(() => {
     invalidate();
+    console.log(currentLanguage);
   }, [currentLanguage, selectedYear]);
 
   const handleSubmit = (values) => {
