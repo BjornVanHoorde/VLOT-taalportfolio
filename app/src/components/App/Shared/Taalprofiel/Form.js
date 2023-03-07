@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Roles from "../../../../core/constants/Roles";
 import { QuestionTypes } from "../../../../core/constants/Taalprofiel";
 import useForm from "../../../../core/hooks/useForm";

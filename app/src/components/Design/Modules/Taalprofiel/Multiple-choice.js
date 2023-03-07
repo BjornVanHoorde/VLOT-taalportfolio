@@ -18,10 +18,22 @@ const MultipleChoice = ({
         {Choices.map((choice) => (
           <Radio
             name={answer.id}
-            value={choice.values[currentLanguage]}
-            key={choice.values[currentLanguage]}
+            value={
+              choice.values[currentLanguage]
+                ? choice.values[currentLanguage]
+                : choice.values.Nederlands
+            }
+            key={
+              choice.values[currentLanguage]
+                ? choice.values[currentLanguage]
+                : choice.values.Nederlands
+            }
             onChange={onChange}
-            checked={choice.values[currentLanguage] === value}
+            checked={
+              choice.values[currentLanguage]
+                ? choice.values[currentLanguage] === value
+                : choice.values.Nederlands === value
+            }
             disabled={disabled}
           />
         ))}
