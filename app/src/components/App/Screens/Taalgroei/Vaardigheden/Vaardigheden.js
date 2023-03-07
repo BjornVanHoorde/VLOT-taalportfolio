@@ -1,4 +1,5 @@
 import verwijder from "../../../../../img/delete.svg";
+import Loading from "../../../../Design/Loading/Loading";
 
 const newButton = () => {
 
