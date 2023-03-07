@@ -1,5 +1,5 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { AuthRoutes } from "../../core/routes";
+import { AuthRoutes, TaalprofielRoutes } from "../../core/routes";
 import { useAuthContext } from "./Auth/AuthProvider";
 import StdSidebar from "./Shared/Generic/Sidebar/Sidebar";
 import TopNavStudent from "./Shared/Generic/TopNavStudent/TopNavStudent";
@@ -13,7 +13,9 @@ const AppLayout = () => {
       <>
         <StdSidebar />
         <div id="main">
-          <TopNavStudent />
+          <TopNavStudent
+            isTaalprofiel={location.pathname.includes(TaalprofielRoutes.Index)}
+          />
           <Outlet />
         </div>
       </>
