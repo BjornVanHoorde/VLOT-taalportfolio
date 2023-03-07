@@ -1,11 +1,32 @@
+.alert-lijst {
+  margin-top: 3vh;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: end;
+  padding: 4rem;
+  z-index: 1;
+}
+
 .alert {
   padding: 20px;
   background-color: #A6DBF1;
   color: #00609A;
   border-radius: 10px 0 10px 0;
   width: 15vw;
-  position: absolute;
-  top: 10vh;
-  right: 5vw;
+  margin-bottom: 3vh;
   z-index: 1;
+  animation: shoveIn 5.1s ease-in-out
+}
+
+@keyframes shoveIn {
+  0%{transform: translateX(100vw);}
+  3%{transform: translateX(0vw);}
+  20%{transform: translateX(0vw);}
+  40%{transform: translateX(0vw);}
+  60%{transform: translateX(0vw);}
+  80%{transform: translateX(0vw);}
+  97%{transform: translateX(0vw);}
+  100% {transform: translateX(100vw);}
 }
