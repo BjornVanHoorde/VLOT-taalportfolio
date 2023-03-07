@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import '../Modal/styles/modal.css'
 
 const Modal = ({ children, title, onDismiss }) => {
   useEffect(() => {
@@ -27,7 +28,7 @@ const Modal = ({ children, title, onDismiss }) => {
                 className="btn-close"
                 aria-label="Close"
                 onClick={onDismiss}
-              />
+              >X</button>
             </div>
             <div className="modal-body">{children}</div>
           </div>
