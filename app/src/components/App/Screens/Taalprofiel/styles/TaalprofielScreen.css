@@ -30,3 +30,9 @@
   width: 25%;
   text-align: center;
 }
+
+.no-answers {
+  width: 100%;
+  text-align: center;
+  margin-top: 2rem;
+}

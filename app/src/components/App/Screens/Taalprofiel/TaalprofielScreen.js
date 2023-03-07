@@ -30,6 +30,14 @@ const TaalprofielScreen = () => {
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
+  if (answers.length === 0 || !answers) {
+    return (
+      <p className="no-answers">
+        Er zijn nog geen vragen voor deze taal beschikbaar...
+      </p>
+    );
+  }
 };
 
 export default TaalprofielScreen;
