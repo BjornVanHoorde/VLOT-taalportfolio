@@ -69,7 +69,7 @@ export default class User extends BaseEntity {
   @OneToMany(() => VaardighedenOnderdeel, (onderdeel) => onderdeel.leerling)
   vaardighedenOnderdelen: VaardighedenOnderdeel[];
 
-  @ManyToOne(() => AndereTaal, (taal) => taal.leerling)
+  @OneToMany(() => AndereTaal, (taal) => taal.leerling)
   andereTalen: AndereTaal[];
 
   @BeforeInsert()

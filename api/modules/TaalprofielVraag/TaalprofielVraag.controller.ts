@@ -1,3 +1,4 @@
+import { isArray, isNotEmpty } from "class-validator";
 import { NextFunction, Response } from "express";
 import { GradeOptions, TaalOptions } from "../../constants";
 import ForbiddenError from "../../errors/ForbiddenError";
@@ -87,7 +88,15 @@ export default class TaalprofielVraagController {
     const { body } = req;
 
     const taalprofielVraag = await this.taalprofielVraagService.create(body);
-    const leerlingen = await this.userService.students();
+    let leerlingen;
+
+    if (taalprofielVraag.taal === TaalOptions.Other) {
+      leerlingen = await this.userService.all({
+        andereTalen: isNotEmpty,
+      });
+    } else {
+      leerlingen = await this.userService.students();
+    }
 
     await this.fillInTaalprofielVragen(leerlingen, taalprofielVraag);
 
@@ -151,15 +160,32 @@ export default class TaalprofielVraagController {
 
   fillInTaalprofielVragen = async (leerlingen, taalprofielVraag) => {
     leerlingen.forEach(async (leerling) => {
-      for (let jaar = 1; jaar < 3; jaar++) {
-        await this.taalprofielAntwoordService.create({
-          antwoord: "",
-          vraagId: taalprofielVraag.id,
-          vraag: taalprofielVraag,
-          leerlingId: leerling.id,
-          leerling,
-          jaar,
-        });
+      if (leerling.andereTalen.length > 0) {
+        for (let index = 0; index < leerling.andereTalen.length; index++) {
+          for (let jaar = 1; jaar < 3; jaar++) {
+            await this.taalprofielAntwoordService.create({
+              antwoord: "",
+              vraagId: taalprofielVraag.id,
+              vraag: taalprofielVraag,
+              leerlingId: leerling.id,
+              leerling,
+              jaar,
+              andereTaal: leerling.andereTalen[index],
+              andereTaalId: leerling.andereTalen[index].id,
+            });
+          }
+        }
+      } else {
+        for (let jaar = 1; jaar < 3; jaar++) {
+          await this.taalprofielAntwoordService.create({
+            antwoord: "",
+            vraagId: taalprofielVraag.id,
+            vraag: taalprofielVraag,
+            leerlingId: leerling.id,
+            leerling,
+            jaar,
+          });
+        }
       }
     });
   };
