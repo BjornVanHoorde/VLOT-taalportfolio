@@ -1,9 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-loop-func */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import getEditStatusStudent from "../../../../core/helpers/getEditStatus";
 import useAlert from "../../../../core/hooks/useAlert";
-import useFetch from "../../../../core/hooks/useFetch";
 import useMutation from "../../../../core/hooks/useMutation";
 import Alert from "../../../Design/Alert/Alert";
 import { useAuthContext } from "../../Auth/AuthProvider";
@@ -12,20 +11,28 @@ import TaalProfielForm from "../../Shared/Taalprofiel/Form";
 import { useYearContext } from "../../Year/YearProvider";
 import "./styles/overview.css";
 
-const TaalprofielOverview = () => {
+const TaalprofielOverview = ({ answers, handleChange }) => {
   const { currentLanguage } = useLanguageContext();
   const { selectedYear } = useYearContext();
   const { auth } = useAuthContext();
   const { isLoading, error, mutate } = useMutation();
   const { alert, showAlert, hideAlert } = useAlert();
+  const [filteredData, setFilteredData] = useState(answers);
 
-  const { data: answers, invalidate } = useFetch(
-    `/taalprofiel/antwoorden/leerling/${auth.user.id}/taal/${currentLanguage}/${selectedYear}`
-  );
+  const filterByOtherLanguage = (answers) => {
+    if (!(currentLanguage.split(" ").length > 1)) {
+      setFilteredData(answers);
+    } else {
+      const filteredAnswers = answers.filter(
+        (answer) => answer.andereTaal.taal === currentLanguage.split(" ").pop()
+      );
+      setFilteredData(filteredAnswers);
+    }
+  };
 
   useEffect(() => {
-    invalidate();
-  }, [currentLanguage, selectedYear]);
+    filterByOtherLanguage(answers);
+  }, [answers]);
 
   const handleSubmit = (values) => {
     const length = Object.keys(values).length;
@@ -39,7 +46,7 @@ const TaalprofielOverview = () => {
           data: { antwoord: values[index] },
           onSuccess: () => {
             if (count === length) {
-              invalidate();
+              handleChange();
               showAlert("De antwoorden zijn opgeslagen.");
               window.scrollTo(0, 0);
             }
@@ -52,15 +59,15 @@ const TaalprofielOverview = () => {
   return (
     <>
       {alert && <Alert message={alert.message} onClick={hideAlert} />}
-      {answers?.length > 0 && (
+      {filteredData?.length > 0 && (
         <TaalProfielForm
-          answers={answers}
+          answers={filteredData}
           onSubmit={handleSubmit}
           editStatusStudent={getEditStatusStudent(auth, selectedYear)}
           currentLanguage={currentLanguage}
         />
       )}
-      {answers?.length === 0 && (
+      {filteredData?.length === 0 && (
         <p className="no-answers">
           Er zijn nog geen vragen voor deze taal beschikbaar...
         </p>

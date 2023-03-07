@@ -34,7 +34,6 @@ const useMutation = () => {
         headers: headers,
         body: body,
       });
-      console.log(result);
       if (options.onSuccess) {
         options.onSuccess(result);
       } else {
