@@ -1,0 +1,7 @@
+.language-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 75%;
+  margin: 2rem auto;
+}

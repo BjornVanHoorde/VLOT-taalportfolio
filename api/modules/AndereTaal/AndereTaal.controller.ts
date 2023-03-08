@@ -146,8 +146,8 @@ export default class AndereTaalController {
           studentId,
           andereTaal.taal
         );
-      taalprofielAntwoorden.forEach((element) => {
-        this.taalprofielAntwoordService.delete(element.id);
+      taalprofielAntwoorden.forEach(async (element) => {
+        await this.taalprofielAntwoordService.delete(element.id);
       });
 
       andereTaal = await this.andereTaalService.delete(parseInt(req.params.id));
