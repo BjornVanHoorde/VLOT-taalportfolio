@@ -25,25 +25,8 @@
 
 }
 
-#auth-login > * {
+#auth-login>* {
     width: 50%;
-}
-
-.form-item {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1.5rem;
-}
-
-.form-item > label {
-    font-size: 0.8rem;
-    margin-bottom: 0.5rem;
-}
-
-.form-item > input {
-    padding: 0.75rem 0rem 0.5rem 0.75rem;
-    border-radius: 10px 0 10px 0;
-
 }
 
 button {
@@ -69,13 +52,13 @@ button:hover {
     font-weight: 400;
 }
 
-#auth-login > h2 {
+#auth-login>h2 {
     font-weight: bold;
     font-size: 1.4rem;
     transform: translateX(-2vw);
 }
 
-#auth-login > form > button {
+#auth-login>form>button {
     border-radius: 10px 0 10px 0;
     background-color: #0098D8;
     color: white;

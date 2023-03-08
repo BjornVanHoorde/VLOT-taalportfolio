@@ -3,6 +3,8 @@ import logo from "../../../../img/logo.svg";
 import { useAuthContext } from "../AuthProvider";
 import useForm from "../../../../core/hooks/useForm";
 import * as yup from "yup";
+import Label from "../../../Design/Form/Label";
+import Input from "../../../Design/Form/Input";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -44,26 +46,26 @@ const LoginScreen = () => {
         >
           {error && <div className="error">{error}</div>}
           <div className="form-item">
-            <label>Gebruikersnaam of e-mail:</label>
-            <input
+            <Label htmlFor="email">Gebruikersnaam of e-mail:</Label>
+            <Input
               type="email"
               name="email"
               onChange={handleChange}
               value={values.email}
               error={errors.email}
               disabled={isLoading}
-            ></input>
+            />
           </div>
           <div className="form-item">
-            <label>Wachtwoord:</label>
-            <input
+            <Label htmlFor="password">Wachtwoord:</Label>
+            <Input
               type="password"
               name="password"
               onChange={handleChange}
               value={values.password}
               error={errors.password}
               disabled={isLoading}
-            ></input>
+            />
           </div>
           <button>Inloggen</button>
         </form>

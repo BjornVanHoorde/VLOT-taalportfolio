@@ -77,10 +77,8 @@ const TaalProfielForm = ({
             }
           })}
       </div>
-      {!editStatusStudent && (
-        <div className="btn-div">
-          {auth.user.rol === Roles.Student && <Button label="Opslaan" />}
-        </div>
+      {!editStatusStudent && auth.user.rol === Roles.Student && (
+        <Button align="right" label="Opslaan" />
       )}
     </form>
   );

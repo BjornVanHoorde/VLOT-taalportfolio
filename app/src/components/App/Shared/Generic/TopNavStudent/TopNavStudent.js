@@ -18,6 +18,11 @@ const TopNavStudent = ({ isTaalprofiel }) => {
     `/andere-talen/leerling/${auth.user.id}`
   );
 
+  const handleSuccess = () => {
+    setShowModal(false);
+    invalidate();
+  };
+
   return (
     <>
       <div className="top-nav">
@@ -48,7 +53,10 @@ const TopNavStudent = ({ isTaalprofiel }) => {
         )}
       </div>
       {showModal && (
-        <CreateLanguageForm onDismiss={() => setShowModal(false)} />
+        <CreateLanguageForm
+          onSuccess={handleSuccess}
+          onDismiss={() => setShowModal(false)}
+        />
       )}
     </>
   );

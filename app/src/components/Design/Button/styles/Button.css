@@ -11,3 +11,10 @@ button.btn {
 button.btn:hover {
   background-color: #A6DBF1;
 }
+
+.btn-div.align-right {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  margin-top: 1rem;
+}

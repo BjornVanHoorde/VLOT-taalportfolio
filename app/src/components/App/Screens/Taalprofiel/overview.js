@@ -9,7 +9,6 @@ import { useAuthContext } from "../../Auth/AuthProvider";
 import { useLanguageContext } from "../../Language/LanguageProvider";
 import TaalProfielForm from "../../Shared/Taalprofiel/Form";
 import { useYearContext } from "../../Year/YearProvider";
-import "./styles/overview.css";
 
 const TaalprofielOverview = ({ answers, handleChange }) => {
   const { currentLanguage } = useLanguageContext();

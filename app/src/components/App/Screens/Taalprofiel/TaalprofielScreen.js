@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import useFetch from "../../../../core/hooks/useFetch";
+import Loading from "../../../Design/Loading/Loading";
 import { useAuthContext } from "../../Auth/AuthProvider";
 import { useLanguageContext } from "../../Language/LanguageProvider";
 import TaalprofielOverview from "./overview";
@@ -28,7 +29,7 @@ const TaalprofielScreen = () => {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (answers.length === 0 || !answers) {
