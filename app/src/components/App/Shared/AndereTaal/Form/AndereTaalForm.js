@@ -24,7 +24,7 @@ const AndereTaalForm = ({ initialData = {}, disabled, onSubmit, label }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(handleData)} noValidate={true}>
+    <form onSubmit={handleSubmit(handleData)} noValidate={true} id="andereTaalForm">
       <Field>
         <Label htmlFor="name">Taal</Label>
         <Input

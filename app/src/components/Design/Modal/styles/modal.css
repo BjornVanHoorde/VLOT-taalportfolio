@@ -14,9 +14,8 @@
     padding: 3rem;
     background-color: white;
     border: solid 3px #A6DBF1;
-    width: 30vw;
+    width: 20vw;
     border-radius: 10px 0 10px 0;
-
 }
 
 .modal-header {
@@ -47,6 +46,14 @@
 }
 
 .modal-body {
-    margin-bottom: 3vh;
-    height: fit-content;
+
 }
+
+#andereTaalForm {
+    background-color: blue;
+}
+
+#andereTaalForm > label {
+    font-size: 4rem;
+}
+

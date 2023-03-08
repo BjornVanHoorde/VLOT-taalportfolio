@@ -42,7 +42,7 @@ const TaalProfielForm = ({
     <form className="taalprofiel" onSubmit={handleSubmit(handleData)}>
       <div className="multiple-choice">
         <div className="field options">
-          <label></label>
+          <label className="multiple-choice-label"></label>
           <ChoicesLabels currentLangauge={currentLanguage} />
         </div>
         {answers &&

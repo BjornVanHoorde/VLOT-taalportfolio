@@ -23,7 +23,7 @@ const getYearFromStorage = (user) => {
     return Year;
   }
   const currentYear = getYear(user);
-  return Years[currentYear - 1];
+  return Years[currentYear - 1].value;
 };
 
 const saveYearToStorage = (Year) => {
@@ -47,6 +47,7 @@ const YearProvider = ({ children }) => {
   const [studentYear, setStudentYear] = useState(getYear(auth)); // [1, 2, 3, 4
   const [selectedYear, setSelectedYear] = useState(getYearFromStorage(auth));
   const [availableYears, setAvailableYears] = useState(getAvailableYears(auth));
+
 
   const handleYearChange = (Year) => {
     setSelectedYear(Year);
