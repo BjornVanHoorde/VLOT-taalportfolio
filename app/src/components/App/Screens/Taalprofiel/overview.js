@@ -10,6 +10,7 @@ import Button from "../../../Design/Button/Button";
 import { useAuthContext } from "../../Auth/AuthProvider";
 import { useLanguageContext } from "../../Language/LanguageProvider";
 import DeleteButton from "../../Shared/Buttons/DeleteButtons";
+import CreateLanguageForm from "../../Shared/Taalprofiel/CreateLanguageForm";
 import TaalProfielForm from "../../Shared/Taalprofiel/Form";
 import { useYearContext } from "../../Year/YearProvider";
 import "./styles/Overview.css";
@@ -21,6 +22,7 @@ const TaalprofielOverview = ({ answers, handleChange }) => {
   const { isLoading, error, mutate } = useMutation();
   const { alert, showAlert, hideAlert } = useAlert();
   const [filteredData, setFilteredData] = useState();
+  const [showModal, setShowModal] = useState(false);
 
   const filterByOtherLanguage = (answers) => {
     if (!(currentLanguage.split(" ").length > 1)) {
@@ -66,6 +68,12 @@ const TaalprofielOverview = ({ answers, handleChange }) => {
     window.location.reload();
   };
 
+  const handleEdit = () => {
+    changeLanguage(Languages.Dutch);
+    handleChange();
+    window.location.reload();
+  };
+
   return (
     <>
       {alert && (
@@ -77,7 +85,7 @@ const TaalprofielOverview = ({ answers, handleChange }) => {
       {currentLanguage.split(" ").length > 1 &&
         filteredData?.[0].andereTaal && (
           <div className="language-options">
-            <Button label="Bewerk taal" onClick={() => {}} />
+            <Button label="Bewerk taal" onClick={() => setShowModal(true)} />
             <DeleteButton
               label="Verwijder taal"
               onSuccess={handleDelete}
@@ -98,6 +106,13 @@ const TaalprofielOverview = ({ answers, handleChange }) => {
         <p className="no-answers">
           Er zijn nog geen vragen voor deze taal beschikbaar...
         </p>
+      )}
+      {showModal && (
+        <CreateLanguageForm
+          onSuccess={handleEdit}
+          onDismiss={() => setShowModal(false)}
+          otherLanguage={filteredData?.[0].andereTaal}
+        />
       )}
     </>
   );
