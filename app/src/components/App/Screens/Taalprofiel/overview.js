@@ -1,22 +1,28 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-loop-func */
 import { useEffect, useState } from "react";
+import Languages from "../../../../core/constants/Languages";
 import getEditStatusStudent from "../../../../core/helpers/getEditStatus";
 import useAlert from "../../../../core/hooks/useAlert";
 import useMutation from "../../../../core/hooks/useMutation";
 import Alert from "../../../Design/Alert/Alert";
+import Button from "../../../Design/Button/Button";
 import { useAuthContext } from "../../Auth/AuthProvider";
 import { useLanguageContext } from "../../Language/LanguageProvider";
+import DeleteButton from "../../Shared/Buttons/DeleteButtons";
+import CreateLanguageForm from "../../Shared/Taalprofiel/CreateLanguageForm";
 import TaalProfielForm from "../../Shared/Taalprofiel/Form";
 import { useYearContext } from "../../Year/YearProvider";
+import "./styles/Overview.css";
 
 const TaalprofielOverview = ({ answers, handleChange }) => {
-  const { currentLanguage } = useLanguageContext();
+  const { currentLanguage, changeLanguage } = useLanguageContext();
   const { selectedYear } = useYearContext();
   const { auth } = useAuthContext();
   const { isLoading, error, mutate } = useMutation();
   const { alert, showAlert, hideAlert } = useAlert();
-  const [filteredData, setFilteredData] = useState(answers);
+  const [filteredData, setFilteredData] = useState();
+  const [showModal, setShowModal] = useState(false);
 
   const filterByOtherLanguage = (answers) => {
     if (!(currentLanguage.split(" ").length > 1)) {
@@ -55,9 +61,39 @@ const TaalprofielOverview = ({ answers, handleChange }) => {
     }
   };
 
+  const handleDelete = () => {
+    changeLanguage(Languages.Dutch);
+    handleChange();
+    showAlert("De taal is verwijderd.");
+    window.location.reload();
+  };
+
+  const handleEdit = () => {
+    changeLanguage(Languages.Dutch);
+    handleChange();
+    window.location.reload();
+  };
+
   return (
     <>
-      {alert && <Alert message={alert.message} onClick={hideAlert} />}
+      {alert && (
+        <div className="alert-list">
+          <Alert message={alert.message} onClick={hideAlert} />
+        </div>
+      )}
+      {/* If the current language is not a self made one, do not show these options */}
+      {currentLanguage.split(" ").length > 1 &&
+        filteredData?.[0].andereTaal && (
+          <div className="language-options">
+            <Button label="Bewerk taal" onClick={() => setShowModal(true)} />
+            <DeleteButton
+              label="Verwijder taal"
+              onSuccess={handleDelete}
+              scope="andere-talen"
+              id={filteredData[0].andereTaal.id}
+            />
+          </div>
+        )}
       {filteredData?.length > 0 && (
         <TaalProfielForm
           answers={filteredData}
@@ -70,6 +106,13 @@ const TaalprofielOverview = ({ answers, handleChange }) => {
         <p className="no-answers">
           Er zijn nog geen vragen voor deze taal beschikbaar...
         </p>
+      )}
+      {showModal && (
+        <CreateLanguageForm
+          onSuccess={handleEdit}
+          onDismiss={() => setShowModal(false)}
+          otherLanguage={filteredData?.[0].andereTaal}
+        />
       )}
     </>
   );

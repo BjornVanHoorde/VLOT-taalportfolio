@@ -1,4 +1,4 @@
-.alert-lijst {
+.alert-list {
   margin-top: 3vh;
   height: auto;
   display: flex;
@@ -21,12 +21,35 @@
 }
 
 @keyframes shoveIn {
-  0%{transform: translateX(100vw);}
-  3%{transform: translateX(0vw);}
-  20%{transform: translateX(0vw);}
-  40%{transform: translateX(0vw);}
-  60%{transform: translateX(0vw);}
-  80%{transform: translateX(0vw);}
-  97%{transform: translateX(0vw);}
-  100% {transform: translateX(100vw);}
+  0% {
+    transform: translateX(100vw);
+  }
+
+  3% {
+    transform: translateX(0vw);
+  }
+
+  20% {
+    transform: translateX(0vw);
+  }
+
+  40% {
+    transform: translateX(0vw);
+  }
+
+  60% {
+    transform: translateX(0vw);
+  }
+
+  80% {
+    transform: translateX(0vw);
+  }
+
+  97% {
+    transform: translateX(0vw);
+  }
+
+  100% {
+    transform: translateX(100vw);
+  }
 }

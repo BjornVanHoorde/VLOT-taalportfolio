@@ -51,7 +51,7 @@ export default class TaalprofielAntwoordService {
     const taalprofielAntwoorden = await this.repository.find({
       where: {
         leerling: { id },
-        vraag: { taal: language },
+        andereTaal: { taal: language },
       },
       order: { vraag: { id: "ASC" } },
       relations: ["vraag"],
