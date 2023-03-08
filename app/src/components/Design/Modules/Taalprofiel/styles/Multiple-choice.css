@@ -3,13 +3,26 @@
 }
 
 .field label p {
-  padding-left: 20px;
+  font-size: 0.8rem;
+  padding-left: 2vw;
+  line-height: 3.4vh;
+}
+
+@media screen and (min-width: 1600px) {
+  .field label p {
+    line-height: auto;
+    font-size: 1rem;
+  }
 }
 
 .field .choices {
   width: 50%;
+  height: auto;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
+  margin: 0;
+  padding: 0;
 }
 
 .field .choices input[type="radio"] {

@@ -15,14 +15,13 @@
     height: 55vh;
     width: 50vh;
     background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.146) 0px 0px 55px;
+    box-shadow: rgba(0, 0, 0, 0.295) 0px 0px 55px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     border: black solid 3px;
     border-radius: 10px 0 10px 0;
-
 }
 
 #auth-login>* {
@@ -62,4 +61,8 @@ button:hover {
     border-radius: 10px 0 10px 0;
     background-color: #0098D8;
     color: white;
+}
+
+.form-label {
+    margin-bottom: 2vh;
 }

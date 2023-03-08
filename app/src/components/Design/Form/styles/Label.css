@@ -1,4 +1,10 @@
 label {
+  width: 100%;
+  font-size: 0.5rem;
+  margin-bottom: 3vh;
+}
+
+.form-label {
   font-size: 0.8rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 3vh;
 }

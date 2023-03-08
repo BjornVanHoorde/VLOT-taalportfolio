@@ -13,10 +13,11 @@
   background-color: #FFF;
   border: 2.5px solid #A6DBF1;
   border-radius: 10px 0 10px 0;
-  padding: 20px 0;
+  height: fit-content;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+  align-items: center;
+  margin-bottom: 2vh;
 }
 
 .taalprofiel .multiple-choice .field.options {
@@ -24,6 +25,7 @@
   border: none;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .taalprofiel .multiple-choice .field.options p {
@@ -35,4 +37,8 @@
   width: 100%;
   text-align: center;
   margin-top: 2rem;
+}
+
+.field > label {
+  height: fit-content;
 }
