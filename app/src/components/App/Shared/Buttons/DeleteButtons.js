@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import useMutation from "../../../../core/hooks/useMutation";
 import Button from "../../../Design/Button/Button";
+import "./styles/DeleteButton.css";
 
 const DeleteButton = ({ label, onSuccess, id, scope, disabled, ...rest }) => {
   const { isLoading, error, mutate } = useMutation();
@@ -20,7 +21,7 @@ const DeleteButton = ({ label, onSuccess, id, scope, disabled, ...rest }) => {
     }
   }, [error]);
 
-  return <Button label={label} onClick={handleClick} />;
+  return <Button className="deleteBtn" label={label} onClick={handleClick} />;
 };
 
 export default DeleteButton;

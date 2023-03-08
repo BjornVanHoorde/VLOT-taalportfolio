@@ -3,12 +3,14 @@ import useFetch from "../../../../core/hooks/useFetch";
 import Loading from "../../../Design/Loading/Loading";
 import { useAuthContext } from "../../Auth/AuthProvider";
 import { useLanguageContext } from "../../Language/LanguageProvider";
+import { useYearContext } from "../../Year/YearProvider";
 import TaalprofielOverview from "./overview";
 import "./styles/TaalprofielScreen.css";
 
 const TaalprofielScreen = () => {
   const { auth } = useAuthContext();
-  const { currentLanguage, selectedYear } = useLanguageContext();
+  const { currentLanguage } = useLanguageContext();
+  const { selectedYear } = useYearContext();
 
   const {
     data: answers,

@@ -1,9 +1,9 @@
 import "./styles/Button.css";
 
-const Button = ({ label, onClick, align }) => {
+const Button = ({ className, label, onClick, align }) => {
   if (align) {
     return (
-      <div className={`btn-div align-${align}`}>
+      <div className={`${className ? className : ""} btn-div align-${align}`}>
         <button className="btn" onClick={onClick}>
           {label}
         </button>
@@ -11,7 +11,7 @@ const Button = ({ label, onClick, align }) => {
     );
   } else {
     return (
-      <button className="btn" onClick={onClick}>
+      <button className={`btn ${className ? className : ""}`} onClick={onClick}>
         {label}
       </button>
     );
