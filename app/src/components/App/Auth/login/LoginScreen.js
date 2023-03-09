@@ -5,6 +5,7 @@ import useForm from "../../../../core/hooks/useForm";
 import * as yup from "yup";
 import Label from "../../../Design/Form/Label";
 import Input from "../../../Design/Form/Input";
+import '../login/styles/auth.css'
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -46,10 +47,11 @@ const LoginScreen = () => {
         >
           {error && <div className="error">{error}</div>}
           <div className="form-item">
-            <Label htmlFor="email">Gebruikersnaam of e-mail:</Label>
+            <Label htmlFor="email" className="auth-label">Gebruikersnaam of e-mail:</Label>
             <Input
               type="email"
               name="email"
+              className="auth-input"
               onChange={handleChange}
               value={values.email}
               error={errors.email}
@@ -57,8 +59,9 @@ const LoginScreen = () => {
             />
           </div>
           <div className="form-item">
-            <Label htmlFor="password">Wachtwoord:</Label>
+            <Label htmlFor="password" className="auth-label">Wachtwoord:</Label>
             <Input
+              className="auth-input"
               type="password"
               name="password"
               onChange={handleChange}

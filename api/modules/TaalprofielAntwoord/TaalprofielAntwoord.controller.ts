@@ -64,6 +64,7 @@ export default class TaalprofielAntwoordController {
     next: NextFunction
   ) => {
     const grade = getGrade(req.params.selectedYear);
+    
 
     if (req.user.isStudent()) {
       req.params.id = req.user.id;

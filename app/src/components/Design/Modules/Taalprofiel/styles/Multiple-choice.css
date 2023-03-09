@@ -17,14 +17,19 @@
 
 .field .choices {
   width: 50%;
-  height: auto;
+  height: fit-content;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   margin: 0;
   padding: 0;
 }
 
-.field .choices input[type="radio"] {
+.field > * > .choises > input {
+  height: 3vh;
+}
+
+input[type=radio] {
   width: 25%;
+  height: auto;
 }

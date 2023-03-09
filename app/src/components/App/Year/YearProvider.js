@@ -48,8 +48,6 @@ const YearProvider = ({ children }) => {
   const [selectedYear, setSelectedYear] = useState(getYearFromStorage(auth));
   const [availableYears, setAvailableYears] = useState(getAvailableYears(auth));
 
-  console.log(selectedYear);
-
   const handleYearChange = (Year) => {
     setSelectedYear(Year);
     saveYearToStorage(Year);

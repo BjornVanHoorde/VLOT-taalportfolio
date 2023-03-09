@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: url('../img/background.png');
+    background: url('../../../../../img/background.png');
     background-size: cover;
 }
 
@@ -63,6 +63,6 @@ button:hover {
     color: white;
 }
 
-.form-label {
-    margin-bottom: 2vh;
+.auth-input {
+    margin: 1vh 0 3vh 0;
 }

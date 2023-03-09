@@ -4,7 +4,7 @@ button.btn {
   border-radius: 10px 0px 10px 0px;
   color: #00609A;
   text-transform: uppercase;
-  width: auto;
+  width: 100%;
   padding: 0.5rem 1.5rem;
 }
 
@@ -14,7 +14,4 @@ button.btn:hover {
 
 .btn-div.align-right {
   width: 100%;
-  display: flex;
-  justify-content: end;
-  margin-top: 1rem;
 }
