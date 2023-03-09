@@ -21,7 +21,7 @@ const TaalgroeiRoutes = {
 
 const KlasRoutes = {
   Index: "/klas",
-  Overview: "/klas/:id",
+  Overview: "/klas/:klas",
 };
 
 export const route = (path, options = {}) => {

@@ -1,6 +1,14 @@
 import "./styles/Radio.css";
 
-const Radio = ({ name, value, label, checked, onChange, disabled }) => {
+const Radio = ({
+  name,
+  value,
+  label,
+  checked,
+  onChange,
+  disabled,
+  required,
+}) => {
   return (
     <>
       <input
@@ -10,6 +18,7 @@ const Radio = ({ name, value, label, checked, onChange, disabled }) => {
         checked={checked}
         onChange={onChange}
         disabled={disabled}
+        required={required}
       />
     </>
   );

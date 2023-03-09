@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 
 const KlasOverview = () => {
-  const { id } = useParams();
+  const { klas } = useParams();
 
-  return id;
+  return klas;
 };
 
 export default KlasOverview;

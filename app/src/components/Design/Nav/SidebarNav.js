@@ -8,7 +8,7 @@ const SidebarNav = ({ itemsType, items = [], classname, children }) => {
         {items &&
           items.map((item) => (
             <li key={item.id}>
-              <Link to={route(KlasRoutes.Overview, { id: item.klas.id })}>
+              <Link to={route(KlasRoutes.Overview, { klas: item.klas.klas })}>
                 {item.klas.klas}
               </Link>
             </li>

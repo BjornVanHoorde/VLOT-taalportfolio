@@ -8,6 +8,7 @@ const MultipleChoice = ({
   value,
   disabled,
   currentLanguage,
+  required,
 }) => {
   return (
     <div className="field">
@@ -35,6 +36,7 @@ const MultipleChoice = ({
                 : choice.values.Nederlands === value
             }
             disabled={disabled}
+            required={required}
           />
         ))}
       </div>
