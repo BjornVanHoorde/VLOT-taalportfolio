@@ -10,6 +10,7 @@ button.btn {
 
 button.btn:hover {
   background-color: #A6DBF1;
+  cursor: pointer;
 }
 
 .btn-div.align-right {
