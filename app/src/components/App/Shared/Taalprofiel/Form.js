@@ -56,6 +56,7 @@ const TaalProfielForm = ({
                   value={values[answer.id]}
                   currentLanguage={currentLanguage}
                   disabled={editStatusStudent}
+                  required={true}
                 />
               );
             }

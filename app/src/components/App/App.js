@@ -2,6 +2,7 @@ import AuthProvider from "./Auth/AuthProvider";
 import { Navigate, Route, Routes } from "react-router-dom";
 import {
   AuthRoutes,
+  KlasRoutes,
   ProfielRoute,
   TaalgroeiRoutes,
   TaalprofielRoutes,
@@ -16,6 +17,7 @@ import LanguageProvider from "./Language/LanguageProvider";
 import UserdetailsScreen from "./Screens/Userdetails/UserdetailsScreen";
 import YearProvider from "./Year/YearProvider";
 import VaardighedenScreen from "./Screens/Taalgroei/Vaardigheden/VaardighedenScreen";
+import KlasOverview from "./Screens/Klas/KlasOverview";
 
 const App = () => {
   return (
@@ -51,6 +53,7 @@ const App = () => {
                   path={TaalgroeiRoutes.Vaardigheden}
                   element={<VaardighedenScreen />}
                 />
+                <Route path={KlasRoutes.Overview} element={<KlasOverview />} />
                 <Route path="*" element={<Navigate to="/home" />} />
               </Route>
             </Routes>

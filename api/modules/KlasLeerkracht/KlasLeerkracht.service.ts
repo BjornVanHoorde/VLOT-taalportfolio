@@ -1,4 +1,9 @@
-import { Repository } from "typeorm";
+import {
+  LessThanOrEqual,
+  MoreThan,
+  MoreThanOrEqual,
+  Repository,
+} from "typeorm";
 import { AppDataSource } from "../../database/DatabaseSource";
 import KlasLeerkracht from "./KlasLeerkracht.entity";
 import { KlasLeerkrachtBody } from "./KlasLeerkracht.types";
@@ -14,7 +19,7 @@ export default class KlasLeerkrachtService {
   all = async (options: object) => {
     const klassen = await this.repository.find({
       where: options,
-      relations: ["leerkracht", "klas"]
+      relations: ["leerkracht", "klas"],
     });
     return klassen;
   };
@@ -22,7 +27,7 @@ export default class KlasLeerkrachtService {
   byClass = async (id: number) => {
     const klassen = await this.repository.find({
       where: { klas: { id } },
-      relations: ["leerkracht"]
+      relations: ["leerkracht"],
     });
     return klassen;
   };
@@ -30,7 +35,19 @@ export default class KlasLeerkrachtService {
   byTeacher = async (id: number) => {
     const klassen = await this.repository.find({
       where: { leerkracht: { id } },
-      relations: ["klas"]
+      relations: ["klas"],
+    });
+    return klassen;
+  };
+
+  byTeacherYear = async (id: number, beginYear: string, endYear: string) => {
+    const klassen = await this.repository.find({
+      where: {
+        leerkracht: { id },
+        geldigVan: MoreThanOrEqual(new Date(`${beginYear}-09-01`)),
+        geldigTot: LessThanOrEqual(new Date(`${endYear}-07-01`)),
+      },
+      relations: ["klas"],
     });
     return klassen;
   };
@@ -38,7 +55,7 @@ export default class KlasLeerkrachtService {
   findOne = async (id: number) => {
     const klas = await this.repository.findOne({
       where: { id },
-      relations: ["leerkracht", "klas"]
+      relations: ["leerkracht", "klas"],
     });
     return klas;
   };

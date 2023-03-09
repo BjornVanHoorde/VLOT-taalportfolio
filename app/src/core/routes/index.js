@@ -8,16 +8,21 @@ const TaalprofielRoutes = {
 };
 
 const ProfielRoute = {
-  Index: "/profiel"
-}
+  Index: "/profiel",
+};
 
 const TaalgroeiRoutes = {
   Index: "/taalgroei",
   Vaardigheden: "/taalgroei/vaardigheden",
   Foutanalyse: "/taalgroei/foutanalyse",
   Woordenschat: "/taalgroei/woordenschat",
-  Taaltips: "/taalgroei/taaltips"
-}
+  Taaltips: "/taalgroei/taaltips",
+};
+
+const KlasRoutes = {
+  Index: "/klas",
+  Overview: "/klas/:klas",
+};
 
 export const route = (path, options = {}) => {
   Object.keys(options).forEach((key) => {
@@ -26,4 +31,10 @@ export const route = (path, options = {}) => {
   return path;
 };
 
-export { AuthRoutes, TaalprofielRoutes, ProfielRoute, TaalgroeiRoutes };
+export {
+  AuthRoutes,
+  TaalprofielRoutes,
+  ProfielRoute,
+  TaalgroeiRoutes,
+  KlasRoutes,
+};

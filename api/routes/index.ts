@@ -350,6 +350,12 @@ const registerTeacherRoutes = (router: Router) => {
     useMethod(userController.allStudentsByClass)
   );
 
+  const klasLeerkrachtController = new KlasLeerkrachtController();
+  teacherRouter.get(
+    "/leerkracht/:id/klassen/:year",
+    useMethod(klasLeerkrachtController.allByTeacherYear)
+  );
+
   const klasController = new KlasController();
   teacherRouter.get(
     "/klassen/leerkracht/:id",

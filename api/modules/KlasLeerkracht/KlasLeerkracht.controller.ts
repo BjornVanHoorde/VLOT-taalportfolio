@@ -51,6 +51,33 @@ export default class KlasLeerkrachtController {
     return res.json(klassen);
   };
 
+  allByTeacherYear = async (
+    req: AuthRequest<{ id: number; year: string }>,
+    res: Response,
+    next: NextFunction
+  ) => {
+    if (req.user.isStudent()) {
+      return new ForbiddenError();
+    }
+
+    if (req.user.isTeacher()) {
+      req.params.id = req.user.id;
+    }
+
+    const beginYear = req.params.year.substring(
+      0,
+      req.params.year.indexOf("-")
+    );
+    const endYear = req.params.year.substring(req.params.year.indexOf("-") + 1);
+
+    const klassen = await this.klasLeerkrachtService.byTeacherYear(
+      req.params.id,
+      beginYear,
+      endYear
+    );
+    return res.json(klassen);
+  };
+
   find = async (
     req: AuthRequest<{ id: number }>,
     res: Response,
