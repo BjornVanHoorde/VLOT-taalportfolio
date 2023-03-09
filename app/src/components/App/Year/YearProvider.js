@@ -1,29 +1,60 @@
 import { createContext, useContext, useState } from "react";
 import Years from "./Years";
 import { useAuthContext } from "../Auth/AuthProvider";
+import { isStudent, isTeacher } from "../../../core/helpers/isRole";
 
 const YearContext = createContext();
 
 const getYear = (user) => {
   if (!user) return null;
-  const klas = user.user.klas.klas.split("");
   let year;
-  klas.map((item) => {
-    if (!isNaN(item)) {
-      year = parseFloat(item);
+  if (isStudent(user)) {
+    const klas = user.user.klas.klas.split("");
+    klas.map((item) => {
+      if (!isNaN(item)) {
+        year = parseFloat(item);
+      }
+    });
+  }
+
+  if (isTeacher(user)) {
+    const newDate = new Date();
+    const dateYear = newDate.getFullYear();
+    const dateMonth = String(newDate.getMonth() + 1).padStart(2, "0");
+    const dateDay = String(newDate.getDate()).padStart(2, "0");
+    const today = dateYear + "-" + dateMonth + "-" + dateDay;
+
+    if (today > `${dateYear}-09-01` && today <= `${dateYear}-12-31`) {
+      return `${dateYear}-${dateYear + 1}`;
     }
-  });
+
+    if (today >= `${dateYear}-01-01` && today < `${dateYear}-07-01`) {
+      return `${dateYear - 1}-${dateYear}`;
+    }
+  }
   return year;
 };
 
 const getYearFromStorage = (user) => {
   if (!user) return null;
-  const Year = localStorage.getItem("VLOT-Year");
-  if (Year) {
-    return Year;
+
+  if (isStudent(user)) {
+    const Year = localStorage.getItem("Student-VLOT-Year");
+    if (Year) {
+      return Year;
+    }
+    const currentYear = getYear(user);
+    return Years[currentYear - 1].value;
   }
-  const currentYear = getYear(user);
-  return Years[currentYear - 1].value;
+
+  if (isTeacher(user)) {
+    const Year = localStorage.getItem("Teacher-VLOT-Year");
+    if (Year) {
+      return Year;
+    }
+    const currentYear = getYear(user);
+    return currentYear;
+  }
 };
 
 const saveYearToStorage = (Year) => {
@@ -32,19 +63,39 @@ const saveYearToStorage = (Year) => {
 
 const getAvailableYears = (user) => {
   if (!user) return null;
-  if (user) {
+  if (isStudent(user)) {
     const years = [];
     for (let i = 0; i < getYear(user); i++) {
       years.push(Years[i]);
     }
     return years;
   }
-  return null;
+
+  if (isTeacher(user)) {
+    let years = [];
+    user.user.leerkrachtKlassen.forEach((klas) => {
+      years.push(
+        `${new Date(klas.geldigVan).getFullYear()}-${new Date(
+          klas.geldigTot
+        ).getFullYear()}`
+      );
+    });
+
+    years = [...new Set(years)];
+
+    years.forEach((year, index) => {
+      years[index] = {
+        label: year,
+        value: year,
+      };
+    });
+    return years;
+  }
 };
 
 const YearProvider = ({ children }) => {
   const { auth } = useAuthContext();
-  const [studentYear, setStudentYear] = useState(getYear(auth)); // [1, 2, 3, 4
+  const [year, setYear] = useState(getYear(auth)); // [1, 2, 3, 4
   const [selectedYear, setSelectedYear] = useState(getYearFromStorage(auth));
   const [availableYears, setAvailableYears] = useState(getAvailableYears(auth));
 
@@ -57,7 +108,7 @@ const YearProvider = ({ children }) => {
     <YearContext.Provider
       value={{
         selectedYear,
-        studentYear,
+        year,
         changeYear: handleYearChange,
         availableYears,
       }}

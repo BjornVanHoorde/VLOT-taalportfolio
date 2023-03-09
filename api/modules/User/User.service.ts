@@ -44,7 +44,7 @@ export default class UserService {
   findOne = async (id: number) => {
     const user = await this.repository.findOne({
       where: { id },
-      relations: ["klas"],
+      relations: ["klas", "leerkrachtKlassen"],
     });
     return user;
   };

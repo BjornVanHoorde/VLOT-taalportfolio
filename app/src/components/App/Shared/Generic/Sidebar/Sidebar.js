@@ -5,15 +5,16 @@ import JaarSelector from "./JaarSelector";
 import Navigation from "./Navigation";
 import "./styles/sidebar.css";
 
-const StdSidebar = () => {
-  const { logout } = useAuthContext();
+const Sidebar = () => {
+  const { auth, logout } = useAuthContext();
+
   return (
     <div className="sidebar">
       <div id="sidebarLogo">
         <img src={logo} alt="logo van de school" />
       </div>
       <JaarSelector />
-      <Navigation />
+      {auth && <Navigation auth={auth} />}
       <AccountInfo />
       <button className="logout-btn" onClick={logout}>
         logout
@@ -22,4 +23,4 @@ const StdSidebar = () => {
   );
 };
 
-export default StdSidebar;
+export default Sidebar;
