@@ -26,31 +26,19 @@
 }
 
 .modal-title {
-    width: 70%;
+    width: 90%;
     display: flex;
     justify-content: start;
     align-items: center;
 }
 
-.modal-header > button {
-    width: 1vw;
-    height: 1vw;
-    color: rgb(175, 239, 255);
+.modal-header > img {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0;
-    padding: 1rem;
-    background-color: rgb(22, 64, 128);
-    border-radius: 10px 0 10px 0;
-}
-
-.modal-body {
-
-}
-
-#andereTaalForm {
-    background-color: blue;
+    width: 7%;
+    cursor: pointer;
 }
 
 #andereTaalForm > label {

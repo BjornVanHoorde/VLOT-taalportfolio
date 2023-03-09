@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import '../Modal/styles/modal.css'
+import close from '../../../img/close.svg';
 
 const Modal = ({ children, title, onDismiss }) => {
   useEffect(() => {
@@ -23,12 +24,7 @@ const Modal = ({ children, title, onDismiss }) => {
               <h5 className="modal-title" id="staticBackdropLabel">
                 {title}
               </h5>
-              <button
-                type="button"
-                className="btn-close"
-                aria-label="Close"
-                onClick={onDismiss}
-              >X</button>
+                <img src={close} alt="close" className="close-modal" onClick={onDismiss}/>
             </div>
             <div className="modal-body">{children}</div>
           </div>

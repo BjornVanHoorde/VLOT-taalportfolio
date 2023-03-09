@@ -15,7 +15,7 @@
 }
 
 #jaar-selector {
-    width: 100%;
+    width: 80%;
     display: flex;
     margin-left: auto;
     margin-right: auto;
@@ -23,10 +23,20 @@
 }
 
 #jaar-selector>select {
-    width: 80%;
+    width: 100%;
     margin: auto;
     padding: 0.5rem;
     font-size: 1.1rem;
+    background-color: #A6DBF1;
+    color: #00609A;
+    border: none;
+    border-radius: 10px 0 10px 0;
+    appearance: none;
+    background-image: url('../../../../../../img/dropdown.svg');
+    background-size: 1vw;
+    background-repeat: no-repeat;
+    background-position: calc(100% - 10px) center;
+
 }
 
 #sidebar-components {
