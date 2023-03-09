@@ -1,6 +1,6 @@
 .taalprofiel {
-  width: 75%;
-  margin: 2rem auto;
+  width: 65%;
+  margin: 2rem 0 0 6rem;
 }
 
 .taalprofiel .multiple-choice {
@@ -41,4 +41,15 @@
 
 .field > label {
   height: fit-content;
+}
+
+.vlag {
+  width: 25%;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  z-index: -1;
+  background-color: #FFF;
 }

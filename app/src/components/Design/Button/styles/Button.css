@@ -16,3 +16,8 @@ button.btn:hover {
 .btn-div.align-right {
   width: 100%;
 }
+
+.form-button {
+  margin-top: 3vh;
+  margin-bottom: 1vh;
+}

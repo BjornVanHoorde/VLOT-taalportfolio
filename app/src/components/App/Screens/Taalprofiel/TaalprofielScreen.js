@@ -5,6 +5,7 @@ import { useAuthContext } from "../../Auth/AuthProvider";
 import { useLanguageContext } from "../../Language/LanguageProvider";
 import { useYearContext } from "../../Year/YearProvider";
 import TaalprofielOverview from "./overview";
+import nederlands from "../../../../img/nederlands.png";
 import "./styles/TaalprofielScreen.css";
 
 const TaalprofielScreen = () => {
@@ -27,7 +28,14 @@ const TaalprofielScreen = () => {
   }, [currentLanguage, selectedYear]);
 
   if (answers && answers.length > 0) {
-    return <TaalprofielOverview answers={answers} handleChange={invalidate} />;
+    return (
+    <>
+    <TaalprofielOverview answers={answers} handleChange={invalidate} />
+    <section className="vlag">
+      <img src={nederlands} alt="vlag" width="100%"></img>
+    </section>
+    </>
+    )
   }
 
   if (isLoading) {

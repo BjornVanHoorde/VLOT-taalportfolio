@@ -12,7 +12,7 @@ const AppLayout = () => {
     return (
       <>
         <StdSidebar />
-        <div id="main">
+        <div id="main" className="">
           <TopNavStudent
             isTaalprofiel={location.pathname.includes(TaalprofielRoutes.Index)}
           />
