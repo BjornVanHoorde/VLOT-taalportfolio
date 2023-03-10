@@ -14,7 +14,7 @@ const KlasHeader = ({ klas, onSearch }) => {
   // Filter the students based on the search input
   useEffect(() => {
     onSearch(inputValue);
-  }, [inputValue]);
+  }, [inputValue, klas]);
 
   return (
     <div className="klas-overview__header">
