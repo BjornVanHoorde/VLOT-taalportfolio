@@ -79,6 +79,24 @@ export default class UserController {
     return res.json(students);
   };
 
+  byStudentName = async (
+    req: AuthRequest<{ student: string }, {}, {}>,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { params } = req;
+
+    if (req.user.isStudent()) {
+      return new ForbiddenError();
+    }
+
+    const firstName = params.student.split(" ")[0];
+    const lastName = params.student.split(" ")[1];
+
+    const students = await this.userService.byStudentName(firstName, lastName);
+    return res.json(students);
+  };
+
   find = async (
     req: AuthRequest<{ id: number }>,
     res: Response,

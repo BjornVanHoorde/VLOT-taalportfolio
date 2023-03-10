@@ -21,13 +21,12 @@
     border-bottom: solid 2px #A6DBF1;
 }
 
-.taalgroei-nav-button > p {
+.taalgroei-nav-button>p {
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1rem;
-
 }
 
 .taalgroei-nav-button:hover {
@@ -66,7 +65,7 @@
 
 .evaluatie-add:hover {
     background-color: #4694ac;
-    color:white;
+    color: white;
     transition: ease 0.3s;
     cursor: pointer;
 }
@@ -89,7 +88,7 @@
 
 .evaluatie-item:hover {
     background-color: #4694ac;
-    color:white;
+    color: white;
     transition: ease 0.3s;
     cursor: pointer;
 }
@@ -102,7 +101,7 @@
 
 }
 
-.evaluatie-item-content > span {
+.evaluatie-item-content>span {
     display: flex;
     align-items: center;
 }
@@ -137,11 +136,11 @@
     border-radius: 10px 0 10px 0;
 }
 
-.taalgroei-form-item > p {
+.taalgroei-form-item>p {
     padding: 1rem;
 }
 
-.taalgroei-form-item > select {
+.taalgroei-form-item>select {
     width: 5vw;
     padding: 1rem;
     border: none;
@@ -169,12 +168,12 @@
     flex-direction: column;
 }
 
-.taalgroei-feedback > h3 {
+.taalgroei-feedback>h3 {
     font-size: 1.4rem;
     margin-bottom: 1rem;
 }
 
-.taalgroei-feedback > input {
+.taalgroei-feedback>input {
     border: solid 3px #A6DBF1;
     height: 15vh;
     border-radius: 10px 0 10px 0;

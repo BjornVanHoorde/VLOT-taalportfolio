@@ -1,0 +1,22 @@
+.tabNav {
+  margin-top: 2rem;
+  margin-left: 5vw;
+}
+
+.tabNav-button {
+  width: 10%;
+  height: 4vh;
+  background-color: white;
+  border: solid 3px #A6DBF1;
+  margin-right: 1vw;
+  border-radius: 10px 0 0 0;
+  border-bottom: none;
+}
+
+.tabNav-button>p {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+}
