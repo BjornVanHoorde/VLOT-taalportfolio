@@ -64,6 +64,21 @@ export default class UserController {
     return res.json(students);
   };
 
+  allStudentsByClassName = async (
+    req: AuthRequest<{ klas: string }, {}, {}>,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { params } = req;
+
+    if (req.user.isStudent()) {
+      return new ForbiddenError();
+    }
+
+    const students = await this.userService.studentsByClassName(params.klas);
+    return res.json(students);
+  };
+
   find = async (
     req: AuthRequest<{ id: number }>,
     res: Response,
@@ -141,7 +156,7 @@ export default class UserController {
     if (!req.user.isAdmin()) {
       return new ForbiddenError();
     }
-    
+
     try {
       const user = await this.userService.delete(parseInt(req.params.id));
       if (!user) {

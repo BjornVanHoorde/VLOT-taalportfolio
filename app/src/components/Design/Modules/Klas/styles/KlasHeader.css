@@ -1,0 +1,11 @@
+.klas-overview__header {
+  display: flex;
+}
+
+.klas-overview__header__title {
+  width: 80%;
+}
+
+.klas-overview__header__search {
+  width: 20%;
+}

@@ -1,0 +1,16 @@
+.klas-grid {
+  margin-top: 2rem;
+  display: flex;
+}
+
+.klas-grid__students {
+  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+  margin: 1rem 0;
+}
+
+.klas-grid__allStudents {
+  width: 20%;
+}

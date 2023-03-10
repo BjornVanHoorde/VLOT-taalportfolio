@@ -349,6 +349,10 @@ const registerTeacherRoutes = (router: Router) => {
     "/students/klas/:id",
     useMethod(userController.allStudentsByClass)
   );
+  teacherRouter.get(
+    "/students/klas/name/:klas",
+    useMethod(userController.allStudentsByClassName)
+  );
 
   const klasLeerkrachtController = new KlasLeerkrachtController();
   teacherRouter.get(

@@ -1,4 +1,5 @@
 import TopNavLanguages from "../../../../../core/constants/TopNavLanguages";
+import { isTeacher } from "../../../../../core/helpers/isRole";
 import LanguageButton from "../../../../Design/Button/LanguageButton";
 import { useAuthContext } from "../../../Auth/AuthProvider";
 import { useLanguageContext } from "../../../Language/LanguageProvider";
@@ -17,7 +18,7 @@ const TopNavTeacher = () => {
             key={language.label}
             activeLanguage={currentLanguage === language.label}
             onClick={() => changeLanguage(language.label)}
-            isTeacher={true}
+            isTeacher={isTeacher(auth)}
           />
         ))}
       </div>
