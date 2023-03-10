@@ -1,5 +1,5 @@
 import AuthProvider from "./Auth/AuthProvider";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import {
   AuthRoutes,
   KlasRoutes,
@@ -18,6 +18,8 @@ import UserdetailsScreen from "./Screens/Userdetails/UserdetailsScreen";
 import YearProvider from "./Year/YearProvider";
 import VaardighedenScreen from "./Screens/Taalgroei/Vaardigheden/VaardighedenScreen";
 import KlasOverview from "./Screens/Klas/KlasOverview";
+import RoleContainer from "./Auth/RoleContainer";
+import Roles from "../../core/constants/Roles";
 
 const App = () => {
   return (
@@ -53,7 +55,18 @@ const App = () => {
                   path={TaalgroeiRoutes.Vaardigheden}
                   element={<VaardighedenScreen />}
                 />
-                <Route path={KlasRoutes.Overview} element={<KlasOverview />} />
+                <Route
+                  element={
+                    <RoleContainer roles={[Roles.Admin, Roles.Teacher]}>
+                      <Outlet />
+                    </RoleContainer>
+                  }
+                >
+                  <Route
+                    path={KlasRoutes.Overview}
+                    element={<KlasOverview />}
+                  />
+                </Route>
                 <Route path="*" element={<Navigate to="/home" />} />
               </Route>
             </Routes>
