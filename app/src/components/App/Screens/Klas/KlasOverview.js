@@ -4,7 +4,7 @@ import Loading from "../../../Design/Loading/Loading";
 import KlasHeader from "../../Shared/Klas/KlasHeader";
 import KlasGrid from "../../Shared/Klas/Klasgrid";
 import "./styles/klasOverview.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const KlasOverview = () => {
   // Get the class name from the url
@@ -12,7 +12,11 @@ const KlasOverview = () => {
   // State for the filtered students
   const [filteredStudents, setFilteredStudents] = useState();
   // Get the students from the database
-  const { data: students, isLoading } = useFetch(`/students/klas/name/${klas}`);
+  const {
+    data: students,
+    invalidate,
+    isLoading,
+  } = useFetch(`/students/klas/name/${klas}`);
 
   // Filter the students based on the search input
   const filterStudents = (search) => {
@@ -22,6 +26,16 @@ const KlasOverview = () => {
     });
     setFilteredStudents(filteredStudents);
   };
+
+  useEffect(() => {
+    invalidate();
+  }, [klas]);
+
+  useEffect(() => {
+    if (students) {
+      setFilteredStudents(students);
+    }
+  }, [students]);
 
   // Handle the search input
   const handleSearch = (value) => {

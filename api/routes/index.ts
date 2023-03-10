@@ -350,6 +350,10 @@ const registerTeacherRoutes = (router: Router) => {
     useMethod(userController.allStudentsByClass)
   );
   teacherRouter.get(
+    "/students/name/:student",
+    useMethod(userController.byStudentName)
+  );
+  teacherRouter.get(
     "/students/klas/name/:klas",
     useMethod(userController.allStudentsByClassName)
   );

@@ -4,6 +4,7 @@ import {
   AuthRoutes,
   KlasRoutes,
   ProfielRoute,
+  StudentRoutes,
   TaalgroeiRoutes,
   TaalprofielRoutes,
 } from "../../core/routes";
@@ -20,6 +21,8 @@ import VaardighedenScreen from "./Screens/Taalgroei/Vaardigheden/VaardighedenScr
 import KlasOverview from "./Screens/Klas/KlasOverview";
 import RoleContainer from "./Auth/RoleContainer";
 import Roles from "../../core/constants/Roles";
+import StudentLayout from "./Screens/Student/StudentLayout";
+import StudentOverview from "./Screens/Student/StudentOverview";
 
 const App = () => {
   return (
@@ -41,20 +44,24 @@ const App = () => {
                   </AuthContainer>
                 }
               >
+                {/* HOME ROUTE */}
                 <Route path="/home" element={<Home />} />
+                {/* PROFIEL ROUTES */}
                 <Route
                   path={ProfielRoute.Index}
                   element={<UserdetailsScreen />}
                 />
+                {/* TAALPROFIEL ROUTES */}
                 <Route
                   path={TaalprofielRoutes.Index}
                   element={<TaalprofielScreen />}
                 />
-                <Route path="*" element={<Navigate to="/home" />} />
+                {/* TAALGROEI ROUTES */}
                 <Route
                   path={TaalgroeiRoutes.Vaardigheden}
                   element={<VaardighedenScreen />}
                 />
+                {/* TEACHER ROUTES */}
                 <Route
                   element={
                     <RoleContainer roles={[Roles.Admin, Roles.Teacher]}>
@@ -62,9 +69,17 @@ const App = () => {
                     </RoleContainer>
                   }
                 >
+                  {/* KLAS ROUTES */}
                   <Route
                     path={KlasRoutes.Overview}
                     element={<KlasOverview />}
+                  />
+                </Route>
+                {/* STUDENT ROUTES */}
+                <Route path={StudentRoutes.Index} element={<StudentLayout />}>
+                  <Route
+                    path={StudentRoutes.Overview}
+                    element={<StudentOverview />}
                   />
                 </Route>
                 <Route path="*" element={<Navigate to="/home" />} />
