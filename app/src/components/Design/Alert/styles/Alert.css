@@ -11,7 +11,7 @@
 
 .alert {
   padding: 20px;
-  background-color: #A6DBF1;
+  background-color: var(--lln-element-bg);
   color: #00609A;
   border-radius: 10px 0 10px 0;
   width: 15vw;

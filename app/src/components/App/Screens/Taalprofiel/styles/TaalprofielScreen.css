@@ -11,7 +11,7 @@
 .taalprofiel .multiple-choice .field {
   width: 100%;
   background-color: #FFF;
-  border: 2.5px solid #A6DBF1;
+  border: 2.5px solid var(--lln-element-bg);
   border-radius: 10px 0 10px 0;
   height: fit-content;
   display: flex;
@@ -34,9 +34,12 @@
 }
 
 .no-answers {
-  width: 100%;
+  width: fit-content;
   text-align: center;
   margin-top: 2rem;
+  padding: 1rem;
+  background-color: var(--lln-sidebar-bg);
+  margin: 2vh auto 2vh auto;
 }
 
 .field > label {

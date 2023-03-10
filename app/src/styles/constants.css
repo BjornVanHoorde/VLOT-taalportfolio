@@ -1,4 +1,13 @@
 :root {
     --tekst: #000;
-    --sidebar-tekst: rgb(132,132,132);
+    --sidebar-tekst: rgb(132, 132, 132);
+
+    --lln-input-stroke: rgb(166, 219, 241);
+    --lln-element-stroke: rgb(0, 96, 154);
+    --lln-element-bg: rgb(223, 242, 250);
+    --lln-sidebar-bg: rgba(223, 242, 250, 0.3);
+
+    --lkr-input-stroke: rgb(239, 211, 159);
+    --lkr-element-color: rgb(173, 127, 61);
+    --lkr-sidebar-bg: rgb(254, 242, 221);
 }
