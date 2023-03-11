@@ -5,9 +5,11 @@ import { isStudent, isTeacher } from "../../../core/helpers/isRole";
 
 const YearContext = createContext();
 
+// Get the year from the user
 const getYear = (user) => {
   if (!user) return null;
   let year;
+  // If the user is a student, get the year from the klas
   if (isStudent(user)) {
     const klas = user.user.klas.klas.split("");
     klas.map((item) => {
@@ -17,6 +19,7 @@ const getYear = (user) => {
     });
   }
 
+  // If the user is a teacher, get the year from the current date
   if (isTeacher(user)) {
     const newDate = new Date();
     const dateYear = newDate.getFullYear();
@@ -35,9 +38,11 @@ const getYear = (user) => {
   return year;
 };
 
+// Get the year from the local storage
 const getYearFromStorage = (user) => {
   if (!user) return null;
 
+  // If the user is a student, get the year from the local storage
   if (isStudent(user)) {
     const Year = localStorage.getItem("Student-VLOT-Year");
     if (Year) {
@@ -47,6 +52,7 @@ const getYearFromStorage = (user) => {
     return Years[currentYear - 1].value;
   }
 
+  // If the user is a teacher, get the year from the local storage
   if (isTeacher(user)) {
     const Year = localStorage.getItem("Teacher-VLOT-Year");
     if (Year) {
@@ -57,12 +63,16 @@ const getYearFromStorage = (user) => {
   }
 };
 
+// Save the year to the local storage
 const saveYearToStorage = (Year) => {
   localStorage.setItem("VLOT-Year", Year);
 };
 
+// Get the available years for the user
 const getAvailableYears = (user) => {
   if (!user) return null;
+
+  // If the user is a student, get the available years based on the klas
   if (isStudent(user)) {
     const years = [];
     for (let i = 0; i < getYear(user); i++) {
@@ -71,6 +81,7 @@ const getAvailableYears = (user) => {
     return years;
   }
 
+  // If the user is a teacher, get the available years based on the klassen
   if (isTeacher(user)) {
     let years = [];
     user.user.leerkrachtKlassen.forEach((klas) => {
@@ -81,8 +92,10 @@ const getAvailableYears = (user) => {
       );
     });
 
+    // Remove duplicates
     years = [...new Set(years)];
 
+    // tranform the years to an array of objects
     years.forEach((year, index) => {
       years[index] = {
         label: year,
@@ -93,6 +106,7 @@ const getAvailableYears = (user) => {
   }
 };
 
+// This is a provider that will be keeping track of the current year
 const YearProvider = ({ children }) => {
   const { auth } = useAuthContext();
   const [year, setYear] = useState(getYear(auth)); // [1, 2, 3, 4
@@ -104,6 +118,7 @@ const YearProvider = ({ children }) => {
     saveYearToStorage(Year);
   };
 
+  // When the auth changes, update the year and the available years
   useEffect(() => {
     setYear(getYear(auth));
     setSelectedYear(getYearFromStorage(auth));

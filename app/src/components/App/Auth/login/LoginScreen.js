@@ -5,8 +5,9 @@ import useForm from "../../../../core/hooks/useForm";
 import * as yup from "yup";
 import Label from "../../../Design/Form/Label";
 import Input from "../../../Design/Form/Input";
-import '../login/styles/auth.css'
+import "../login/styles/auth.css";
 
+// validation schema
 const schema = yup.object().shape({
   email: yup.string().email().required(),
   password: yup.string().required(),
@@ -20,11 +21,11 @@ const defaultData = {
 const LoginScreen = () => {
   const { login } = useAuthContext();
   const { isLoading, error, mutate } = useMutation();
-
   const { values, errors, handleChange, handleSubmit } = useForm(schema, {
     ...defaultData,
   });
 
+  // handle submit
   const handleData = (values) => {
     mutate(`${process.env.REACT_APP_API_URL}/login`, {
       method: "POST",
@@ -47,7 +48,9 @@ const LoginScreen = () => {
         >
           {error && <div className="error">{error}</div>}
           <div className="form-item">
-            <Label htmlFor="email" className="auth-label">Gebruikersnaam of e-mail:</Label>
+            <Label htmlFor="email" className="auth-label">
+              Gebruikersnaam of e-mail:
+            </Label>
             <Input
               type="email"
               name="email"
@@ -59,7 +62,9 @@ const LoginScreen = () => {
             />
           </div>
           <div className="form-item">
-            <Label htmlFor="password" className="auth-label">Wachtwoord:</Label>
+            <Label htmlFor="password" className="auth-label">
+              Wachtwoord:
+            </Label>
             <Input
               className="auth-input"
               type="password"

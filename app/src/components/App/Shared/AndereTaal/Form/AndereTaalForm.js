@@ -5,6 +5,7 @@ import Button from "../../../../Design/Button/Button";
 import useForm from "../../../../../core/hooks/useForm";
 import Field from "../../../../Design/Form/Field";
 
+// validation schema
 const schema = yup.object().shape({
   taal: yup.string().required(),
 });
@@ -14,6 +15,7 @@ const defaultData = {
 };
 
 const AndereTaalForm = ({ initialData = {}, disabled, onSubmit, label }) => {
+  // hook for handling the form
   const { values, errors, handleChange, handleSubmit } = useForm(schema, {
     ...defaultData,
     ...initialData,
@@ -24,7 +26,11 @@ const AndereTaalForm = ({ initialData = {}, disabled, onSubmit, label }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(handleData)} noValidate={true} id="andereTaalForm">
+    <form
+      onSubmit={handleSubmit(handleData)}
+      noValidate={true}
+      id="andereTaalForm"
+    >
       <Field>
         <Label htmlFor="name">Taal</Label>
         <Input

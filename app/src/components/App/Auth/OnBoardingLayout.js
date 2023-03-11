@@ -5,6 +5,7 @@ const OnBoardingLayout = () => {
   const { auth } = useAuthContext();
   const location = useLocation();
 
+  // redirect to page if already authenticated
   if (!auth) {
     return (
       <>

@@ -24,6 +24,7 @@ const TaalprofielOverview = ({ answers, handleChange }) => {
   const [filteredData, setFilteredData] = useState();
   const [showModal, setShowModal] = useState(false);
 
+  // If the answers are for a made up language, filter them by the language
   const filterByOtherLanguage = (answers) => {
     if (!(currentLanguage.split(" ").length > 1)) {
       setFilteredData(answers);
@@ -35,10 +36,12 @@ const TaalprofielOverview = ({ answers, handleChange }) => {
     }
   };
 
+  // Refilter the data when the answers change
   useEffect(() => {
     filterByOtherLanguage(answers);
   }, [answers]);
 
+  // handle the submit of the form
   const handleSubmit = (values) => {
     const length = Object.keys(values).length;
     let count = 0;
@@ -61,6 +64,7 @@ const TaalprofielOverview = ({ answers, handleChange }) => {
     }
   };
 
+  // handle the delete of a language
   const handleDelete = () => {
     changeLanguage(Languages.Dutch);
     handleChange();
@@ -68,6 +72,7 @@ const TaalprofielOverview = ({ answers, handleChange }) => {
     window.location.reload();
   };
 
+  // handle the edit of a language
   const handleEdit = () => {
     changeLanguage(Languages.Dutch);
     handleChange();
@@ -107,6 +112,7 @@ const TaalprofielOverview = ({ answers, handleChange }) => {
           Er zijn nog geen vragen voor deze taal beschikbaar...
         </p>
       )}
+      {/* form for making a language */}
       {showModal && (
         <CreateLanguageForm
           onSuccess={handleEdit}

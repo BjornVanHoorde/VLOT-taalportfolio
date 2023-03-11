@@ -15,6 +15,7 @@ const saveLanguageToStorage = (language) => {
   localStorage.setItem("VLOT-language", language);
 };
 
+// This is a provider that will be keeping track of the current language
 const LanguageProvider = ({ children }) => {
   const [currentLanguage, setCurrentLanguage] = useState(
     getLanguageFromStorage()

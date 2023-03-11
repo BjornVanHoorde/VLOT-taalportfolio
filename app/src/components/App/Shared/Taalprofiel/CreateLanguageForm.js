@@ -5,6 +5,7 @@ import AndereTaalForm from "../AndereTaal/Form/AndereTaalForm";
 
 const CreateLanguageForm = ({ otherLanguage, onSuccess, onDismiss }) => {
   const { isLoading, error, mutate } = useMutation();
+  // Check if the form is for updating or creating
   const [isUpdate, setIsUpdate] = useState(otherLanguage ? true : false);
 
   const handleSubmit = (values) => {
@@ -21,18 +22,22 @@ const CreateLanguageForm = ({ otherLanguage, onSuccess, onDismiss }) => {
   };
 
   return (
-    <Modal
-      title={isUpdate ? "Taal bewerken" : "Nieuwe taal toevoegen"}
-      onDismiss={onDismiss}
-    >
-      {error && <p>{error}</p>}
-      <AndereTaalForm
-        label={isUpdate ? "Bewerken" : "Toevoegen"}
-        onSubmit={handleSubmit}
-        initialData={otherLanguage}
-        disabled={isLoading}
-      />
-    </Modal>
+    <>
+      {/* based on the isUpdate state, we show a different title */}
+      <Modal
+        title={isUpdate ? "Taal bewerken" : "Nieuwe taal toevoegen"}
+        onDismiss={onDismiss}
+      >
+        {error && <p>{error}</p>}
+        {/* based on the isUpdate state, we show a different label and form */}
+        <AndereTaalForm
+          label={isUpdate ? "Bewerken" : "Toevoegen"}
+          onSubmit={handleSubmit}
+          initialData={otherLanguage}
+          disabled={isLoading}
+        />
+      </Modal>
+    </>
   );
 };
 

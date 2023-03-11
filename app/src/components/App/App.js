@@ -24,6 +24,7 @@ import Roles from "../../core/constants/Roles";
 import StudentLayout from "./Screens/Student/StudentLayout";
 import StudentOverview from "./Screens/Student/StudentOverview";
 
+// This is the main app component with all the routes
 const App = () => {
   return (
     <>

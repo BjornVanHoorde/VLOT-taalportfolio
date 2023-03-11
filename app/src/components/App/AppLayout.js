@@ -10,9 +10,11 @@ const AppLayout = () => {
   const { auth } = useAuthContext();
   const location = useLocation();
 
+  // redirect to login if not authenticated
   if (auth) {
     return (
       <>
+        {/* return the sidebar and the main content based on the user by changing the theme */}
         <Sidebar />
         <div
           id="main"

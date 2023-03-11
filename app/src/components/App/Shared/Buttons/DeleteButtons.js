@@ -3,6 +3,7 @@ import useMutation from "../../../../core/hooks/useMutation";
 import Button from "../../../Design/Button/Button";
 import "./styles/DeleteButton.css";
 
+// This is a button that will delete a resource
 const DeleteButton = ({ label, onSuccess, id, scope, disabled, ...rest }) => {
   const { isLoading, error, mutate } = useMutation();
 
