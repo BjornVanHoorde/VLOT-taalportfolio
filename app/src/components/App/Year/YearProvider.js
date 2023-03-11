@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import Years from "./Years";
 import { useAuthContext } from "../Auth/AuthProvider";
 import { isStudent, isTeacher } from "../../../core/helpers/isRole";
@@ -103,6 +103,12 @@ const YearProvider = ({ children }) => {
     setSelectedYear(Year);
     saveYearToStorage(Year);
   };
+
+  useEffect(() => {
+    setYear(getYear(auth));
+    setSelectedYear(getYearFromStorage(auth));
+    setAvailableYears(getAvailableYears(auth));
+  }, [auth]);
 
   return (
     <YearContext.Provider
