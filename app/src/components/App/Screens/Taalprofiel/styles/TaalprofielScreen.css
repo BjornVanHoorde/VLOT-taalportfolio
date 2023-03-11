@@ -10,8 +10,8 @@
 
 .taalprofiel .multiple-choice .field {
   width: 100%;
-  background-color: #FFF;
-  border: 2.5px solid var(--lln-element-bg);
+  background-color: var(--whiteS);
+  border: 2.5px solid var(--primary-color);
   border-radius: 10px 0 10px 0;
   height: fit-content;
   display: flex;
@@ -38,11 +38,11 @@
   text-align: center;
   margin-top: 2rem;
   padding: 1rem;
-  background-color: var(--lln-sidebar-bg);
+  background-color: var(--secondary-color-transparant);
   margin: 2vh auto 2vh auto;
 }
 
-.field > label {
+.field>label {
   height: fit-content;
 }
 
@@ -54,5 +54,5 @@
   margin: 0;
   padding: 0;
   z-index: -1;
-  background-color: #FFF;
+  background-color: var(--white);
 }

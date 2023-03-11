@@ -1,15 +1,15 @@
 button.btn {
-  background-color: #FFF;
-  border: 2px solid var(--lln-element-bg);
+  background-color: var(--white);
+  border: 2px solid var(--primary-color);
   border-radius: 10px 0px 10px 0px;
-  color: #00609A;
+  color: var(--tertiary-color);
   text-transform: uppercase;
   width: 100%;
   padding: 0.5rem 1.5rem;
 }
 
 button.btn:hover {
-  background-color: var(--lln-element-bg);
+  background-color: var(--secondary-color);
   cursor: pointer;
 }
 

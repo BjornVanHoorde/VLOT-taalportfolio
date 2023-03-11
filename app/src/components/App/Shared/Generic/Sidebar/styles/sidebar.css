@@ -1,9 +1,11 @@
+/* import the constants */
+@import '../../../../../../styles/constants.css';
+
 .sidebar {
     height: 100vh;
     width: 15vw;
     position: fixed;
-    /* background-color: rgb(190, 190, 190); */
-    background-color: var(--lln-sidebar-bg);
+    background-color: var(--secondary-color);
     display: flex;
     flex-direction: column;
     justify-content: start;
@@ -27,12 +29,12 @@
     margin: auto;
     padding: 0.5rem;
     font-size: 1.1rem;
-    background-color: var(--lln-element-bg);
-    color: #00609A;
+    background-color: var(--primary-color);
+    color: var(--tertiary-color);
     border: none;
     border-radius: 10px 0 10px 0;
     appearance: none;
-    background-image: url('../../../../../../img/dropdown.svg');
+    background-image: var(--dropdown-arrow);
     background-size: 1vw;
     background-repeat: no-repeat;
     background-position: calc(100% - 10px) center;
@@ -53,21 +55,21 @@
     margin-top: 2vh;
 }
 
-.main-nav> li {
+.main-nav>li {
     margin-bottom: 1.8rem;
     font-size: 1rem;
     margin-left: 1rem;
-    color: #848484;
+    color: var(--black);
     cursor: pointer;
 }
 
 @media screen and (min-width: 1600px) {
 
-    .main-nav> li {
+    .main-nav>li {
         margin-bottom: 3rem;
         font-size: 1.3rem;
         margin-left: 1.3rem;
-        color: #848484;
+        color: var(--black);
         cursor: pointer;
     }
 }
@@ -78,7 +80,7 @@
 }
 
 .main-nav>li>a {
-    color: black;
+    color: var(--black);
     text-decoration: none;
 }
 
@@ -86,19 +88,19 @@
     margin-bottom: 1rem;
 }
 
-.sub-nav> li {
+.sub-nav>li {
     margin-bottom: 1rem;
     font-size: 1rem;
     margin-left: 2rem;
-    color: #848484
+    color: var(--black)
 }
 
 @media screen and (min-width: 1600px) {
-    .sub-nav> li {
+    .sub-nav>li {
         margin-bottom: 1rem;
         font-size: 1.3rem;
         margin-left: 2.6rem;
-        color: #848484;
+        color: var(--black);
         cursor: pointer;
     }
 }
@@ -108,7 +110,7 @@
 }
 
 .sub-nav>li>a {
-    color: black;
+    color: var(--black);
     text-decoration: none;
 }
 
@@ -123,7 +125,7 @@
 }
 
 .account-info:hover {
-    background-color: rgb(192, 225, 255);
+    background-color: var(--primary-color);
     cursor: pointer;
     transition: ease-out 0.2s;
 }
@@ -154,7 +156,7 @@
     .account-info>p {
         display: none;
     }
-    
+
     .user-id {
         display: none;
     }
@@ -162,7 +164,7 @@
 
 a {
     text-decoration: none;
-    color: black
+    color: var(--black)
 }
 
 li {
@@ -172,11 +174,11 @@ li {
 .logout-btn {
     position: absolute;
     bottom: 0;
-    background-color: rgb(235, 68, 68);
-    color: white;
+    background-color: var(--red);
+    color: var(--white);
 }
 
 .logout-btn:hover {
-    background-color: rgb(165, 48, 48);
-    color: white;
+    background-color: var(--red-hover);
+    color: var(--white);
 }

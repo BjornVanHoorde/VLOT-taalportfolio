@@ -6,8 +6,8 @@
 .tabNav-button {
   width: 10%;
   height: 4vh;
-  background-color: white;
-  border: solid 3px #A6DBF1;
+  background-color: var(--white);
+  border: solid 3px var(--primary-color);
   margin-right: 1vw;
   border-radius: 10px 0 0 0;
   border-bottom: none;

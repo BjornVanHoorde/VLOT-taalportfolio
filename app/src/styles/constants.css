@@ -1,4 +1,4 @@
-:root {
+/* :root {
     --tekst: #000;
     --sidebar-tekst: rgb(132, 132, 132);
 
@@ -10,4 +10,29 @@
     --lkr-input-stroke: rgb(239, 211, 159);
     --lkr-element-color: rgb(173, 127, 61);
     --lkr-sidebar-bg: rgb(254, 242, 221);
+} */
+
+:root {
+    --black: #000;
+    --dark-effect: rgba(65, 65, 65, 0.952);
+    --gray: #848484;
+    --white: #fff;
+    --red: rgb(235, 68, 68);
+    --red-hover: rgb(165, 48, 48);
+}
+
+:root .student-theme {
+    --primary-color: #A6DBF1;
+    --secondary-color: #DFF2FA;
+    --secondary-color-transparant: rgba(223, 242, 250, 0.5);
+    --tertiary-color: #00609A;
+    --dropdown-arrow: url('../img/dropdown.svg')
+}
+
+:root .teacher-theme {
+    --primary-color: #F4D397;
+    --secondary-color: #FEF2DD;
+    --secondary-color-transparant: rgba(254, 242, 221, 0.5);
+    --tertiary-color: #AD7F3D;
+    --dropdown-arrow: url('../img/dropdown.svg')
 }

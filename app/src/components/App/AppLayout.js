@@ -14,7 +14,12 @@ const AppLayout = () => {
     return (
       <>
         <Sidebar />
-        <div id="main">
+        <div
+          id="main"
+          className={`${isStudent(auth) ? "student-theme" : ""} ${
+            isTeacher(auth) ? "teacher-theme" : ""
+          }`}
+        >
           {auth && isStudent(auth) && (
             <TopNavStudent
               isTaalprofiel={location.pathname.includes(
