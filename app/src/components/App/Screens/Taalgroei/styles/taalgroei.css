@@ -173,13 +173,8 @@
     margin-bottom: 1rem;
 }
 
-<<<<<<< HEAD
-.taalgroei-feedback > input {
-    border: solid 3px var(--lln-element-bg);
-=======
 .taalgroei-feedback>input {
     border: solid 3px #A6DBF1;
->>>>>>> fdce0dffa0d00d9feb5f64e3b9176076f5bc75a0
     height: 15vh;
     border-radius: 10px 0 10px 0;
 }

@@ -1,5 +1,5 @@
 .top-nav {
-    height: 6vh;
+    height: 16vh;
     width: 100%;
     display: flex;
     align-items: center;
@@ -8,7 +8,7 @@
     background-color: #4b778a;
 }
 
-.top-nav>button {
+.top-nav > button {
     height: 70%;
     overflow: hidden;
     width: 8vw;
