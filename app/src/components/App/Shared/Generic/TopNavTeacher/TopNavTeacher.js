@@ -3,7 +3,7 @@ import { isTeacher } from "../../../../../core/helpers/isRole";
 import LanguageButton from "../../../../Design/Button/LanguageButton";
 import { useAuthContext } from "../../../Auth/AuthProvider";
 import { useLanguageContext } from "../../../Language/LanguageProvider";
-import "./styles/topbar.css";
+import "./styles/topbar-teacher.css";
 
 const TopNavTeacher = () => {
   const { auth } = useAuthContext();
@@ -11,7 +11,7 @@ const TopNavTeacher = () => {
 
   return (
     <>
-      <div className="top-nav">
+      <div className="top-nav-teacher">
         {TopNavLanguages.map((language) => (
           <LanguageButton
             label={language.label}

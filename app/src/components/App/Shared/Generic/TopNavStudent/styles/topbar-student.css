@@ -1,16 +1,19 @@
-.top-nav {
-    height: 16vh;
+.top-nav-student {
+    height: auto;
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    width: fit-content;
     margin-left: 3vw;
+    padding: 0;
 }
 
-.top-nav > button {
+.top-nav-student > button {
     height: 70%;
     overflow: hidden;
     width: 8vw;
+    padding: 0.5rem 1.5rem;
+    margin: 1rem ;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,10 +22,10 @@
     border-radius: 10px 0px 10px 0px;
 }
 
-.top-nav>button:hover {
+.top-nav-student>button:hover {
     background-color: var(--secondary-color);
 }
 
-.top-nav button.active {
+.top-nav-student button.active {
     background-color: var(--secondary-color);
 }

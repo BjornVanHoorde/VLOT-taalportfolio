@@ -7,7 +7,7 @@ import LanguageButton from "../../../../Design/Button/LanguageButton";
 import { useAuthContext } from "../../../Auth/AuthProvider";
 import { useLanguageContext } from "../../../Language/LanguageProvider";
 import CreateLanguageForm from "../../Taalprofiel/CreateLanguageForm";
-import "./styles/topbar.css";
+import "./styles/topbar-student.css";
 
 const TopNavStudent = ({ isTaalprofiel }) => {
   const { auth } = useAuthContext();
@@ -25,7 +25,7 @@ const TopNavStudent = ({ isTaalprofiel }) => {
 
   return (
     <>
-      <div className="top-nav">
+      <div className="top-nav-student">
         {TopNavLanguages.map((language) => (
           <LanguageButton
             label={language.label}

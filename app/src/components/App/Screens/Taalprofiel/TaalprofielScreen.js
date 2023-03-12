@@ -5,7 +5,9 @@ import { useAuthContext } from "../../Auth/AuthProvider";
 import { useLanguageContext } from "../../Language/LanguageProvider";
 import { useYearContext } from "../../Year/YearProvider";
 import TaalprofielOverview from "./overview";
-import nederlands from "../../../../img/nederlands.png";
+import Nederlands from "../../../../img/nederlands.png";
+import Frans from "../../../../img/frans.png";
+
 import "./styles/TaalprofielScreen.css";
 
 const TaalprofielScreen = () => {
@@ -24,6 +26,7 @@ const TaalprofielScreen = () => {
     }/${selectedYear}`
   );
 
+
   useEffect(() => {
     invalidate();
   }, [currentLanguage, selectedYear]);
@@ -34,7 +37,7 @@ const TaalprofielScreen = () => {
       <>
         <TaalprofielOverview answers={answers} handleChange={invalidate} />
         <section className="vlag">
-          <img src={nederlands} alt="vlag" width="100%"></img>
+          <img src={currentLanguage} alt="vlag" width="100%"></img>
         </section>
       </>
     );

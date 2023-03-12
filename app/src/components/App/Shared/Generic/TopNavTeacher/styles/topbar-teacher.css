@@ -1,4 +1,4 @@
-.top-nav {
+.top-nav-teacher {
     height: 6vh;
     display: flex;
     align-items: center;
@@ -6,7 +6,7 @@
     margin-left: 3vw;
 }
 
-.top-nav>button {
+.top-nav-teacher>button {
     height: 70%;
     overflow: hidden;
     width: 8vw;
@@ -20,10 +20,10 @@
     border-radius: 10px 0px 10px 0px;
 }
 
-.top-nav>button:hover {
+.top-nav-teacher>button:hover {
     background-color: var(--secondary-color);
 }
 
-.top-nav button.active {
+.top-nav-teacher button.active {
     background-color: var(--secondary-color);
 }
