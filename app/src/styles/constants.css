@@ -26,7 +26,7 @@
     --secondary-color: #DFF2FA;
     --secondary-color-transparant: rgba(223, 242, 250, 0.5);
     --tertiary-color: #00609A;
-    --dropdown-arrow: url('../img/dropdown.svg')
+    --dropdown-arrow: url('../img/dropdown-student.svg')
 }
 
 :root .teacher-theme {
@@ -34,5 +34,5 @@
     --secondary-color: #FEF2DD;
     --secondary-color-transparant: rgba(254, 242, 221, 0.5);
     --tertiary-color: #AD7F3D;
-    --dropdown-arrow: url('../img/dropdown.svg')
+    --dropdown-arrow: url('../img/dropdown-teacher.svg')
 }
