@@ -1,5 +1,5 @@
 .modal-dialog {
-    background-color: rgba(65, 65, 65, 0.952);
+    background-color: var(--dark-effect);
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -12,8 +12,8 @@
 
 .modal-content {
     padding: 3rem;
-    background-color: white;
-    border: solid 3px var(--lln-element-bg);
+    background-color: var(--white);
+    border: solid 3px var(--secondary-color);
     width: 20vw;
     border-radius: 10px 0 10px 0;
 }
@@ -32,7 +32,7 @@
     align-items: center;
 }
 
-.modal-header > img {
+.modal-header>img {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,7 +41,6 @@
     cursor: pointer;
 }
 
-#andereTaalForm > label {
+#andereTaalForm>label {
     font-size: 4rem;
 }
-

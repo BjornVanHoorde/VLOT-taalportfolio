@@ -8,6 +8,7 @@ import MultipleChoice from "../../../Design/Modules/Taalprofiel/Multiple-choice"
 import Open from "../../../Design/Modules/Taalprofiel/Open";
 import { useAuthContext } from "../../Auth/AuthProvider";
 
+// tranform the data to a format that can be used by the useForm hook
 const transformData = (initialData) => {
   const transformedData = {};
 
@@ -30,6 +31,7 @@ const TaalProfielForm = ({
     transformData(answers)
   );
 
+  // invalidate the form when the answers change
   useEffect(() => {
     handleInvalidate(transformData(answers));
   }, [answers]);

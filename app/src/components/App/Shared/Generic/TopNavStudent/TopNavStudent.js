@@ -34,6 +34,7 @@ const TopNavStudent = ({ isTaalprofiel }) => {
             onClick={() => changeLanguage(language.label)}
           />
         ))}
+        {/* Show this only if the user is on the taalprofiel screen and if there are any other languages */}
         {isTaalprofiel &&
           otherLanguages?.length > 0 &&
           otherLanguages.map((language) => (
@@ -48,10 +49,12 @@ const TopNavStudent = ({ isTaalprofiel }) => {
               }
             />
           ))}
+        {/* Show this only if the user is on the taalprofiel screen */}
         {isTaalprofiel && (
           <Button label="+" onClick={() => setShowModal(true)} />
         )}
       </div>
+      {/* Popup with the form to create a new language */}
       {showModal && (
         <CreateLanguageForm
           onSuccess={handleSuccess}

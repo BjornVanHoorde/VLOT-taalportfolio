@@ -1,5 +1,4 @@
 input[type=radio] {
-  accent-color: #00609A;
-  
-}
+  accent-color: var(--tertiary-color);
 
+}

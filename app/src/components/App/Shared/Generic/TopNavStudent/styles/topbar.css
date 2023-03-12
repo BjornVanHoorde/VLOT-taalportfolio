@@ -5,7 +5,6 @@
     align-items: center;
     width: fit-content;
     margin-left: 3vw;
-    background-color: #4b778a;
 }
 
 .top-nav > button {
@@ -15,15 +14,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 3px #A6DBF1 solid;
+    border: 3px solid var(--primary-color);
     background: none;
-    border-radius: 10px 0px 10px 0px;;
+    border-radius: 10px 0px 10px 0px;
 }
 
 .top-nav>button:hover {
-    background-color: #DFF2FA;
+    background-color: var(--secondary-color);
 }
 
 .top-nav button.active {
-    background-color: #DFF2FA;
+    background-color: var(--secondary-color);
 }

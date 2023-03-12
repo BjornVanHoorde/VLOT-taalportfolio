@@ -10,15 +10,15 @@
 .taalgroei-nav-button {
     width: 10%;
     height: 4vh;
-    background-color: white;
-    border: solid 3px var(--lln-element-bg);
+    background-color: var(--white);
+    border: solid 3px var(--primary-color);
     margin-right: 1vw;
     border-radius: 10px 0 0 0;
     border-bottom: none;
 }
 
 .lijn {
-    border-bottom: solid 2px var(--lln-element-bg);
+    border-bottom: solid 2px var(--primary-color);
 }
 
 .taalgroei-nav-button>p {
@@ -30,13 +30,13 @@
 }
 
 .taalgroei-nav-button:hover {
-    background-color: #DFF2FA;
+    background-color: var(--secondary-color);
     transition: ease 0.3s;
     cursor: pointer;
 }
 
 .taalgroei-nav-button:active {
-    background-color: #DFF2FA;
+    background-color: var(--secondary-color);
 }
 
 .vaardigheden-content {
@@ -47,9 +47,9 @@
 
 .evaluatie-sidebar {
     width: 13vw;
-    color: #64b2d3;
+    color: var(--tertiary-color);
     height: 100%;
-    background-color: #DFF2FA;
+    background-color: var(--secondary-color-transparant);
 }
 
 .evaluatie-add {
@@ -64,19 +64,18 @@
 }
 
 .evaluatie-add:hover {
-    background-color: #4694ac;
-    color: white;
+    background-color: var(--tertiary-color);
+    color: var(--white);
     transition: ease 0.3s;
     cursor: pointer;
 }
 
 .evaluatie-add:active {
-    background-color: #DFF2FA;
+    background-color: var(--tertiary-color);
 }
 
 .evaluatie-item {
     background-color: none;
-    border: solid 3px var(--lln-element-bg);
     display: flex;
     justify-content: space-evenly;
     height: fit-content;
@@ -87,8 +86,8 @@
 }
 
 .evaluatie-item:hover {
-    background-color: #4694ac;
-    color: white;
+    background-color: var(--tertiary-color);
+    color: var(--white);
     transition: ease 0.3s;
     cursor: pointer;
 }
@@ -132,7 +131,7 @@
     width: 80%;
     display: flex;
     justify-content: space-between;
-    border: solid 3px var(--lln-element-bg);
+    border: solid 3px var(--primary-color);
     border-radius: 10px 0 10px 0;
 }
 
@@ -174,7 +173,7 @@
 }
 
 .taalgroei-feedback>input {
-    border: solid 3px #A6DBF1;
+    border: solid 3px var(--primary-color);
     height: 15vh;
     border-radius: 10px 0 10px 0;
 }

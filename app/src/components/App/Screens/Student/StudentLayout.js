@@ -2,6 +2,7 @@ import { Outlet, useParams } from "react-router-dom";
 import useFetch from "../../../../core/hooks/useFetch";
 import Loading from "../../../Design/Loading/Loading";
 
+// This is a layout that will be used for the student pages
 const StudentLayout = () => {
   const { student } = useParams();
 

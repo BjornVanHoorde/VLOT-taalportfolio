@@ -15,15 +15,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 3px var(--lln-element-bg) solid;
+    border: 3px solid var(--primary-color);
     background: none;
     border-radius: 10px 0px 10px 0px;
 }
 
 .top-nav>button:hover {
-    background-color: #DFF2FA;
+    background-color: var(--secondary-color);
 }
 
 .top-nav button.active {
-    background-color: #DFF2FA;
+    background-color: var(--secondary-color);
 }

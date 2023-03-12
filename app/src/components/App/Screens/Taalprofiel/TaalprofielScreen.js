@@ -13,6 +13,7 @@ const TaalprofielScreen = () => {
   const { currentLanguage } = useLanguageContext();
   const { selectedYear } = useYearContext();
 
+  // Fetch data based on the user, language and year
   const {
     data: answers,
     invalidate,
@@ -27,21 +28,24 @@ const TaalprofielScreen = () => {
     invalidate();
   }, [currentLanguage, selectedYear]);
 
+  // Overview screen
   if (answers && answers.length > 0) {
     return (
-    <>
-    <TaalprofielOverview answers={answers} handleChange={invalidate} />
-    <section className="vlag">
-      <img src={nederlands} alt="vlag" width="100%"></img>
-    </section>
-    </>
-    )
+      <>
+        <TaalprofielOverview answers={answers} handleChange={invalidate} />
+        <section className="vlag">
+          <img src={nederlands} alt="vlag" width="100%"></img>
+        </section>
+      </>
+    );
   }
 
+  // Loading screen
   if (isLoading) {
     return <Loading />;
   }
 
+  // No answers screen
   if (answers.length === 0 || !answers) {
     return (
       <p className="no-answers">

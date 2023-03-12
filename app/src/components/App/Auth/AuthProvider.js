@@ -18,6 +18,7 @@ const saveAuthToStorage = (auth) => {
   localStorage.setItem(KEY, btoa(JSON.stringify(auth)));
 };
 
+// This is a provider that will be keeping track of the current user
 const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(getAuthFromStorage());
 

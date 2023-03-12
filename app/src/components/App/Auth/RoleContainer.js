@@ -6,6 +6,7 @@ const RoleContainer = ({ roles = [], children }) => {
     auth: { user },
   } = useAuthContext();
 
+  // redirect to home if the user has not the correct role
   if (!roles.includes(user.rol)) {
     return <Navigate to="/" />;
   }

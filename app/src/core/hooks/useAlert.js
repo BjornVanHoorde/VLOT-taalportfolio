@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+// this hook will be used to show alerts
 const useAlert = () => {
   const [alert, setAlert] = useState(null);
 
