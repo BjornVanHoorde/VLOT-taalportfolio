@@ -1,6 +1,7 @@
 import AuthProvider from "./Auth/AuthProvider";
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import {
+  AllStudentRoutes,
   AuthRoutes,
   KlasRoutes,
   ProfielRoute,
@@ -25,6 +26,8 @@ import StudentLayout from "./Screens/Teacher/Student/StudentLayout";
 import StudentOverview from "./Screens/Teacher/Student/StudentOverview";
 import TaalprofielLayout from "./Screens/Teacher/Taalprofiel/TaalprofielLayout";
 import TaalprofielOverview from "./Screens/Teacher/Taalprofiel/TaalprofielOverview";
+import AllStudentsLayout from "./Screens/Teacher/AllStudents/AllStudentsLayout";
+import AllStudentsOverview from "./Screens/Teacher/AllStudents/AllStudentsOverview";
 
 // This is the main app component with all the routes
 const App = () => {
@@ -85,6 +88,16 @@ const App = () => {
                   <Route
                     path={StudentRoutes.Overview}
                     element={<StudentOverview />}
+                  />
+                </Route>
+                {/* TEACHER ALLSTUDENTS ROUTES */}
+                <Route
+                  path={AllStudentRoutes.Index}
+                  element={<AllStudentsLayout />}
+                >
+                  <Route
+                    path={AllStudentRoutes.Overview}
+                    element={<AllStudentsOverview />}
                   />
                 </Route>
                 {/* TEACHER TAALPROFIEL ROUTES */}
