@@ -1,5 +1,5 @@
 import { useNavigate, useOutletContext } from "react-router-dom";
-import { MainNav } from "../../../../../core/constants/SidebarNav";
+import { MainNav } from "../../../../../core/constants/MainNav";
 import useFetch from "../../../../../core/hooks/useFetch";
 import { KlasRoutes, route } from "../../../../../core/routes";
 import BackButton from "../../../../Design/Button/BackButton";
@@ -23,8 +23,6 @@ const TaalprofielOverview = () => {
     `/taalprofiel/antwoorden/leerling/${`${student.voornaam} ${student.achternaam}`}/${currentLanguage}/${selectedYear}`
   );
 
-  console.log("answers", answers);
-
   return (
     <>
       <BackButton
@@ -40,6 +38,9 @@ const TaalprofielOverview = () => {
       {isLoading && <Loading />}
       {answers && answers.length > 0 && (
         <Overview answers={answers} handleChange={invalidate} />
+      )}
+      {answers && answers.length === 0 && (
+        <p>Er zijn nog geen antwoorden voor dit taalprofiel</p>
       )}
     </>
   );

@@ -29,8 +29,6 @@ const Overview = ({ answers, handleChange }) => {
     filterByOtherLanguage(answers);
   }, [answers]);
 
-  console.log("filteredData", filteredData);
-
   return (
     <>
       {filteredData?.length > 0 && (

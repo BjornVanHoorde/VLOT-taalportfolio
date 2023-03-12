@@ -10,9 +10,14 @@ const TabNav = ({ items = [], student }) => {
         <nav>
           {items.map((item) => (
             <button
-              onClick={() => navigate(route(item.href, { student }))}
+              onClick={() => navigate(route(item.href, { student: student }))}
               key={item.label}
-              className="tabNav-button"
+              className={`tabNav-button ${
+                route(item.href, { student: student }) ===
+                window.location.pathname.replace(/%20/g, " ")
+                  ? "active"
+                  : ""
+              }`}
             >
               <p>{item.label}</p>
             </button>
