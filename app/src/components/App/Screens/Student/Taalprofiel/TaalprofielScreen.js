@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-import useFetch from "../../../../core/hooks/useFetch";
-import Loading from "../../../Design/Loading/Loading";
-import { useAuthContext } from "../../Auth/AuthProvider";
-import { useLanguageContext } from "../../Language/LanguageProvider";
-import { useYearContext } from "../../Year/YearProvider";
-import TaalprofielOverview from "./overview";
-import nederlands from "../../../../img/nederlands.png";
+import useFetch from "../../../../../core/hooks/useFetch";
+import Loading from "../../../../Design/Loading/Loading";
+import { useAuthContext } from "../../../Auth/AuthProvider";
+import { useLanguageContext } from "../../../Language/LanguageProvider";
+import { useYearContext } from "../../../Year/YearProvider";
+import TaalprofielOverview from "./TaalprofielOverview";
+import nederlands from "../../../../../img/nederlands.png";
 import "./styles/TaalprofielScreen.css";
 
 const TaalprofielScreen = () => {

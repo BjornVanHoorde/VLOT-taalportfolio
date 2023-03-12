@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
-import useFetch from "../../../../core/hooks/useFetch";
-import Loading from "../../../Design/Loading/Loading";
-import KlasHeader from "../../Shared/Klas/KlasHeader";
-import KlasGrid from "../../Shared/Klas/Klasgrid";
+import useFetch from "../../../../../core/hooks/useFetch";
+import Loading from "../../../../Design/Loading/Loading";
+import KlasHeader from "../../../Shared/Klas/KlasHeader";
+import KlasGrid from "../../../Shared/Klas/Klasgrid";
 import "./styles/klasOverview.css";
 import { useEffect, useState } from "react";
 

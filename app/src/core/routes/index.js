@@ -5,6 +5,7 @@ const AuthRoutes = {
 
 const TaalprofielRoutes = {
   Index: "/taalprofiel",
+  Overview: "/taalprofiel/:student",
 };
 
 const ProfielRoute = {

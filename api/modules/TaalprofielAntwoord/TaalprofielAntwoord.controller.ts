@@ -3,7 +3,12 @@ import { TaalOptions } from "../../constants";
 import ForbiddenError from "../../errors/ForbiddenError";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
-import { CheckTeacherClasses, convertYear, getGrade } from "../../utils";
+import {
+  CheckTeacherClasses,
+  convertTeacherYear,
+  convertYear,
+  getGrade,
+} from "../../utils";
 import KlasService from "../Klas/Klas.service";
 import UserService from "../User/User.service";
 import TaalprofielAntwoordService from "./TaalprofielAntwoord.service";
@@ -64,7 +69,6 @@ export default class TaalprofielAntwoordController {
     next: NextFunction
   ) => {
     const grade = getGrade(req.params.selectedYear);
-    
 
     if (req.user.isStudent()) {
       req.params.id = req.user.id;
@@ -82,6 +86,48 @@ export default class TaalprofielAntwoordController {
         req.params.id,
         req.params.language,
         Number(req.params.selectedYear),
+        grade
+      );
+    return res.json(taalprofielAntwoorden);
+  };
+
+  byStudentName = async (
+    req: AuthRequest<{
+      student: string;
+      language: TaalOptions;
+      year: string;
+    }>,
+    res: Response,
+    next: NextFunction
+  ) => {
+    if (req.user.isStudent()) {
+      return new ForbiddenError();
+    }
+
+    const firstName = req.params.student.split(" ")[0];
+    const lastName = req.params.student.split(" ")[1];
+    const studentData = await this.userService.byStudentName(
+      firstName,
+      lastName
+    );
+
+    if (req.user.isTeacher()) {
+      if (!(await CheckTeacherClasses(req.user.id, studentData[0].klas.id))) {
+        next(new ForbiddenError());
+      }
+    }
+
+    const selectedYear = convertTeacherYear(
+      req.params.year,
+      studentData[0].klas.klas
+    );
+    const grade = getGrade(String(selectedYear));
+
+    const taalprofielAntwoorden =
+      await this.taalprofielAntwoordService.byStudentLanguage(
+        studentData[0].id,
+        req.params.language,
+        selectedYear,
         grade
       );
     return res.json(taalprofielAntwoorden);
