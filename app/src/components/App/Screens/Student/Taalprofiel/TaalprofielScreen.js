@@ -1,24 +1,14 @@
 import { useEffect } from "react";
-<<<<<<< HEAD:app/src/components/App/Screens/Taalprofiel/TaalprofielScreen.js
-import useFetch from "../../../../core/hooks/useFetch";
-import Loading from "../../../Design/Loading/Loading";
-import { useAuthContext } from "../../Auth/AuthProvider";
-import { useLanguageContext } from "../../Language/LanguageProvider";
-import { useYearContext } from "../../Year/YearProvider";
-import TaalprofielOverview from "./overview";
-import Nederlands from "../../../../img/nederlands.png";
-import Frans from "../../../../img/frans.png";
-
-=======
 import useFetch from "../../../../../core/hooks/useFetch";
 import Loading from "../../../../Design/Loading/Loading";
 import { useAuthContext } from "../../../Auth/AuthProvider";
 import { useLanguageContext } from "../../../Language/LanguageProvider";
 import { useYearContext } from "../../../Year/YearProvider";
 import TaalprofielOverview from "./TaalprofielOverview";
-import nederlands from "../../../../../img/nederlands.png";
->>>>>>> a871ad54b169b42ca8b1b1f1885dde025f68a72d:app/src/components/App/Screens/Student/Taalprofiel/TaalprofielScreen.js
+import Nederlands from "../../../../../img/nederlands.png";
+import Frans from "../../../../../img/frans.png";
 import "./styles/TaalprofielScreen.css";
+import Languages from "../../../../../core/constants/Languages";
 
 const TaalprofielScreen = () => {
   const { auth } = useAuthContext();
@@ -36,7 +26,6 @@ const TaalprofielScreen = () => {
     }/${selectedYear}`
   );
 
-
   useEffect(() => {
     invalidate();
   }, [currentLanguage, selectedYear]);
@@ -46,9 +35,22 @@ const TaalprofielScreen = () => {
     return (
       <>
         <TaalprofielOverview answers={answers} handleChange={invalidate} />
-        <section className="vlag">
-          <img src={currentLanguage} alt="vlag" width="100%"></img>
-        </section>
+        {/* if the current language is not made up show this */}
+        {currentLanguage.split(" ").length === 1 && (
+          <section className="vlag">
+            <img
+              src={
+                currentLanguage === Languages.Dutch
+                  ? Nederlands
+                  : currentLanguage === Languages.French
+                  ? Frans
+                  : ""
+              }
+              alt="vlag"
+              width="100%"
+            ></img>
+          </section>
+        )}
       </>
     );
   }
