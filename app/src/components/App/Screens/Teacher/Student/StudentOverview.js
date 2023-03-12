@@ -1,8 +1,8 @@
 import { useNavigate, useOutletContext } from "react-router-dom";
-import { MainNav } from "../../../../core/constants/MainNav";
-import { KlasRoutes, route } from "../../../../core/routes";
-import BackButton from "../../../Design/Button/BackButton";
-import TabNav from "../../../Design/Nav/TabNav";
+import { MainNav } from "../../../../../core/constants/MainNav";
+import { KlasRoutes, route } from "../../../../../core/routes";
+import BackButton from "../../../../Design/Button/BackButton";
+import TabNav from "../../../../Design/Nav/TabNav";
 
 const StudentOverview = () => {
   const { student } = useOutletContext();
@@ -16,7 +16,10 @@ const StudentOverview = () => {
           navigate(route(KlasRoutes.Overview, { klas: student.klas.klas }))
         }
       />
-      <TabNav items={MainNav} />
+      <TabNav
+        items={MainNav}
+        student={`${student.voornaam} ${student.achternaam}`}
+      />
     </>
   );
 };

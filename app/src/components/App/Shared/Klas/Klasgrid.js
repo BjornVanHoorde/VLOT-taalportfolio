@@ -1,9 +1,14 @@
-import { useNavigate } from "react-router-dom";
-import { route, StudentRoutes } from "../../../../core/routes";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  AllStudentRoutes,
+  route,
+  StudentRoutes,
+} from "../../../../core/routes";
 import StudentCard from "../../../Design/Modules/Klas/studentCard";
 import "./styles/klasGrid.css";
 
 const KlasGrid = ({ students }) => {
+  const { klas } = useParams();
   const navigate = useNavigate();
 
   return (
@@ -24,7 +29,10 @@ const KlasGrid = ({ students }) => {
         ))}
       </div>
       <div className="klas-grid__allStudents">
-        <h3>Alle leerlingen</h3>
+        <StudentCard
+          AllStudents={true}
+          onClick={() => navigate(route(AllStudentRoutes.Overview, { klas }))}
+        />
       </div>
     </div>
   );

@@ -24,6 +24,7 @@ const TaalProfielForm = ({
   onSubmit,
   editStatusStudent,
   currentLanguage,
+  isTeacher,
 }) => {
   const { auth } = useAuthContext();
   const { values, handleChange, handleSubmit, handleInvalidate } = useForm(
@@ -57,7 +58,7 @@ const TaalProfielForm = ({
                   onChange={handleChange}
                   value={values[answer.id]}
                   currentLanguage={currentLanguage}
-                  disabled={editStatusStudent}
+                  disabled={editStatusStudent || isTeacher}
                   required={true}
                 />
               );
@@ -74,7 +75,7 @@ const TaalProfielForm = ({
                   key={answer.id}
                   onChange={handleChange}
                   value={values[answer.id]}
-                  readOnly={editStatusStudent}
+                  readOnly={editStatusStudent || isTeacher}
                 />
               );
             }

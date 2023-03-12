@@ -380,6 +380,10 @@ const registerTeacherRoutes = (router: Router) => {
     "/taalprofiel/antwoorden/klas/:id",
     useMethod(taalprofielAntwoordController.byClass)
   );
+  teacherRouter.get(
+    "/taalprofiel/antwoorden/leerling/:student/:language/:year",
+    useMethod(taalprofielAntwoordController.byStudentName)
+  );
 
   const foutenanalyseOnderdeelController =
     new FoutenanalyseOnderdeelController();

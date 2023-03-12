@@ -1,18 +1,18 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-loop-func */
 import { useEffect, useState } from "react";
-import Languages from "../../../../core/constants/Languages";
-import getEditStatusStudent from "../../../../core/helpers/getEditStatus";
-import useAlert from "../../../../core/hooks/useAlert";
-import useMutation from "../../../../core/hooks/useMutation";
-import Alert from "../../../Design/Alert/Alert";
-import Button from "../../../Design/Button/Button";
-import { useAuthContext } from "../../Auth/AuthProvider";
-import { useLanguageContext } from "../../Language/LanguageProvider";
-import DeleteButton from "../../Shared/Buttons/DeleteButtons";
-import CreateLanguageForm from "../../Shared/Taalprofiel/CreateLanguageForm";
-import TaalProfielForm from "../../Shared/Taalprofiel/Form";
-import { useYearContext } from "../../Year/YearProvider";
+import Languages from "../../../../../core/constants/Languages";
+import getEditStatusStudent from "../../../../../core/helpers/getEditStatus";
+import useAlert from "../../../../../core/hooks/useAlert";
+import useMutation from "../../../../../core/hooks/useMutation";
+import Alert from "../../../../Design/Alert/Alert";
+import Button from "../../../../Design/Button/Button";
+import { useAuthContext } from "../../../Auth/AuthProvider";
+import { useLanguageContext } from "../../../Language/LanguageProvider";
+import DeleteButton from "../../../Shared/Buttons/DeleteButtons";
+import CreateLanguageForm from "../../../Shared/Taalprofiel/CreateLanguageForm";
+import TaalProfielForm from "../../../Shared/Taalprofiel/Form";
+import { useYearContext } from "../../../Year/YearProvider";
 import "./styles/Overview.css";
 
 const TaalprofielOverview = ({ answers, handleChange }) => {

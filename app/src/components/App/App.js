@@ -1,6 +1,7 @@
 import AuthProvider from "./Auth/AuthProvider";
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import {
+  AllStudentRoutes,
   AuthRoutes,
   KlasRoutes,
   ProfielRoute,
@@ -13,16 +14,20 @@ import LoginScreen from "./Auth/login/LoginScreen";
 import Home from "./Screens/Home";
 import AuthContainer from "./Auth/AuthContainer";
 import AppLayout from "./AppLayout";
-import TaalprofielScreen from "./Screens/Taalprofiel/TaalprofielScreen";
+import TaalprofielScreen from "./Screens/Student/Taalprofiel/TaalprofielScreen";
 import LanguageProvider from "./Language/LanguageProvider";
 import UserdetailsScreen from "./Screens/Userdetails/UserdetailsScreen";
 import YearProvider from "./Year/YearProvider";
-import VaardighedenScreen from "./Screens/Taalgroei/Vaardigheden/VaardighedenScreen";
-import KlasOverview from "./Screens/Klas/KlasOverview";
+import VaardighedenScreen from "./Screens/Student/Taalgroei/Vaardigheden/VaardighedenScreen";
+import KlasOverview from "./Screens/Teacher/Klas/KlasOverview";
 import RoleContainer from "./Auth/RoleContainer";
 import Roles from "../../core/constants/Roles";
-import StudentLayout from "./Screens/Student/StudentLayout";
-import StudentOverview from "./Screens/Student/StudentOverview";
+import StudentLayout from "./Screens/Teacher/Student/StudentLayout";
+import StudentOverview from "./Screens/Teacher/Student/StudentOverview";
+import TaalprofielLayout from "./Screens/Teacher/Taalprofiel/TaalprofielLayout";
+import TaalprofielOverview from "./Screens/Teacher/Taalprofiel/TaalprofielOverview";
+import AllStudentsLayout from "./Screens/Teacher/AllStudents/AllStudentsLayout";
+import AllStudentsOverview from "./Screens/Teacher/AllStudents/AllStudentsOverview";
 
 // This is the main app component with all the routes
 const App = () => {
@@ -62,7 +67,9 @@ const App = () => {
                   path={TaalgroeiRoutes.Vaardigheden}
                   element={<VaardighedenScreen />}
                 />
-                {/* TEACHER ROUTES */}
+                {/*
+                 * TEACHER ROUTES
+                 */}
                 <Route
                   element={
                     <RoleContainer roles={[Roles.Admin, Roles.Teacher]}>
@@ -70,17 +77,37 @@ const App = () => {
                     </RoleContainer>
                   }
                 >
-                  {/* KLAS ROUTES */}
+                  {/* TEACHER KLAS ROUTES */}
                   <Route
                     path={KlasRoutes.Overview}
                     element={<KlasOverview />}
                   />
                 </Route>
-                {/* STUDENT ROUTES */}
+                {/* TEACHER STUDENT ROUTES */}
                 <Route path={StudentRoutes.Index} element={<StudentLayout />}>
                   <Route
                     path={StudentRoutes.Overview}
                     element={<StudentOverview />}
+                  />
+                </Route>
+                {/* TEACHER ALLSTUDENTS ROUTES */}
+                <Route
+                  path={AllStudentRoutes.Index}
+                  element={<AllStudentsLayout />}
+                >
+                  <Route
+                    path={AllStudentRoutes.Overview}
+                    element={<AllStudentsOverview />}
+                  />
+                </Route>
+                {/* TEACHER TAALPROFIEL ROUTES */}
+                <Route
+                  path={TaalprofielRoutes.Index}
+                  element={<TaalprofielLayout />}
+                >
+                  <Route
+                    path={TaalprofielRoutes.Overview}
+                    element={<TaalprofielOverview />}
                   />
                 </Route>
                 <Route path="*" element={<Navigate to="/home" />} />
