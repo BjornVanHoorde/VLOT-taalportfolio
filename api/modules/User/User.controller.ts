@@ -2,15 +2,21 @@ import { NextFunction, Response } from "express";
 import ForbiddenError from "../../errors/ForbiddenError";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
+import TaalprofielAntwoordService from "../TaalprofielAntwoord/TaalprofielAntwoord.service";
+import TaalprofielVraagService from "../TaalprofielVraag/TaalprofielVraag.service";
 import { UserRole } from "./User.constants";
 import UserService from "./User.service";
 import { UserBody } from "./User.types";
 
 export default class UserController {
   private userService: UserService;
+  private taalprofielVraagService: TaalprofielVraagService;
+  private taalprofielAntwoordService: TaalprofielAntwoordService;
 
   constructor() {
     this.userService = new UserService();
+    this.taalprofielVraagService = new TaalprofielVraagService();
+    this.taalprofielAntwoordService = new TaalprofielAntwoordService();
   }
 
   all = async (
@@ -137,7 +143,25 @@ export default class UserController {
     body.rol = body.rol;
 
     const user = await this.userService.create(body);
-    return res.json(user);
+
+    if (user.rol === UserRole.Student) {
+      //create a empty answer for every question for the student
+      const questions = await this.taalprofielVraagService.all({});
+      questions.forEach(async (question) => {
+        for (let jaar = 0; jaar < 3; jaar++) {
+          await this.taalprofielAntwoordService.create({
+            antwoord: "",
+            vraagId: question.id,
+            vraag: question,
+            leerlingId: user.id,
+            leerling: user,
+            jaar,
+          });
+        }
+      });
+
+      return res.json(user);
+    }
   };
 
   update = async (
