@@ -1,22 +1,16 @@
-import { useNavigate } from "react-router-dom";
-import { route } from "../../../core/routes";
 import "./styles/TabNav.css";
 
-const TabNav = ({ items = [], student }) => {
-  const navigate = useNavigate();
+const TabNav = ({ items = [], onChange, activeTab }) => {
   return (
     <>
       <div className="tabNav">
         <nav>
           {items.map((item) => (
             <button
-              onClick={() => navigate(route(item.href, { student: student }))}
+              onClick={() => onChange(item.label)}
               key={item.label}
               className={`tabNav-button ${
-                route(item.href, { student: student }) ===
-                window.location.pathname.replace(/%20/g, " ")
-                  ? "active"
-                  : ""
+                activeTab === item.label ? "active" : ""
               }`}
             >
               <p>{item.label}</p>

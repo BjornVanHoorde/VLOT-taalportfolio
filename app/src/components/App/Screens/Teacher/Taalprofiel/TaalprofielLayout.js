@@ -1,21 +1,19 @@
-import { Outlet, useParams } from "react-router-dom";
 import useFetch from "../../../../../core/hooks/useFetch";
 import Loading from "../../../../Design/Loading/Loading";
+import TaalprofielOverview from "./TaalprofielOverview";
 
-const TaalprofielLayout = () => {
-  const { student } = useParams();
-
+const TaalprofielLayout = ({ student }) => {
   const {
     data: studentData,
     isLoading,
     invalidate,
-  } = useFetch(`/students/name/${student}`);
+  } = useFetch(`/students/name/${student.voornaam} ${student.achternaam}`);
 
   return (
     <>
       {isLoading && <Loading />}
       {studentData && (
-        <Outlet context={{ student: studentData[0], onUpdate: invalidate }} />
+        <TaalprofielOverview student={studentData[0]} onUpdate={invalidate} />
       )}
     </>
   );

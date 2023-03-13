@@ -9,10 +9,15 @@ import ItemSidebar from "../../../Shared/Generic/ItemSidebar/ItemSidebar";
 const AllStudentsOverview = () => {
   const { klas, students } = useOutletContext();
   const [currentStudent, setCurrentStudent] = useState();
+  const [currentTab, setCurrentTab] = useState();
   const navigate = useNavigate();
 
   const handleStudentChange = (student) => {
     setCurrentStudent(student);
+  };
+
+  const handleTabChange = (tab) => {
+    setCurrentTab(tab);
   };
 
   return (
@@ -21,13 +26,18 @@ const AllStudentsOverview = () => {
         label={klas}
         onClick={() => navigate(route(KlasRoutes.Overview, { klas }))}
       />
-      <TabNav items={MainNav} klas={klas} />
+      <TabNav
+        items={MainNav}
+        onChange={handleTabChange}
+        activeTab={currentTab}
+      />
       <ItemSidebar
         items={students}
         title="students"
         onChange={handleStudentChange}
         activeItem={currentStudent}
       />
+      {currentTab && currentStudent && <p>"test"</p>}
     </>
   );
 };

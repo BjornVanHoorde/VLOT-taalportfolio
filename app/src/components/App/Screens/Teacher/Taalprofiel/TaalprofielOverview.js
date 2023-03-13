@@ -9,8 +9,7 @@ import { useLanguageContext } from "../../../Language/LanguageProvider";
 import { useYearContext } from "../../../Year/YearProvider";
 import Overview from "./Overview";
 
-const TaalprofielOverview = () => {
-  const { student } = useOutletContext();
+const TaalprofielOverview = ({ student, onUpdate }) => {
   const { currentLanguage } = useLanguageContext();
   const { selectedYear } = useYearContext();
   const navigate = useNavigate();
@@ -25,16 +24,6 @@ const TaalprofielOverview = () => {
 
   return (
     <>
-      <BackButton
-        label={`${student.voornaam} ${student.achternaam}`}
-        onClick={() =>
-          navigate(route(KlasRoutes.Overview, { klas: student.klas.klas }))
-        }
-      />
-      <TabNav
-        items={MainNav}
-        student={`${student.voornaam} ${student.achternaam}`}
-      />
       {isLoading && <Loading />}
       {answers && answers.length > 0 && (
         <Overview answers={answers} handleChange={invalidate} />
