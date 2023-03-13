@@ -1,0 +1,68 @@
+.itemSidebar {
+  width: 13vw;
+  color: var(--tertiary-color);
+  height: calc(100vh - 12vh - 4.5rem);
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: var(--secondary-color-transparant);
+  /* position: fixed;
+  top: 2rem */
+}
+
+.itemSidebar__add {
+  background-color: none;
+  border: solid 3px var(--lln-element-bg);
+  display: flex;
+  justify-content: space-evenly;
+  padding: 1.3rem;
+  font-size: 1rem;
+  border-radius: 0 0 10px 0;
+  border-top: none;
+}
+
+.itemSidebar__add:hover {
+  background-color: var(--tertiary-color);
+  color: var(--white);
+  transition: ease 0.3s;
+  cursor: pointer;
+}
+
+.itemSidebar__item {
+  background-color: none;
+  display: flex;
+  justify-content: space-evenly;
+  height: fit-content;
+  padding: 1rem;
+  font-size: 1rem;
+  border-radius: 0 0 10px 0;
+  border-top: none;
+}
+
+.itemSidebar__item:hover {
+  background-color: var(--tertiary-color);
+  color: var(--white);
+  transition: ease 0.3s;
+  cursor: pointer;
+}
+
+.itemSidebar__item.active {
+  background-color: var(--tertiary-color);
+  color: var(--white);
+}
+
+.itemSidebar__item__content {
+  display: flex;
+  width: 75%;
+  justify-content: space-between;
+
+
+}
+
+.itemSidebar__item__content>span {
+  display: flex;
+  align-items: center;
+}
+
+.itemSidebar__delete {
+  width: 10%;
+}
