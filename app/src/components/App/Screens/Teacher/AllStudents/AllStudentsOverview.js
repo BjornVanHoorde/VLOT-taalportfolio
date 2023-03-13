@@ -5,6 +5,8 @@ import { KlasRoutes, route } from "../../../../../core/routes";
 import BackButton from "../../../../Design/Button/BackButton";
 import TabNav from "../../../../Design/Nav/TabNav";
 import ItemSidebar from "../../../Shared/Generic/ItemSidebar/ItemSidebar";
+import TaalprofielLayout from "../Taalprofiel/TaalprofielLayout";
+import "./styles/AllStudentsOverview.css";
 
 const AllStudentsOverview = () => {
   const { klas, students } = useOutletContext();
@@ -31,13 +33,24 @@ const AllStudentsOverview = () => {
         onChange={handleTabChange}
         activeTab={currentTab}
       />
-      <ItemSidebar
-        items={students}
-        title="students"
-        onChange={handleStudentChange}
-        activeItem={currentStudent}
-      />
-      {currentTab && currentStudent && <p>"test"</p>}
+      <div className="allStudentsOverview__main">
+        <div className="allStudentsOverview__main__spaceHelper"></div>
+        <ItemSidebar
+          items={students}
+          title="students"
+          onChange={handleStudentChange}
+          activeItem={currentStudent}
+        />
+        {currentTab === "Taalprofiel" && currentStudent && (
+          <TaalprofielLayout student={currentStudent} />
+        )}
+        {currentTab === "Taaldossier" && currentStudent && (
+          <p>Dit onderdeel is nog onder constructie</p>
+        )}
+        {currentTab === "Taalgroei" && currentStudent && (
+          <p>Dit onderdeel is nog onder constructie</p>
+        )}
+      </div>
     </>
   );
 };

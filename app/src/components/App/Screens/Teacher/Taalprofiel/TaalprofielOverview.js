@@ -1,10 +1,5 @@
-import { useNavigate, useOutletContext } from "react-router-dom";
-import { MainNav } from "../../../../../core/constants/MainNav";
 import useFetch from "../../../../../core/hooks/useFetch";
-import { KlasRoutes, route } from "../../../../../core/routes";
-import BackButton from "../../../../Design/Button/BackButton";
 import Loading from "../../../../Design/Loading/Loading";
-import TabNav from "../../../../Design/Nav/TabNav";
 import { useLanguageContext } from "../../../Language/LanguageProvider";
 import { useYearContext } from "../../../Year/YearProvider";
 import Overview from "./Overview";
@@ -12,7 +7,6 @@ import Overview from "./Overview";
 const TaalprofielOverview = ({ student, onUpdate }) => {
   const { currentLanguage } = useLanguageContext();
   const { selectedYear } = useYearContext();
-  const navigate = useNavigate();
 
   const {
     data: answers,

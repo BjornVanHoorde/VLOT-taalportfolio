@@ -1,0 +1,7 @@
+.allStudentsOverview__main {
+  display: flex;
+}
+
+.allStudentsOverview__main__spaceHelper {
+  width: 13vw;
+}
