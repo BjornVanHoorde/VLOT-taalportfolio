@@ -15,6 +15,7 @@ const KlasGrid = ({ students }) => {
     <div className="klas-grid">
       <div className="klas-grid__students">
         {students.map((student) => (
+          <>
           <StudentCard
             student={student}
             key={student.id}
@@ -26,6 +27,7 @@ const KlasGrid = ({ students }) => {
               )
             }
           />
+      </>
         ))}
       </div>
       <div className="klas-grid__allStudents">
