@@ -1,14 +1,16 @@
 import { useEffect } from "react";
-import useFetch from "../../../../core/hooks/useFetch";
-import Loading from "../../../Design/Loading/Loading";
-import { useAuthContext } from "../../Auth/AuthProvider";
-import { useLanguageContext } from "../../Language/LanguageProvider";
-import { useYearContext } from "../../Year/YearProvider";
-import TaalprofielOverview from "./overview";
-import Nederlands from "../../../../img/nederlands.png";
-import Frans from "../../../../img/frans.png";
-
+import useFetch from "../../../../../core/hooks/useFetch";
+import Loading from "../../../../Design/Loading/Loading";
+import { useAuthContext } from "../../../Auth/AuthProvider";
+import { useLanguageContext } from "../../../Language/LanguageProvider";
+import { useYearContext } from "../../../Year/YearProvider";
+import TaalprofielOverview from "./TaalprofielOverview";
+import Nederlands from "../../../../../img/nederlands.png";
+import Frans from "../../../../../img/frans.png";
+import Engels from "../../../../../img/engels.png";
+import Duits from "../../../../../img/duits.png";
 import "./styles/TaalprofielScreen.css";
+import Languages from "../../../../../core/constants/Languages";
 
 const TaalprofielScreen = () => {
   const { auth } = useAuthContext();
@@ -26,7 +28,6 @@ const TaalprofielScreen = () => {
     }/${selectedYear}`
   );
 
-
   useEffect(() => {
     invalidate();
   }, [currentLanguage, selectedYear]);
@@ -36,10 +37,26 @@ const TaalprofielScreen = () => {
     return (
       <>
         <TaalprofielOverview answers={answers} handleChange={invalidate} />
-        <section className="vlag">
-          {/* Hier is het stukje dat niet wilt werken. Als ge de taal in curly brackets zet lukt het. */}
-          <img src={currentLanguage} alt="vlag" width="100%"></img>
-        </section>
+        {/* if the current language is not made up show this */}
+        {currentLanguage.split(" ").length === 1 && (
+          <section className="vlag">
+            <img
+              src={
+                currentLanguage === Languages.Dutch
+                  ? Nederlands
+                  : currentLanguage === Languages.French
+                  ? Frans
+                  : currentLanguage === Languages.English
+                  ? Engels
+                  : currentLanguage === Languages.German
+                  ? Duits
+                  : ""
+              }
+              alt="vlag"
+              width="100%"
+            ></img>
+          </section>
+        )}
       </>
     );
   }
