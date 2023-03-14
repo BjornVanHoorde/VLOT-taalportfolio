@@ -1,3 +1,5 @@
+import '../Klas/styles/studentCard.css'
+
 const StudentCard = ({ student, onClick, AllStudents }) => {
   if (student) {
     return (
@@ -11,7 +13,7 @@ const StudentCard = ({ student, onClick, AllStudents }) => {
 
   if (AllStudents) {
     return (
-      <div className="klas-grid__student" onClick={onClick}>
+      <div className="klas-grid__all-student" onClick={onClick}>
         <h3>Alle leerlingen</h3>
       </div>
     );

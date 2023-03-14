@@ -1,15 +1,27 @@
 import { useEffect, useState } from "react";
 import Input from "../../../Design/Form/Input";
+import Search from "../../../../img/search.svg";
 import "./styles/KlasHeader.css";
 
 const KlasHeader = ({ klas, onSearch }) => {
   // State for the search input
   const [inputValue, setInputValue] = useState("");
+  const [toggleIcon, setToggleIcon] = useState("search")
 
   // Handle the search input
   const handleChange = (e) => {
     setInputValue(e.target.value);
   };
+
+  const handleFocus = () => {
+    console.log("div heeft focus");
+    setToggleIcon("");
+  }
+  const lostFocus = (e) => {
+    console.log('div lost focus');
+    setInputValue("");
+    setToggleIcon("search");
+  }
 
   // Filter the students based on the search input
   useEffect(() => {
@@ -27,7 +39,9 @@ const KlasHeader = ({ klas, onSearch }) => {
           onChange={handleChange}
           type="text"
           name="search"
-          placeholder="Zoek een leerling"
+          onFocus={handleFocus}
+          onBlur={lostFocus}
+          className={toggleIcon}
         />
       </div>
     </div>

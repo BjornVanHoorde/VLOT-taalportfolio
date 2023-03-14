@@ -1,0 +1,27 @@
+.klas-grid__student {
+    padding: 1rem;
+    width: 30%;
+    margin-bottom: 4vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--primary-color);
+    border-radius: 10px 0 10px 0;
+    cursor: pointer
+}
+
+.klas-grid__all-student {
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--primary-color);
+    border-radius: 10px 0 10px 0;
+    cursor: pointer
+}
+
+.klas-grid__all-student:hover, .klas-grid__student:hover {
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+    transition: 0.2s ease;
+}
