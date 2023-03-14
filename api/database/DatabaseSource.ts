@@ -1,6 +1,8 @@
 import "reflect-metadata";
 import { DataSource } from "typeorm";
 import AndereTaal from "../modules/AndereTaal/AndereTaal.entity";
+import Basisgeletterdheid from "../modules/Basisgeletterdheid/Basisgeletterdheid.entity";
+import BasisgeletterdheidLeerling from "../modules/BasisgeletterdheidLeerling/BasisgeletterdheidLeerling.entity";
 import FoutenanalyseFout from "../modules/FoutenanalyseFout/FoutenanalyseFout.entity";
 import FoutenanalyseOnderdeel from "../modules/FoutenanalyseOnderdeel/FoutenanalyseOnderdeel.entity";
 import Klas from "../modules/Klas/Klas.entity";
@@ -41,6 +43,8 @@ export const AppDataSource = new DataSource({
     VaardighedenOnderdeel,
     VaardighedenEvaluatie,
     AndereTaal,
+    Basisgeletterdheid,
+    BasisgeletterdheidLeerling,
   ],
   migrations: [],
   subscribers: [],

@@ -1,10 +1,5 @@
 import { IsDefined } from "class-validator";
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { BaseEntity } from "../BaseEntity";
 import Taaltip from "../Taaltip/Taaltip.entity";
 import User from "../User/User.entity";
