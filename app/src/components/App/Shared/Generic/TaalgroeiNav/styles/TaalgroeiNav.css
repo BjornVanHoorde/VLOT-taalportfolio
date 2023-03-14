@@ -1,0 +1,7 @@
+.taalgroei-nav {
+  height: 6vh;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  margin-left: 3vw;
+}

@@ -4,6 +4,7 @@ import { MainNav } from "../../../../../core/constants/MainNav";
 import { KlasRoutes, route } from "../../../../../core/routes";
 import BackButton from "../../../../Design/Button/BackButton";
 import TabNav from "../../../../Design/Nav/TabNav";
+import TaalgroeiLayout from "../Taalgroei/TaalgroeiLayout";
 import TaalprofielLayout from "../Taalprofiel/TaalprofielLayout";
 
 const StudentOverview = () => {
@@ -32,11 +33,9 @@ const StudentOverview = () => {
         <TaalprofielLayout student={student} />
       )}
       {currentTab === "Taaldossier" && (
-        <p>Dit onderdeel is nog onder constructie</p>
+        <p>🚧 Dit onderdeel is nog onder constructie 🚧</p>
       )}
-      {currentTab === "Taalgroei" && (
-        <p>Dit onderdeel is nog onder constructie</p>
-      )}
+      {currentTab === "Taalgroei" && <TaalgroeiLayout student={student} />}
     </>
   );
 };

@@ -45,10 +45,10 @@ const AllStudentsOverview = () => {
           <TaalprofielLayout student={currentStudent} />
         )}
         {currentTab === "Taaldossier" && currentStudent && (
-          <p>Dit onderdeel is nog onder constructie</p>
+          <p>🚧 Dit onderdeel is nog onder constructie 🚧</p>
         )}
         {currentTab === "Taalgroei" && currentStudent && (
-          <p>Dit onderdeel is nog onder constructie</p>
+          <p>🚧 Dit onderdeel is nog onder constructie 🚧</p>
         )}
       </div>
     </>
