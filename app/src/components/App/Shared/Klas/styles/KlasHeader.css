@@ -1,6 +1,6 @@
 .klas-overview__header {
   display: flex;
-  width: 80%;
+  width: 100%;
 }
 
 .klas-overview__header__title {
@@ -12,8 +12,10 @@
 
 .klas-overview__header__search {
   width: 20%;
-  margin-left: 2rem;
+  margin-left: 0rem;
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
 }
 
 .klas-overview__header__search > input{
@@ -21,6 +23,7 @@
   border: none;
   outline: solid 2px var(--primary-color);
   background-color: rgba(255, 255, 255, 0.4);
+  width: 70%;
 }
 
 input > textarea {

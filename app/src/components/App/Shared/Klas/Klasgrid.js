@@ -27,6 +27,28 @@ const KlasGrid = ({ students }) => {
               )
             }
           />
+                    <StudentCard
+            student={student}
+            key={student.id}
+            onClick={() =>
+              navigate(
+                route(StudentRoutes.Overview, {
+                  student: `${student.voornaam} ${student.achternaam}`,
+                })
+              )
+            }
+          />
+                    <StudentCard
+            student={student}
+            key={student.id}
+            onClick={() =>
+              navigate(
+                route(StudentRoutes.Overview, {
+                  student: `${student.voornaam} ${student.achternaam}`,
+                })
+              )
+            }
+          />
       </>
         ))}
       </div>

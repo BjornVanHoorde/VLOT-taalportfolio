@@ -1,7 +1,7 @@
 .klas-grid__student {
     padding: 1rem;
-    width: 30%;
-    margin-bottom: 4vh;
+    width: 20%;
+    margin: 0 3vw 3vw 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,7 +12,7 @@
 
 .klas-grid__all-student {
     padding: 1rem;
-    width: 100%;
+    width: 70%;
     display: flex;
     justify-content: center;
     align-items: center;
