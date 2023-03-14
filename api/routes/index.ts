@@ -3,6 +3,7 @@ import NotFoundError from "../errors/NotFoundError";
 import { authJwt, authLocal, withRole } from "../middleware/auth";
 import AndereTaalController from "../modules/AndereTaal/AndereTaal.controller";
 import BasisgeletterdheidController from "../modules/Basisgeletterdheid/Basisgeletterdheid.controller";
+import BasisgeletterdheidLeerlingController from "../modules/BasisgeletterdheidLeerling/BasisgeletterdheidLeerling.controller";
 import FoutenanalyseFoutenController from "../modules/FoutenanalyseFout/FoutenanalyseFout.controller";
 import FoutenanalyseOnderdeelController from "../modules/FoutenanalyseOnderdeel/FoutenanalyseOnderdeel.controller";
 import KlasController from "../modules/Klas/Klas.controller";
@@ -116,6 +117,13 @@ const registerAdminRoutes = (router: Router) => {
   adminRouter.delete(
     "/basisgeletterdheid/:id",
     useMethod(basisgeletterdheidController.delete)
+  );
+
+  const basisgeletterdheidLeerlingController =
+    new BasisgeletterdheidLeerlingController();
+  adminRouter.get(
+    "/basisgeletterdheid/leerlingen",
+    useMethod(basisgeletterdheidLeerlingController.all)
   );
 
   const klasLeerkrachtController = new KlasLeerkrachtController();
@@ -381,6 +389,17 @@ const registerTeacherRoutes = (router: Router) => {
   teacherRouter.get(
     "/leerkracht/:id/klassen/:year",
     useMethod(klasLeerkrachtController.allByTeacherYear)
+  );
+
+  const basisgeletterdheidLeerlingController =
+    new BasisgeletterdheidLeerlingController();
+  teacherRouter.get(
+    "/basisgeletterdheid/leerling/:id",
+    useMethod(basisgeletterdheidLeerlingController.byStudent)
+  );
+  teacherRouter.patch(
+    "/basisgeletterdheid/leerling/:id",
+    useMethod(basisgeletterdheidLeerlingController.update)
   );
 
   const klasController = new KlasController();
