@@ -1,0 +1,19 @@
+.klas-grid__student {
+    padding: 1rem;
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--primary-color);
+    border-radius: 10px 0 10px 0;
+}
+
+.klas-grid__all-student {
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--primary-color);
+    border-radius: 10px 0 10px 0;
+}
