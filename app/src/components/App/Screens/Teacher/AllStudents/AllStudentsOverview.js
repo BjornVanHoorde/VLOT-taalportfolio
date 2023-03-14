@@ -5,6 +5,8 @@ import { KlasRoutes, route } from "../../../../../core/routes";
 import BackButton from "../../../../Design/Button/BackButton";
 import TabNav from "../../../../Design/Nav/TabNav";
 import ItemSidebar from "../../../Shared/Generic/ItemSidebar/ItemSidebar";
+import ItemSidebarWithClassOption from "../../../Shared/Generic/ItemSidebar/ItemSidebarWithClassOption";
+import TaalgroeiLayout from "../Taalgroei/TaalgroeiLayout";
 import TaalprofielLayout from "../Taalprofiel/TaalprofielLayout";
 import "./styles/AllStudentsOverview.css";
 
@@ -22,6 +24,8 @@ const AllStudentsOverview = () => {
     setCurrentTab(tab);
   };
 
+  console.log(currentStudent);
+
   return (
     <>
       <BackButton
@@ -35,12 +39,23 @@ const AllStudentsOverview = () => {
       />
       <div className="allStudentsOverview__main">
         <div className="allStudentsOverview__main__spaceHelper"></div>
-        <ItemSidebar
-          items={students}
-          title="students"
-          onChange={handleStudentChange}
-          activeItem={currentStudent}
-        />
+        {currentTab === "Taalgroei" && (
+          <ItemSidebarWithClassOption
+            items={students}
+            title="students"
+            onChange={handleStudentChange}
+            activeItem={currentStudent}
+            klas={klas}
+          />
+        )}
+        {currentTab !== "Taalgroei" && (
+          <ItemSidebar
+            items={students}
+            title="students"
+            onChange={handleStudentChange}
+            activeItem={currentStudent}
+          />
+        )}
         {currentTab === "Taalprofiel" && currentStudent && (
           <TaalprofielLayout student={currentStudent} />
         )}
@@ -48,7 +63,7 @@ const AllStudentsOverview = () => {
           <p>🚧 Dit onderdeel is nog onder constructie 🚧</p>
         )}
         {currentTab === "Taalgroei" && currentStudent && (
-          <p>🚧 Dit onderdeel is nog onder constructie 🚧</p>
+          <TaalgroeiLayout student={currentStudent} klas={klas} />
         )}
       </div>
     </>

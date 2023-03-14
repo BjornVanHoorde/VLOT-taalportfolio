@@ -2,18 +2,28 @@ import useFetch from "../../../../../../core/hooks/useFetch";
 import Loading from "../../../../../Design/Loading/Loading";
 import BasisgeletterdheidScreen from "./BasisgeletterdheidScreen";
 
-const BasisGeletterdheidLayout = ({ student }) => {
+const BasisGeletterdheidLayout = ({ student, klas }) => {
   const {
     data: statuses,
     isLoading,
     invalidate,
-  } = useFetch(`/basisgeletterdheid/leerling/${student.id}`);
+  } = useFetch(
+    student
+      ? `/basisgeletterdheid/leerling/${student.id}`
+      : klas
+      ? `/basisgeletterdheid/klas/${klas}`
+      : null
+  );
 
   return (
     <>
       {isLoading && <Loading />}
       {statuses && (
-        <BasisgeletterdheidScreen data={statuses} onUpdate={invalidate} />
+        <BasisgeletterdheidScreen
+          data={statuses}
+          klas={klas ? klas : null}
+          onUpdate={invalidate}
+        />
       )}
     </>
   );

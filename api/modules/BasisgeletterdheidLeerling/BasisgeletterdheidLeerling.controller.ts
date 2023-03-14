@@ -3,6 +3,7 @@ import ForbiddenError from "../../errors/ForbiddenError";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
 import { CheckTeacherClasses } from "../../utils";
+import KlasService from "../Klas/Klas.service";
 import UserService from "../User/User.service";
 import BasisgeletterdheidLeerlingService from "./BasisgeletterdheidLeerling.service";
 import { BasisgeletterdheidLeerlingBody } from "./BasisgeletterdheidLeerling.types";
@@ -10,11 +11,13 @@ import { BasisgeletterdheidLeerlingBody } from "./BasisgeletterdheidLeerling.typ
 export default class BasisgeletterdheidLeerlingController {
   private basisgeletterdheidLeerlingService: BasisgeletterdheidLeerlingService;
   private userService: UserService;
+  private klasService: KlasService;
 
   constructor() {
     this.basisgeletterdheidLeerlingService =
       new BasisgeletterdheidLeerlingService();
     this.userService = new UserService();
+    this.klasService = new KlasService();
   }
 
   all = async (
@@ -51,6 +54,22 @@ export default class BasisgeletterdheidLeerlingController {
 
     const basisgeletterdheidLeerlingen =
       await this.basisgeletterdheidLeerlingService.byStudent(req.params.id);
+    return res.json(basisgeletterdheidLeerlingen);
+  };
+
+  byClass = async (
+    req: AuthRequest<{ klas: string }>,
+    res: Response,
+    next: NextFunction
+  ) => {
+    if (req.user.isStudent()) {
+      return new ForbiddenError();
+    }
+
+    const klas = await this.klasService.findOneBy({ klas: req.params.klas });
+
+    const basisgeletterdheidLeerlingen =
+      await this.basisgeletterdheidLeerlingService.byClass(klas.id);
     return res.json(basisgeletterdheidLeerlingen);
   };
 

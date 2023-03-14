@@ -397,6 +397,10 @@ const registerTeacherRoutes = (router: Router) => {
     "/basisgeletterdheid/leerling/:id",
     useMethod(basisgeletterdheidLeerlingController.byStudent)
   );
+  teacherRouter.get(
+    "/basisgeletterdheid/klas/:klas",
+    useMethod(basisgeletterdheidLeerlingController.byClass)
+  );
   teacherRouter.patch(
     "/basisgeletterdheid/leerling/:id",
     useMethod(basisgeletterdheidLeerlingController.update)

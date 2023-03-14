@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BasisgeletterdheidChoices from "../../../../../core/constants/BasisgeletterdheidChoices";
 import Vaardigheden from "../../../../../core/constants/Vaardigheden";
 import useForm from "../../../../../core/hooks/useForm";
@@ -15,12 +15,17 @@ const transformData = (initialData) => {
   return transformedData;
 };
 
-const BasisgeletterdheidForm = ({ data, onSubmit }) => {
+const BasisgeletterdheidForm = ({ data, onSubmit, klas }) => {
   const [currentAll, setCurrentAll] = useState("");
-  const { values, handleChange, handleSubmit } = useForm(
+  const { values, handleChange, handleSubmit, handleInvalidate } = useForm(
     null,
     transformData(data)
   );
+
+  // invalidate the form when the data changes
+  useEffect(() => {
+    handleInvalidate(transformData(data));
+  }, [data]);
 
   const handleData = (values) => {
     onSubmit(values);
@@ -66,6 +71,12 @@ const BasisgeletterdheidForm = ({ data, onSubmit }) => {
                       key={element.id}
                       className="basisgeletterdheid-form__field"
                     >
+                      {klas && (
+                        <p>
+                          {element.leerling.voornaam}{" "}
+                          {element.leerling.achternaam}
+                        </p>
+                      )}
                       <label>{element.basisgeletterdheid.geletterdheid}</label>
                       <Select
                         name={`${element.id}`}
