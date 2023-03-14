@@ -2,15 +2,19 @@ import { NextFunction, Response } from "express";
 import ForbiddenError from "../../errors/ForbiddenError";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
+import { CheckTeacherClasses } from "../../utils";
+import UserService from "../User/User.service";
 import BasisgeletterdheidLeerlingService from "./BasisgeletterdheidLeerling.service";
 import { BasisgeletterdheidLeerlingBody } from "./BasisgeletterdheidLeerling.types";
 
 export default class BasisgeletterdheidLeerlingController {
   private basisgeletterdheidLeerlingService: BasisgeletterdheidLeerlingService;
+  private userService: UserService;
 
   constructor() {
     this.basisgeletterdheidLeerlingService =
       new BasisgeletterdheidLeerlingService();
+    this.userService = new UserService();
   }
 
   all = async (
@@ -24,6 +28,29 @@ export default class BasisgeletterdheidLeerlingController {
 
     const basisgeletterdheidLeerlingen =
       await this.basisgeletterdheidLeerlingService.all({ ...req.body });
+    return res.json(basisgeletterdheidLeerlingen);
+  };
+
+  byStudent = async (
+    req: AuthRequest<{ id: number }>,
+    res: Response,
+    next: NextFunction
+  ) => {
+    if (req.user.isStudent()) {
+      req.params.id = req.user.id;
+    }
+
+    const leerling = await this.userService.findOne(req.params.id);
+
+    if (req.user.isTeacher()) {
+      const valid = await CheckTeacherClasses(req.user.id, leerling.klas.id);
+      if (!valid) {
+        return new ForbiddenError();
+      }
+    }
+
+    const basisgeletterdheidLeerlingen =
+      await this.basisgeletterdheidLeerlingService.byStudent(req.params.id);
     return res.json(basisgeletterdheidLeerlingen);
   };
 
@@ -66,7 +93,7 @@ export default class BasisgeletterdheidLeerlingController {
     res: Response,
     next: NextFunction
   ) => {
-    if (req.user.isTeacher()) {
+    if (req.user.isStudent()) {
       return new ForbiddenError();
     }
 
