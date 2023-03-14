@@ -2,6 +2,7 @@ import { NextFunction, Request, Response, Router } from "express";
 import NotFoundError from "../errors/NotFoundError";
 import { authJwt, authLocal, withRole } from "../middleware/auth";
 import AndereTaalController from "../modules/AndereTaal/AndereTaal.controller";
+import BasisgeletterdheidController from "../modules/Basisgeletterdheid/Basisgeletterdheid.controller";
 import FoutenanalyseFoutenController from "../modules/FoutenanalyseFout/FoutenanalyseFout.controller";
 import FoutenanalyseOnderdeelController from "../modules/FoutenanalyseOnderdeel/FoutenanalyseOnderdeel.controller";
 import KlasController from "../modules/Klas/Klas.controller";
@@ -98,6 +99,24 @@ const registerAdminRoutes = (router: Router) => {
   adminRouter.post("/taaltip", useMethod(taaltipController.create));
   adminRouter.patch("/taaltip/:id", useMethod(taaltipController.update));
   adminRouter.delete("/taaltip/:id", useMethod(taaltipController.delete));
+
+  const basisgeletterdheidController = new BasisgeletterdheidController();
+  adminRouter.get(
+    "/basisgeletterdheden",
+    useMethod(basisgeletterdheidController.all)
+  );
+  adminRouter.post(
+    "/basisgeletterdheid",
+    useMethod(basisgeletterdheidController.create)
+  );
+  adminRouter.patch(
+    "/basisgeletterdheid/:id",
+    useMethod(basisgeletterdheidController.update)
+  );
+  adminRouter.delete(
+    "/basisgeletterdheid/:id",
+    useMethod(basisgeletterdheidController.delete)
+  );
 
   const klasLeerkrachtController = new KlasLeerkrachtController();
   adminRouter.get(

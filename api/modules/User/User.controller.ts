@@ -2,6 +2,8 @@ import { NextFunction, Response } from "express";
 import ForbiddenError from "../../errors/ForbiddenError";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
+import BasisgeletterdheidService from "../Basisgeletterdheid/Basisgeletterdheid.service";
+import BasisgeletterdheidLeerlingService from "../BasisgeletterdheidLeerling/BasisgeletterdheidLeerling.service";
 import TaalprofielAntwoordService from "../TaalprofielAntwoord/TaalprofielAntwoord.service";
 import TaalprofielVraagService from "../TaalprofielVraag/TaalprofielVraag.service";
 import { UserRole } from "./User.constants";
@@ -12,11 +14,16 @@ export default class UserController {
   private userService: UserService;
   private taalprofielVraagService: TaalprofielVraagService;
   private taalprofielAntwoordService: TaalprofielAntwoordService;
+  private basisgeletterdheidLeerlingService: BasisgeletterdheidLeerlingService;
+  private basisgeletterdheidService: BasisgeletterdheidService;
 
   constructor() {
     this.userService = new UserService();
     this.taalprofielVraagService = new TaalprofielVraagService();
     this.taalprofielAntwoordService = new TaalprofielAntwoordService();
+    this.basisgeletterdheidLeerlingService =
+      new BasisgeletterdheidLeerlingService();
+    this.basisgeletterdheidService = new BasisgeletterdheidService();
   }
 
   all = async (
@@ -147,21 +154,11 @@ export default class UserController {
     if (user.rol === UserRole.Student) {
       //create a empty answer for every question for the student
       const questions = await this.taalprofielVraagService.all({});
-      questions.forEach(async (question) => {
-        for (let jaar = 0; jaar < 3; jaar++) {
-          await this.taalprofielAntwoordService.create({
-            antwoord: "",
-            vraagId: question.id,
-            vraag: question,
-            leerlingId: user.id,
-            leerling: user,
-            jaar,
-          });
-        }
-      });
-
-      return res.json(user);
+      const basisgeletterdheden = await this.basisgeletterdheidService.all({});
+      this.fillInTaalprofielAntwoorden(questions, user);
+      this.fillInBasisgeletterdheidLeerlingen(basisgeletterdheden, user);
     }
+    return res.json(user);
   };
 
   update = async (
@@ -208,5 +205,32 @@ export default class UserController {
     } catch (e) {
       next(e);
     }
+  };
+
+  fillInTaalprofielAntwoorden = (questions, leerling) => {
+    questions.forEach(async (question) => {
+      for (let jaar = 0; jaar < 3; jaar++) {
+        await this.taalprofielAntwoordService.create({
+          antwoord: "",
+          vraagId: question.id,
+          vraag: question,
+          leerlingId: leerling.id,
+          leerling,
+          jaar,
+        });
+      }
+    });
+  };
+
+  fillInBasisgeletterdheidLeerlingen = (basisgeletterdheden, leerling) => {
+    basisgeletterdheden.forEach(async (basisgeletterdheid) => {
+      await this.basisgeletterdheidLeerlingService.create({
+        status: false,
+        basisgeletterdheidId: basisgeletterdheid.id,
+        basisgeletterdheid,
+        leerlingId: leerling.id,
+        leerling,
+      });
+    });
   };
 }

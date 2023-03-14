@@ -15,7 +15,7 @@ export default class TaaltipService {
   all = async (options: object) => {
     const taaltips = await this.repository.find({
       where: options,
-      relations: ["taaltipsAntwoorden"]
+      relations: ["taaltipsAntwoorden"],
     });
     return taaltips;
   };
