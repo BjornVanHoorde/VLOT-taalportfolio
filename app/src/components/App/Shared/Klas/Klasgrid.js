@@ -11,6 +11,9 @@ const KlasGrid = ({ students }) => {
   const { klas } = useParams();
   const navigate = useNavigate();
 
+  console.log(students.length);
+
+  if(students.length > 0) {
   return (
     <div className="klas-grid">
       <div className="klas-grid__students">
@@ -38,6 +41,7 @@ const KlasGrid = ({ students }) => {
       </div>
     </div>
   );
+  }
 };
 
 export default KlasGrid;
