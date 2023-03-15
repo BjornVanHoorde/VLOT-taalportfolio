@@ -15,7 +15,12 @@ const transformData = (initialData) => {
   return transformedData;
 };
 
-const BasisgeletterdheidForm = ({ data, onSubmit, klas }) => {
+const BasisgeletterdheidForm = ({
+  data,
+  onSubmit,
+  klas,
+  isStudent = false,
+}) => {
   const [currentAll, setCurrentAll] = useState("");
   const { values, handleChange, handleSubmit, handleInvalidate } = useForm(
     null,
@@ -44,13 +49,17 @@ const BasisgeletterdheidForm = ({ data, onSubmit, klas }) => {
 
   return (
     <>
-      <label>verander alle waarden</label>
-      <Select
-        name="change all"
-        options={[{ label: "-", value: "" }, ...BasisgeletterdheidChoices]}
-        value={currentAll}
-        onChange={handleAllChange}
-      />
+      {!isStudent && (
+        <>
+          <label>verander alle waarden</label>
+          <Select
+            name="change all"
+            options={[{ label: "-", value: "" }, ...BasisgeletterdheidChoices]}
+            value={currentAll}
+            onChange={handleAllChange}
+          />
+        </>
+      )}
       <form
         className="basisgeletterdheid-form"
         onSubmit={handleSubmit(handleData)}
@@ -83,6 +92,7 @@ const BasisgeletterdheidForm = ({ data, onSubmit, klas }) => {
                         options={BasisgeletterdheidChoices}
                         value={values[element.id]}
                         onChange={handleChange}
+                        disabled={isStudent}
                       />
                     </div>
                   );
@@ -91,7 +101,9 @@ const BasisgeletterdheidForm = ({ data, onSubmit, klas }) => {
             </div>
           );
         })}
-        <Button align="right" label="Opslaan" className="form-button" />
+        {!isStudent && (
+          <Button align="right" label="Opslaan" className="form-button" />
+        )}
       </form>
     </>
   );

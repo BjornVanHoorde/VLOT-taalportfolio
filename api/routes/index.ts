@@ -495,6 +495,7 @@ const registerTeacherRoutes = (router: Router) => {
 const registerStudentRoutes = (router: Router) => {
   const studentRouter = Router();
 
+  // Register student routes
   const andereTaalController = new AndereTaalController();
   studentRouter.get(
     "/andere-talen/leerling/:id",
@@ -510,7 +511,6 @@ const registerStudentRoutes = (router: Router) => {
     useMethod(andereTaalController.delete)
   );
 
-  // Register student routes
   const userController = new UserController();
   studentRouter.get("/user/:id", useMethod(userController.find));
 
@@ -526,6 +526,13 @@ const registerStudentRoutes = (router: Router) => {
   studentRouter.get(
     "/taalprofiel/vragen/taal/:language",
     useMethod(taalprofielVragenController.allByLanguage)
+  );
+
+  const basisgeletterdheidLeerlingController =
+    new BasisgeletterdheidLeerlingController();
+  studentRouter.get(
+    "/basisgeletterdheid/leerling/:id",
+    useMethod(basisgeletterdheidLeerlingController.byStudent)
   );
 
   const taalprofielAntwoordController = new TaalprofielAntwoordController();
