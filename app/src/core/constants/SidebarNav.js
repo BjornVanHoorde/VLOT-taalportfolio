@@ -1,4 +1,8 @@
-import { TaalgroeiRoutes, TaalprofielRoutes } from "../routes";
+import {
+  TaaldossierRoutes,
+  TaalgroeiRoutes,
+  TaalprofielRoutes,
+} from "../routes";
 
 const MainNav = [
   {
@@ -6,11 +10,11 @@ const MainNav = [
     label: "Taalprofiel",
   },
   {
-    href: "",
+    href: TaaldossierRoutes.Index,
     label: "Taaldossier",
   },
   {
-    href: "",
+    href: TaalgroeiRoutes.Index,
     label: "Taalgroei",
   },
 ];
@@ -21,16 +25,20 @@ const SubNav = [
     label: "Vaardigheden",
   },
   {
-    href: "",
+    href: TaalgroeiRoutes.Foutanalyse,
     label: "Foutanalyse",
   },
   {
-    href: "",
+    href: TaalgroeiRoutes.Woordenschat,
     label: "Woordenschat",
   },
   {
-    href: "",
+    href: TaalgroeiRoutes.Taaltips,
     label: "Taaltips",
+  },
+  {
+    href: TaalgroeiRoutes.Basisgeletterdheid,
+    label: "Basisgeletterdheid",
   },
 ];
 

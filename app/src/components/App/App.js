@@ -6,6 +6,7 @@ import {
   KlasRoutes,
   ProfielRoute,
   StudentRoutes,
+  TaaldossierRoutes,
   TaalgroeiRoutes,
   TaalprofielRoutes,
 } from "../../core/routes";
@@ -28,6 +29,12 @@ import TaalprofielLayout from "./Screens/Teacher/Taalprofiel/TaalprofielLayout";
 import TaalprofielOverview from "./Screens/Teacher/Taalprofiel/TaalprofielOverview";
 import AllStudentsLayout from "./Screens/Teacher/AllStudents/AllStudentsLayout";
 import AllStudentsOverview from "./Screens/Teacher/AllStudents/AllStudentsOverview";
+import TaaldossierScreen from "./Screens/Student/Taaldossier/TaaldossierScreen";
+import FoutanalyseScreen from "./Screens/Student/Taalgroei/Foutanalyse/FoutanalyseScreen";
+import WoordenschatScreen from "./Screens/Student/Taalgroei/Woordenschat/WoordenschatScreen";
+import TaaltipsScreen from "./Screens/Student/Taalgroei/Taaltips/TaaltipsScreen";
+import BasisgeletterdheidScreen from "./Screens/Student/Taalgroei/Basisgeletterdheid/BasisgeletterdheidScreen";
+import TaalgroeiScreen from "./Screens/Student/Taalgroei/TaalgroeiScreen";
 
 // This is the main app component with all the routes
 const App = () => {
@@ -57,16 +64,52 @@ const App = () => {
                   path={ProfielRoute.Index}
                   element={<UserdetailsScreen />}
                 />
-                {/* TAALPROFIEL ROUTES */}
+                {/*
+                 * STUDENT ROUTES
+                 */}
                 <Route
-                  path={TaalprofielRoutes.Index}
-                  element={<TaalprofielScreen />}
-                />
-                {/* TAALGROEI ROUTES */}
-                <Route
-                  path={TaalgroeiRoutes.Vaardigheden}
-                  element={<VaardighedenScreen />}
-                />
+                  element={
+                    <RoleContainer roles={[Roles.Admin, Roles.Student]}>
+                      <Outlet />
+                    </RoleContainer>
+                  }
+                >
+                  {/* TAALPROFIEL ROUTES */}
+                  <Route
+                    path={TaalprofielRoutes.Index}
+                    element={<TaalprofielScreen />}
+                  />
+                  {/* TAALDOSSIER ROUTES */}
+                  <Route
+                    path={TaaldossierRoutes.Index}
+                    element={<TaaldossierScreen />}
+                  />
+                  {/* TAALGROEI ROUTES */}
+                  <Route
+                    path={TaalgroeiRoutes.Index}
+                    element={<TaalgroeiScreen />}
+                  />
+                  <Route
+                    path={TaalgroeiRoutes.Vaardigheden}
+                    element={<VaardighedenScreen />}
+                  />
+                  <Route
+                    path={TaalgroeiRoutes.Foutanalyse}
+                    element={<FoutanalyseScreen />}
+                  />
+                  <Route
+                    path={TaalgroeiRoutes.Woordenschat}
+                    element={<WoordenschatScreen />}
+                  />
+                  <Route
+                    path={TaalgroeiRoutes.Taaltips}
+                    element={<TaaltipsScreen />}
+                  />
+                  <Route
+                    path={TaalgroeiRoutes.Basisgeletterdheid}
+                    element={<BasisgeletterdheidScreen />}
+                  />
+                </Route>
                 {/*
                  * TEACHER ROUTES
                  */}

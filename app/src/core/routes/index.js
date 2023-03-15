@@ -8,8 +8,9 @@ const TaalprofielRoutes = {
   Overview: "/taalprofiel/:student",
 };
 
-const ProfielRoute = {
-  Index: "/profiel",
+const TaaldossierRoutes = {
+  Index: "/taaldossier",
+  Overview: "/taaldossier/:student",
 };
 
 const TaalgroeiRoutes = {
@@ -18,6 +19,11 @@ const TaalgroeiRoutes = {
   Foutanalyse: "/taalgroei/foutanalyse",
   Woordenschat: "/taalgroei/woordenschat",
   Taaltips: "/taalgroei/taaltips",
+  Basisgeletterdheid: "/taalgroei/basisgeletterdheid",
+};
+
+const ProfielRoute = {
+  Index: "/profiel",
 };
 
 const KlasRoutes = {
@@ -50,4 +56,5 @@ export {
   KlasRoutes,
   StudentRoutes,
   AllStudentRoutes,
+  TaaldossierRoutes,
 };
