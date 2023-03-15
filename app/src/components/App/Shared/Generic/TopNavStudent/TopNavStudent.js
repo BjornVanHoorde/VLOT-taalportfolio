@@ -18,11 +18,14 @@ const TopNavStudent = ({ isTaalprofiel }) => {
     `/andere-talen/leerling/${auth.user.id}`
   );
 
+console.log(window.location.pathname);
+
   const handleSuccess = () => {
     setShowModal(false);
     invalidate();
   };
 
+  if (window.location.pathname === '/taalprofiel' || window.location.pathname === '/taalgroei/basisgeletterdheid') {
   return (
     <>
       <div className="top-nav-student">
@@ -63,6 +66,7 @@ const TopNavStudent = ({ isTaalprofiel }) => {
       )}
     </>
   );
+}
 };
 
 export default TopNavStudent;

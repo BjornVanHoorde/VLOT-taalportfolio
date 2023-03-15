@@ -1,17 +1,28 @@
 import { Link } from "react-router-dom";
 import { SubNav } from "../../../../../core/constants/SidebarNav";
+import '../Taalgroei/styles/taalgroeiIndex.css';
 
 const TaalgroeiScreen = () => {
   return (
-    <>
-      {SubNav.map((item, index) => {
-        return (
-          <Link key={index} to={item.href}>
-            {item.label}
-          </Link>
-        );
-      })}
-    </>
+      <div className="taalgroei-index">
+        <div className="taalgroei-title">
+          <h2>Taalgroei</h2>
+        </div>
+        <div className="taalgroei-nav">
+        {SubNav.map((item, index) => {
+          return (
+            <div 
+            className={`${
+              item.label !== 'Basisgeletterdheid' ? 'taalgroei-nav-item disabled' : 'taalgroei-nav-item'
+            }`}>
+              <Link key={index} to={item.href}>
+                {item.label}
+              </Link>
+            </div>
+          );
+        })}
+        </div>
+    </div>
   );
 };
 
