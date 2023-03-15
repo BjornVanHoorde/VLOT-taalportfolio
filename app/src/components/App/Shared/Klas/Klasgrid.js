@@ -16,40 +16,18 @@ const KlasGrid = ({ students }) => {
       <div className="klas-grid__students">
         {students.map((student) => (
           <>
-          <StudentCard
-            student={student}
-            key={student.id}
-            onClick={() =>
-              navigate(
-                route(StudentRoutes.Overview, {
-                  student: `${student.voornaam} ${student.achternaam}`,
-                })
-              )
-            }
-          />
-                    <StudentCard
-            student={student}
-            key={student.id}
-            onClick={() =>
-              navigate(
-                route(StudentRoutes.Overview, {
-                  student: `${student.voornaam} ${student.achternaam}`,
-                })
-              )
-            }
-          />
-                    <StudentCard
-            student={student}
-            key={student.id}
-            onClick={() =>
-              navigate(
-                route(StudentRoutes.Overview, {
-                  student: `${student.voornaam} ${student.achternaam}`,
-                })
-              )
-            }
-          />
-      </>
+            <StudentCard
+              student={student}
+              key={student.id}
+              onClick={() =>
+                navigate(
+                  route(StudentRoutes.Overview, {
+                    student: `${student.voornaam} ${student.achternaam}`,
+                  })
+                )
+              }
+            />
+          </>
         ))}
       </div>
       <div className="klas-grid__allStudents">
