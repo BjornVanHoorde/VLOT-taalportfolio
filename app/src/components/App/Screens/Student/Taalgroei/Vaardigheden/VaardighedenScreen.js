@@ -1,7 +1,8 @@
+import Construction from "../../../../../Design/Construction/Construction";
 import "../styles/taalgroei.css";
 
 const VaardighedenScreen = () => {
-  return <p>🚧 Dit onderdeel is nog onder constructie 🚧</p>;
+  return <Construction />;
 };
 
 export default VaardighedenScreen;

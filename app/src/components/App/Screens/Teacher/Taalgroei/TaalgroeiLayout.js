@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Construction from "../../../../Design/Construction/Construction";
 import TaalgroeiNav from "../../../Shared/Generic/TaalgroeiNav/TaalgroeiNav";
 import BasisGeletterdheidLayout from "./Basisgeletterdheid/BasisgeletterdheidLayout";
 
@@ -14,7 +15,7 @@ const TaalgroeiLayout = ({ student, klas }) => {
       <div className="taalgroei__layout">
         <TaalgroeiNav onClick={handleNavClick} currentTab={currentTab} />
         {currentTab !== "Basisgeletterdheid" && currentTab !== undefined && (
-          <p>🚧 Dit onderdeel is nog onder constructie 🚧</p>
+          <Construction />
         )}
         {currentTab === "Basisgeletterdheid" && student.id !== klas && (
           <BasisGeletterdheidLayout student={student} />

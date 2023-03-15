@@ -1,5 +1,7 @@
+import Construction from "../../../../../Design/Construction/Construction";
+
 const TaaltipsScreen = () => {
-  return <p>🚧 Dit onderdeel is nog onder constructie 🚧</p>;
+  return <Construction />;
 };
 
 export default TaaltipsScreen;

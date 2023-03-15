@@ -3,6 +3,7 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 import { MainNav } from "../../../../../core/constants/MainNav";
 import { KlasRoutes, route } from "../../../../../core/routes";
 import BackButton from "../../../../Design/Button/BackButton";
+import Construction from "../../../../Design/Construction/Construction";
 import TabNav from "../../../../Design/Nav/TabNav";
 import ItemSidebar from "../../../Shared/Generic/ItemSidebar/ItemSidebar";
 import ItemSidebarWithClassOption from "../../../Shared/Generic/ItemSidebar/ItemSidebarWithClassOption";
@@ -59,9 +60,7 @@ const AllStudentsOverview = () => {
         {currentTab === "Taalprofiel" && currentStudent && (
           <TaalprofielLayout student={currentStudent} />
         )}
-        {currentTab === "Taaldossier" && currentStudent && (
-          <p>🚧 Dit onderdeel is nog onder constructie 🚧</p>
-        )}
+        {currentTab === "Taaldossier" && currentStudent && <Construction />}
         {currentTab === "Taalgroei" && currentStudent && (
           <TaalgroeiLayout student={currentStudent} klas={klas} />
         )}

@@ -3,6 +3,7 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 import { MainNav } from "../../../../../core/constants/MainNav";
 import { KlasRoutes, route } from "../../../../../core/routes";
 import BackButton from "../../../../Design/Button/BackButton";
+import Construction from "../../../../Design/Construction/Construction";
 import TabNav from "../../../../Design/Nav/TabNav";
 import TaalgroeiLayout from "../Taalgroei/TaalgroeiLayout";
 import TaalprofielLayout from "../Taalprofiel/TaalprofielLayout";
@@ -32,9 +33,7 @@ const StudentOverview = () => {
       {student && currentTab === "Taalprofiel" && (
         <TaalprofielLayout student={student} />
       )}
-      {currentTab === "Taaldossier" && (
-        <p>🚧 Dit onderdeel is nog onder constructie 🚧</p>
-      )}
+      {currentTab === "Taaldossier" && <Construction />}
       {currentTab === "Taalgroei" && <TaalgroeiLayout student={student} />}
     </>
   );
