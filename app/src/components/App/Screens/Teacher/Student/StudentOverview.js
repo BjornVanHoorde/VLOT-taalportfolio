@@ -9,11 +9,14 @@ import TaalgroeiLayout from "../Taalgroei/TaalgroeiLayout";
 import TaalprofielLayout from "../Taalprofiel/TaalprofielLayout";
 
 const StudentOverview = () => {
-  const { student } = useOutletContext();
+  const { student, onOtherLanguageDismiss } = useOutletContext();
   const [currentTab, setCurrentTab] = useState();
   const navigate = useNavigate();
 
   const handleTabChange = (tab) => {
+    if (tab !== "Taalprofiel") {
+      onOtherLanguageDismiss();
+    }
     setCurrentTab(tab);
   };
 

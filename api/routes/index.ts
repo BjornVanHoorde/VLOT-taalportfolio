@@ -391,6 +391,12 @@ const registerTeacherRoutes = (router: Router) => {
     useMethod(klasLeerkrachtController.allByTeacherYear)
   );
 
+  const andereTaalController = new AndereTaalController();
+  teacherRouter.get(
+    "/andere-taal/leerling/:id",
+    useMethod(andereTaalController.byStudent)
+  );
+
   const basisgeletterdheidLeerlingController =
     new BasisgeletterdheidLeerlingController();
   teacherRouter.get(

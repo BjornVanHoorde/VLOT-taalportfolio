@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import useFetch from "../../../../../core/hooks/useFetch";
 import Loading from "../../../../Design/Loading/Loading";
 import { useLanguageContext } from "../../../Language/LanguageProvider";
@@ -13,8 +14,14 @@ const TaalprofielOverview = ({ student, onUpdate }) => {
     isLoading,
     invalidate,
   } = useFetch(
-    `/taalprofiel/antwoorden/leerling/${`${student.voornaam} ${student.achternaam}`}/${currentLanguage}/${selectedYear}`
+    `/taalprofiel/antwoorden/leerling/${`${student.voornaam} ${student.achternaam}`}/${
+      currentLanguage.split(" ")[0]
+    }/${selectedYear}`
   );
+
+  useEffect(() => {
+    invalidate();
+  }, [currentLanguage, selectedYear]);
 
   return (
     <>

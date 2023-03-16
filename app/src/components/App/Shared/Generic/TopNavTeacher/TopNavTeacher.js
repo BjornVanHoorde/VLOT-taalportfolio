@@ -1,3 +1,4 @@
+import Languages from "../../../../../core/constants/Languages";
 import TopNavLanguages from "../../../../../core/constants/TopNavLanguages";
 import { isTeacher } from "../../../../../core/helpers/isRole";
 import LanguageButton from "../../../../Design/Button/LanguageButton";
@@ -5,7 +6,7 @@ import { useAuthContext } from "../../../Auth/AuthProvider";
 import { useLanguageContext } from "../../../Language/LanguageProvider";
 import "./styles/topbar-teacher.css";
 
-const TopNavTeacher = () => {
+const TopNavTeacher = ({ otherLanguages }) => {
   const { auth } = useAuthContext();
   const { currentLanguage, changeLanguage } = useLanguageContext();
 
@@ -21,6 +22,20 @@ const TopNavTeacher = () => {
             isTeacher={isTeacher(auth)}
           />
         ))}
+        {otherLanguages?.length > 0 &&
+          otherLanguages.map((language) => (
+            <LanguageButton
+              key={language.id}
+              label={language.taal}
+              activeLanguage={
+                currentLanguage === `${Languages.Other} ${language.taal}`
+              }
+              onClick={() =>
+                changeLanguage(`${Languages.Other} ${language.taal}`)
+              }
+              isTeacher={isTeacher(auth)}
+            />
+          ))}
       </div>
     </>
   );
