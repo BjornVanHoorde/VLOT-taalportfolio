@@ -6,7 +6,7 @@ import "./styles/KlasHeader.css";
 const KlasHeader = ({ klas, onSearch }) => {
   // State for the search input
   const [inputValue, setInputValue] = useState("");
-  const [toggleIcon, setToggleIcon] = useState("search")
+  const [toggleIcon, setToggleIcon] = useState("search");
 
   // Handle the search input
   const handleChange = (e) => {
@@ -14,14 +14,12 @@ const KlasHeader = ({ klas, onSearch }) => {
   };
 
   const handleFocus = () => {
-    console.log("div heeft focus");
     setToggleIcon("");
-  }
+  };
   const lostFocus = (e) => {
-    console.log('div lost focus');
     setInputValue("");
     setToggleIcon("search");
-  }
+  };
 
   // Filter the students based on the search input
   useEffect(() => {

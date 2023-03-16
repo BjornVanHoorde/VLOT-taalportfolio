@@ -47,12 +47,14 @@ const KlasOverview = () => {
       {students && <KlasHeader klas={klas} onSearch={handleSearch} />}
       {isLoading && <Loading />}
       {filteredStudents && <KlasGrid students={filteredStudents} />}
-      {students && students.length === 0 && (
+      {students && students?.length === 0 && (
         <p>Deze klas bevat geen leerlingen</p>
-        )}
-      {students.length > 0 && filteredStudents && filteredStudents.length === 0 && (
-        <p>Er zijn geen leerlingen gevonden met deze naam</p>
       )}
+      {students?.length > 0 &&
+        filteredStudents &&
+        filteredStudents?.length === 0 && (
+          <p>Er zijn geen leerlingen gevonden met deze naam</p>
+        )}
     </div>
   );
 };

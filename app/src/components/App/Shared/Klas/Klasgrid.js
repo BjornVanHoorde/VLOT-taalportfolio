@@ -11,14 +11,11 @@ const KlasGrid = ({ students }) => {
   const { klas } = useParams();
   const navigate = useNavigate();
 
-  console.log(students.length);
-
-  if(students.length > 0) {
-  return (
-    <div className="klas-grid">
-      <div className="klas-grid__students">
-        {students.map((student) => (
-          <>
+  if (students.length > 0) {
+    return (
+      <div className="klas-grid">
+        <div className="klas-grid__students">
+          {students.map((student) => (
             <StudentCard
               student={student}
               key={student.id}
@@ -30,17 +27,16 @@ const KlasGrid = ({ students }) => {
                 )
               }
             />
-          </>
-        ))}
+          ))}
+        </div>
+        <div className="klas-grid__allStudents">
+          <StudentCard
+            AllStudents={true}
+            onClick={() => navigate(route(AllStudentRoutes.Overview, { klas }))}
+          />
+        </div>
       </div>
-      <div className="klas-grid__allStudents">
-        <StudentCard
-          AllStudents={true}
-          onClick={() => navigate(route(AllStudentRoutes.Overview, { klas }))}
-        />
-      </div>
-    </div>
-  );
+    );
   }
 };
 
