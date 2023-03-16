@@ -6,7 +6,6 @@ button.btn {
   text-transform: uppercase;
   width: 20%;
   padding: 0.5rem 1.5rem;
-  margin-bottom: 5vh;
 }
 
 button.btn:hover {
@@ -21,4 +20,8 @@ button.btn:hover {
 .form-button {
   margin-top: 3vh;
   margin-bottom: 1vh;
+}
+
+.eol {
+  margin-bottom: 5vh
 }

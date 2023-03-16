@@ -1,12 +1,10 @@
 .itemSidebar {
   width: 13vw;
   color: var(--tertiary-color);
-  height: calc(100vh - 12vh - 4.5rem);
+  min-height: calc(100vh - 12vh - 4rem);
   overflow-x: hidden;
   overflow-y: auto;
   background-color: var(--secondary-color-transparant);
-  position: fixed;
-  top: calc(12vh + 4.5rem)
 }
 
 .itemSidebar__add {

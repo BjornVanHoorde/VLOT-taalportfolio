@@ -1,0 +1,41 @@
+.backBtn {
+    width: fit-content;
+    padding: 1rem;
+    margin: 2rem 0 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+}
+
+.backBtn:hover {
+    background-color: var(--secondary-color);
+    cursor: pointer;
+    transition: ease-out 0.2s;
+}
+
+.back-circle {
+    height: 2vw;
+    width: 2vw;
+    transform: rotate(90deg);    
+    background-color: var(--primary-color);
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1vw;
+}
+
+.back-circle > img {
+    height: 50%;
+    width: 50%;
+}
+
+.back-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    width: auto;
+}

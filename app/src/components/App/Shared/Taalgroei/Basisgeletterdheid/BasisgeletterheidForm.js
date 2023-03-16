@@ -4,6 +4,7 @@ import Vaardigheden from "../../../../../core/constants/Vaardigheden";
 import useForm from "../../../../../core/hooks/useForm";
 import Button from "../../../../Design/Button/Button";
 import Select from "../../../../Design/Form/Select";
+import '../Basisgeletterdheid/styles/basisgeletterdheid.css';
 
 const transformData = (initialData) => {
   const transformedData = {};
@@ -50,7 +51,7 @@ const BasisgeletterdheidForm = ({
   return (
     <>
       {!isStudent && (
-        <>
+        <div className="all-values">
           <label>verander alle waarden</label>
           <Select
             name="change all"
@@ -58,10 +59,10 @@ const BasisgeletterdheidForm = ({
             value={currentAll}
             onChange={handleAllChange}
           />
-        </>
+        </div>
       )}
       <form
-        className="basisgeletterdheid-form"
+        className={`basisgeletterdheid-form ${isStudent ? "student" : "teacher"}`}
         onSubmit={handleSubmit(handleData)}
       >
         {Vaardigheden.map((vaardigheid) => {
@@ -93,6 +94,7 @@ const BasisgeletterdheidForm = ({
                         value={values[element.id]}
                         onChange={handleChange}
                         disabled={isStudent}
+                        className={values[element.id] === "true" ? "true" : "false"}
                       />
                     </div>
                   );

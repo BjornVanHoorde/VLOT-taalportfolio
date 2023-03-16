@@ -1,6 +1,6 @@
 import Proptypes from "prop-types";
 
-const Select = ({ options = [], name, disabled, value, onChange, error }) => {
+const Select = ({ options = [], name, disabled, value, onChange, error, className="" }) => {
   return (
     <>
       <select
@@ -8,6 +8,7 @@ const Select = ({ options = [], name, disabled, value, onChange, error }) => {
         disabled={disabled}
         value={String(value) || ""}
         onChange={onChange}
+        className={className}
       >
         {options &&
           options.map((option) => (

@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { SubNav } from "../../../../../core/constants/SidebarNav";
-import '../Taalgroei/styles/taalgroeiIndex.css';
+import { isStudent } from "../../../../../core/helpers/isRole";
+import '../Taalgroei/styles/taalgroeiScreen.css';
+
 
 const TaalgroeiScreen = () => {
   return (

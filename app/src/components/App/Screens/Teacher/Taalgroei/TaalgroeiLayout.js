@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { isTeacher } from "../../../../../core/helpers/isRole";
 import Construction from "../../../../Design/Construction/Construction";
 import TaalgroeiNav from "../../../Shared/Generic/TaalgroeiNav/TaalgroeiNav";
 import BasisGeletterdheidLayout from "./Basisgeletterdheid/BasisgeletterdheidLayout";
+import '../Taalgroei/styles/taalgroeiLayout.css'
 
 const TaalgroeiLayout = ({ student, klas }) => {
   const [currentTab, setCurrentTab] = useState();

@@ -1,0 +1,15 @@
+.taalgroei-index {
+    min-height: 100vh;
+    width: 100%;
+}
+
+.taalgroei-title {
+    font-size: 1.7rem;
+    padding: 2rem;
+}
+
+.disabled {
+    background-image: url('../../../../../../img/constructionBg.png');
+    background-color: rgb(211, 211, 211);
+    cursor: default;
+}
