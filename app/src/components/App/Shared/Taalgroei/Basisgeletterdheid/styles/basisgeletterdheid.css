@@ -33,8 +33,17 @@ font-weight: bold;
     outline: none;
     border: none;
     margin-inline-start: 1vw;
+    background-image: url('../../../../../../img/dropdown-neutral.svg');
+    background-repeat: no-repeat;
+    background-position: calc(100% - 10px) center;
+    background-size: 5%;
+    color: rgba(255, 255, 255, 0.0);
 }
 
+select option {
+    background-color: rgb(241, 241, 241);
+    color: black;
+}
 
 .true {
     background-color: rgb(28, 179, 28);
