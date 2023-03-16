@@ -1,8 +1,9 @@
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet, useOutletContext, useParams } from "react-router-dom";
 import useFetch from "../../../../../core/hooks/useFetch";
 import Loading from "../../../../Design/Loading/Loading";
 
 const AllStudentsLayout = () => {
+  const { onOtherLanguageChange, onOtherLanguageDismiss } = useOutletContext();
   const { klas } = useParams();
 
   const {
@@ -15,7 +16,15 @@ const AllStudentsLayout = () => {
     <>
       {isLoading && <Loading />}
       {students && (
-        <Outlet context={{ klas, students, onUpdate: invalidate }} />
+        <Outlet
+          context={{
+            klas,
+            students,
+            onUpdate: invalidate,
+            onOtherLanguageChange,
+            onOtherLanguageDismiss,
+          }}
+        />
       )}
     </>
   );

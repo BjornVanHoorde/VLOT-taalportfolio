@@ -12,7 +12,7 @@ import TaalprofielLayout from "../Taalprofiel/TaalprofielLayout";
 import "./styles/AllStudentsOverview.css";
 
 const AllStudentsOverview = () => {
-  const { klas, students } = useOutletContext();
+  const { klas, students, onOtherLanguageDismiss } = useOutletContext();
   const [currentStudent, setCurrentStudent] = useState();
   const [currentTab, setCurrentTab] = useState();
   const navigate = useNavigate();
@@ -23,6 +23,7 @@ const AllStudentsOverview = () => {
 
   const handleTabChange = (tab) => {
     if (tab !== "Taalgroei") {
+      onOtherLanguageDismiss();
       if (typeof currentStudent?.id === "string") {
         setCurrentStudent();
       }

@@ -7,7 +7,7 @@ import { useLanguageContext } from "../../../Language/LanguageProvider";
 import TaalProfielForm from "../../../Shared/Taalprofiel/Form";
 import "./styles/Overview.css";
 
-const Overview = ({ answers, handleChange }) => {
+const Overview = ({ answers }) => {
   const { currentLanguage } = useLanguageContext();
   const { auth } = useAuthContext();
   const [filteredData, setFilteredData] = useState();

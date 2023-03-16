@@ -2,8 +2,10 @@ import { NextFunction, Response } from "express";
 import ForbiddenError from "../../errors/ForbiddenError";
 import NotFoundError from "../../errors/NotFoundError";
 import { AuthRequest } from "../../middleware/auth/auth.types";
+import { CheckTeacherClasses } from "../../utils";
 import BasisgeletterdheidService from "../Basisgeletterdheid/Basisgeletterdheid.service";
 import BasisgeletterdheidLeerlingService from "../BasisgeletterdheidLeerling/BasisgeletterdheidLeerling.service";
+import KlasService from "../Klas/Klas.service";
 import TaalprofielAntwoordService from "../TaalprofielAntwoord/TaalprofielAntwoord.service";
 import TaalprofielVraagService from "../TaalprofielVraag/TaalprofielVraag.service";
 import { UserRole } from "./User.constants";
@@ -16,6 +18,7 @@ export default class UserController {
   private taalprofielAntwoordService: TaalprofielAntwoordService;
   private basisgeletterdheidLeerlingService: BasisgeletterdheidLeerlingService;
   private basisgeletterdheidService: BasisgeletterdheidService;
+  private klasService: KlasService;
 
   constructor() {
     this.userService = new UserService();
@@ -24,6 +27,7 @@ export default class UserController {
     this.basisgeletterdheidLeerlingService =
       new BasisgeletterdheidLeerlingService();
     this.basisgeletterdheidService = new BasisgeletterdheidService();
+    this.klasService = new KlasService();
   }
 
   all = async (
@@ -73,6 +77,12 @@ export default class UserController {
       return new ForbiddenError();
     }
 
+    if (req.user.isTeacher()) {
+      if (!(await CheckTeacherClasses(req.user.id, req.params.id))) {
+        next(new ForbiddenError());
+      }
+    }
+
     const students = await this.userService.studentsByClass(params.id);
     return res.json(students);
   };
@@ -86,6 +96,14 @@ export default class UserController {
 
     if (req.user.isStudent()) {
       return new ForbiddenError();
+    }
+
+    const klas = await this.klasService.findOneBy({ klas: params.klas });
+
+    if (req.user.isTeacher()) {
+      if (!(await CheckTeacherClasses(req.user.id, klas.id))) {
+        next(new ForbiddenError());
+      }
     }
 
     const students = await this.userService.studentsByClassName(params.klas);
