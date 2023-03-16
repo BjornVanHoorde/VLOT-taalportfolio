@@ -39,3 +39,8 @@ textarea {
 ::-webkit-scrollbar { 
     display: none; 
 }
+
+select option {
+    background-color: rgb(241, 241, 241);
+    color: black;
+}
