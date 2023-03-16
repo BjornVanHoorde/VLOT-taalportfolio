@@ -22,10 +22,13 @@ const AllStudentsOverview = () => {
   };
 
   const handleTabChange = (tab) => {
+    if (tab !== "Taalgroei") {
+      if (typeof currentStudent?.id === "string") {
+        setCurrentStudent();
+      }
+    }
     setCurrentTab(tab);
   };
-
-  console.log(currentStudent);
 
   return (
     <>

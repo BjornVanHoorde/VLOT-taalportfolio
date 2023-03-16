@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Input from "../../../Design/Form/Input";
-import Search from "../../../../img/search.svg";
 import "./styles/KlasHeader.css";
 
 const KlasHeader = ({ klas, onSearch }) => {
