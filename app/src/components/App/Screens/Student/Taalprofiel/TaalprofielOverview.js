@@ -91,12 +91,17 @@ const TaalprofielOverview = ({ answers, handleChange }) => {
       {currentLanguage.split(" ").length > 1 &&
         filteredData?.[0].andereTaal && (
           <div className="language-options">
-            <Button label="Bewerk taal" onClick={() => setShowModal(true)} />
+            <Button
+              label="Bewerk taal"
+              onClick={() => setShowModal(true)}
+              disabled={isLoading}
+            />
             <DeleteButton
               label="Verwijder taal"
               onSuccess={handleDelete}
               scope="andere-talen"
               id={filteredData[0].andereTaal.id}
+              disabled={isLoading}
             />
           </div>
         )}
@@ -106,6 +111,7 @@ const TaalprofielOverview = ({ answers, handleChange }) => {
           onSubmit={handleSubmit}
           editStatusStudent={getEditStatusStudent(auth, selectedYear)}
           currentLanguage={currentLanguage}
+          disabled={isLoading}
         />
       )}
       {filteredData?.length === 0 && (
@@ -119,6 +125,7 @@ const TaalprofielOverview = ({ answers, handleChange }) => {
           onSuccess={handleEdit}
           onDismiss={() => setShowModal(false)}
           otherLanguage={filteredData?.[0].andereTaal}
+          disabled={isLoading}
         />
       )}
     </div>

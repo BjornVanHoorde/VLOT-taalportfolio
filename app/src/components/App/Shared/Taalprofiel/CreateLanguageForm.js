@@ -1,12 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useMutation from "../../../../core/hooks/useMutation";
 import Modal from "../../../Design/Modal/Modal";
 import AndereTaalForm from "../AndereTaal/Form/AndereTaalForm";
 
-const CreateLanguageForm = ({ otherLanguage, onSuccess, onDismiss }) => {
+const CreateLanguageForm = ({
+  otherLanguage,
+  onSuccess,
+  onDismiss,
+  disabled,
+}) => {
   const { isLoading, error, mutate } = useMutation();
   // Check if the form is for updating or creating
-  const [isUpdate, setIsUpdate] = useState(otherLanguage ? true : false);
+  const [isUpdate] = useState(otherLanguage ? true : false);
 
   const handleSubmit = (values) => {
     mutate(
@@ -34,7 +39,7 @@ const CreateLanguageForm = ({ otherLanguage, onSuccess, onDismiss }) => {
           label={isUpdate ? "Bewerken" : "Toevoegen"}
           onSubmit={handleSubmit}
           initialData={otherLanguage}
-          disabled={isLoading}
+          disabled={isLoading || disabled}
         />
       </Modal>
     </>

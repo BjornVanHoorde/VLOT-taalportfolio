@@ -1,6 +1,6 @@
 import "./styles/Open.css";
 
-const Open = ({ answer, onChange, value, readOnly }) => {
+const Open = ({ answer, onChange, value, readOnly, disabled }) => {
   return (
     <div className="field">
       <p className="question">{answer.vraag.vraag}</p>
@@ -10,6 +10,7 @@ const Open = ({ answer, onChange, value, readOnly }) => {
         value={value}
         onChange={onChange}
         readOnly={readOnly}
+        disabled={disabled}
       />
     </div>
   );

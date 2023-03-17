@@ -22,7 +22,14 @@ const DeleteButton = ({ label, onSuccess, id, scope, disabled, ...rest }) => {
     }
   }, [error]);
 
-  return <Button className="deleteBtn" label={label} onClick={handleClick} />;
+  return (
+    <Button
+      className="deleteBtn"
+      label={label}
+      onClick={handleClick}
+      disabled={isLoading || disabled}
+    />
+  );
 };
 
 export default DeleteButton;
