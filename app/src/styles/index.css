@@ -5,6 +5,8 @@
 
 :root {
     min-height: 100vh;
+    max-width: 100vw;
+    overflow-x: hidden;
     font-family: "filson-soft", sans-serif;
     /* background: url('../img/achtergrond\ -\ design.png'); */
     background-size: cover;
