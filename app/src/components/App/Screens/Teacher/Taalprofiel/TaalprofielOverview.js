@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import useFetch from "../../../../../core/hooks/useFetch";
 import Loading from "../../../../Design/Loading/Loading";
+import Message from "../../../../Design/Message/Message";
 import { useLanguageContext } from "../../../Language/LanguageProvider";
 import { useYearContext } from "../../../Year/YearProvider";
 import Overview from "./Overview";
@@ -30,7 +31,7 @@ const TaalprofielOverview = ({ student, onUpdate }) => {
         <Overview answers={answers} handleChange={invalidate} />
       )}
       {answers && answers.length === 0 && (
-        <p>Er zijn nog geen antwoorden voor dit taalprofiel</p>
+        <Message message="Er zijn nog geen vragen voor dit taalprofiel" />
       )}
     </>
   );

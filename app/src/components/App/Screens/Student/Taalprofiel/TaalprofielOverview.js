@@ -80,7 +80,7 @@ const TaalprofielOverview = ({ answers, handleChange }) => {
   };
 
   return (
-    <>
+    <div className="taalprofiel-overview">
       {alert && (
         <div className="alert-list">
           <Alert message={alert.message} onClick={hideAlert} />
@@ -120,7 +120,7 @@ const TaalprofielOverview = ({ answers, handleChange }) => {
           otherLanguage={filteredData?.[0].andereTaal}
         />
       )}
-    </>
+    </div>
   );
 };
 

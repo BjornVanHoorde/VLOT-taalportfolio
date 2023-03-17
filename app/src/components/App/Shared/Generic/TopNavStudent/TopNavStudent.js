@@ -18,55 +18,56 @@ const TopNavStudent = ({ isTaalprofiel }) => {
     `/andere-talen/leerling/${auth.user.id}`
   );
 
-console.log(window.location.pathname);
-
   const handleSuccess = () => {
     setShowModal(false);
     invalidate();
   };
 
-  if (window.location.pathname === '/taalprofiel' || window.location.pathname === '/taalgroei/basisgeletterdheid') {
-  return (
-    <>
-      <div className="top-nav-student">
-        {TopNavLanguages.map((language) => (
-          <LanguageButton
-            label={language.label}
-            key={language.label}
-            activeLanguage={currentLanguage === language.label}
-            onClick={() => changeLanguage(language.label)}
-          />
-        ))}
-        {/* Show this only if the user is on the taalprofiel screen and if there are any other languages */}
-        {isTaalprofiel &&
-          otherLanguages?.length > 0 &&
-          otherLanguages.map((language) => (
+  if (
+    window.location.pathname === "/taalprofiel" ||
+    window.location.pathname === "/taalgroei/basisgeletterdheid"
+  ) {
+    return (
+      <>
+        <div className="top-nav-student">
+          {TopNavLanguages.map((language) => (
             <LanguageButton
-              key={language.id}
-              label={language.taal}
-              activeLanguage={
-                currentLanguage === `${Languages.Other} ${language.taal}`
-              }
-              onClick={() =>
-                changeLanguage(`${Languages.Other} ${language.taal}`)
-              }
+              label={language.label}
+              key={language.label}
+              activeLanguage={currentLanguage === language.label}
+              onClick={() => changeLanguage(language.label)}
             />
           ))}
-        {/* Show this only if the user is on the taalprofiel screen */}
-        {isTaalprofiel && (
-          <Button label="+" onClick={() => setShowModal(true)} />
+          {/* Show this only if the user is on the taalprofiel screen and if there are any other languages */}
+          {isTaalprofiel &&
+            otherLanguages?.length > 0 &&
+            otherLanguages.map((language) => (
+              <LanguageButton
+                key={language.id}
+                label={language.taal}
+                activeLanguage={
+                  currentLanguage === `${Languages.Other} ${language.taal}`
+                }
+                onClick={() =>
+                  changeLanguage(`${Languages.Other} ${language.taal}`)
+                }
+              />
+            ))}
+          {/* Show this only if the user is on the taalprofiel screen */}
+          {isTaalprofiel && (
+            <Button label="+" onClick={() => setShowModal(true)} />
+          )}
+        </div>
+        {/* Popup with the form to create a new language */}
+        {showModal && (
+          <CreateLanguageForm
+            onSuccess={handleSuccess}
+            onDismiss={() => setShowModal(false)}
+          />
         )}
-      </div>
-      {/* Popup with the form to create a new language */}
-      {showModal && (
-        <CreateLanguageForm
-          onSuccess={handleSuccess}
-          onDismiss={() => setShowModal(false)}
-        />
-      )}
-    </>
-  );
-}
+      </>
+    );
+  }
 };
 
 export default TopNavStudent;

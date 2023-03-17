@@ -42,7 +42,12 @@ const AndereTaalForm = ({ initialData = {}, disabled, onSubmit, label }) => {
           disabled={disabled}
         />
       </Field>
-      <Button align="right" type="submit" disabled={disabled} label={label} />
+      <Button
+        className="full-width"
+        type="submit"
+        disabled={disabled}
+        label={label}
+      />
     </form>
   );
 };

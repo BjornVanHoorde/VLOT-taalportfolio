@@ -9,6 +9,7 @@ import Nederlands from "../../../../../img/nederlands.png";
 import Frans from "../../../../../img/frans.png";
 import "./styles/TaalprofielScreen.css";
 import Languages from "../../../../../core/constants/Languages";
+import Message from "../../../../Design/Message/Message";
 
 const TaalprofielScreen = () => {
   const { auth } = useAuthContext();
@@ -63,9 +64,7 @@ const TaalprofielScreen = () => {
   // No answers screen
   if (answers.length === 0 || !answers) {
     return (
-      <p className="no-answers">
-        Er zijn nog geen vragen voor deze taal beschikbaar...
-      </p>
+      <Message message="Er zijn nog geen vragen voor deze taal beschikbaar..." />
     );
   }
 };

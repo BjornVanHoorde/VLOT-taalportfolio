@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { isTeacher } from "../../../../../core/helpers/isRole";
 import Construction from "../../../../Design/Construction/Construction";
 import TaalgroeiNav from "../../../Shared/Generic/TaalgroeiNav/TaalgroeiNav";
 import BasisGeletterdheidLayout from "./Basisgeletterdheid/BasisgeletterdheidLayout";
-import '../Taalgroei/styles/taalgroeiLayout.css'
+import "../Taalgroei/styles/taalgroeiLayout.css";
 
 const TaalgroeiLayout = ({ student, klas }) => {
   const [currentTab, setCurrentTab] = useState();
@@ -14,7 +13,11 @@ const TaalgroeiLayout = ({ student, klas }) => {
 
   return (
     <>
-      <div className="taalgroei__layout">
+      <div
+        className={`taalgroei__layout ${
+          currentTab !== "Basisgeletterdheid" ? "full-width" : ""
+        }`}
+      >
         <TaalgroeiNav onClick={handleNavClick} currentTab={currentTab} />
         {currentTab !== "Basisgeletterdheid" && currentTab !== undefined && (
           <Construction />

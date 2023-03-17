@@ -5,6 +5,7 @@ import KlasHeader from "../../../Shared/Klas/KlasHeader";
 import KlasGrid from "../../../Shared/Klas/Klasgrid";
 import "./styles/klasOverview.css";
 import { useEffect, useState } from "react";
+import Message from "../../../../Design/Message/Message";
 
 const KlasOverview = () => {
   // Get the class name from the url
@@ -48,12 +49,12 @@ const KlasOverview = () => {
       {isLoading && <Loading />}
       {filteredStudents && <KlasGrid students={filteredStudents} />}
       {students && students?.length === 0 && (
-        <p>Deze klas bevat geen leerlingen</p>
+        <Message message="Deze klas bevat geen leerlingen" />
       )}
       {students?.length > 0 &&
         filteredStudents &&
         filteredStudents?.length === 0 && (
-          <p>Er zijn geen leerlingen gevonden met deze naam</p>
+          <Message message="Er zijn geen leerlingen gevonden met deze naam" />
         )}
     </div>
   );

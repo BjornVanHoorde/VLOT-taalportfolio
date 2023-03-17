@@ -36,8 +36,8 @@ textarea {
     }
 }
 
-::-webkit-scrollbar { 
-    display: none; 
+::-webkit-scrollbar {
+    display: none;
 }
 
 select option {

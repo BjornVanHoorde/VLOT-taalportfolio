@@ -31,6 +31,10 @@ export default class BasisgeletterdheidLeerlingService {
     const basisgeletterdheidLeerlingen = await this.repository.find({
       where: { leerling: { klas: { id } } },
       relations: ["basisgeletterdheid", "leerling"],
+      order: {
+        leerling: { achternaam: "ASC" },
+        basisgeletterdheid: { id: "ASC" },
+      },
     });
     return basisgeletterdheidLeerlingen;
   };

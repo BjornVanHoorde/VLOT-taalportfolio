@@ -5,7 +5,6 @@ const BasisgeletterdheidScreen = ({ data, onUpdate, klas }) => {
   const { isLoading, error, mutate } = useMutation();
 
   const handleSubmit = (values) => {
-    console.log(values);
     for (const index in values) {
       mutate(
         `${process.env.REACT_APP_API_URL}/basisgeletterdheid/leerling/${index}`,
