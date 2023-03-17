@@ -17,6 +17,7 @@ const KlasOverview = () => {
     data: students,
     invalidate,
     isLoading,
+    error,
   } = useFetch(`/students/klas/name/${klas}`);
 
   // Filter the students based on the search input

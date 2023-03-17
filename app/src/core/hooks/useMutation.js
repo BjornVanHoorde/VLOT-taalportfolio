@@ -36,6 +36,7 @@ const useMutation = () => {
       });
       if (options.onSuccess) {
         options.onSuccess(result);
+        setIsLoading(false);
       } else {
         setIsLoading(false);
       }
