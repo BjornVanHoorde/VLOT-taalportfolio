@@ -76,6 +76,7 @@ const TaalprofielOverview = ({ answers, handleChange }) => {
   const handleEdit = () => {
     changeLanguage(Languages.Dutch);
     handleChange();
+    showAlert("De taal is aangepast.");
     window.location.reload();
   };
 
