@@ -21,6 +21,7 @@ const BasisgeletterdheidForm = ({
   onSubmit,
   klas,
   isStudent = false,
+  disabled,
 }) => {
   const [currentAll, setCurrentAll] = useState("");
   const { values, handleChange, handleSubmit, handleInvalidate } = useForm(
@@ -58,6 +59,7 @@ const BasisgeletterdheidForm = ({
             options={[{ label: "-", value: "" }, ...BasisgeletterdheidChoices]}
             value={currentAll}
             onChange={handleAllChange}
+            disabled={disabled}
           />
         </div>
       )}
@@ -95,7 +97,7 @@ const BasisgeletterdheidForm = ({
                         options={BasisgeletterdheidChoices}
                         value={values[element.id]}
                         onChange={handleChange}
-                        disabled={isStudent}
+                        disabled={isStudent || disabled}
                         className={`${
                           values[element.id] === "true" ? "true" : "false"
                         }
@@ -109,7 +111,12 @@ const BasisgeletterdheidForm = ({
           );
         })}
         {!isStudent && (
-          <Button align="right" label="Opslaan" className="form-button" />
+          <Button
+            align="right"
+            label="Opslaan"
+            className="form-button"
+            disabled={disabled}
+          />
         )}
       </form>
     </>

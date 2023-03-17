@@ -36,6 +36,7 @@ const BasisgeletterdheidScreen = ({ data, onUpdate, klas }) => {
           klas={klas ? klas : null}
           data={data}
           onSubmit={handleSubmit}
+          disabled={isLoading}
         />
       )}
     </>
