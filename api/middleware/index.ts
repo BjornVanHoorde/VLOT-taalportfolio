@@ -8,7 +8,7 @@ import { Application, NextFunction, Request, Response, Router } from "express";
 const registerMiddleware = (app: Router) => {
   // use CORS middleware
   // add "allow all" cors
-  if (process.env.ENV === "production") {
+  if (process.env.ENV === "PRODUCTION") {
     const corsOptions = {
       origin: process.env.APP_URL,
       optionsSuccessStatus: 200,
