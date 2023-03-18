@@ -15,7 +15,7 @@ const TaalgroeiLayout = ({ student, klas }) => {
     <>
       <div
         className={`taalgroei__layout ${
-          currentTab !== "Basisgeletterdheid" ? "full-width" : ""
+          currentTab !== "Basisgeletterdheid" ? "" : ""
         }`}
       >
         <TaalgroeiNav onClick={handleNavClick} currentTab={currentTab} />

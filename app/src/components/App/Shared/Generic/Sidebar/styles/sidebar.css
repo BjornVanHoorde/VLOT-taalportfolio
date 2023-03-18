@@ -38,7 +38,11 @@
     background-size: 1vw;
     background-repeat: no-repeat;
     background-position: calc(100% - 10px) center;
+}
 
+#jaar-selector > select option {
+    background-color: var(--primary-color);
+    color: var(--tertiary-color);
 }
 
 #sidebar-components {

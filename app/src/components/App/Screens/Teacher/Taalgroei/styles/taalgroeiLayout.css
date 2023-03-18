@@ -1,7 +1,7 @@
 .taalgroei__layout {
-    width: 75%;
-}
-
-.taalgroei__layout.full-width {
     width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }

@@ -86,12 +86,12 @@ const BasisgeletterdheidForm = ({
                       className="basisgeletterdheid-form__field"
                     >
                       {klas && (
-                        <p>
+                        <p className="geletterdheid-info-element">
                           {element.leerling.voornaam}{" "}
                           {element.leerling.achternaam}
                         </p>
                       )}
-                      <label>{element.basisgeletterdheid.geletterdheid}</label>
+                      <label className="geletterdheid-element-lkr">{element.basisgeletterdheid.geletterdheid}</label>
                       <Select
                         name={`${element.id}`}
                         options={BasisgeletterdheidChoices}

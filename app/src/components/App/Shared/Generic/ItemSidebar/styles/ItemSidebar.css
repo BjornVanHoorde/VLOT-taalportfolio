@@ -5,6 +5,7 @@
   overflow-x: hidden;
   overflow-y: auto;
   background-color: var(--secondary-color-transparant);
+  position: relative
 }
 
 .itemSidebar__add {
@@ -16,6 +17,7 @@
   font-size: 1rem;
   border-radius: 0 0 10px 0;
   border-top: none;
+  display: inline;
 }
 
 .itemSidebar__add:hover {
