@@ -1,4 +1,6 @@
 import { NextFunction, Request, Response, Router } from "express";
+import * as express from "express";
+import * as path from "path";
 import NotFoundError from "../errors/NotFoundError";
 import { authJwt, authLocal, withRole } from "../middleware/auth";
 import AndereTaalController from "../modules/AndereTaal/AndereTaal.controller";
@@ -666,6 +668,9 @@ const registerStudentRoutes = (router: Router) => {
 };
 
 const registerRoutes = (app: Router) => {
+  // public folder
+  app.use("/public", express.static(path.resolve(__dirname, "../public")));
+
   // Onboarding routes
   registerOnboardingRoutes(app);
 
