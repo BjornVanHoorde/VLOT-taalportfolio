@@ -46,3 +46,13 @@ select option {
     background-color: rgb(241, 241, 241);
     color: black;
 }
+
+.lln {
+    background-color: var(--primary-color);
+    color: #FFF;
+}
+
+.lkr {
+    background-color: var(--primary-color);
+    color: #FFF;
+}

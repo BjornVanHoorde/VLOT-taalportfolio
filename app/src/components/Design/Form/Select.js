@@ -1,6 +1,9 @@
 import Proptypes from "prop-types";
 
 const Select = ({ options = [], name, disabled, value, onChange, error, className="" }) => {
+
+  console.log();
+
   return (
     <>
       <select
@@ -12,7 +15,7 @@ const Select = ({ options = [], name, disabled, value, onChange, error, classNam
       >
         {options &&
           options.map((option) => (
-            <option key={option.value} value={option.value}>
+            <option key={option.value} value={option.value} className="">
               {option.label}
             </option>
           ))}

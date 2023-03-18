@@ -6,7 +6,7 @@
 
 .basisgeletterdheid-form.teacher {
     margin: 2rem;
-    width: 100%;
+    width: 95%;
 }
 
 .basisgeletterdheid-form__subpart {
@@ -14,9 +14,9 @@
     line-height: 2rem;
 }
 
-.basisgeletterdheid-form__subpart>h2 {
-    font-size: 1.3rem;
-    font-weight: bold;
+.basisgeletterdheid-form__subpart > h2 {
+font-size: 1.3rem;
+font-weight: bold;
 }
 
 .basisgeletterdheid-form__field {
@@ -28,19 +28,7 @@
     justify-content: space-between;
 }
 
-.basisgeletterdheid-form__field>select.student {
-    width: 15%;
-    outline: none;
-    border: none;
-    margin-inline-start: 1vw;
-    background-image: url('');
-    background-repeat: no-repeat;
-    background-position: calc(100% - 10px) center;
-    background-size: 5%;
-    color: rgba(255, 255, 255, 0.0);
-}
-
-.basisgeletterdheid-form__field>select.teacher {
+.basisgeletterdheid-form__field > select {
     width: 15%;
     outline: none;
     border: none;
@@ -50,11 +38,6 @@
     background-position: calc(100% - 10px) center;
     background-size: 5%;
     color: rgba(255, 255, 255, 0.0);
-}
-
-select option {
-    background-color: rgb(241, 241, 241);
-    color: black;
 }
 
 .true {
@@ -69,14 +52,14 @@ select option {
 
 .all-values {
     margin: 4rem 0 0 2rem;
-    width: 100%;
+    width: 95%;
     background-color: var(--primary-color);
     padding: 1rem;
     display: flex;
     justify-content: space-between;
 }
 
-.all-values>select {
+.all-values > select {
     width: 15%;
     border: none;
     padding: 0.5rem;
@@ -87,4 +70,12 @@ select option {
 label {
     display: flex;
     align-items: center;
+}
+
+.geletterdheid-element-lkr {
+    width: 60%;
+}
+
+.geletterdheid-info-element {
+    width: 15%;
 }
