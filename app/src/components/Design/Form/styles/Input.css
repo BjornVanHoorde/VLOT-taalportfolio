@@ -6,3 +6,10 @@ input {
   font-size: 1rem;
   margin: 2vh 0 2vh 0;
 }
+
+.invalid-feedback {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+}

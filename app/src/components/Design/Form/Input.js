@@ -13,6 +13,7 @@ const Input = ({
 }) => {
   return (
     <>
+      {error && <div className="invalid-feedback"> {error} </div>}
       <input
         type={type}
         name={name}
@@ -23,7 +24,6 @@ const Input = ({
         {...rest}
       />
       {children}
-      {error && <div className="invalid-feedback d-block"> {error} </div>}
     </>
   );
 };

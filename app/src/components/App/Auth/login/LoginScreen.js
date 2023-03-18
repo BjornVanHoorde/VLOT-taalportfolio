@@ -6,6 +6,7 @@ import * as yup from "yup";
 import Label from "../../../Design/Form/Label";
 import Input from "../../../Design/Form/Input";
 import "../login/styles/auth.css";
+import errorHandler from "../../../../core/helpers/errorHandler";
 
 // validation schema
 const schema = yup.object().shape({
@@ -46,7 +47,7 @@ const LoginScreen = () => {
           onSubmit={handleSubmit(handleData)}
           noValidate
         >
-          {error && <div className="error">{error}</div>}
+          {error && <div className="error">{errorHandler(error)}</div>}
           <div className="form-item">
             <Label htmlFor="email" className="auth-label">
               Gebruikersnaam of e-mail:

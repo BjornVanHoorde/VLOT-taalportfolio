@@ -12,8 +12,9 @@
 }
 
 #auth-login {
-    height: 55vh;
-    width: 50vh;
+    padding: 2rem 0;
+    height: auto;
+    width: 25%;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.295) 0px 0px 55px;
     display: flex;
