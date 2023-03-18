@@ -1,11 +1,8 @@
-import useAlert from "../../../../../../core/hooks/useAlert";
 import useMutation from "../../../../../../core/hooks/useMutation";
-import Alert from "../../../../../Design/Alert/Alert";
 import BasisgeletterdheidForm from "../../../../Shared/Taalgroei/Basisgeletterdheid/BasisgeletterheidForm";
 
 const BasisgeletterdheidScreen = ({ data, onUpdate, klas }) => {
   const { isLoading, error, mutate } = useMutation();
-  const { alert, showAlert, hideAlert } = useAlert();
 
   const handleSubmit = (values) => {
     for (const index in values) {
@@ -15,8 +12,6 @@ const BasisgeletterdheidScreen = ({ data, onUpdate, klas }) => {
           method: "PATCH",
           data: { status: values[index] === "true" ? true : false },
           onSuccess: () => {
-            window.scrollTo(0, 0);
-            showAlert("Basisgeletterdheden opgeslagen.");
             onUpdate();
           },
         }
@@ -26,11 +21,6 @@ const BasisgeletterdheidScreen = ({ data, onUpdate, klas }) => {
 
   return (
     <>
-      {alert && (
-        <div className="alert-list">
-          <Alert message={alert.message} onClick={hideAlert} />
-        </div>
-      )}
       {data && (
         <BasisgeletterdheidForm
           klas={klas ? klas : null}
