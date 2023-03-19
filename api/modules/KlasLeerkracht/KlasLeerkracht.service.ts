@@ -44,8 +44,8 @@ export default class KlasLeerkrachtService {
     const klassen = await this.repository.find({
       where: {
         leerkracht: { id },
-        geldigVan: MoreThanOrEqual(new Date(`${beginYear}-08-31`)),
-        geldigTot: LessThanOrEqual(new Date(`${endYear}-07-01`)),
+        // geldigVan: MoreThanOrEqual(new Date(`${beginYear}-08-31`)),
+        // geldigTot: LessThanOrEqual(new Date(`${endYear}-07-01`)),
       },
       relations: ["klas"],
     });
