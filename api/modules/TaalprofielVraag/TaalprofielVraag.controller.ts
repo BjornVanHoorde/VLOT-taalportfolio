@@ -160,7 +160,7 @@ export default class TaalprofielVraagController {
 
   fillInTaalprofielVragen = async (leerlingen, taalprofielVraag) => {
     leerlingen.forEach(async (leerling) => {
-      if (leerling.andereTalen.length > 0) {
+      if (leerling.andereTalen?.length > 0) {
         for (let index = 0; index < leerling.andereTalen.length; index++) {
           for (let jaar = 1; jaar < 3; jaar++) {
             await this.taalprofielAntwoordService.create({
