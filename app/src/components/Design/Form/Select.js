@@ -1,9 +1,14 @@
 import Proptypes from "prop-types";
 
-const Select = ({ options = [], name, disabled, value, onChange, error, className="" }) => {
-
-  console.log();
-
+const Select = ({
+  options = [],
+  name,
+  disabled,
+  value,
+  onChange,
+  error,
+  className = "",
+}) => {
   return (
     <>
       <select

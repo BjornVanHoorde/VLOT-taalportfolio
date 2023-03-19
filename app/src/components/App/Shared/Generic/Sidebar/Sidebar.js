@@ -3,8 +3,9 @@ import logo from "../../../../../img/logo.svg";
 import { useAuthContext } from "../../../Auth/AuthProvider";
 import AccountInfo from "./AccountInfo";
 import JaarSelector from "./JaarSelector";
-import Navigation from "./Navigation";
 import "./styles/sidebar.css";
+import StudentNavigation from "./StudentNavigation";
+import TeacherNavigation from "./TeacherNavigation";
 
 const Sidebar = () => {
   const { auth, logout } = useAuthContext();
@@ -19,7 +20,8 @@ const Sidebar = () => {
         <img src={logo} alt="logo van de school" />
       </div>
       <JaarSelector />
-      {auth && <Navigation auth={auth} />}
+      {isStudent(auth) && <StudentNavigation auth={auth} />}
+      {isTeacher(auth) && <TeacherNavigation auth={auth} />}
       <AccountInfo />
       <button className="logout-btn" onClick={logout}>
         logout

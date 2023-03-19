@@ -1,10 +1,9 @@
-import { MainNav, SubNav } from "../../../../../core/constants/SidebarNav";
-import { isStudent, isTeacher } from "../../../../../core/helpers/isRole";
+import { isTeacher } from "../../../../../core/helpers/isRole";
 import useFetch from "../../../../../core/hooks/useFetch";
 import SidebarNav from "../../../../Design/Nav/SidebarNav";
 import { useYearContext } from "../../../Year/YearProvider";
 
-const Navigation = ({ auth }) => {
+const TeacherNavigation = ({ auth }) => {
   const { selectedYear } = useYearContext();
   const {
     data: klassen,
@@ -14,11 +13,7 @@ const Navigation = ({ auth }) => {
 
   return (
     <div id="sidebar-components">
-      {auth && isStudent(auth) && (
-        <SidebarNav items={MainNav} classname="main-nav">
-          <SidebarNav items={SubNav} classname="sub-nav" />
-        </SidebarNav>
-      )}
+      {isLoading && <p>Loading...</p>}
       {auth && isTeacher(auth) && klassen && (
         <SidebarNav itemsType="klassen" items={klassen} classname="main-nav" />
       )}
@@ -26,4 +21,4 @@ const Navigation = ({ auth }) => {
   );
 };
 
-export default Navigation;
+export default TeacherNavigation;
