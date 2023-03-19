@@ -9,4 +9,6 @@ export interface AuthRequest<
   Locals extends Record<string, any> = Record<string, any>
 > extends Request<P, ResBody, ReqBody, ReqQuery, Locals> {
   user: User;
+  params: any;
+  body: any;
 }
