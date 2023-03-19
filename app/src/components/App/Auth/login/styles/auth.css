@@ -42,11 +42,12 @@ button:hover {
 }
 
 .error {
-    margin-bottom: 3vh;
+    margin-bottom: 2vh;
+    width: fit-content;
     height: 4vh;
     display: flex;
     align-items: center;
-    padding: 1rem;
+    padding: 2rem 1.5rem 2rem 1.5rem;
     color: crimson;
     background-color: rgb(255, 193, 193);
     font-weight: 400;
@@ -56,6 +57,7 @@ button:hover {
     font-weight: bold;
     font-size: 1.4rem;
     transform: translateX(-2vw);
+    margin: 2rem;
 }
 
 #auth-login>form>button {
