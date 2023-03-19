@@ -668,6 +668,9 @@ const registerStudentRoutes = (router: Router) => {
 };
 
 const registerRoutes = (app: Router) => {
+  // public folder
+  app.use("/public", express.static(path.resolve(__dirname, "../public")));
+
   // Onboarding routes
   registerOnboardingRoutes(app);
 
