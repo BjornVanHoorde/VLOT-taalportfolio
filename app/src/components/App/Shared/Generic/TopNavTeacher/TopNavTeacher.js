@@ -4,11 +4,14 @@ import { isTeacher } from "../../../../../core/helpers/isRole";
 import LanguageButton from "../../../../Design/Button/LanguageButton";
 import { useAuthContext } from "../../../Auth/AuthProvider";
 import { useLanguageContext } from "../../../Language/LanguageProvider";
+import { useLocation } from "react-router-dom";
 import "./styles/topbar-teacher.css";
+import { getKlasYear } from "../../../../../core/helpers/getYear";
 
 const TopNavTeacher = ({ otherLanguages }) => {
   const { auth } = useAuthContext();
   const { currentLanguage, changeLanguage } = useLanguageContext();
+  const location = useLocation();
 
   return (
     <>
@@ -20,6 +23,15 @@ const TopNavTeacher = ({ otherLanguages }) => {
             activeLanguage={currentLanguage === language.label}
             onClick={() => changeLanguage(language.label)}
             isTeacher={isTeacher(auth)}
+            klasYear={
+              location.pathname === "/home"
+                ? 7
+                : getKlasYear(
+                    location.pathname.split("/")[
+                      location.pathname.split("/").length - 1
+                    ]
+                  )
+            }
           />
         ))}
         {otherLanguages?.length > 0 &&

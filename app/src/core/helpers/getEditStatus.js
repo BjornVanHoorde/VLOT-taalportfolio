@@ -1,4 +1,4 @@
-import getYear from "./getYear";
+import { getYear } from "./getYear";
 
 // Get the edit status of the student
 const getEditStatusStudent = (student, selectedYear) => {

@@ -10,4 +10,16 @@ const getYear = (user) => {
   return year;
 };
 
-export default getYear;
+// This function returns the year of the klas
+const getKlasYear = (klasName) => {
+  const klas = klasName.split("");
+  let year;
+  klas.map((item) => {
+    if (!isNaN(item)) {
+      year = parseFloat(item);
+    }
+  });
+  return year;
+};
+
+export { getYear, getKlasYear };
