@@ -1,6 +1,7 @@
 import { Request } from "express";
 import User from "../../modules/User/User.entity";
 
+// Interface for the request object
 export interface AuthRequest<
   P = void,
   ResBody = void,

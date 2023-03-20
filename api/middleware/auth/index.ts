@@ -11,6 +11,7 @@ import { UserRole } from "../../modules/User/User.constants";
 passport.use("local", LocalStrategy);
 passport.use("jwt", JwtStrategy);
 
+// This is a wrapper for passport.authenticate that handles errors
 const passportWithErrorHandling = (strategy: any) => {
   return function (req, res: Response, next: NextFunction) {
     passport.authenticate(
@@ -20,7 +21,7 @@ const passportWithErrorHandling = (strategy: any) => {
         if (err) {
           return next(err);
         }
-        if (!user) {          
+        if (!user) {
           return next(new AuthError());
         } else {
           req.user = user;
@@ -34,12 +35,15 @@ const passportWithErrorHandling = (strategy: any) => {
 const authLocal = passportWithErrorHandling("local");
 const authJwt = passportWithErrorHandling("jwt");
 
+// Creates a JWT token for the user that will expire in the number of hours specified in the .env file
+// The token wil keep track of the user
 const createToken = (user: User) => {
   return jwt.sign({ id: user.id, user: user.email }, process.env.JWT_SECRET, {
     expiresIn: parseInt(process.env.JWT_EXPIRES_IN_HOURS) * 60 * 60,
   });
 };
 
+// Middleware that checks if the user has the required role
 const withRole = (roles: UserRole) => (req, res, next) => {
   const { user } = req;
 

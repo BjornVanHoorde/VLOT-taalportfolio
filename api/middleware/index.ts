@@ -13,23 +13,27 @@ const registerMiddleware = (app: Router) => {
       origin: process.env.APP_URL,
       optionsSuccessStatus: 200,
     };
+    // allows CORS online
     app.use(cors(corsOptions));
   } else {
     app.use(cors());
   }
-
+  // JSON is going to be the default format
   app.use(bodyParser.json());
   app.use(
     bodyParser.urlencoded({
       extended: true,
     })
   );
-
+  // blocks the browser from trying to guess the MIME type
   app.use(helmet.noSniff());
+  // Hides the X-Powered-By header
   app.use(helmet.hidePoweredBy());
+  // Adds a filter to prevent XSS attacks
   app.use(helmet.xssFilter());
 };
 
+// Error handler
 const registerErrorHandler = (app: Application) => {
   // Default error handler
   app.use(function (

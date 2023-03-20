@@ -18,6 +18,7 @@ import VaardighedenOnderdeel from "../modules/VaardighedenOnderdeel/Vaardigheden
 import WoordenschatOnderdeel from "../modules/WoordenschatOnderdeel/WoordenschatOnderdeel.entity";
 import WoordenschatWoord from "../modules/WoordenschatWoord/WoordenschatWoord.entity";
 
+// config for the database
 export const AppDataSource = new DataSource({
   type: "postgres",
   host: process.env.DB_HOST,

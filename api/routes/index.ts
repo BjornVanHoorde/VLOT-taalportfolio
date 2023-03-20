@@ -23,6 +23,7 @@ import VaardighedenOnderdeelController from "../modules/VaardighedenOnderdeel/Va
 import WoordenschatOnderdeelController from "../modules/WoordenschatOnderdeel/WoordenschatOnderdeel.controller";
 import WoordenschatWoordController from "../modules/WoordenschatWoord/WoordenschatWoord.controller";
 
+// wrapper for error handling
 const useMethod =
   (func: (req: any, res: Response, next: NextFunction) => Promise<any>) =>
   async (req: Request, res: Response, next: NextFunction) => {
@@ -33,6 +34,7 @@ const useMethod =
     }
   };
 
+// Routes that are not protected by authJWT
 const registerOnboardingRoutes = (router: Router) => {
   // Register onboarding routes
   const authController = new AuthController();

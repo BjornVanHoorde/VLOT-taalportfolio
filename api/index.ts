@@ -5,6 +5,7 @@ import { AppDataSource } from "./database/DatabaseSource";
 import { registerErrorHandler, registerMiddleware } from "./middleware";
 import { registerRoutes } from "./routes";
 
+// initialize database
 AppDataSource.initialize()
   .then(async () => {
     const app = express();

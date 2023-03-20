@@ -6,6 +6,7 @@ const jwtOptions = {
   secretOrKey: process.env.JWT_SECRET,
 };
 
+// This strategy will be used to check if the user is authenticated for the API
 export default new Strategy(jwtOptions, async (payload, done) => {
   try {
     const { email, id } = payload;
