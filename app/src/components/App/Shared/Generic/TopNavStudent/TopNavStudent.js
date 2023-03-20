@@ -30,14 +30,24 @@ const TopNavStudent = ({ isTaalprofiel }) => {
     return (
       <>
         <div className="top-nav-student">
-          {TopNavLanguages.map((language) => (
-            <LanguageButton
-              label={language.label}
-              key={language.label}
-              activeLanguage={currentLanguage === language.label}
-              onClick={() => changeLanguage(language.label)}
-            />
-          ))}
+          {/* If the screen is basisgeletterdhied, only show Dutch */}
+          {window.location.pathname === "/taalgroei/basisgeletterdheid"
+            ? [{ label: "Nederlands" }].map((language) => (
+                <LanguageButton
+                  label={language.label}
+                  key={language.label}
+                  activeLanguage={currentLanguage === language.label}
+                  onClick={() => changeLanguage(language.label)}
+                />
+              ))
+            : TopNavLanguages.map((language) => (
+                <LanguageButton
+                  label={language.label}
+                  key={language.label}
+                  activeLanguage={currentLanguage === language.label}
+                  onClick={() => changeLanguage(language.label)}
+                />
+              ))}
           {/* Show this only if the user is on the taalprofiel screen and if there are any other languages */}
           {isTaalprofiel &&
             otherLanguages?.length > 0 &&

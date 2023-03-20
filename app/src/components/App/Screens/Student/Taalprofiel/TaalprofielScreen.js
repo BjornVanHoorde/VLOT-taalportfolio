@@ -38,8 +38,9 @@ const TaalprofielScreen = () => {
     return (
       <>
         <TaalprofielOverview answers={answers} handleChange={invalidate} />
-        {/* if the current language is not made up show this */}
-        {currentLanguage.split(" ").length === 1 && (
+        {/* if the current language is not made up show this
+            This section is currently left out.*/}
+        {/* {currentLanguage.split(" ").length === 1 && (
           <section className="vlag">
             <img
               src={
@@ -57,7 +58,7 @@ const TaalprofielScreen = () => {
               width="100%"
             ></img>
           </section>
-        )}
+        )} */}
       </>
     );
   }
