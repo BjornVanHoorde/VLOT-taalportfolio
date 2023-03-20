@@ -30,7 +30,7 @@ const TaalprofielOverview = ({ answers, handleChange }) => {
       setFilteredData(answers);
     } else {
       const filteredAnswers = answers.filter(
-        (answer) => answer.andereTaal.taal === currentLanguage.split(" ").pop()
+        (answer) => answer.andereTaal?.taal === currentLanguage.split(" ").pop()
       );
       setFilteredData(filteredAnswers);
     }
