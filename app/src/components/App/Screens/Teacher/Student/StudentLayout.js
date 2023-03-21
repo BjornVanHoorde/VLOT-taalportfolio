@@ -5,7 +5,12 @@ import Loading from "../../../../Design/Loading/Loading";
 // This is a layout that will be used for the student pages
 const StudentLayout = () => {
   const { student } = useParams();
-  const { onOtherLanguageChange, onOtherLanguageDismiss } = useOutletContext();
+  const {
+    onOtherLanguageChange,
+    onOtherLanguageDismiss,
+    onBasisgeletterdheid,
+    onBasisgeletterdheidDismiss,
+  } = useOutletContext();
 
   const {
     data: studentData,
@@ -23,6 +28,8 @@ const StudentLayout = () => {
             onUpdate: invalidate,
             onOtherLanguageChange,
             onOtherLanguageDismiss,
+            onBasisgeletterdheid,
+            onBasisgeletterdheidDismiss,
           }}
         />
       )}

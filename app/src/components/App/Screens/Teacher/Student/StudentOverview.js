@@ -10,13 +10,24 @@ import TaalgroeiLayout from "../Taalgroei/TaalgroeiLayout";
 import TaalprofielLayout from "../Taalprofiel/TaalprofielLayout";
 
 const StudentOverview = () => {
-  const { student, onOtherLanguageDismiss } = useOutletContext();
+  const {
+    student,
+    onOtherLanguageDismiss,
+    onBasisgeletterdheid,
+    onBasisgeletterdheidDismiss,
+  } = useOutletContext();
   const [currentTab, setCurrentTab] = useState();
   const navigate = useNavigate();
 
   const handleTabChange = (tab) => {
     if (tab !== "Taalprofiel") {
       onOtherLanguageDismiss();
+    }
+    if (tab === "Basisgeletterdheid") {
+      onBasisgeletterdheid();
+    }
+    if (tab !== "Basisgeletterdheid") {
+      onBasisgeletterdheidDismiss();
     }
     setCurrentTab(tab);
   };

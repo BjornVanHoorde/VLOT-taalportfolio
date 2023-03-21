@@ -14,7 +14,13 @@ import TaalprofielLayout from "../Taalprofiel/TaalprofielLayout";
 import "./styles/AllStudentsOverview.css";
 
 const AllStudentsOverview = () => {
-  const { klas, students, onOtherLanguageDismiss } = useOutletContext();
+  const {
+    klas,
+    students,
+    onOtherLanguageDismiss,
+    onBasisgeletterdheid,
+    onBasisgeletterdheidDismiss,
+  } = useOutletContext();
   const { currentLanguage, changeLanguage } = useLanguageContext();
   const [currentStudent, setCurrentStudent] = useState();
   const [currentTab, setCurrentTab] = useState();
@@ -33,6 +39,12 @@ const AllStudentsOverview = () => {
       if (typeof currentStudent?.id === "string") {
         setCurrentStudent();
       }
+    }
+    if (tab === "Basisgeletterdheid") {
+      onBasisgeletterdheid();
+    }
+    if (tab !== "Basisgeletterdheid") {
+      onBasisgeletterdheidDismiss();
     }
     setCurrentTab(tab);
   };

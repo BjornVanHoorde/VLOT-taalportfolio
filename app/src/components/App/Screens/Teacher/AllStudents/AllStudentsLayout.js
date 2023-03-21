@@ -3,7 +3,12 @@ import useFetch from "../../../../../core/hooks/useFetch";
 import Loading from "../../../../Design/Loading/Loading";
 
 const AllStudentsLayout = () => {
-  const { onOtherLanguageChange, onOtherLanguageDismiss } = useOutletContext();
+  const {
+    onOtherLanguageChange,
+    onOtherLanguageDismiss,
+    onBasisgeletterdheid,
+    onBasisgeletterdheidDismiss,
+  } = useOutletContext();
   const { klas } = useParams();
 
   const {
@@ -23,6 +28,8 @@ const AllStudentsLayout = () => {
             onUpdate: invalidate,
             onOtherLanguageChange,
             onOtherLanguageDismiss,
+            onBasisgeletterdheid,
+            onBasisgeletterdheidDismiss,
           }}
         />
       )}

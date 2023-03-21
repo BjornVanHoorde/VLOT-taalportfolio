@@ -11,6 +11,15 @@ const AppLayout = () => {
   const { auth } = useAuthContext();
   const location = useLocation();
   const [otherLanguages, setOtherLanguages] = useState([]);
+  const [isBasisgeletterdheid, setIsBasisgeletterdheid] = useState(false);
+
+  const handleBasisgeletterheid = () => {
+    setIsBasisgeletterdheid(true);
+  };
+
+  const handleBasisgeletterdheidDismiss = () => {
+    setIsBasisgeletterdheid(false);
+  };
 
   const handleOtherLanguageChange = (languages) => {
     setOtherLanguages(languages);
@@ -44,12 +53,17 @@ const AppLayout = () => {
             />
           )}
           {auth && isTeacher(auth) && (
-            <TopNavTeacher otherLanguages={otherLanguages} />
+            <TopNavTeacher
+              otherLanguages={otherLanguages}
+              basisgeletterdheid={isBasisgeletterdheid}
+            />
           )}
           <Outlet
             context={{
               onOtherLanguageChange: handleOtherLanguageChange,
               onOtherLanguageDismiss: handleOtherLanguageDismiss,
+              onBasisgeletterdheid: handleBasisgeletterheid,
+              onBasisgeletterdheidDismiss: handleBasisgeletterdheidDismiss,
             }}
           />
         </div>
