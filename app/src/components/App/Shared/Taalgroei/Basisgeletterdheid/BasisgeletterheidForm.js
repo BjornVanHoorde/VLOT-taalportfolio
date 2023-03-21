@@ -50,7 +50,7 @@ const BasisgeletterdheidForm = ({
   };
 
   return (
-    <>
+    <div className="basisgeletterdheid-form-div">
       {!isStudent && (
         <div className="all-values">
           <label>verander alle waarden</label>
@@ -91,7 +91,9 @@ const BasisgeletterdheidForm = ({
                           {element.leerling.achternaam}
                         </p>
                       )}
-                      <label className="geletterdheid-element-lkr">{element.basisgeletterdheid.geletterdheid}</label>
+                      <label className="geletterdheid-element-lkr">
+                        {element.basisgeletterdheid.geletterdheid}
+                      </label>
                       <Select
                         name={`${element.id}`}
                         options={BasisgeletterdheidChoices}
@@ -119,7 +121,7 @@ const BasisgeletterdheidForm = ({
           />
         )}
       </form>
-    </>
+    </div>
   );
 };
 

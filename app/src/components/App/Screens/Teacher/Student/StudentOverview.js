@@ -5,6 +5,7 @@ import { KlasRoutes, route } from "../../../../../core/routes";
 import BackButton from "../../../../Design/Button/BackButton";
 import Construction from "../../../../Design/Construction/Construction";
 import TabNav from "../../../../Design/Nav/TabNav";
+import BasisGeletterdheidLayout from "../Basisgeletterdheid/BasisgeletterdheidLayout";
 import TaalgroeiLayout from "../Taalgroei/TaalgroeiLayout";
 import TaalprofielLayout from "../Taalprofiel/TaalprofielLayout";
 
@@ -38,6 +39,10 @@ const StudentOverview = () => {
       )}
       {currentTab === "Taaldossier" && <Construction />}
       {currentTab === "Taalgroei" && <TaalgroeiLayout student={student} />}
+      {currentTab === "Basisgeletterdheid" && <BasisGeletterdheidLayout />}
+      {currentTab === "Basisgeletterdheid" && (
+        <BasisGeletterdheidLayout student={student} />
+      )}
     </>
   );
 };

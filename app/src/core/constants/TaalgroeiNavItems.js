@@ -11,9 +11,6 @@ const TaalgroeiNavItems = [
   {
     label: "Taaltips",
   },
-  {
-    label: "Basisgeletterdheid",
-  },
 ];
 
 export default TaalgroeiNavItems;

@@ -8,7 +8,7 @@ import Construction from "../../../../Design/Construction/Construction";
 import TabNav from "../../../../Design/Nav/TabNav";
 import { useLanguageContext } from "../../../Language/LanguageProvider";
 import ItemSidebar from "../../../Shared/Generic/ItemSidebar/ItemSidebar";
-import ItemSidebarWithClassOption from "../../../Shared/Generic/ItemSidebar/ItemSidebarWithClassOption";
+import BasisGeletterdheidLayout from "../Basisgeletterdheid/BasisgeletterdheidLayout";
 import TaalgroeiLayout from "../Taalgroei/TaalgroeiLayout";
 import TaalprofielLayout from "../Taalprofiel/TaalprofielLayout";
 import "./styles/AllStudentsOverview.css";
@@ -28,7 +28,7 @@ const AllStudentsOverview = () => {
   };
 
   const handleTabChange = (tab) => {
-    if (tab !== "Taalgroei") {
+    if (tab !== "Taalprofiel") {
       onOtherLanguageDismiss();
       if (typeof currentStudent?.id === "string") {
         setCurrentStudent();
@@ -50,29 +50,22 @@ const AllStudentsOverview = () => {
       />
       <div className="allStudentsOverview__main">
         <div className="allStudentsOverview__main__spaceHelper"></div>
-        {currentTab === "Taalgroei" && (
-          <ItemSidebarWithClassOption
-            items={students}
-            title="students"
-            onChange={handleStudentChange}
-            activeItem={currentStudent}
-            klas={klas}
-          />
-        )}
-        {currentTab !== "Taalgroei" && (
-          <ItemSidebar
-            items={students}
-            title="students"
-            onChange={handleStudentChange}
-            activeItem={currentStudent}
-          />
-        )}
+        <ItemSidebar
+          items={students}
+          title="students"
+          onChange={handleStudentChange}
+          activeItem={currentStudent}
+          klas={klas}
+        />
         {currentTab === "Taalprofiel" && currentStudent && (
           <TaalprofielLayout student={currentStudent} />
         )}
         {currentTab === "Taaldossier" && currentStudent && <Construction />}
         {currentTab === "Taalgroei" && currentStudent && (
           <TaalgroeiLayout student={currentStudent} klas={klas} />
+        )}
+        {currentTab === "Basisgeletterdheid" && currentStudent && (
+          <BasisGeletterdheidLayout student={currentStudent} />
         )}
       </div>
     </>

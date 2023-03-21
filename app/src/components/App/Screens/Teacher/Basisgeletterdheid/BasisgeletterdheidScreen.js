@@ -1,5 +1,5 @@
-import useMutation from "../../../../../../core/hooks/useMutation";
-import BasisgeletterdheidForm from "../../../../Shared/Taalgroei/Basisgeletterdheid/BasisgeletterheidForm";
+import useMutation from "../../../../../core/hooks/useMutation";
+import BasisgeletterdheidForm from "../../../Shared/Taalgroei/Basisgeletterdheid/BasisgeletterheidForm";
 
 const BasisgeletterdheidScreen = ({ data, onUpdate, klas }) => {
   const { isLoading, error, mutate } = useMutation();

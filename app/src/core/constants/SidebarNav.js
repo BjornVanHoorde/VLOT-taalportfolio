@@ -1,4 +1,5 @@
 import {
+  BasisgeletterdheidRoutes,
   TaaldossierRoutes,
   TaalgroeiRoutes,
   TaalprofielRoutes,
@@ -12,6 +13,10 @@ const MainNav = [
   {
     href: TaaldossierRoutes.Index,
     label: "Taaldossier",
+  },
+  {
+    href: BasisgeletterdheidRoutes.Index,
+    label: "Basisgeletterdheid",
   },
   {
     href: TaalgroeiRoutes.Index,
@@ -35,10 +40,6 @@ const SubNav = [
   {
     href: TaalgroeiRoutes.Taaltips,
     label: "Taaltips",
-  },
-  {
-    href: TaalgroeiRoutes.Basisgeletterdheid,
-    label: "Basisgeletterdheid",
   },
 ];
 

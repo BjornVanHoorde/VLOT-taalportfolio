@@ -1,7 +1,7 @@
-import useFetch from "../../../../../../core/hooks/useFetch";
-import Loading from "../../../../../Design/Loading/Loading";
-import { useAuthContext } from "../../../../Auth/AuthProvider";
-import BasisgeletterdheidForm from "../../../../Shared/Taalgroei/Basisgeletterdheid/BasisgeletterheidForm";
+import useFetch from "../../../../../core/hooks/useFetch";
+import Loading from "../../../../Design/Loading/Loading";
+import { useAuthContext } from "../../../Auth/AuthProvider";
+import BasisgeletterdheidForm from "../../../Shared/Taalgroei/Basisgeletterdheid/BasisgeletterheidForm";
 
 const BasisgeletterdheidScreen = () => {
   const { auth } = useAuthContext();

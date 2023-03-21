@@ -4,7 +4,7 @@
 }
 
 .tabNav-button {
-  width: 10%;
+  width: auto;
   height: 4vh;
   background-color: var(--white);
   border: solid 3px var(--primary-color);

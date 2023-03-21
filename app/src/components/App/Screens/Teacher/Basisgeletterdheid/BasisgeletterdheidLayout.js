@@ -1,7 +1,7 @@
-import useAlert from "../../../../../../core/hooks/useAlert";
-import useFetch from "../../../../../../core/hooks/useFetch";
-import Alert from "../../../../../Design/Alert/Alert";
-import Loading from "../../../../../Design/Loading/Loading";
+import useAlert from "../../../../../core/hooks/useAlert";
+import useFetch from "../../../../../core/hooks/useFetch";
+import Alert from "../../../../Design/Alert/Alert";
+import Loading from "../../../../Design/Loading/Loading";
 import BasisgeletterdheidScreen from "./BasisgeletterdheidScreen";
 
 const BasisGeletterdheidLayout = ({ student, klas }) => {

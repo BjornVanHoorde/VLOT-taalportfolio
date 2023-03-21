@@ -40,7 +40,7 @@
     background-position: calc(100% - 10px) center;
 }
 
-#jaar-selector > select option {
+#jaar-selector>select option {
     background-color: var(--primary-color);
     color: var(--tertiary-color);
 }
@@ -88,7 +88,7 @@
     text-decoration: none;
 }
 
-.main-nav>li:nth-child(3) {
+.main-nav>li:nth-child(4) {
     margin-bottom: 1rem;
 }
 

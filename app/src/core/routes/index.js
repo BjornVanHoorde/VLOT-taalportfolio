@@ -19,7 +19,11 @@ const TaalgroeiRoutes = {
   Foutanalyse: "/taalgroei/foutanalyse",
   Woordenschat: "/taalgroei/woordenschat",
   Taaltips: "/taalgroei/taaltips",
-  Basisgeletterdheid: "/taalgroei/basisgeletterdheid",
+};
+
+const BasisgeletterdheidRoutes = {
+  Index: "/basisgeletterdheid",
+  Overview: "/basisgeletterdheid/:student",
 };
 
 const ProfielRoute = {
@@ -57,4 +61,5 @@ export {
   StudentRoutes,
   AllStudentRoutes,
   TaaldossierRoutes,
+  BasisgeletterdheidRoutes,
 };

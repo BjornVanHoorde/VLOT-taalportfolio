@@ -3,6 +3,7 @@ import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import {
   AllStudentRoutes,
   AuthRoutes,
+  BasisgeletterdheidRoutes,
   KlasRoutes,
   ProfielRoute,
   StudentRoutes,
@@ -33,8 +34,8 @@ import TaaldossierScreen from "./Screens/Student/Taaldossier/TaaldossierScreen";
 import FoutanalyseScreen from "./Screens/Student/Taalgroei/Foutanalyse/FoutanalyseScreen";
 import WoordenschatScreen from "./Screens/Student/Taalgroei/Woordenschat/WoordenschatScreen";
 import TaaltipsScreen from "./Screens/Student/Taalgroei/Taaltips/TaaltipsScreen";
-import BasisgeletterdheidScreen from "./Screens/Student/Taalgroei/Basisgeletterdheid/BasisgeletterdheidScreen";
 import TaalgroeiScreen from "./Screens/Student/Taalgroei/TaalgroeiScreen";
+import BasisgeletterdheidScreen from "./Screens/Student/Basisgeletterdheid/BasisgeletterdheidScreen";
 
 // This is the main app component with all the routes
 const App = () => {
@@ -84,6 +85,11 @@ const App = () => {
                     path={TaaldossierRoutes.Index}
                     element={<TaaldossierScreen />}
                   />
+                  {/* BASISGELETTTERDHEID ROUTES */}
+                  <Route
+                    path={BasisgeletterdheidRoutes.Index}
+                    element={<BasisgeletterdheidScreen />}
+                  />
                   {/* TAALGROEI ROUTES */}
                   <Route
                     path={TaalgroeiRoutes.Index}
@@ -104,10 +110,6 @@ const App = () => {
                   <Route
                     path={TaalgroeiRoutes.Taaltips}
                     element={<TaaltipsScreen />}
-                  />
-                  <Route
-                    path={TaalgroeiRoutes.Basisgeletterdheid}
-                    element={<BasisgeletterdheidScreen />}
                   />
                 </Route>
                 {/*
