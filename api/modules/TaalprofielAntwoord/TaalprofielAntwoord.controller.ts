@@ -8,6 +8,7 @@ import {
   convertTeacherYear,
   convertYear,
   getGrade,
+  getGradeYear,
 } from "../../utils";
 import KlasService from "../Klas/Klas.service";
 import UserService from "../User/User.service";
@@ -156,7 +157,7 @@ export default class TaalprofielAntwoordController {
       await this.taalprofielAntwoordService.byClassLanguageYear(
         klas.id,
         req.params.language,
-        convertTeacherYear(req.params.year, klas.klas)
+        getGradeYear(String(convertTeacherYear(req.params.year, klas.klas)))
       );
     return res.json(taalprofielAntwoorden);
   };

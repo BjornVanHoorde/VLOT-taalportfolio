@@ -29,6 +29,8 @@ const Overview = ({ answers, klas, studentList }) => {
     filterByOtherLanguage(answers);
   }, [answers]);
 
+  console.log(answers);
+
   return (
     <>
       {filteredData?.length > 0 && !klas && (
@@ -38,7 +40,7 @@ const Overview = ({ answers, klas, studentList }) => {
           currentLanguage={currentLanguage}
         />
       )}
-      {filteredData?.length > 0 && studentList?.length > 1 && klas && (
+      {filteredData?.length > 0 && studentList?.length >= 1 && klas && (
         <div className="taalprofiel-long-list">
           {studentList.map((student) => (
             <div key={student.id}>
