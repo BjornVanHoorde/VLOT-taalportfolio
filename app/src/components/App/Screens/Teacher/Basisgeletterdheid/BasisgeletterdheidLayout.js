@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import useAlert from "../../../../../core/hooks/useAlert";
 import useFetch from "../../../../../core/hooks/useFetch";
 import Alert from "../../../../Design/Alert/Alert";
@@ -23,6 +24,10 @@ const BasisGeletterdheidLayout = ({ student, klas }) => {
     window.scrollTo(0, 0);
     showAlert("Basisgeletterdheden opgeslagen.");
   };
+
+  useEffect(() => {
+    invalidate();
+  }, [student, klas]);
 
   return (
     <>

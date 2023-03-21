@@ -7,6 +7,7 @@ const ItemSidebar = ({
   items = [],
   onChange,
   activeItem,
+  klas,
 }) => {
   return (
     <div className="itemSidebar">
@@ -20,6 +21,16 @@ const ItemSidebar = ({
           </div>
         </div>
       )}
+      <div
+        className={`itemSidebar__item ${
+          activeItem?.id === klas ? "active" : ""
+        }`}
+        onClick={() => onChange({ id: klas })}
+      >
+        <div className="itemSidebar__item__content">
+          {title === "students" && <span>{klas}</span>}
+        </div>
+      </div>
       {items.map((item) => (
         <div
           key={item.id}

@@ -30,15 +30,15 @@ const AllStudentsOverview = () => {
     if (currentLanguage.split(" ")[0] === Languages.Other) {
       changeLanguage(Languages.Dutch);
     }
+    if (typeof student.id === "string") {
+      onOtherLanguageDismiss();
+    }
     setCurrentStudent(student);
   };
 
   const handleTabChange = (tab) => {
     if (tab !== "Taalprofiel") {
       onOtherLanguageDismiss();
-      if (typeof currentStudent?.id === "string") {
-        setCurrentStudent();
-      }
     }
     if (tab === "Basisgeletterdheid") {
       onBasisgeletterdheid();
@@ -70,14 +70,24 @@ const AllStudentsOverview = () => {
           klas={klas}
         />
         {currentTab === "Taalprofiel" && currentStudent && (
-          <TaalprofielLayout student={currentStudent} />
+          <TaalprofielLayout
+            student={
+              typeof currentStudent.id === "number" ? currentStudent : null
+            }
+            klas={typeof currentStudent.id === "string" ? klas : null}
+          />
         )}
         {currentTab === "Taaldossier" && currentStudent && <Construction />}
         {currentTab === "Taalgroei" && currentStudent && (
           <TaalgroeiLayout student={currentStudent} klas={klas} />
         )}
         {currentTab === "Basisgeletterdheid" && currentStudent && (
-          <BasisGeletterdheidLayout student={currentStudent} />
+          <BasisGeletterdheidLayout
+            student={
+              typeof currentStudent.id === "number" ? currentStudent : null
+            }
+            klas={typeof currentStudent.id === "string" ? klas : null}
+          />
         )}
       </div>
     </>

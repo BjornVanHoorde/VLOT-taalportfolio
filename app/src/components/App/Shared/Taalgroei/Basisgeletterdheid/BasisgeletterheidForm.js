@@ -87,8 +87,8 @@ const BasisgeletterdheidForm = ({
                     >
                       {klas && (
                         <p className="geletterdheid-info-element">
-                          {element.leerling.voornaam}{" "}
-                          {element.leerling.achternaam}
+                          {element.leerling?.voornaam}{" "}
+                          {element.leerling?.achternaam}
                         </p>
                       )}
                       <label className="geletterdheid-element-lkr">

@@ -17,10 +17,12 @@ import { TaalprofielAntwoordBody } from "./TaalprofielAntwoord.types";
 export default class TaalprofielAntwoordController {
   private taalprofielAntwoordService: TaalprofielAntwoordService;
   private userService: UserService;
+  private klasService: KlasService;
 
   constructor() {
     this.taalprofielAntwoordService = new TaalprofielAntwoordService();
     this.userService = new UserService();
+    this.klasService = new KlasService();
   }
 
   all = async (
@@ -134,7 +136,7 @@ export default class TaalprofielAntwoordController {
   };
 
   byClass = async (
-    req: AuthRequest<{ id: number }>,
+    req: AuthRequest<{ name: string; language: string; year: string }>,
     res: Response,
     next: NextFunction
   ) => {
@@ -142,15 +144,20 @@ export default class TaalprofielAntwoordController {
       return new ForbiddenError();
     }
 
+    const klas = await this.klasService.findOneBy({ klas: req.params.name });
+
     if (req.user.isTeacher()) {
-      if (!(await CheckTeacherClasses(req.user.id, req.params.id))) {
+      if (!(await CheckTeacherClasses(req.user.id, klas.id))) {
         next(new ForbiddenError());
       }
     }
 
-    const taalprofielAntwoorden = await this.taalprofielAntwoordService.byClass(
-      req.params.id
-    );
+    const taalprofielAntwoorden =
+      await this.taalprofielAntwoordService.byClassLanguageYear(
+        klas.id,
+        req.params.language,
+        convertTeacherYear(req.params.year, klas.klas)
+      );
     return res.json(taalprofielAntwoorden);
   };
 

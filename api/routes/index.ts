@@ -429,7 +429,7 @@ const registerTeacherRoutes = (router: Router) => {
     useMethod(taalprofielAntwoordController.byStudent)
   );
   teacherRouter.get(
-    "/taalprofiel/antwoorden/klas/:id",
+    "/taalprofiel/antwoorden/klas/:name/:language/:year",
     useMethod(taalprofielAntwoordController.byClass)
   );
   teacherRouter.get(

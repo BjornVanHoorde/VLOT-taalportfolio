@@ -4,17 +4,19 @@ import useFetch from "../../../../../core/hooks/useFetch";
 import Loading from "../../../../Design/Loading/Loading";
 import TaalprofielOverview from "./TaalprofielOverview";
 
-const TaalprofielLayout = ({ student }) => {
+const TaalprofielLayout = ({ student, klas }) => {
   const { onOtherLanguageChange } = useOutletContext();
 
   const {
     data: studentData,
     isLoading,
     invalidate,
-  } = useFetch(`/students/name/${student.voornaam} ${student.achternaam}`);
+  } = useFetch(
+    student ? `/students/name/${student.voornaam} ${student.achternaam}` : null
+  );
 
   const { data: otherLanguages } = useFetch(
-    `/andere-taal/leerling/${student.id}`
+    student && `/andere-taal/leerling/${student.id}`
   );
 
   useEffect(() => {
@@ -23,11 +25,19 @@ const TaalprofielLayout = ({ student }) => {
     }
   }, [otherLanguages]);
 
+  useEffect(() => {
+    invalidate();
+  }, [student, klas]);
+
   return (
     <>
       {isLoading && <Loading />}
-      {studentData && (
-        <TaalprofielOverview student={studentData[0]} onUpdate={invalidate} />
+      {(studentData || klas) && (
+        <TaalprofielOverview
+          student={student ? studentData[0] : null}
+          onUpdate={invalidate}
+          klas={klas ? klas : null}
+        />
       )}
     </>
   );

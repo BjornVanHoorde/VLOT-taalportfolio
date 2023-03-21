@@ -6,7 +6,7 @@ import { useLanguageContext } from "../../../Language/LanguageProvider";
 import { useYearContext } from "../../../Year/YearProvider";
 import Overview from "./Overview";
 
-const TaalprofielOverview = ({ student, onUpdate }) => {
+const TaalprofielOverview = ({ student, klas, onUpdate }) => {
   const { currentLanguage } = useLanguageContext();
   const { selectedYear } = useYearContext();
 
@@ -15,20 +15,48 @@ const TaalprofielOverview = ({ student, onUpdate }) => {
     isLoading,
     invalidate,
   } = useFetch(
-    `/taalprofiel/antwoorden/leerling/${`${student.voornaam} ${student.achternaam}`}/${
-      currentLanguage.split(" ")[0]
-    }/${selectedYear}`
+    student
+      ? `/taalprofiel/antwoorden/leerling/${`${student.voornaam} ${student.achternaam}`}/${
+          currentLanguage.split(" ")[0]
+        }/${selectedYear}`
+      : klas
+      ? `/taalprofiel/antwoorden/klas/${klas}/${
+          currentLanguage.split(" ")[0]
+        }/${selectedYear}`
+      : null
   );
+
+  const {
+    data: students,
+    isLoading: isLoadingStudents,
+    invalidate: invalidateStudents,
+  } = useFetch(klas ? `/students/klas/name/${klas}` : null);
 
   useEffect(() => {
     invalidate();
-  }, [currentLanguage, selectedYear]);
+  }, [currentLanguage, selectedYear, student, klas]);
+
+  useEffect(() => {
+    invalidateStudents();
+  }, [klas]);
 
   return (
     <>
       {isLoading && <Loading />}
-      {answers && answers.length > 0 && (
-        <Overview answers={answers} handleChange={invalidate} />
+      {answers && answers.length > 0 && students && (
+        <Overview
+          answers={answers}
+          handleChange={invalidate}
+          klas={klas ? klas : null}
+          studentList={students}
+        />
+      )}
+      {answers && answers.length > 0 && !students && (
+        <Overview
+          answers={answers}
+          handleChange={invalidate}
+          klas={klas ? klas : null}
+        />
       )}
       {answers && answers.length === 0 && (
         <Message message="Er zijn nog geen vragen voor dit taalprofiel" />

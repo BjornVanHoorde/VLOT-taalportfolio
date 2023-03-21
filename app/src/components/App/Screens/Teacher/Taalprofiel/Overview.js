@@ -7,7 +7,7 @@ import { useLanguageContext } from "../../../Language/LanguageProvider";
 import TaalProfielForm from "../../../Shared/Taalprofiel/Form";
 import "./styles/Overview.css";
 
-const Overview = ({ answers }) => {
+const Overview = ({ answers, klas, studentList }) => {
   const { currentLanguage } = useLanguageContext();
   const { auth } = useAuthContext();
   const [filteredData, setFilteredData] = useState();
@@ -31,12 +31,28 @@ const Overview = ({ answers }) => {
 
   return (
     <>
-      {filteredData?.length > 0 && (
+      {filteredData?.length > 0 && !klas && (
         <TaalProfielForm
           answers={filteredData}
           isTeacher={isTeacher(auth)}
           currentLanguage={currentLanguage}
         />
+      )}
+      {filteredData?.length > 0 && studentList?.length > 1 && klas && (
+        <div className="taalprofiel-long-list">
+          {studentList.map((student) => (
+            <div key={student.id}>
+              <h2>{`${student.voornaam} ${student.achternaam}`}</h2>
+              <TaalProfielForm
+                answers={filteredData.filter(
+                  (answer) => answer.leerling?.id === student.id
+                )}
+                isTeacher={isTeacher(auth)}
+                currentLanguage={currentLanguage}
+              />
+            </div>
+          ))}
+        </div>
       )}
       {filteredData?.length === 0 && (
         <p className="no-answers">

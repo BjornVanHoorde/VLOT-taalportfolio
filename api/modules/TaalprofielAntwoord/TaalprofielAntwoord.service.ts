@@ -63,6 +63,24 @@ export default class TaalprofielAntwoordService {
     const taalprofielAntwoorden = await this.repository.find({
       where: { leerling: { klas: { id } } },
       relations: ["vraag", "leerling"],
+      order: { leerling: { achternaam: "ASC" } },
+    });
+    return taalprofielAntwoorden;
+  };
+
+  byClassLanguageYear = async (
+    id: number,
+    language: TaalOptions,
+    year: number
+  ) => {
+    const taalprofielAntwoorden = await this.repository.find({
+      where: {
+        leerling: { klas: { id } },
+        vraag: { taal: language },
+        jaar: year,
+      },
+      relations: ["vraag", "leerling"],
+      order: { leerling: { achternaam: "ASC" } },
     });
     return taalprofielAntwoorden;
   };
