@@ -39,7 +39,7 @@ const Overview = ({ answers, klas, studentList }) => {
         />
       )}
       {filteredData?.length > 0 && studentList?.length > 1 && klas && (
-        <div className="taalprofiel-long-list">
+        <div className="taalprofiel-long-list teacher">
           {studentList.map((student) => (
             <div key={student.id}>
               <h2>{`${student.voornaam} ${student.achternaam}`}</h2>

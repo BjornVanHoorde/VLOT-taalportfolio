@@ -1,12 +1,15 @@
 .taalprofiel {
-  width: 65%;
-  margin: 2rem 0 0 6rem;
+  width: 100%;
+  margin: 2rem 0 0 0rem;
 }
 
+
 .taalprofiel .multiple-choice {
-  width: 100%;
+  width: 90%;
   margin-bottom: 5rem;
+  margin-left: 4vw;
 }
+
 
 .taalprofiel .multiple-choice .field {
   width: 100%;

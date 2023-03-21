@@ -22,10 +22,12 @@ const Sidebar = () => {
       <JaarSelector />
       {isStudent(auth) && <StudentNavigation auth={auth} />}
       {isTeacher(auth) && <TeacherNavigation auth={auth} />}
-      <AccountInfo />
+
+      {/* <AccountInfo /> */}
       <button className="logout-btn" onClick={logout}>
         logout
       </button>
+      
     </div>
   );
 };

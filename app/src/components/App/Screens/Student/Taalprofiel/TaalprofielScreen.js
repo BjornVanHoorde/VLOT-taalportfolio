@@ -9,7 +9,6 @@ import Nederlands from "../../../../../img/nederlands.png";
 import Frans from "../../../../../img/frans.png";
 import Engels from "../../../../../img/engels.png";
 import Duits from "../../../../../img/duits.png";
-import "./styles/TaalprofielScreen.css";
 import Languages from "../../../../../core/constants/Languages";
 import Message from "../../../../Design/Message/Message";
 
