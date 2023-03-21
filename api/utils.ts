@@ -26,10 +26,14 @@ const convertYear = (selectedYear: string, klas: string) => {
   // Covert the year into an array of each character
   const splitKlas = klas.split("");
   let convertedYear: number;
+  let first = false;
   // Get the year based on the first number in the classname
   splitKlas.map((item) => {
     if (!isNaN(parseFloat(item))) {
-      convertedYear = parseFloat(item);
+      if (!first) {
+        first = true;
+        convertedYear = parseFloat(item);
+      }
     }
   });
 
@@ -79,10 +83,14 @@ const convertTeacherYear = (selectedYear: string, klas: string) => {
   const secondYear = selectedYear.split("-")[1];
   const splitKlas = klas.split("");
   let classYear: number;
+  let first = false;
   // Get the year based on the first number in the classname
   splitKlas.map((item) => {
     if (!isNaN(parseFloat(item))) {
-      classYear = parseFloat(item);
+      if (!first) {
+        first = true;
+        classYear = parseFloat(item);
+      }
     }
   });
 

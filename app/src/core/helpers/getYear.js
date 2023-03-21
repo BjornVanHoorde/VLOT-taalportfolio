@@ -1,10 +1,14 @@
 // This function returns the year of the student
 const getYear = (user) => {
   const klas = user.user.klas.klas.split("");
+  let first = false;
   let year;
   klas.map((item) => {
     if (!isNaN(item)) {
-      year = parseFloat(item);
+      if (!first) {
+        first = true;
+        year = parseFloat(item);
+      }
     }
   });
   return year;
