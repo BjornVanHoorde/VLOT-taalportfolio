@@ -29,8 +29,6 @@ const Overview = ({ answers, klas, studentList }) => {
     filterByOtherLanguage(answers);
   }, [answers]);
 
-  console.log(answers);
-
   return (
     <>
       {filteredData?.length > 0 && !klas && (
