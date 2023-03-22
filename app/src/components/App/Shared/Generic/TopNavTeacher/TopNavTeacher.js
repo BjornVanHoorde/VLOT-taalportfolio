@@ -13,6 +13,12 @@ const TopNavTeacher = ({ otherLanguages, basisgeletterdheid }) => {
   const { currentLanguage, changeLanguage } = useLanguageContext();
   const location = useLocation();
 
+  console.log(
+    getKlasYear(
+      location.pathname.split("/")[location.pathname.split("/").length - 1]
+    )
+  );
+
   if (basisgeletterdheid) {
     return (
       <>

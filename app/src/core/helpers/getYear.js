@@ -18,9 +18,13 @@ const getYear = (user) => {
 const getKlasYear = (klasName) => {
   const klas = klasName.split("");
   let year;
+  let first = false;
   klas.map((item) => {
     if (!isNaN(item)) {
-      year = parseFloat(item);
+      if (!first) {
+        first = true;
+        year = parseFloat(item);
+      }
     }
   });
   return year;
