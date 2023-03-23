@@ -36,11 +36,11 @@
   font-size: 1rem;
   border-radius: 0 0 10px 0;
   border-top: none;
+
 }
 
 .itemSidebar__item:hover {
-  background-color: var(--tertiary-color);
-  color: var(--white);
+  background-color: var(--primary-color);
   transition: ease 0.3s;
   cursor: pointer;
 }

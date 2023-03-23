@@ -26,10 +26,16 @@
 }
 
 .field > * > .choises > input {
-  height: 3vh;
+  height: 51vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 input[type=radio] {
   width: 25%;
   height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
