@@ -19,6 +19,12 @@ button.btn:hover {
   justify-content: flex-end;
 }
 
+.btn-div.align-right-teacher {
+  width: 95%;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .form-button {
   margin-top: 5vh;
   margin-bottom: 1vh;
