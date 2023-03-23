@@ -16,7 +16,7 @@ const TaalprofielOverview = ({ student, klas, onUpdate }) => {
     invalidate,
   } = useFetch(
     student
-      ? `/taalprofiel/antwoorden/leerling/${`${student.voornaam} ${student.achternaam}`}/${
+      ? `/taalprofiel/antwoorden/leerling/${`${student.id}`}/${
           currentLanguage.split(" ")[0]
         }/${selectedYear}`
       : klas

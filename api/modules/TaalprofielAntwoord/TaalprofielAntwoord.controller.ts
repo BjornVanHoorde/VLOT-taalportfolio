@@ -94,9 +94,9 @@ export default class TaalprofielAntwoordController {
     return res.json(taalprofielAntwoorden);
   };
 
-  byStudentName = async (
+  byStudentId = async (
     req: AuthRequest<{
-      student: string;
+      id: number;
       language: TaalOptions;
       year: string;
     }>,
@@ -107,28 +107,23 @@ export default class TaalprofielAntwoordController {
       return new ForbiddenError();
     }
 
-    const firstName = req.params.student.split(" ")[0];
-    const lastName = req.params.student.split(" ")[1];
-    const studentData = await this.userService.byStudentName(
-      firstName,
-      lastName
-    );
+    const studentData = await this.userService.findOne(req.params.id);
 
     if (req.user.isTeacher()) {
-      if (!(await CheckTeacherClasses(req.user.id, studentData[0].klas.id))) {
+      if (!(await CheckTeacherClasses(req.user.id, studentData.klas.id))) {
         next(new ForbiddenError());
       }
     }
 
     const selectedYear = convertTeacherYear(
       req.params.year,
-      studentData[0].klas.klas
+      studentData.klas.klas
     );
     const grade = getGrade(String(selectedYear));
 
     const taalprofielAntwoorden =
       await this.taalprofielAntwoordService.byStudentLanguage(
-        studentData[0].id,
+        studentData.id,
         req.params.language,
         selectedYear,
         grade

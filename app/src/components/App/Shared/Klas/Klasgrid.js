@@ -22,6 +22,7 @@ const KlasGrid = ({ students }) => {
               onClick={() =>
                 navigate(
                   route(StudentRoutes.Overview, {
+                    id: student.id,
                     student: `${student.voornaam} ${student.achternaam}`,
                   })
                 )

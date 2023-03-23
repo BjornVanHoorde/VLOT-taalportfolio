@@ -380,10 +380,10 @@ const registerTeacherRoutes = (router: Router) => {
     "/students/klas/:id",
     useMethod(userController.allStudentsByClass)
   );
-  teacherRouter.get(
-    "/students/name/:student",
-    useMethod(userController.byStudentName)
-  );
+  // teacherRouter.get(
+  //   "/students/name/:student",
+  //   useMethod(userController.byStudentName)
+  // );
   teacherRouter.get(
     "/students/klas/name/:klas",
     useMethod(userController.allStudentsByClassName)
@@ -433,8 +433,8 @@ const registerTeacherRoutes = (router: Router) => {
     useMethod(taalprofielAntwoordController.byClass)
   );
   teacherRouter.get(
-    "/taalprofiel/antwoorden/leerling/:student/:language/:year",
-    useMethod(taalprofielAntwoordController.byStudentName)
+    "/taalprofiel/antwoorden/leerling/:id/:language/:year",
+    useMethod(taalprofielAntwoordController.byStudentId)
   );
 
   const foutenanalyseOnderdeelController =

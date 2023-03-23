@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { Like, Repository } from "typeorm";
 import { AppDataSource } from "../../database/DatabaseSource";
 import { UserRole } from "./User.constants";
 import User from "./User.entity";
@@ -48,17 +48,17 @@ export default class UserService {
     return students;
   };
 
-  byStudentName = async (firstName: string, lastName: string) => {
-    const studentData = await this.repository.find({
-      where: {
-        rol: UserRole.Student,
-        voornaam: firstName,
-        achternaam: lastName,
-      },
-      relations: ["klas"],
-    });
-    return studentData;
-  };
+  // byStudentName = async (studentName: string) => {
+  //   const studentData = await this.repository.find({
+  //     where: {
+  //       rol: UserRole.Student,
+  //       voornaam: Like(),
+  //       achternaam: lastName,
+  //     },
+  //     relations: ["klas"],
+  //   });
+  //   return studentData;
+  // };
 
   findOne = async (id: number) => {
     const user = await this.repository.findOne({

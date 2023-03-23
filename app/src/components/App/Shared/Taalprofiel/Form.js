@@ -7,7 +7,7 @@ import ChoicesLabels from "../../../Design/Form/ChoicesLabels";
 import MultipleChoice from "../../../Design/Modules/Taalprofiel/Multiple-choice";
 import Open from "../../../Design/Modules/Taalprofiel/Open";
 import { useAuthContext } from "../../Auth/AuthProvider";
-import '../../Screens/Teacher/Taalprofiel/styles/TaalprofielScreen.css';
+import "../../Screens/Teacher/Taalprofiel/styles/TaalprofielScreen.css";
 
 // tranform the data to a format that can be used by the useForm hook
 const transformData = (initialData) => {
@@ -43,11 +43,11 @@ const TaalProfielForm = ({
     onSubmit(values);
   };
 
-  console.log(auth.user.rol);
-  const rol = auth.user.rol;
-
   return (
-    <form className={ `taalprofiel ${rol.toLowerCase()}` } onSubmit={handleSubmit(handleData)}>
+    <form
+      className={`taalprofiel ${auth.user.rol.toLowerCase()}`}
+      onSubmit={handleSubmit(handleData)}
+    >
       <div className="multiple-choice">
         <div className="field options">
           <label className="multiple-choice-label"></label>

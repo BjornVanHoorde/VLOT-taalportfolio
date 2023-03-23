@@ -37,7 +37,7 @@ const KlasRoutes = {
 
 const StudentRoutes = {
   Index: "/leerling",
-  Overview: "/leerling/:student",
+  Overview: "/leerling/:id/:student",
 };
 
 const AllStudentRoutes = {

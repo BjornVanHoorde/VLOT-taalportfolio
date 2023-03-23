@@ -11,9 +11,7 @@ const TaalprofielLayout = ({ student, klas }) => {
     data: studentData,
     isLoading,
     invalidate,
-  } = useFetch(
-    student ? `/students/name/${student.voornaam} ${student.achternaam}` : null
-  );
+  } = useFetch(student ? `/user/${student.id}` : null);
 
   const { data: otherLanguages } = useFetch(
     student && `/andere-taal/leerling/${student.id}`
@@ -34,7 +32,7 @@ const TaalprofielLayout = ({ student, klas }) => {
       {isLoading && <Loading />}
       {(studentData || klas) && (
         <TaalprofielOverview
-          student={student ? studentData[0] : null}
+          student={student ? studentData : null}
           onUpdate={invalidate}
           klas={klas ? klas : null}
         />

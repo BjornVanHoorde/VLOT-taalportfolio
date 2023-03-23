@@ -4,7 +4,7 @@ import Loading from "../../../../Design/Loading/Loading";
 
 // This is a layout that will be used for the student pages
 const StudentLayout = () => {
-  const { student } = useParams();
+  const { id } = useParams();
   const {
     onOtherLanguageChange,
     onOtherLanguageDismiss,
@@ -12,11 +12,7 @@ const StudentLayout = () => {
     onBasisgeletterdheidDismiss,
   } = useOutletContext();
 
-  const {
-    data: studentData,
-    isLoading,
-    invalidate,
-  } = useFetch(`/students/name/${student}`);
+  const { data: studentData, isLoading, invalidate } = useFetch(`/user/${id}`);
 
   return (
     <>
@@ -24,7 +20,7 @@ const StudentLayout = () => {
       {studentData && (
         <Outlet
           context={{
-            student: studentData[0],
+            student: studentData,
             onUpdate: invalidate,
             onOtherLanguageChange,
             onOtherLanguageDismiss,
