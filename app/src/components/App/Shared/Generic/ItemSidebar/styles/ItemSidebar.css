@@ -46,8 +46,7 @@
 }
 
 .itemSidebar__item.active {
-  background-color: var(--tertiary-color);
-  color: var(--white);
+  background-color: var(--primary-color);
 }
 
 .itemSidebar__item__content {
