@@ -71,12 +71,13 @@ export default class TaalprofielAntwoordService {
   byClassLanguageYear = async (
     id: number,
     language: TaalOptions,
+    grade: number,
     year: number
   ) => {
     const taalprofielAntwoorden = await this.repository.find({
       where: {
         leerling: { klas: { id } },
-        vraag: { taal: language },
+        vraag: { taal: language, graad: grade },
         jaar: year,
       },
       relations: ["vraag", "leerling"],

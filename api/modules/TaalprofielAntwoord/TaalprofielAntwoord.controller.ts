@@ -152,6 +152,7 @@ export default class TaalprofielAntwoordController {
       await this.taalprofielAntwoordService.byClassLanguageYear(
         klas.id,
         req.params.language,
+        getGrade(String(convertTeacherYear(req.params.year, klas.klas))),
         getGradeYear(String(convertTeacherYear(req.params.year, klas.klas)))
       );
     return res.json(taalprofielAntwoorden);
